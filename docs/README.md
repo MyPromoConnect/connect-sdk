@@ -16,7 +16,7 @@ require 'vendor/autoload.php
 ```
 #### Usage
 
-Everything is build around the `\Connect\SDK\Client`.
+Everything is build around the `\MyPromo\Connect\SDK\Client`.
 
 ```php
 $client = new \MyPromo\Connect\SDK\Client($production, $clientId, $clientSecret)

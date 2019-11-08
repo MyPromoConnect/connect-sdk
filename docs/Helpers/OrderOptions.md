@@ -1,4 +1,4 @@
-Helper class for `\Connect\SDK\Repositories\OrderRepository::all()`
+Helper class for `\MyPromo\Connect\SDK\Repositories\OrderRepository::all()`
 
 ```php
 $orderOptions = new \MyPromo\Connect\SDK\Helpers\OrderOptions();
