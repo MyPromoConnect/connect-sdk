@@ -1,7 +1,7 @@
-Template-File for [OrderItem][OrderItem].
+Template-File for [OrderItem->setFiles(...)][OrderItem]
 
 ```php
-$file = new \Connect\SDK\Models\File();
+$file = new \MyPromo\Connect\SDK\Models\File();
 $file->setType('front');
 $file->setUrl('fully-qualified-file-path');
 ```

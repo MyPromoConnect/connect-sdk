@@ -1,7 +1,7 @@
 Template-File for [OrderItemRepository][OrderItemRepository].
 
 ```php
-$orderItem = new \Connect\SDK\Models\OrderItem();
+$orderItem = new \MyPromo\Connect\SDK\Models\OrderItem();
 $orderItem->setReference('your-reference');
 $orderItem->setQuantity(35);
 $orderItem->setOrderId($order->getId());

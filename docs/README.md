@@ -6,7 +6,7 @@ The recommended way to install Connect SDK is through [Composer][Composer].
 Run the Composer command to install the latest stable version of Connect SDK:
 
 ```
-composer require connect/sdk
+composer require mypromo/connectsdk
 ```
 
 After installing, you need to require Composer's autoloader:
@@ -16,20 +16,27 @@ require 'vendor/autoload.php
 ```
 #### Usage
 
-Everything is build around the `\Connect\SDK\Client`.
+Everything is build around the `\MyPromo\Connect\SDK\Client`.
+
+###### Create a new client
 
 ```php
-$client = new \Connect\SDK\Client($production, $clientId, $clientSecret)
+$client = new \MyPromo\Connect\SDK\Client($production, $clientId, $clientSecret)
 ```
-Available Client-Methods:
+###### Constructor Parameters
+```php
+bool    $production     // Set your environment (Sandbox, Live)
+int     $clientId       // Set your client-id provided by connect
+string  $clientSecret   // Set your client-secret provided by connect
+```
+###### Available Client-Methods
 - `$client->auth()`
 - `$client->status()`
 
-From here on you are able to use the repositories.
+From here on you are able to use the repositories which require a functioning `\MyPromo\Connect\SDK\Client`.
 
 - [OrderRepository][orderRepository]
 - [OrderItemRepository][orderItemRepository]
-
 
 [Composer]: https://getcomposer.org/
 [orderRepository]: Repositories/OrderRepository.md

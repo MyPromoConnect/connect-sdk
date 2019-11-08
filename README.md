@@ -1,12 +1,14 @@
+[![Build Status](https://travis-ci.com/MyPromoConnect/SDK.svg?branch=master)](https://travis-ci.com/MyPromoConnect/SDK)
 [![License](https://poser.pugx.org/mypromo/connectsdk/license)](https://packagist.org/packages/mypromo/connectsdk)
 [![Latest Stable Version](https://poser.pugx.org/mypromo/connectsdk/v/stable)](https://packagist.org/packages/mypromo/connectsdk)
 [![composer.lock](https://poser.pugx.org/mypromo/connectsdk/composerlock)](https://packagist.org/packages/mypromo/connectsdk)
 
-## Getting started
-`tbd`
+## Contents
 
-## Docs
-`tbd`
+- [Docs][Docs]
+  - [Helpers][Helpers]
+  - [Models][Models]
+  - [Repositories][Repositories]
 
 ## Requirements
 - PHP >=5.6
@@ -29,12 +31,15 @@ Running tests requires at least PHP Version `7.2` or higher.
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `tbd` | `Connect\SDK` | [v1][repo] | [v1][docs] |  \>= 5.6      |
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
 
 # License
 
 The Connect SDK is open-source software licensed under the [MIT license][mit-link].
 
-[repo]: http://github.com/
-[docs]: http://github.com/
+[repo]: https://github.com/MyPromoConnect/SDK
 [mit-link]: https://opensource.org/licenses/MIT
+[Docs]: docs
+[Helpers]: docs/Helpers
+[Models]: docs/Models
+[Repositories]: docs/Repositories
