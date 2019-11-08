@@ -38,7 +38,6 @@ From here on you are able to use the repositories which require a functioning `\
 - [OrderRepository][orderRepository]
 - [OrderItemRepository][orderItemRepository]
 
-
 [Composer]: https://getcomposer.org/
 [orderRepository]: Repositories/OrderRepository.md
 [orderItemRepository]: Repositories/OrderItemRepository.md
