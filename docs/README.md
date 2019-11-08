@@ -25,7 +25,7 @@ Available Client-Methods:
 - `$client->auth()`
 - `$client->status()`
 
-From here on you are able to use the repositories.
+From here on you are able to use the repositories which require a functioning `\MyPromo\Connect\SDK\Client`.
 
 - [OrderRepository][orderRepository]
 - [OrderItemRepository][orderItemRepository]

@@ -1,4 +1,4 @@
-Template-File for [OrderItem][OrderItem].
+Template-File for [OrderItem->setFiles(...)][OrderItem]
 
 ```php
 $file = new \MyPromo\Connect\SDK\Models\File();

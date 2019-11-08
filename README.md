@@ -30,14 +30,13 @@ Running tests requires at least PHP Version `7.2` or higher.
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][docs] |  \>= 5.6      |
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
 
 # License
 
 The Connect SDK is open-source software licensed under the [MIT license][mit-link].
 
-[repo]: http://github.com/
-[docs]: http://github.com/
+[repo]: https://github.com/MyPromoConnect/SDK
 [mit-link]: https://opensource.org/licenses/MIT
 [Docs]: docs
 [Helpers]: docs/Helpers
