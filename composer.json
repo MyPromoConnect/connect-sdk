@@ -1,0 +1,24 @@
+{
+    "name": "connect/sdk",
+    "description": "SDK for connect",
+    "type": "sdk",
+    "require": {
+        "guzzlehttp/guzzle": "^6.4",
+        "symfony/cache": "^3.4",
+        "ext-json": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Connect\\SDK\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Connect\\SDK\\Tests\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.4"
+    }
+}
