@@ -1,8 +1,8 @@
 <?php
 
-namespace Connect\SDK\Repositories;
+namespace MyPromo\Connect\SDK\Repositories;
 
-use Connect\SDK\Client;
+use MyPromo\Connect\SDK\Client;
 
 /**
  * Class Repository

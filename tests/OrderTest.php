@@ -1,9 +1,9 @@
 <?php
 
-namespace Connect\SDK\Tests;
+namespace MyPromo\Connect\SDK\Tests;
 
-use Connect\SDK\Models\Address;
-use Connect\SDK\Models\Order;
+use MyPromo\Connect\SDK\Models\Address;
+use MyPromo\Connect\SDK\Models\Order;
 use PHPUnit\Framework\TestCase;
 
 class OrderTest extends TestCase

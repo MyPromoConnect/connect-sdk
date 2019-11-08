@@ -1,6 +1,6 @@
 <?php
 
-namespace Connect\SDK\Contracts;
+namespace MyPromo\Connect\SDK\Contracts;
 
 /**
  * Interface Model

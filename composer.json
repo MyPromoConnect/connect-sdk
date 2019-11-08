@@ -1,5 +1,5 @@
 {
-    "name": "connect/sdk",
+    "name": "mypromo/connect/sdk",
     "description": "SDK for connect",
     "type": "sdk",
     "require": {
@@ -10,12 +10,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Connect\\SDK\\": "src/"
+            "MyPromo\\Connect\\SDK\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Connect\\SDK\\Tests\\": "tests/"
+            "MyPromo\\Connect\\SDK\\Tests\\": "tests/"
         }
     },
     "require-dev": {

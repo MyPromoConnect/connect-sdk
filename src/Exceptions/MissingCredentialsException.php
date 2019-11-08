@@ -1,6 +1,6 @@
 <?php
 
-namespace Connect\SDK\Exceptions;
+namespace MyPromo\Connect\SDK\Exceptions;
 
 use Exception;
 

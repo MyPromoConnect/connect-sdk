@@ -1,8 +1,8 @@
 <?php
 
-namespace Connect\SDK\Models;
+namespace MyPromo\Connect\SDK\Models;
 
-use Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Contracts\Arrayable;
 
 /**
  * Class Custom
