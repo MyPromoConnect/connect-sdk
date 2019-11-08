@@ -6,7 +6,7 @@ There are multiple addresses needed to create an [Order][Order].
 Example Address-Object:
 
 ```php
-$address = new \Connect\SDK\Models\Address();
+$address = new \MyPromo\Connect\SDK\Models\Address();
 $address->setReference('your-reference-code');
 $address->setCompany('Sample Company');
 $address->setFirstname('Sam');

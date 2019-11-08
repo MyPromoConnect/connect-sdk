@@ -19,7 +19,7 @@ require 'vendor/autoload.php
 Everything is build around the `\Connect\SDK\Client`.
 
 ```php
-$client = new \Connect\SDK\Client($production, $clientId, $clientSecret)
+$client = new \MyPromo\Connect\SDK\Client($production, $clientId, $clientSecret)
 ```
 Available Client-Methods:
 - `$client->auth()`

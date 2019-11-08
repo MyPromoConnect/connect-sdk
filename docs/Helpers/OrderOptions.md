@@ -1,7 +1,7 @@
 Helper class for `\Connect\SDK\Repositories\OrderRepository::all()`
 
 ```php
-$orderOptions = new \Connect\SDK\Helpers\OrderOptions();
+$orderOptions = new \MyPromo\Connect\SDK\Helpers\OrderOptions();
 $orderOptions->setFrom(1);
 $orderOptions->setPerPage(5);
 $orderOptions->setCreatedFrom(new DateTime('date'));

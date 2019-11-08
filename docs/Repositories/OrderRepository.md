@@ -1,6 +1,6 @@
 #### Create a new Repository
 ```php
-$orderRepository = new \Connect\SDK\Repositories\Orders\OrderRepository($client);
+$orderRepository = new \MyPromo\Connect\SDK\Repositories\Orders\OrderRepository($client);
 ```
 Template-Files:
 - [Order][Order]
@@ -10,7 +10,7 @@ Template-Files:
 ###### Create Order
 
 ```php
-$order = new \Connect\SDK\Models\Order();
+$order = new \MyPromo\Connect\SDK\Models\Order();
 ...
 $orderRepository->create($order);
 ```
@@ -36,7 +36,7 @@ $orderRepository->find($order->getId());
 ###### Get all orders
 
 ```php
-$orderOptions = new \Connect\SDK\Helpers\OrderOptions();
+$orderOptions = new \MyPromo\Connect\SDK\Helpers\OrderOptions();
 ...
 
 or

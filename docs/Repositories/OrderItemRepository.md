@@ -1,6 +1,6 @@
 #### Create a new Repository
 ```php
-$orderItemRepository = new \Connect\SDK\Repositories\Orders\OrderItemRepository($client);
+$orderItemRepository = new \MyPromo\Connect\SDK\Repositories\Orders\OrderItemRepository($client);
 ```
 
 Template-Files:
@@ -11,7 +11,7 @@ Template-Files:
 ###### Submit Order
 
 ```php
-$orderItem = new \Connect\SDK\Models\OrderItem();
+$orderItem = new \MyPromo\Connect\SDK\Models\OrderItem();
 ...
 $orderItemRepository->submit($orderItem);
 ```
