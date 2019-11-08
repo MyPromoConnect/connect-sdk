@@ -1,6 +1,6 @@
 <?php
 
-namespace Connect\SDK\Helpers;
+namespace MyPromo\Connect\SDK\Helpers;
 
 use DateTimeInterface;
 use InvalidArgumentException;

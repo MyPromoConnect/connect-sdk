@@ -1,9 +1,9 @@
 <?php
 
-namespace Connect\SDK\Helpers;
+namespace MyPromo\Connect\SDK\Helpers;
 
-use Connect\SDK\Contracts\Arrayable;
-use Connect\SDK\Repositories\Orders\OrderRepository;
+use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Repositories\Orders\OrderRepository;
 use DateTimeInterface;
 
 /**

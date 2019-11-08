@@ -1,9 +1,9 @@
 <?php
 
-namespace Connect\SDK;
+namespace MyPromo\Connect\SDK;
 
-use Connect\SDK\Exceptions\ClientException;
-use Connect\SDK\Exceptions\MissingCredentialsException;
+use MyPromo\Connect\SDK\Exceptions\ClientException;
+use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use GuzzleHttp\RequestOptions;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;

@@ -1,13 +1,13 @@
 <?php
 
-namespace Connect\SDK\Repositories\Orders;
+namespace MyPromo\Connect\SDK\Repositories\Orders;
 
-use Connect\SDK\Exceptions\ClientException;
-use Connect\SDK\Exceptions\MissingCredentialsException;
-use Connect\SDK\Exceptions\OrderException;
-use Connect\SDK\Helpers\OrderOptions;
-use Connect\SDK\Models\Order;
-use Connect\SDK\Repositories\Repository;
+use MyPromo\Connect\SDK\Exceptions\ClientException;
+use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
+use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Helpers\OrderOptions;
+use MyPromo\Connect\SDK\Models\Order;
+use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
 use Psr\Cache\InvalidArgumentException;
 

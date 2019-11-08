@@ -1,13 +1,13 @@
 <?php
 
-namespace Connect\SDK\Tests;
+namespace MyPromo\Connect\SDK\Tests;
 
-use Connect\SDK\Client;
-use Connect\SDK\Exceptions\MissingOrderException;
-use Connect\SDK\Models\Custom;
-use Connect\SDK\Models\File;
-use Connect\SDK\Models\OrderItem;
-use Connect\SDK\Repositories\Orders\OrderItemRepository;
+use MyPromo\Connect\SDK\Client;
+use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
+use MyPromo\Connect\SDK\Models\Custom;
+use MyPromo\Connect\SDK\Models\File;
+use MyPromo\Connect\SDK\Models\OrderItem;
+use MyPromo\Connect\SDK\Repositories\Orders\OrderItemRepository;
 use PHPUnit\Framework\TestCase;
 
 class OrderItemTest extends TestCase
