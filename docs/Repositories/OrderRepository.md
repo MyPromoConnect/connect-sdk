@@ -3,12 +3,12 @@
 $orderRepository = new \MyPromo\Connect\SDK\Repositories\Orders\OrderRepository($client);
 ```
 Template-Files:
-- [Order][Order]
 - [OrderOptions][OrderOptions]
+
 #### Available Methods
 
 ###### Create Order
-
+Create a new order (with the given Template-File: [Order][Order])
 ```php
 $order = new \MyPromo\Connect\SDK\Models\Order();
 ...

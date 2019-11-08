@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.com/MyPromoConnect/SDK.svg?branch=master)](https://travis-ci.com/MyPromoConnect/SDK)
 [![License](https://poser.pugx.org/mypromo/connectsdk/license)](https://packagist.org/packages/mypromo/connectsdk)
 [![Latest Stable Version](https://poser.pugx.org/mypromo/connectsdk/v/stable)](https://packagist.org/packages/mypromo/connectsdk)
 [![composer.lock](https://poser.pugx.org/mypromo/connectsdk/composerlock)](https://packagist.org/packages/mypromo/connectsdk)
