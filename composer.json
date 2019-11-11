@@ -1,5 +1,5 @@
 {
-    "name": "mypromo/connectsdk",
+    "name": "mypromo/connect-sdk",
     "description": "SDK for connect",
     "type": "sdk",
     "require": {
