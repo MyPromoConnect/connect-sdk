@@ -211,6 +211,27 @@ class File implements Arrayable
             'tracking_code' => $this->trackingCode,
         ];
 
+        // only use credentials if everything isset
+        // credentials will be used in the following order
+        // 1. https basic auth user and password
+        // 2. https basic auth header
+        // 3. sftp user and password
+        if (isset($this->httpsBasicAuthUser) && isset($this->httpsBasicAuthPassword)) {
+            $fileArray['auth']['basic'] = [
+                'username' => $this->httpsBasicAuthUser,
+                'password' => $this->httpsBasicAuthPassword,
+            ];
+        } elseif (isset($this->httpsHeader)) {
+            $fileArray['auth']['basic'] = [
+                'header' => $this->httpsHeader,
+            ];
+        } elseif (isset($this->sftpUser) && isset($this->sftpPassword)) {
+            $fileArray['auth']['basic'] = [
+                'username' => $this->sftpUser,
+                'password' => $this->sftpPassword,
+            ];
+        }
+
         return $fileArray;
     }
 }
