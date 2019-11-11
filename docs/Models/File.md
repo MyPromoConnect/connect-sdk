@@ -10,11 +10,29 @@ Supported Filepath's:
 - sFTP
 - https
 
-You also can add a basic authentication or a custom header for the
-file if not set in the client settings.
+## Authentication
+Supported:
+- https basic user and password auth
+- https header auth
+- sftp user and password auth
 
+This is also the order of authentication if you set everything.
+
+###### https Basic Auth
 ```php
-tbd
+$file->setHttpsBasicAuthUser($user);
+$file->setHttpsBasicAuthPassword($password);
+```
+
+###### https Header Auth
+```php
+$file->setHttpsHeader('Bearer Test');
+```
+
+###### sftp auth
+```php
+$file->setSftpUser($user);
+$file->setSftpPassword($password);
 ```
 
 [OrderItem]: OrderItem.md
