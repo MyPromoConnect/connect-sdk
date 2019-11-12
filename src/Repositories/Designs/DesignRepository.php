@@ -66,7 +66,7 @@ class DesignRepository extends Repository
         ])
         ;
 
-        if ($response->getStatusCode() !== 201) {
+        if ($response->getStatusCode() !== 200) {
             throw new DesignException($response->getBody(), $response->getStatusCode());
         }
 

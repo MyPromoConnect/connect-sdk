@@ -3,6 +3,8 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Exceptions\OrderItemException;
+use MyPromo\Connect\SDK\Helpers\DesignOptions;
 
 /**
  * Class OrderItem
@@ -39,6 +41,11 @@ class OrderItem implements Arrayable
      * @var ...$files
      */
     protected $files;
+
+    /**
+     * @var ...$designs
+     */
+    protected $designs;
 
 
     /**
@@ -137,12 +144,32 @@ class OrderItem implements Arrayable
         $this->files = $files;
     }
 
+
+    /**
+     * @return mixed
+     */
+    public function getDesigns()
+    {
+        return $this->designs;
+    }
+
+    /**
+     * @param DesignOptions ...$designs
+     */
+    public function setDesigns($designs)
+    {
+        $this->designs = $designs;
+    }
+
     /**
      * {@inheritDoc}
+     *
+     * @throws OrderItemException
      */
     public function toArray()
     {
-        $files = [];
+        $files   = [];
+        $designs = [];
 
         /**
          * @var File $file
@@ -151,12 +178,36 @@ class OrderItem implements Arrayable
             $files[] = $file->toArray();
         }
 
-        return [
+        /**
+         * @var DesignOptions $design
+         */
+        foreach ($this->designs as $design) {
+            $designs[] = $design->toArray();
+        }
+
+        $orderItemArray = [
             'reference' => $this->reference,
             'quantity'  => $this->quantity,
             'sku'       => $this->sku,
-            'files'     => $files,
             'customs'   => $this->custom->toArray(),
         ];
+
+        if (!empty($files)) {
+            $orderItemArray['files'] = $files;
+        }
+
+        if (!empty($designs)) {
+            $orderItemArray['designs'] = $files;
+        }
+
+        /**
+         * This is out of behavior for the normal ->toArray implementation
+         * But we cannot allow to send designs and files to the API at the same time
+         */
+        if (!empty($designs) && !empty($files)) {
+            throw new OrderItemException('You cannot use designs and files together.');
+        }
+
+        return $orderItemArray;
     }
 }
