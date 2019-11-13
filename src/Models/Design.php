@@ -31,9 +31,9 @@ class Design implements Arrayable
     protected $sku;
 
     /**
-     * @var string|null
+     * @var array|null
      */
-    protected $draft;
+    protected $customs;
 
     /**
      * @return int|null
@@ -100,19 +100,19 @@ class Design implements Arrayable
     }
 
     /**
-     * @return string|null
+     * @return array|null
      */
-    public function getDraft()
+    public function getCustoms()
     {
-        return $this->draft;
+        return $this->customs;
     }
 
     /**
-     * @param string $draft
+     * @param array $customs
      */
-    public function setDraft($draft)
+    public function setDraft($customs)
     {
-        $this->draft = $draft;
+        $this->customs = $customs;
     }
 
 
@@ -129,8 +129,8 @@ class Design implements Arrayable
             'cancel_url' => $this->cancelUrl,
         ];
 
-        if ($this->draft) {
-            $designArray['draft'] = $this->draft;
+        if ($this->customs) {
+            $designArray['customs'] = $this->customs;
         }
 
         return $designArray;
