@@ -197,7 +197,7 @@ class OrderItem implements Arrayable
         }
 
         if (!empty($designs)) {
-            $orderItemArray['designs'] = $files;
+            $orderItemArray['designs'] = $designs;
         }
 
         /**

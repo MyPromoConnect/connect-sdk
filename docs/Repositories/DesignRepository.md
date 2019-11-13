@@ -1,24 +1,23 @@
 #### Create a new Repository
 ```php
-$designRepository = new \MyPromo\Connect\SDK\Repositories\Designs\DesignRepository($client);
+$designRepository = new \MyPromo\Connect\SDK\Repositories\Designs\OrderRepository($client);
 ```
-
-Template-Files:
-- [Design][Design]
 
 #### Available Methods
 
 ###### Create Design
-
+Create a new design (with [Design][Design])
 ```php
 $design = new \MyPromo\Connect\SDK\Models\Design();
 ...
-$response = $designRepository->create($design);
+$designRepository->create($design);
 ```
+
 ###### Submit Design
+Submit a design. 
 
 ```php
-$response = $designRepository->submit($designId);
+$designRepository->submit($design->getId());
 ```
 
 [Design]: ../Models/Design.md

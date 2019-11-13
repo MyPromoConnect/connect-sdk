@@ -110,7 +110,7 @@ class Design implements Arrayable
     /**
      * @param array $customs
      */
-    public function setDraft($customs)
+    public function setCustoms($customs)
     {
         $this->customs = $customs;
     }
@@ -135,5 +135,4 @@ class Design implements Arrayable
 
         return $designArray;
     }
-
 }
