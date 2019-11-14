@@ -5,11 +5,11 @@ $design = new \MyPromo\Connect\SDK\Models\Design();
 $design->setReturnUrl('https...');
 $design->setCancelUrl('https...);
 $design->setSku('EXAMPLE-SKU');
-$design->setCustoms([
+$design->setOptions([
     'example-key' => 'example-value'
 ]);
 ```
 
-There are no optionals.
+Options are optionals.
 
 [DesignRepository]: ../Repositories/DesignRepository.md

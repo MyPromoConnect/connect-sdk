@@ -33,9 +33,9 @@ class OrderItem implements Arrayable
     protected $sku;
 
     /**
-     * @var Custom
+     * @var Customs
      */
-    protected $custom;
+    protected $customs;
 
     /**
      * @var ...$files
@@ -113,19 +113,19 @@ class OrderItem implements Arrayable
     }
 
     /**
-     * @return Custom
+     * @return Customs
      */
-    public function getCustom()
+    public function getCustoms()
     {
-        return $this->custom;
+        return $this->customs;
     }
 
     /**
-     * @param Custom $custom
+     * @param Customs $customs
      */
-    public function setCustom($custom)
+    public function setCustoms($customs)
     {
-        $this->custom = $custom;
+        $this->customs = $customs;
     }
 
     /**
@@ -189,7 +189,7 @@ class OrderItem implements Arrayable
             'reference' => $this->reference,
             'quantity'  => $this->quantity,
             'sku'       => $this->sku,
-            'customs'   => $this->custom->toArray(),
+            'customs'   => $this->customs->toArray(),
         ];
 
         if (!empty($files)) {

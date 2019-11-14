@@ -1,7 +1,7 @@
-Optional Custom-Entries for [OrderItem][OrderItem].
+Optional Customs-Entries for [OrderItem][OrderItem].
 
 ```php
-$custom = new \MyPromo\Connect\SDK\Models\Custom();
+$custom = new \MyPromo\Connect\SDK\Models\Customs();
 $custom->setAmount(10.5);
 $custom->setDescription('Printed matter, n.e.s.');
 $custom->setOrigin('DE');

@@ -33,7 +33,7 @@ class Design implements Arrayable
     /**
      * @var array|null
      */
-    protected $customs;
+    protected $options;
 
     /**
      * @return int|null
@@ -102,17 +102,17 @@ class Design implements Arrayable
     /**
      * @return array|null
      */
-    public function getCustoms()
+    public function getOptions()
     {
-        return $this->customs;
+        return $this->options;
     }
 
     /**
-     * @param array $customs
+     * @param array $options
      */
-    public function setCustoms($customs)
+    public function setOptions($options)
     {
-        $this->customs = $customs;
+        $this->options = $options;
     }
 
 
@@ -129,8 +129,8 @@ class Design implements Arrayable
             'cancel_url' => $this->cancelUrl,
         ];
 
-        if ($this->customs) {
-            $designArray['customs'] = $this->customs;
+        if ($this->options) {
+            $designArray['options'] = $this->options;
         }
 
         return $designArray;

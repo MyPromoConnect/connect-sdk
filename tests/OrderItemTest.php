@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Tests;
 
 use MyPromo\Connect\SDK\Client;
 use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
-use MyPromo\Connect\SDK\Models\Custom;
+use MyPromo\Connect\SDK\Models\Customs;
 use MyPromo\Connect\SDK\Models\File;
 use MyPromo\Connect\SDK\Models\OrderItem;
 use MyPromo\Connect\SDK\Repositories\Orders\OrderItemRepository;
@@ -28,7 +28,7 @@ class OrderItemTest extends TestCase
     private $orderItemRepository;
 
     /**
-     * @var Custom
+     * @var Customs
      */
     private $custom;
 
@@ -50,9 +50,9 @@ class OrderItemTest extends TestCase
         $this->file->setUrl('https://example.com');
         $this->file->setType('front');
 
-        $this->custom = new Custom();
+        $this->custom = new Customs();
 
-        $this->orderItem->setCustom($this->custom);
+        $this->orderItem->setCustoms($this->custom);
         $this->orderItem->setQuantity(15);
         $this->orderItem->setFiles($this->file);
     }
@@ -66,7 +66,7 @@ class OrderItemTest extends TestCase
 
         $this->assertEquals(
             $this->custom,
-            $this->orderItem->getCustom()
+            $this->orderItem->getCustoms()
         );
 
         $this->assertEquals(
@@ -98,7 +98,7 @@ class OrderItemTest extends TestCase
 
     public function testFilledCustomsAnArray()
     {
-        $customArray = $this->orderItem->getCustom()->toArray();
+        $customArray = $this->orderItem->getCustoms()->toArray();
 
         $this->assertIsArray($customArray);
 

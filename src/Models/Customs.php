@@ -8,7 +8,7 @@ use MyPromo\Connect\SDK\Contracts\Arrayable;
  * Class Custom
  * @package Connect\SDK\Models
  */
-class Custom implements Arrayable
+class Customs implements Arrayable
 {
     /**
      * @var string
