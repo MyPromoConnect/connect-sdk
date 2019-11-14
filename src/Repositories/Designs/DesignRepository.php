@@ -60,7 +60,7 @@ class DesignRepository extends Repository
      */
     public function submit($designId)
     {
-        $response = $this->client->guzzle()->post('/v1/designs/' . $designId . '/confirm', [
+        $response = $this->client->guzzle()->post('/v1/designs/' . $designId . '/submit', [
             'headers' => [
                 'Accept'        => 'application/json',
                 'Content-Type'  => 'application/json',
