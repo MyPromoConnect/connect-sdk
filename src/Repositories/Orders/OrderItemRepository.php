@@ -51,6 +51,8 @@ class OrderItemRepository extends Repository
             throw new OrderException($response->getBody(), $response->getStatusCode());
         }
 
-        return json_decode($response->getBody(), true);
+        $body = json_decode($response->getBody(), true);
+
+        return $body;
     }
 }

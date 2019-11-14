@@ -42,7 +42,10 @@ class DesignRepository extends Repository
             throw new DesignException($response->getBody(), $response->getStatusCode());
         }
 
-        return json_decode($response->getBody(), true);
+        $body = json_decode($response->getBody(), true);
+        $design->setId($body['id']);
+
+        return $body;
     }
 
     /**

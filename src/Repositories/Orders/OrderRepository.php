@@ -109,7 +109,10 @@ class OrderRepository extends Repository
             throw new OrderException($response->getBody(), $response->getStatusCode());
         }
 
-        return json_decode($response->getBody(), true);
+        $body = json_decode($response->getBody(), true);
+        $order->setId($body['id']);
+
+        return $body;
     }
 
     /**
