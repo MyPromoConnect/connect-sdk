@@ -16,7 +16,9 @@ require 'vendor/autoload.php
 ```
 #### Usage
 
-Everything is build around the `\MyPromo\Connect\SDK\Client`.
+Everything is build around the `\MyPromo\Connect\SDK\Client`.  
+Every [Repository][Repository] will return the response as an array on success.  
+On failure it will throw an exception.
 
 ###### Create a new client
 
@@ -41,3 +43,4 @@ From here on you are able to use the repositories which require a functioning `\
 [Composer]: https://getcomposer.org/
 [orderRepository]: Repositories/OrderRepository.md
 [orderItemRepository]: Repositories/OrderItemRepository.md
+[Repository]: Repositories

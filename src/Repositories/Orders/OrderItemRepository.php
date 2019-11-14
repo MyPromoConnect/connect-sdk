@@ -6,6 +6,7 @@ use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Exceptions\OrderItemException;
 use MyPromo\Connect\SDK\Models\OrderItem;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
@@ -27,6 +28,7 @@ class OrderItemRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws InvalidArgumentException
+     * @throws OrderItemException
      */
     public function submit($orderItem)
     {
@@ -49,6 +51,8 @@ class OrderItemRepository extends Repository
             throw new OrderException($response->getBody(), $response->getStatusCode());
         }
 
-        return json_decode($response->getBody(), true);
+        $body = json_decode($response->getBody(), true);
+
+        return $body;
     }
 }
