@@ -171,20 +171,6 @@ class OrderItem implements Arrayable
         $files   = [];
         $designs = [];
 
-        /**
-         * @var File $file
-         */
-        foreach ($this->files as $file) {
-            $files[] = $file->toArray();
-        }
-
-        /**
-         * @var DesignOptions $design
-         */
-        foreach ($this->designs as $design) {
-            $designs[] = $design->toArray();
-        }
-
         $orderItemArray = [
             'reference' => $this->reference,
             'quantity'  => $this->quantity,
@@ -192,8 +178,26 @@ class OrderItem implements Arrayable
             'customs'   => $this->customs->toArray(),
         ];
 
+        if ($this->files) {
+            /**
+             * @var File $file
+             */
+            foreach ($this->files as $file) {
+                $files[] = $file->toArray();
+            }
+        }
+
         if (!empty($files)) {
             $orderItemArray['files'] = $files;
+        }
+
+        if ($this->designs) {
+            /**
+             * @var DesignOptions $design
+             */
+            foreach ($this->designs as $design) {
+                $designs[] = $design->toArray();
+            }
         }
 
         if (!empty($designs)) {
