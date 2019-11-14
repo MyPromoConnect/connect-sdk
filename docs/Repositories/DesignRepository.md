@@ -1,6 +1,6 @@
 #### Create a new Repository
 ```php
-$designRepository = new \MyPromo\Connect\SDK\Repositories\Designs\OrderRepository($client);
+$designRepository = new \MyPromo\Connect\SDK\Repositories\Designs\DesignRepository($client);
 ```
 
 #### Available Methods

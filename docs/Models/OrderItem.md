@@ -7,15 +7,15 @@ $orderItem->setQuantity(35);
 $orderItem->setOrderId($order->getId());
 $orderItem->setSku('product-sku');
 $orderItem->setFiles($file);
-$orderItem->setCustom($custom);
+$orderItem->setCustoms($customs);
 ```
 
 Required Models: 
 - [File][File]
 
 Optional:
-- [Custom][Custom]
+- [Custom][Customs]
 
 [File]: File.md
-[Custom]: Custom.md
+[Customs]: Customs.md
 [OrderItemRepository]: ../Repositories/OrderItemRepository.md
