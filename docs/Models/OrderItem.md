@@ -15,7 +15,9 @@ Required Models:
 
 Optional:
 - [Custom][Customs]
+- [CustomProperty][CustomProperty]
 
 [File]: File.md
 [Customs]: Customs.md
+[CustomProperty]: CustomProperty.md
 [OrderItemRepository]: ../Repositories/OrderItemRepository.md

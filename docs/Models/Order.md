@@ -8,6 +8,8 @@ $order->setRecipient($recipient);
 $order->setInvoice($invoice);
 ```
 
-There are no optionals.
+Optional:
+- [CustomProperty][CustomProperty]
 
 [OrderRepository]: ../Repositories/OrderRepository.md
+[CustomProperty]: CustomProperty.md

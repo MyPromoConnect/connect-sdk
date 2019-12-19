@@ -56,6 +56,11 @@ class Order implements Arrayable
     protected $files;
 
     /**
+     * @var CustomProperty[]
+     */
+    protected $customProperties;
+
+    /**
      * @param int $id
      */
     public function setId($id)
@@ -200,6 +205,22 @@ class Order implements Arrayable
     }
 
     /**
+     * @return CustomProperty[]
+     */
+    public function getCustomProperties(): array
+    {
+        return $this->customProperties;
+    }
+
+    /**
+     * @param CustomProperty[] $customProperties
+     */
+    public function setCustomProperties(array $customProperties): void
+    {
+        $this->customProperties = $customProperties;
+    }
+
+    /**
      * Convert object to array
      *
      * @return array
@@ -228,6 +249,15 @@ class Order implements Arrayable
 
         if ($files) {
             $orderArray['files'] = $files;
+        }
+
+        $customPropertyArray = [];
+        foreach ($this->customProperties as $customProperty) {
+            $customPropertyArray[] = $customProperty->toArray();
+        }
+
+        if (!empty($customPropertyArray)) {
+            $orderArray['custom_properties'] = $customPropertyArray;
         }
 
         return $orderArray;
