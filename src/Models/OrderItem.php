@@ -45,7 +45,7 @@ class OrderItem implements Arrayable
     /**
      * @var CustomProperty[]
      */
-    protected $customProperties;
+    protected $customProperties = [];
 
     /**
      * @var ...$designs

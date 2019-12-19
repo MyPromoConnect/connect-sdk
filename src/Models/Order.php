@@ -58,7 +58,7 @@ class Order implements Arrayable
     /**
      * @var CustomProperty[]
      */
-    protected $customProperties;
+    protected $customProperties = [];
 
     /**
      * @param int $id
