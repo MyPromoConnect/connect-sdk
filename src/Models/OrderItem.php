@@ -160,7 +160,7 @@ class OrderItem implements Arrayable
     /**
      * @param DesignOptions ...$designs
      */
-    public function setDesigns($designs)
+    public function setDesigns(...$designs)
     {
         $this->designs = $designs;
     }
