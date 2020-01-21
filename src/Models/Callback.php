@@ -43,7 +43,7 @@ class Callback implements Arrayable
     /**
      * @return string
      */
-    public function getUrl(): string
+    public function getUrl()
     {
         return $this->url;
     }
@@ -51,7 +51,7 @@ class Callback implements Arrayable
     /**
      * @param string $url
      */
-    public function setUrl(string $url): void
+    public function setUrl($url)
     {
         $this->url = $url;
     }
@@ -59,7 +59,7 @@ class Callback implements Arrayable
     /**
      * @return string
      */
-    public function getAuthUsername(): string
+    public function getAuthUsername()
     {
         return $this->auth_username;
     }
@@ -67,7 +67,7 @@ class Callback implements Arrayable
     /**
      * @param string $auth_username
      */
-    public function setAuthUsername(string $auth_username): void
+    public function setAuthUsername($auth_username)
     {
         $this->auth_username = $auth_username;
     }
@@ -75,7 +75,7 @@ class Callback implements Arrayable
     /**
      * @return string
      */
-    public function getAuthPassword(): string
+    public function getAuthPassword()
     {
         return $this->auth_password;
     }
@@ -83,7 +83,7 @@ class Callback implements Arrayable
     /**
      * @param string $auth_password
      */
-    public function setAuthPassword(string $auth_password): void
+    public function setAuthPassword($auth_password)
     {
         $this->auth_password = $auth_password;
     }
@@ -91,7 +91,7 @@ class Callback implements Arrayable
     /**
      * @return string
      */
-    public function getAuthHeader(): string
+    public function getAuthHeader()
     {
         return $this->auth_header;
     }
@@ -99,7 +99,7 @@ class Callback implements Arrayable
     /**
      * @param string $auth_header
      */
-    public function setAuthHeader(string $auth_header): void
+    public function setAuthHeader($auth_header)
     {
         $this->auth_header = $auth_header;
     }
@@ -110,8 +110,7 @@ class Callback implements Arrayable
      */
     public function toArray()
     {
-        if (empty($this->url))
-        {
+        if (empty($this->url)) {
             /**
              * This is out of behavior for the normal ->toArray implementation
              * But we cannot allow to send callback without url

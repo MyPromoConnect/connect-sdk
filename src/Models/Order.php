@@ -64,6 +64,7 @@ class Order implements Arrayable
      * @var Callback
      */
     protected $callback;
+
     /**
      * @param int $id
      */
@@ -211,7 +212,7 @@ class Order implements Arrayable
     /**
      * @return CustomProperty[]
      */
-    public function getCustomProperties(): array
+    public function getCustomProperties()
     {
         return $this->customProperties;
     }
@@ -219,7 +220,7 @@ class Order implements Arrayable
     /**
      * @param CustomProperty[] $customProperties
      */
-    public function setCustomProperties(array $customProperties): void
+    public function setCustomProperties($customProperties)
     {
         $this->customProperties = $customProperties;
     }
@@ -227,7 +228,7 @@ class Order implements Arrayable
     /**
      * @return Callback
      */
-    public function getCallback(): Callback
+    public function getCallback()
     {
         return $this->callback;
     }
@@ -235,7 +236,7 @@ class Order implements Arrayable
     /**
      * @param Callback $callback
      */
-    public function setCallback(Callback $callback): void
+    public function setCallback($callback)
     {
         $this->callback = $callback;
     }
@@ -280,7 +281,7 @@ class Order implements Arrayable
             $orderArray['custom_properties'] = $customPropertyArray;
         }
 
-        if (!empty($this->callback)){
+        if (!empty($this->callback)) {
             $orderArray['callback'] = $this->callback->toArray();
         }
 

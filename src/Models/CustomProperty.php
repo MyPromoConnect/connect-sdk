@@ -26,7 +26,7 @@ class CustomProperty implements Arrayable
     /**
      * @return string
      */
-    public function getKey(): string
+    public function getKey()
     {
         return $this->key;
     }
@@ -34,7 +34,7 @@ class CustomProperty implements Arrayable
     /**
      * @param string $key
      */
-    public function setKey(string $key): void
+    public function setKey($key)
     {
         $this->key = $key;
     }
@@ -42,7 +42,7 @@ class CustomProperty implements Arrayable
     /**
      * @return string
      */
-    public function getValue(): string
+    public function getValue()
     {
         return $this->value;
     }
@@ -50,7 +50,7 @@ class CustomProperty implements Arrayable
     /**
      * @param string $value
      */
-    public function setValue(string $value): void
+    public function setValue($value)
     {
         $this->value = $value;
     }

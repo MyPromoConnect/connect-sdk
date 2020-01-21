@@ -168,7 +168,7 @@ class OrderItem implements Arrayable
     /**
      * @return CustomProperty[]
      */
-    public function getCustomProperties(): array
+    public function getCustomProperties()
     {
         return $this->customProperties;
     }
@@ -176,7 +176,7 @@ class OrderItem implements Arrayable
     /**
      * @param CustomProperty[] $customProperties
      */
-    public function setCustomProperties(array $customProperties): void
+    public function setCustomProperties($customProperties)
     {
         $this->customProperties = $customProperties;
     }
@@ -195,8 +195,11 @@ class OrderItem implements Arrayable
             'reference' => $this->reference,
             'quantity'  => $this->quantity,
             'sku'       => $this->sku,
-            'customs'   => $this->customs->toArray(),
         ];
+
+        if (!empty($this->customs)) {
+            $orderItemArray['customs'] = $this->customs->toArray();
+        }
 
         if ($this->files) {
             /**
