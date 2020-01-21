@@ -194,7 +194,6 @@ class OrderItem implements Arrayable
         $orderItemArray = [
             'reference' => $this->reference,
             'quantity'  => $this->quantity,
-            'sku'       => $this->sku,
         ];
 
         if (!empty($this->customs)) {
@@ -233,6 +232,12 @@ class OrderItem implements Arrayable
          */
         if (!empty($designs) && !empty($files)) {
             throw new OrderItemException('You cannot use designs and files together.');
+        }
+
+        if (
+            empty($designs)
+        ) {
+            $orderItemArray['sku'] = $this->sku;
         }
 
         $customPropertyArray = [];
