@@ -168,7 +168,7 @@ class OrderItem implements Arrayable
     /**
      * @return CustomProperty[]
      */
-    public function getCustomProperties(): array
+    public function getCustomProperties()
     {
         return $this->customProperties;
     }
@@ -176,7 +176,7 @@ class OrderItem implements Arrayable
     /**
      * @param CustomProperty[] $customProperties
      */
-    public function setCustomProperties(array $customProperties): void
+    public function setCustomProperties($customProperties)
     {
         $this->customProperties = $customProperties;
     }
@@ -194,9 +194,11 @@ class OrderItem implements Arrayable
         $orderItemArray = [
             'reference' => $this->reference,
             'quantity'  => $this->quantity,
-            'sku'       => $this->sku,
-            'customs'   => $this->customs->toArray(),
         ];
+
+        if (!empty($this->customs)) {
+            $orderItemArray['customs'] = $this->customs->toArray();
+        }
 
         if ($this->files) {
             /**
@@ -230,6 +232,12 @@ class OrderItem implements Arrayable
          */
         if (!empty($designs) && !empty($files)) {
             throw new OrderItemException('You cannot use designs and files together.');
+        }
+
+        if (
+            empty($designs)
+        ) {
+            $orderItemArray['sku'] = $this->sku;
         }
 
         $customPropertyArray = [];
