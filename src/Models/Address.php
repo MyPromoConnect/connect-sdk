@@ -477,7 +477,7 @@ class Address implements Arrayable
      */
     public function toArray()
     {
-        return [
+        $addressArray = [
             'reference'                 => $this->reference,
             'company'                   => $this->company,
             'department'                => $this->department,
@@ -495,11 +495,16 @@ class Address implements Arrayable
             'mobile'                    => $this->mobile,
             'email'                     => $this->email,
             'vat_id'                    => $this->vatId,
-            'commercial_register_entry' => $this->commercialRegisterEntry,
             'eori_number'               => $this->eoriNumber,
             'account_holder'            => $this->accountHolder,
             'iban'                      => $this->iban,
             'bic_or_swift'              => $this->bicOrSwift,
         ];
+
+        if (!empty($this->commercialRegisterEntry)){
+            $addressArray['commercial_register_entry'] = $this->commercialRegisterEntry;
+        }
+
+        return $addressArray;
     }
 }
