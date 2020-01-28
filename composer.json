@@ -4,7 +4,7 @@
     "type": "sdk",
     "require": {
         "guzzlehttp/guzzle": "^6.4",
-        "symfony/cache": "^3.4",
+        "symfony/cache": "^5.0",
         "ext-json": "*"
     },
     "license": "MIT",
