@@ -35,8 +35,7 @@ class DesignRepository extends Repository
                 'Authorization' => 'Bearer ' . $this->client->auth()->get(),
             ],
             RequestOptions::JSON => $design->toArray(),
-        ])
-        ;
+        ]);
 
         if ($response->getStatusCode() !== 201) {
             throw new DesignException($response->getBody(), $response->getStatusCode());
@@ -66,13 +65,52 @@ class DesignRepository extends Repository
                 'Content-Type'  => 'application/json',
                 'Authorization' => 'Bearer ' . $this->client->auth()->get(),
             ],
-        ])
-        ;
+        ]);
 
         if ($response->getStatusCode() !== 200) {
             throw new DesignException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
+    }
+
+    /**
+     * @param int         $designId
+     * @param null|string $targetFile
+     *
+     * @return string
+     * @throws ClientException
+     * @throws DesignException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
+     */
+    public function preview($designId, $targetFile = null)
+    {
+        $response = $this->client->guzzle()->get('/v1/designs/' . $designId . '/preview', [
+            'headers' => [
+                'Accept'        => 'application/json',
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new DesignException($response->getBody(), $response->getStatusCode());
+        } elseif (
+            strtolower($response->getHeader('Content-Type')[0]) !== 'pdf'
+            && strtolower($response->getHeader('Content-Type')[0]) !== 'application/pdf'
+        ) {
+            throw new DesignException(
+                "Not supported content-type '{$response->getHeader('Content-Type')[0]}'."
+            );
+        }
+
+        if ($targetFile) {
+            $previewFile = fopen($targetFile, 'w');
+            fwrite($previewFile, $response->getbody());
+            fclose($previewFile);
+        }
+
+        return $response;
     }
 }
