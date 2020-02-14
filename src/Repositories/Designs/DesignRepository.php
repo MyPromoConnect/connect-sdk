@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Designs;
 
+use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\DesignException;
@@ -9,6 +10,7 @@ use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Models\Design;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class DesignRepository
@@ -75,16 +77,48 @@ class DesignRepository extends Repository
     }
 
     /**
+     * gets preview response and can save preview as file
+     *
      * @param int         $designId
      * @param null|string $targetFile
      *
-     * @return string
+     * @return ResponseInterface
+     * @throws ClientException
+     * @throws DesignException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
+     * @throws Exception
+     */
+    public function preview($designId, $targetFile = null)
+    {
+        $response = $this->getPreviewResponse($designId);
+
+        if ($targetFile) {
+            $previewFile = fopen($targetFile, 'w');
+            if ($previewFile === false) {
+                throw new Exception("File '{$targetFile}' could not be created.");
+            }
+            {
+                fwrite($previewFile, $response->getbody());
+                fclose($previewFile);
+            }
+        }
+
+        return $response;
+    }
+
+    /**
+     * gets preview response
+     *
+     * @param int $designId
+     *
+     * @return ResponseInterface
      * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
      */
-    public function preview($designId, $targetFile = null)
+    public function getPreviewResponse($designId)
     {
         $response = $this->client->guzzle()->get('/v1/designs/' . $designId . '/preview', [
             'headers' => [
@@ -105,12 +139,35 @@ class DesignRepository extends Repository
             );
         }
 
-        if ($targetFile) {
-            $previewFile = fopen($targetFile, 'w');
+        return $response;
+    }
+
+    /**
+     * save preview as file
+     *
+     * @param int    $designId
+     * @param string $targetFile
+     *
+     * @return string
+     * @throws ClientException
+     * @throws DesignException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
+     * @throws Exception
+     */
+    public function savePreview($designId, $targetFile)
+    {
+        $response = $this->getPreviewResponse($designId);
+
+        $previewFile = fopen($targetFile, 'w');
+        if ($previewFile === false) {
+            throw new Exception("File '{$targetFile}' could not be created.");
+        }
+        {
             fwrite($previewFile, $response->getbody());
             fclose($previewFile);
         }
 
-        return $response;
+        return $targetFile;
     }
 }

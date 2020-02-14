@@ -21,13 +21,23 @@ $designRepository->submit($design->getId());
 ```
 
 ###### Preview Design
-Get a design preview and save it in a file.
+Get a design preview and save it in the given file.
 
 ```php
 $designRepository->preview($design->getId(), "preview.pdf");
 ```
 
+Get only a design preview response
 
+```php
+$designRepository->getPreviewResponse($design->getId());
+```
+
+Save a design preview in the given file
+
+```php
+$designRepository->savePreview($design->getId(), "preview.pdf");
+```
 
 [Design]: ../Models/Design.md
 
