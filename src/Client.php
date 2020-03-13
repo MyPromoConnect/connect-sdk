@@ -25,6 +25,12 @@ class Client
      */
     const SANDBOX_URL = 'https://sandbox.connect.mypromo.com';
 
+
+    /**
+     * Sandbox URL
+     */
+    const STAGE_URL = 'https://stage.connect.mypromo.com';
+
     /**
      * @var int
      */
@@ -36,9 +42,9 @@ class Client
     protected $secret;
 
     /**
-     * Defines if the SDK runs in production or sandbox
+     * Defines if the SDK runs in production, sandbox or staging
      *
-     * @var bool
+     * @var int
      */
     protected $production;
 
@@ -61,9 +67,25 @@ class Client
      */
     public function __construct($production, $id, $secret)
     {
+
+        // Switch through production codes
+        // default case should always be the live system
+        switch ($production) {
+            case 0:
+                $baseUri = self::SANDBOX_URL;
+                break;
+            case 1:
+                $baseUri = self::PRODUCTION_URL;
+                break;
+            case 2:
+                $baseUri = self::STAGE_URL;
+                break;
+            default:
+                $baseUri = self::PRODUCTION_URL;
+        }
         $this->cache      = new FilesystemAdapter();
         $this->guzzle     = new \GuzzleHttp\Client([
-            'base_uri' => $production ? self::PRODUCTION_URL : self::SANDBOX_URL,
+            'base_uri' => $baseUri,
         ]);
         $this->id         = $id;
         $this->secret     = $secret;
