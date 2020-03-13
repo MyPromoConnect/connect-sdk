@@ -83,6 +83,7 @@ class Client
             default:
                 $baseUri = self::PRODUCTION_URL;
         }
+
         $this->cache      = new FilesystemAdapter();
         $this->guzzle     = new \GuzzleHttp\Client([
             'base_uri' => $baseUri,
