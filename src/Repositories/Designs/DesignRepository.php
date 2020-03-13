@@ -112,11 +112,18 @@ class DesignRepository extends Repository
      */
     public function getPreviewPDF($designId)
     {
-        $response = $this->client->guzzle()->get('/v1/designs/' . $designId . '/preview', [
+        $getDesignResponse = $this->getDesign($designId);
+
+        $previewUrl = isset($getDesignResponse['preview_url']) ? $getDesignResponse['preview_url'] : null;
+
+        if ($previewUrl === null){
+            throw new DesignException("No preview url exists.");
+        }
+
+        $response = $this->client->guzzle()->get($previewUrl, [
             'headers' => [
                 'Accept'        => 'application/json',
                 'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
             ],
         ]);
 
