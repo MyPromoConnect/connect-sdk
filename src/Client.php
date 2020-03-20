@@ -18,18 +18,17 @@ class Client
     /**
      * Production URL
      */
-    const PRODUCTION_URL = 'https://connect.mypromo.com';
+    const PRODUCTION_URL = 'https://api.mypromo.com/';
 
     /**
      * Sandbox URL
      */
-    const SANDBOX_URL = 'https://sandbox.connect.mypromo.com';
-
+    const SANDBOX_URL = 'https://sandbox.api.mypromo.com';
 
     /**
      * Sandbox URL
      */
-    const STAGE_URL = 'https://stage.connect.mypromo.com';
+    const STAGE_URL = 'https://stage.api.mypromo.com';
 
     /**
      * @var int
