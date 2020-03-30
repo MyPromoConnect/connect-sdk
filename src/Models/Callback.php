@@ -245,8 +245,15 @@ class Callback implements Arrayable
             throw new OrderException('Callback url is missing.');
         }
 
+        //decide authType
         if (empty($this->authType)) {
-            throw new OrderException("Callback authentication type is missing.");
+            if(!empty($this->authUsername) && !empty($this->authPassword)){
+                $this->authType = self::AUTH_TYPE_BASIC;
+            }elseif (!empty($this->authHeader)){
+                $this->authType = self::AUTH_TYPE_HEADER;
+            }else{
+                $this->authType = self::AUTH_TYPE_NONE;
+            }
         }
 
         if (!in_array($this->authType, self::SUPPORTED_AUTH_TYPES)) {
