@@ -9,6 +9,7 @@ use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Models\Design;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Class DesignRepository
@@ -48,6 +49,32 @@ class DesignRepository extends Repository
     }
 
     /**
+     * @param $designId
+     *
+     * @return mixed
+     * @throws ClientException
+     * @throws DesignException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
+     */
+    public function getDesign($designId)
+    {
+        $response = $this->client->guzzle()->get('/v1/designs/' . $designId, [
+            'headers' => [
+                'Accept'        => 'application/json',
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new DesignException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
      * @param int $designId
      *
      * @return mixed
@@ -75,22 +102,28 @@ class DesignRepository extends Repository
     }
 
     /**
-     * @param int         $designId
-     * @param null|string $targetFile
+     * @param int $designId
      *
-     * @return string
+     * @return ResponseInterface
      * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
      */
-    public function preview($designId, $targetFile = null)
+    public function getPreviewPDF($designId)
     {
-        $response = $this->client->guzzle()->get('/v1/designs/' . $designId . '/preview', [
+        $getDesignResponse = $this->getDesign($designId);
+
+        $previewUrl = isset($getDesignResponse['preview_url']) ? $getDesignResponse['preview_url'] : null;
+
+        if ($previewUrl === null){
+            throw new DesignException("No preview url exists.");
+        }
+
+        $response = $this->client->guzzle()->get($previewUrl, [
             'headers' => [
                 'Accept'        => 'application/json',
                 'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
             ],
         ]);
 
@@ -105,12 +138,33 @@ class DesignRepository extends Repository
             );
         }
 
-        if ($targetFile) {
-            $previewFile = fopen($targetFile, 'w');
-            fwrite($previewFile, $response->getbody());
-            fclose($previewFile);
+        return $response;
+    }
+
+    /**
+     * @param int    $designId
+     * @param string $targetFile
+     *
+     * @return bool
+     * @throws ClientException
+     * @throws DesignException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
+     */
+    public function savePreview($designId, $targetFile)
+    {
+        $response = $this->getPreviewPDF($designId);
+
+        $previewFile = fopen($targetFile, 'w');
+        if ($previewFile === false) {
+            throw new DesignException("File '{$targetFile}' could not be created.");
         }
 
-        return $response;
+
+        if (fwrite($previewFile, $response->getbody()) === false){
+            throw new DesignException("File '{$targetFile}' is not writable.");
+        }
+
+        return fclose($previewFile);
     }
 }
