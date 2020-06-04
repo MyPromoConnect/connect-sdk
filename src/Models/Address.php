@@ -121,6 +121,11 @@ class Address implements Arrayable
     protected $commercialRegisterEntry;
 
     /**
+     * @var int|null
+     */
+    protected $templateId = null;
+
+    /**
      * @return string
      */
     public function getReference()
@@ -473,6 +478,22 @@ class Address implements Arrayable
     }
 
     /**
+     * @return int|null
+     */
+    public function getTemplateId()
+    {
+        return $this->templateId;
+    }
+
+    /**
+     * @param int|null $templateId
+     */
+    public function setTemplateId($templateId)
+    {
+        $this->templateId = $templateId;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function toArray()
@@ -503,6 +524,10 @@ class Address implements Arrayable
 
         if (!empty($this->commercialRegisterEntry)){
             $addressArray['commercial_register_entry'] = $this->commercialRegisterEntry;
+        }
+
+        if(!empty($this->templateId)) {
+            $addressArray['template_id'] = $this->templateId;
         }
 
         return $addressArray;
