@@ -36,6 +36,11 @@ class Design implements Arrayable
     protected $options;
 
     /**
+     * @var string
+     */
+    protected $intent;
+
+    /**
      * @return int|null
      */
     public function getId()
@@ -115,6 +120,22 @@ class Design implements Arrayable
         $this->options = $options;
     }
 
+    /**
+     * @return string
+     */
+    public function getIntent()
+    {
+        return $this->intent;
+    }
+
+    /**
+     * @param string $intent
+     */
+    public function setIntent($intent)
+    {
+        $this->intent = $intent;
+    }
+
 
     /**
      * Get the instance as an array.
@@ -125,6 +146,7 @@ class Design implements Arrayable
     {
         $designArray = [
             'sku'        => $this->sku,
+            'intent'     => $this->intent,
             'return_url' => $this->returnUrl,
             'cancel_url' => $this->cancelUrl,
         ];

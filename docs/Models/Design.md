@@ -5,6 +5,7 @@ $design = new \MyPromo\Connect\SDK\Models\Design();
 $design->setReturnUrl('https...');
 $design->setCancelUrl('https...');
 $design->setSku('EXAMPLE-SKU');
+$design->setIntent('EXAMPLE-INTENT (upload/customize)');
 $design->setOptions([
     'example-key' => 'example-value'
 ]);
