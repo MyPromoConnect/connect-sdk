@@ -7,7 +7,7 @@ $designRepository = new \MyPromo\Connect\SDK\Repositories\Designs\DesignReposito
 
 ###### Create Design
 
-Create a new design user hash (with [Design][Design])
+Create a new editor user hash (with [Design][Design])
 ```php
 $design = new \MyPromo\Connect\SDK\Models\Design();
 ...
