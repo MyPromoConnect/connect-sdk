@@ -18,7 +18,7 @@ class Design implements Arrayable
     /**
      * @var string
      */
-    protected $userHash;
+    protected $editorUserHash;
 
     /**
      * @var string
@@ -64,17 +64,17 @@ class Design implements Arrayable
     /**
      * @return string
      */
-    public function getUserHash()
+    public function getEditorUserHash()
     {
-        return $this->userHash;
+        return $this->editorUserHash;
     }
 
     /**
-     * @param string $userHash
+     * @param string $editorUserHash
      */
-    public function setUserHash($userHash)
+    public function setEditorUserHash($editorUserHash)
     {
-        $this->userHash = $userHash;
+        $this->editorUserHash = $editorUserHash;
     }
 
     /**
@@ -170,7 +170,7 @@ class Design implements Arrayable
             'intent'     => $this->intent,
             'return_url'        => $this->returnUrl,
             'cancel_url'        => $this->cancelUrl,
-            'editor_user_hash'  => $this->userHash,
+            'editor_user_hash'  => $this->editorUserHash,
         ];
 
         if ($this->options) {

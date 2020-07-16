@@ -192,7 +192,7 @@ class DesignRepository extends Repository
         }
 
         $body = json_decode($response->getBody(), true);
-        $design->setUserHash($body['editor_user_hash']);
+        $design->setEditorUserHash($body['editor_user_hash']);
 
         return $body;
     }
