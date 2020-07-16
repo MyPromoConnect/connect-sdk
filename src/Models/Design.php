@@ -18,6 +18,11 @@ class Design implements Arrayable
     /**
      * @var string
      */
+    protected $userHash;
+
+    /**
+     * @var string
+     */
     protected $returnUrl;
 
     /**
@@ -54,6 +59,22 @@ class Design implements Arrayable
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUserHash()
+    {
+        return $this->userHash;
+    }
+
+    /**
+     * @param string $userHash
+     */
+    public function setUserHash($userHash)
+    {
+        $this->userHash = $userHash;
     }
 
     /**
@@ -145,10 +166,11 @@ class Design implements Arrayable
     public function toArray()
     {
         $designArray = [
-            'sku'        => $this->sku,
+            'sku'               => $this->sku,
             'intent'     => $this->intent,
-            'return_url' => $this->returnUrl,
-            'cancel_url' => $this->cancelUrl,
+            'return_url'        => $this->returnUrl,
+            'cancel_url'        => $this->cancelUrl,
+            'editor_user_hash'  => $this->userHash,
         ];
 
         if ($this->options) {
