@@ -2,6 +2,7 @@ Template-File for [DesignRepository->create()][DesignRepository]
 
 ```php
 $design = new \MyPromo\Connect\SDK\Models\Design();
+$design->setUserHash('Hash String');
 $design->setReturnUrl('https...');
 $design->setCancelUrl('https...');
 $design->setSku('EXAMPLE-SKU');

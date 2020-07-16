@@ -168,4 +168,34 @@ class DesignRepository extends Repository
 
         return fclose($previewFile);
     }
+    /**
+     * @param Design $design
+     *
+     * @return mixed
+     *
+     * @throws DesignException
+     * @throws ClientException
+     * @throws MissingCredentialsException
+     * @throws InvalidArgumentException
+     */
+    public function createEditorUserHash($design)
+    {
+        $response = $this->client->guzzle()->post('/v1/editor_user', [
+            'headers'            => [
+                'Accept'        => 'application/json',
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+            ],
+        ]);
+
+        if ($response->getStatusCode() !== 201) {
+            throw new DesignException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+        $design->setUserHash($body['editor_user_hash']);
+
+        return $body;
+    }
+
 }
