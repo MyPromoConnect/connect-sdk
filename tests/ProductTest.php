@@ -103,16 +103,16 @@ class ProductTest extends TestCase
         $this->assertCount(2, $priceUpdateArray['data'][0]['prices']['sales_prices']);
 
         $this->assertArrayHasKey('qty', $priceUpdateArray['data'][0]['prices']['sales_prices'][0]);
-        $this->assertIsInt($priceUpdateArray['data'][0]['prices']['sales_prices'][0]['qty']);
+        $this->assertGreaterThan(0, intval($priceUpdateArray['data'][0]['prices']['sales_prices'][0]['qty']));
         $this->assertArrayHasKey('price', $priceUpdateArray['data'][0]['prices']['sales_prices'][0]);
-        $this->assertIsFloat($priceUpdateArray['data'][0]['prices']['sales_prices'][0]['price']);
+        $this->assertGreaterThan(0, floatval($priceUpdateArray['data'][0]['prices']['sales_prices'][0]['price']));
     }
 
     public function testInventoryArrayStructure() {
         $inventoryArray = $this->productInventory->toArray();
 
         $this->assertIsArray($inventoryArray);
-        $this->assertArrayHasKey($inventoryArray['data']);
+        $this->assertArrayHasKey('data', $inventoryArray);
         $this->assertIsArray($inventoryArray['data']);
         $this->assertCount(2, $inventoryArray['data']);
 
