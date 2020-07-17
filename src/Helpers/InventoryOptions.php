@@ -104,9 +104,9 @@ class InventoryOptions implements Arrayable
     public function toArray()
     {
         return [
-            'from' => $this->from,
-            'per_page' => $this->per_page,
-            'sku' => $this->sku,
+            'from'          => $this->from,
+            'per_page'      => $this->per_page,
+            'sku'           => $this->sku,
             'shipping_from' => $this->shipping_from,
         ];
     }
