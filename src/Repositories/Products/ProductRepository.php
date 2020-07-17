@@ -120,7 +120,7 @@ class ProductRepository extends Repository
      * @throws ProductException
      */
     public function putInventory($productInventory) {
-        $response = $this->client->guzzle()->post('/v1/inventory', [
+        $response = $this->client->guzzle()->patch('/v1/inventory', [
             'headers'            => [
                 'Accept'        => 'application/json',
                 'Content-Type'  => 'application/json',
@@ -182,7 +182,7 @@ class ProductRepository extends Repository
      * @throws ProductException
      */
     public function putPrices($productPriceUpdate) {
-        $response = $this->client->guzzle()->post('/v1/inventory', [
+        $response = $this->client->guzzle()->patch('/v1/inventory', [
             'headers'            => [
                 'Accept'        => 'application/json',
                 'Content-Type'  => 'application/json',
