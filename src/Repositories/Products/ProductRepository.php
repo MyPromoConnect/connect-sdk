@@ -8,6 +8,7 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Products;
 
+use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Exceptions\ProductException;
@@ -15,6 +16,7 @@ use MyPromo\Connect\SDK\Helpers\InventoryOptions;
 use MyPromo\Connect\SDK\Helpers\PriceOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
+use Psr\Cache\InvalidArgumentException;
 
 class ProductRepository extends Repository
 {
@@ -32,9 +34,10 @@ class ProductRepository extends Repository
      * You can use the @param array|ProductOptions $options
      *
      * @return array
+     * @throws ClientException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
      * @throws ProductException
-     * @throws \MyPromo\Connect\SDK\Exceptions\ClientException
-     * @throws \MyPromo\Connect\SDK\Exceptions\MissingCredentialsException
      */
     public function all($options) {
         if ($options instanceof ProductOptions) {
@@ -62,9 +65,10 @@ class ProductRepository extends Repository
      * @param $productId
      *
      * @return array
-     * @throws ProductException
      * @throws ClientException
+     * @throws InvalidArgumentException
      * @throws MissingCredentialsException
+     * @throws ProductException
      */
     public function find($productId) {
         $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
@@ -92,10 +96,15 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws ClientException
+     * @throws InvalidArgumentException
      * @throws MissingCredentialsException
      * @throws ProductException
      */
     public function getInventory($options) {
+        if ($options instanceof InventoryOptions) {
+            $options = $options->toArray();
+        }
+
         $response = $this->client->guzzle()->get('/v1/inventory', [
             'headers' => [
                 'Accept'        => 'application/json',
@@ -118,6 +127,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws ProductException
+     * @throws InvalidArgumentException
      */
     public function putInventory($productInventory) {
         $response = $this->client->guzzle()->patch('/v1/inventory', [
@@ -152,9 +162,10 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws ProductException
+     * @throws InvalidArgumentException
      */
     public function getPrices($options) {
-        if ($options instanceof ProductOptions) {
+        if ($options instanceof PriceOptions) {
             $options = $options->toArray();
         }
 
@@ -178,11 +189,12 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws ClientException
+     * @throws InvalidArgumentException
      * @throws MissingCredentialsException
      * @throws ProductException
      */
     public function putPrices($productPriceUpdate) {
-        $response = $this->client->guzzle()->patch('/v1/inventory', [
+        $response = $this->client->guzzle()->patch('/v1/prices', [
             'headers'            => [
                 'Accept'        => 'application/json',
                 'Content-Type'  => 'application/json',
