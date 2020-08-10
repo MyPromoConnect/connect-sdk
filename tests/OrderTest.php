@@ -16,7 +16,7 @@ class OrderTest extends TestCase
     /**
      * @var Address
      */
-    private $invoice;
+    private $export;
 
     /**
      * @var Address
@@ -87,7 +87,7 @@ class OrderTest extends TestCase
         $this->order->setReference('SDK-Reference-1');
         $this->order->setShipper($this->shipper);
         $this->order->setRecipient($this->recipient);
-        $this->order->setInvoice($this->invoice);
+        $this->order->setExport($this->invoice);
     }
 
     public function testOrderDefaults()
