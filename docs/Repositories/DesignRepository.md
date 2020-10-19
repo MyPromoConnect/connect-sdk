@@ -6,6 +6,14 @@ $designRepository = new \MyPromo\Connect\SDK\Repositories\Designs\DesignReposito
 #### Available Methods
 
 ###### Create Design
+
+Create a new editor user hash (with [Design][Design])
+```php
+$design = new \MyPromo\Connect\SDK\Models\Design();
+...
+$designRepository->createEditorUserHash($design);
+```
+
 Create a new design (with [Design][Design])
 ```php
 $design = new \MyPromo\Connect\SDK\Models\Design();
