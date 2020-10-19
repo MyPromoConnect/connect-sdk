@@ -46,7 +46,7 @@ class Order implements Arrayable
     protected $recipient;
 
     /**
-     * @var Address
+     * @var Address|null
      */
     protected $invoice;
 
@@ -178,7 +178,7 @@ class Order implements Arrayable
     }
 
     /**
-     * @return Address
+     * @return Address|null
      */
     public function getInvoice()
     {
@@ -186,7 +186,7 @@ class Order implements Arrayable
     }
 
     /**
-     * @param Address $invoice
+     * @param Address|null $invoice
      */
     public function setInvoice($invoice)
     {
@@ -265,7 +265,7 @@ class Order implements Arrayable
             'express_shipping'   => $this->expressShipping,
             'shipper'            => $this->shipper->toArray(),
             'recipient'          => $this->recipient->toArray(),
-            'invoice'            => $this->invoice->toArray(),
+            'invoice'            => $this->invoice !== null ? $this->invoice->toArray() : null,
         ];
 
         if ($files) {
