@@ -5,7 +5,7 @@ $order = new \MyPromo\Connect\SDK\Models\Order();
 $order->setReference('your-order-reference');
 $order->setShipper($shipper);
 $order->setRecipient($recipient);
-$order->setInvoice($invoice);
+$order->setExport($export);
 ```
 
 Optional:

@@ -48,7 +48,7 @@ class Order implements Arrayable
     /**
      * @var Address|null
      */
-    protected $invoice;
+    protected $export;
 
     /**
      * @var ...$files
@@ -180,17 +180,17 @@ class Order implements Arrayable
     /**
      * @return Address|null
      */
-    public function getInvoice()
+    public function getExport()
     {
-        return $this->invoice;
+        return $this->export;
     }
 
     /**
-     * @param Address|null $invoice
+     * @param Address|null $export
      */
-    public function setInvoice($invoice)
+    public function setExport($export)
     {
-        $this->invoice = $invoice;
+        $this->export = $export;
     }
 
     /**
@@ -265,7 +265,7 @@ class Order implements Arrayable
             'express_shipping'   => $this->expressShipping,
             'shipper'            => $this->shipper->toArray(),
             'recipient'          => $this->recipient->toArray(),
-            'invoice'            => $this->invoice !== null ? $this->invoice->toArray() : null,
+            'export'             => $this->export !== null ? $this->export->toArray() : null,
         ];
 
         if ($files) {
