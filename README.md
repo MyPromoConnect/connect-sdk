@@ -3,6 +3,11 @@
 [![Latest Stable Version](https://poser.pugx.org/mypromo/connect-sdk/v/stable)](https://packagist.org/packages/mypromo/connectsdk)
 [![composer.lock](https://poser.pugx.org/mypromo/connect-sdk/composerlock)](https://packagist.org/packages/mypromo/connectsdk)
 
+## Important Announcement
+
+Mypromo Connect SDK will support `php 7.3` or higher only from 1st of March 2021 only. 
+Please update your applications and environments accordingly.
+
 ## Contents
 
 - [Docs][Docs]
