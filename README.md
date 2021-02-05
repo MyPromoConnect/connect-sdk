@@ -8,6 +8,10 @@
 Mypromo Connect SDK will support `php 7.3` or higher only from 1st of March 2021. 
 Please update your applications and environments accordingly.
 
+## Important Changes
+- added Trailing Slashes to all API Endpoints
+- Support a custom baseUri for Client ([see details here](docs/README.md))
+
 ## Contents
 
 - [Docs][Docs]
@@ -33,6 +37,10 @@ If you discover any security related issues, please email `support@mypromo.com` 
 Running tests requires at least PHP Version `7.2` or higher.  
 
 ## Version Guidance
+
+| Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
+|---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
