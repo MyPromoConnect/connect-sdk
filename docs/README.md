@@ -23,13 +23,14 @@ On failure it will throw an exception.
 ###### Create a new client
 
 ```php
-$client = new \MyPromo\Connect\SDK\Client($production, $clientId, $clientSecret)
+$client = new \MyPromo\Connect\SDK\Client($productionCode, $clientId, $clientSecret)
 ```
 ###### Constructor Parameters
 ```php
-bool    $production     // Set your environment (Sandbox, Live)
+int     $productionCode // Set your environment (0=Sandbox, 1=Live, 2=Stage)
 int     $clientId       // Set your client-id provided by connect
 string  $clientSecret   // Set your client-secret provided by connect
+string  $baseUri        // Set your custom baseUri (e.g. for own dev server), it's optional and will override `productionCode` parameter
 ```
 ###### Available Client-Methods
 - `$client->auth()`

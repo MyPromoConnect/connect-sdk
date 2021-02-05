@@ -23,12 +23,12 @@ class Client
     /**
      * Sandbox URL
      */
-    const SANDBOX_URL = 'https://sandbox.api.mypromo.com';
+    const SANDBOX_URL = 'https://sandbox.api.mypromo.com/';
 
     /**
      * Sandbox URL
      */
-    const STAGE_URL = 'https://stage.api.mypromo.com';
+    const STAGE_URL = 'https://stage.api.mypromo.com/';
 
     /**
      * @var int
@@ -45,7 +45,7 @@ class Client
      *
      * @var int
      */
-    protected $production;
+    protected $productionCode;
 
     /**
      * @var FilesystemAdapter
@@ -60,36 +60,38 @@ class Client
     /**
      * Client constructor.
      *
-     * @param bool   $production
-     * @param int    $id
-     * @param string $secret
+     * @param int           $productionCode
+     * @param int           $id
+     * @param string        $secret
+     * @param string|null   $baseUri
      */
-    public function __construct($production, $id, $secret)
+    public function __construct($productionCode, $id, $secret, $baseUri = null)
     {
-
-        // Switch through production codes
-        // default case should always be the live system
-        switch ($production) {
-            case 0:
-                $baseUri = self::SANDBOX_URL;
-                break;
-            case 1:
-                $baseUri = self::PRODUCTION_URL;
-                break;
-            case 2:
-                $baseUri = self::STAGE_URL;
-                break;
-            default:
-                $baseUri = self::PRODUCTION_URL;
+        if (!$baseUri) {
+            // Switch through production codes
+            // default case should always be the live system
+            switch ($productionCode) {
+                case 0:
+                    $baseUri = self::SANDBOX_URL;
+                    break;
+                case 1:
+                    $baseUri = self::PRODUCTION_URL;
+                    break;
+                case 2:
+                    $baseUri = self::STAGE_URL;
+                    break;
+                default:
+                    $baseUri = self::PRODUCTION_URL;
+            }
         }
 
         $this->cache      = new FilesystemAdapter();
         $this->guzzle     = new \GuzzleHttp\Client([
             'base_uri' => $baseUri,
         ]);
-        $this->id         = $id;
-        $this->secret     = $secret;
-        $this->production = $production;
+        $this->id               = $id;
+        $this->secret           = $secret;
+        $this->productionCode   = $productionCode;
     }
 
     /**
