@@ -14,6 +14,8 @@ Supported Filepath's:
 Supported:
 - https basic user and password auth
 - https header auth
+- https oauth
+- https oauth2
 - sftp user and password auth
 
 This is also the order of authentication if you set everything.
@@ -27,6 +29,26 @@ $file->setHttpsBasicAuthPassword($password);
 ###### https Header Auth
 ```php
 $file->setHttpsHeader('Bearer Test');
+```
+
+###### https oauth
+```php
+$file->setOAuthCredentials([
+    'auth_url' => $authUrl,
+    'username' => $username,
+    'password' => $password
+]);
+```
+
+###### https oauth2
+```php
+$file->setOAuth2Credentials([
+    'client_id' => $clientId,
+    'client_secret' => $clientSecret,
+    'auth_url' => $authUrl,
+    'grant_type' => $grantType,
+    'scope' => "*"
+]);
 ```
 
 ###### sftp auth
