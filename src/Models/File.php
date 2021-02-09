@@ -260,9 +260,7 @@ class File implements Arrayable
                 'password' => $this->httpsBasicAuthPassword,
             ];
         } elseif (isset($this->httpsHeader)) {
-            $fileArray['auth']['basic'] = [
-                'header' => $this->httpsHeader,
-            ];
+            $fileArray['auth']['header'] = $this->httpsHeader;
         } elseif (isset($this->sftpUser) && isset($this->sftpPassword)) {
             $fileArray['auth']['basic'] = [
                 'username' => $this->sftpUser,
