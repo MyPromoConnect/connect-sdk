@@ -45,6 +45,12 @@ class File implements Arrayable
      */
     protected $httpsHeader;
 
+    /** @var array|null */
+    protected $oauthCredentials;
+
+    /** @var array|null */
+    protected $oauth2Credentials;
+
     /**
      * @var string|null
      */
@@ -200,6 +206,38 @@ class File implements Arrayable
     }
 
     /**
+     * @return array|null
+     */
+    public function getOAuthCredenetials()
+    {
+        return $this->oauthCredentials;
+    }
+
+    /**
+     * @param array|null  $oauthCredentials
+     */
+    public function setOAuthCredentials(array $oauthCredentials)
+    {
+        $this->oauthCredentials = $oauthCredentials;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getOAuth2Credentials()
+    {
+        return $this->oauth2Credentials;
+    }
+
+    /**
+     * @param array|null  $oauth2Credentials
+     */
+    public function setOAuth2Credentials(array $oauth2Credentials)
+    {
+        $this->oauth2Credentials = $oauth2Credentials;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function toArray()
@@ -222,14 +260,16 @@ class File implements Arrayable
                 'password' => $this->httpsBasicAuthPassword,
             ];
         } elseif (isset($this->httpsHeader)) {
-            $fileArray['auth']['basic'] = [
-                'header' => $this->httpsHeader,
-            ];
+            $fileArray['auth']['header'] = $this->httpsHeader;
         } elseif (isset($this->sftpUser) && isset($this->sftpPassword)) {
             $fileArray['auth']['basic'] = [
                 'username' => $this->sftpUser,
                 'password' => $this->sftpPassword,
             ];
+        } else if (isset($this->oauthCredentials)) {
+            $fileArray['auth']['oauth1'] = $this->oauthCredentials;
+        } else if (isset($this->oauth2Credentials)) {
+            $fileArray['auth']['oauth2'] = $this->oauth2Credentials;
         }
 
         return $fileArray;
