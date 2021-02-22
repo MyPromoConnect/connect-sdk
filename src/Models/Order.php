@@ -21,6 +21,11 @@ class Order implements Arrayable
     protected $reference;
 
     /**
+     * @var string
+     */
+    protected $reference2;
+
+    /**
      * @var bool
      */
     protected $complaint = false;
@@ -95,6 +100,22 @@ class Order implements Arrayable
     public function setReference($reference)
     {
         $this->reference = $reference;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReference2()
+    {
+        return $this->reference2;
+    }
+
+    /**
+     * @param string $reference2
+     */
+    public function setReference2($reference2)
+    {
+        $this->reference2 = $reference2;
     }
 
     /**
@@ -260,6 +281,7 @@ class Order implements Arrayable
 
         $orderArray = [
             'reference'          => $this->reference,
+            'reference2'         => $this->reference2,
             'complaint'          => $this->complaint,
             'express_production' => $this->expressProduction,
             'express_shipping'   => $this->expressShipping,
