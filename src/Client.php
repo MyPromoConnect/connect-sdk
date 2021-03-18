@@ -71,7 +71,7 @@ class Client
      * @param int           $id
      * @param string        $secret
      * @param string|null   $baseUri
-     * @param bool $forceNewToken
+     * @param bool          $forceNewToken
      */
     public function __construct($productionCode, $id, $secret, $baseUri = null, $forceNewToken = false)
     {
@@ -100,7 +100,7 @@ class Client
         $this->id               = $id;
         $this->secret           = $secret;
         $this->productionCode   = $productionCode;
-        $this->forceNewToken = $forceNewToken;
+        $this->forceNewToken    = $forceNewToken;
     }
 
     /**
