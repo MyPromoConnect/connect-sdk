@@ -58,14 +58,22 @@ class Client
     protected $guzzle;
 
     /**
+     * To force SDK for new token
+     *
+     * @var $forceNewToken
+     */
+    protected $forceNewToken;
+
+    /**
      * Client constructor.
      *
      * @param int           $productionCode
      * @param int           $id
      * @param string        $secret
      * @param string|null   $baseUri
+     * @param bool $forceNewToken
      */
-    public function __construct($productionCode, $id, $secret, $baseUri = null)
+    public function __construct($productionCode, $id, $secret, $baseUri = null, $forceNewToken = false)
     {
         if (!$baseUri) {
             // Switch through production codes
@@ -92,6 +100,7 @@ class Client
         $this->id               = $id;
         $this->secret           = $secret;
         $this->productionCode   = $productionCode;
+        $this->forceNewToken = $forceNewToken;
     }
 
     /**
@@ -143,7 +152,7 @@ class Client
 
         $bearerToken = $this->cache->getItem('bearerToken' . $this->id . '-' . $this->secret);
 
-        if (!$bearerToken->isHit()) {
+        if (!$bearerToken->isHit() || $this->forceNewToken) {
             $response = $this->guzzle->post('/oauth/token', [
                 'headers'            => [
                     'Content-Type' => 'application/json',
