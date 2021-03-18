@@ -35,7 +35,7 @@ int     $productionCode // Set your environment (0=Sandbox, 1=Live, 2=Stage)
 int     $clientId       // Set your client-id provided by connect
 string  $clientSecret   // Set your client-secret provided by connect
 string  $baseUri        // Set your custom baseUri (e.g. for own dev server), it's optional and will override `productionCode` parameter
-string  $forceNewToken  // Force SDK to create new token for your client (Optional feature) can be used in case of DB updated and old token is stored in cache so you can use force to generate new token
+bool    $forceNewToken  // Force SDK to create new token for your client (Optional feature) can be used in case of DB updated and old token is stored in cache so you can use force to generate new token
 ```
 
 ###### Available Client-Methods
