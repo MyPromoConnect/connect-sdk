@@ -5,7 +5,7 @@
     "require": {
         "php": "^7.3",
         "guzzlehttp/guzzle": "^7.0.1",
-        "symfony/cache": "^3.4",
+        "symfony/cache": "^5.2",
         "ext-json": "*"
     },
     "license": "MIT",
