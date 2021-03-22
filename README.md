@@ -13,6 +13,7 @@ Please update your applications and environments accordingly.
 - added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
 - Support a custom baseUri for Client ([see details here](docs/README.md))
 - Add `reference2`field to Order Model ([see details here](docs/Models/Order.md))
+- Set minimum PHP Version to 7.3
 
 ## Contents
 
@@ -36,17 +37,17 @@ If you discover any security related issues, please email `support@mypromo.com` 
 
 #### Tests
 
-Running tests requires at least PHP Version `7.2` or higher.
+Running tests requires at least PHP Version `7.3` or higher.
 
 ## Version Guidance
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.3      |
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.3      |
 
 # License
 
