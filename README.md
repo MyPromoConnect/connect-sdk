@@ -13,7 +13,7 @@ Please update your applications and environments accordingly.
 - added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
 - Support a custom baseUri for Client ([see details here](docs/README.md))
 - Add `reference2`field to Order Model ([see details here](docs/Models/Order.md))
-- Set minium PHP Version to 7.3
+- Set minimum PHP Version to 7.3
 
 ## Contents
 
