@@ -7,7 +7,7 @@ use Exception;
 /**
  * Class ClientException
  * @package Connect\SDK\Exceptions
- *          Thrown whenever something occurs in @see \Connect\SDK\ClientClient
+ *          Thrown whenever something occurs in @see \MyPromo\Connect\SDK\Client
  */
 class ClientException extends Exception
 {

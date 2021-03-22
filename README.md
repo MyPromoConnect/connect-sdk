@@ -5,7 +5,7 @@
 
 ## Important Announcement
 
-Mypromo Connect SDK will support `php 7.3` or higher only from 1st of March 2021.
+Mypromo Connect SDK will support `php 7.2` or higher only from 1st of March 2021.
 Please update your applications and environments accordingly.
 
 ## Important Changes
@@ -13,6 +13,7 @@ Please update your applications and environments accordingly.
 - added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
 - Support a custom baseUri for Client ([see details here](docs/README.md))
 - Add `reference2`field to Order Model ([see details here](docs/Models/Order.md))
+- Set minium PHP Version to 7.2
 
 ## Contents
 
@@ -42,11 +43,11 @@ Running tests requires at least PHP Version `7.2` or higher.
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.2      |
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 5.6      |
+| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.2      |
 
 # License
 
