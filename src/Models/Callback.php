@@ -1,17 +1,14 @@
 <?php
-/**
- * @file          Callback.php
- * @since         20.01.20, 14:18
- *
- * @copyright (c) 2020.
- * @author        Mohammad Abazid <mab@os-cillation.de>
- */
 
 namespace MyPromo\Connect\SDK\Models;
 
-
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
+use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Validation;
 
 /**
  * Class Callback
@@ -62,7 +59,7 @@ class Callback implements Arrayable
     protected $authPassword;
 
     /**
-     * @var string
+     * @var array|null
      */
     protected $authHeader;
 
@@ -135,18 +132,38 @@ class Callback implements Arrayable
     }
 
     /**
-     * @return string
+     * @return array|null
      */
-    public function getAuthHeader()
+    public function getAuthHeader(): ?array
     {
         return $this->authHeader;
     }
 
     /**
-     * @param string $authHeader
+     * @param  array  $authHeader
+     * @throws OrderException
      */
-    public function setAuthHeader($authHeader)
+    public function setAuthHeader(array $authHeader)
     {
+        $validator = Validation::createValidator();
+        $constraints = new Collection([
+            'key' => [
+                new Type('string'),
+                new Length(['min' => 2]),
+                new NotNull(),
+            ],
+            'value' => [
+                new Type('string'),
+                new Length(['min' => 2]),
+                new NotNull(),
+            ],
+        ]);
+
+        $violations = $validator->validate($authHeader, $constraints);
+        if ($violations->count() > 0) {
+            throw new OrderException($violations);
+        }
+
         $this->authHeader = $authHeader;
     }
 
@@ -247,11 +264,11 @@ class Callback implements Arrayable
 
         //decide authType
         if (empty($this->authType)) {
-            if(!empty($this->authUsername) && !empty($this->authPassword)){
+            if (!empty($this->authUsername) && !empty($this->authPassword)) {
                 $this->authType = self::AUTH_TYPE_BASIC;
-            }elseif (!empty($this->authHeader)){
+            } elseif (!empty($this->authHeader)) {
                 $this->authType = self::AUTH_TYPE_HEADER;
-            }else{
+            } else {
                 $this->authType = self::AUTH_TYPE_NONE;
             }
         }
@@ -282,7 +299,7 @@ class Callback implements Arrayable
                 return $callbackArray;
             case self::AUTH_TYPE_HEADER:
                 if (empty($this->authHeader)) {
-                    throw new OrderException("Callback authentication header is missing.");
+                    throw new OrderException("Callback authentication header key/value pair is missing.");
                 }
 
                 $callbackArray['auth']['header'] = $this->authHeader;

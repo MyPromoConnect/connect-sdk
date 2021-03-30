@@ -3,6 +3,12 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Exceptions\OrderException;
+use Symfony\Component\Validator\Constraints\Collection;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotNull;
+use Symfony\Component\Validator\Constraints\Type;
+use Symfony\Component\Validator\Validation;
 
 /**
  * Class File
@@ -41,7 +47,7 @@ class File implements Arrayable
     protected $httpsBasicAuthPassword;
 
     /**
-     * @var string|null
+     * @var array|null
      */
     protected $httpsHeader;
 
@@ -158,18 +164,38 @@ class File implements Arrayable
     }
 
     /**
-     * @return string|null
+     * @return array|null
      */
-    public function getHttpsHeader()
+    public function getHttpsHeader(): ?array
     {
         return $this->httpsHeader;
     }
 
     /**
-     * @param string|null $httpsHeader
+     * @param  array  $httpsHeader
+     * @throws OrderException
      */
-    public function setHttpsHeader($httpsHeader)
+    public function setHttpsHeader(array $httpsHeader)
     {
+        $validator = Validation::createValidator();
+        $constraints = new Collection([
+            'key' => [
+                new Type('string'),
+                new Length(['min' => 2]),
+                new NotNull(),
+            ],
+            'value' => [
+                new Type('string'),
+                new Length(['min' => 2]),
+                new NotNull(),
+            ],
+        ]);
+
+        $violations = $validator->validate($httpsHeader, $constraints);
+        if ($violations->count() > 0) {
+            throw new OrderException($violations);
+        }
+
         $this->httpsHeader = $httpsHeader;
     }
 

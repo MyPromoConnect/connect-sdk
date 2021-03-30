@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK;
 
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use GuzzleHttp\RequestOptions;
@@ -142,9 +143,9 @@ class Client
      *
      * @throws MissingCredentialsException
      * @throws ClientException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
-    public function auth()
+    public function auth(): CacheItem
     {
         if (!isset($this->id) || !isset($this->secret)) {
             throw new MissingCredentialsException('Missing client id or secret.');
@@ -186,8 +187,9 @@ class Client
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws InvalidArgumentException
+     * @throws GuzzleException
      */
-    public function status()
+    public function status(): array
     {
         $response = $this->guzzle->get('/v1/status', [
             'headers' => [

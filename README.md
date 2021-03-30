@@ -14,6 +14,7 @@ Please update your applications and environments accordingly.
 - Support a custom baseUri for Client ([see details here](docs/README.md))
 - Add `reference2`field to Order Model ([see details here](docs/Models/Order.md))
 - Set minimum PHP Version to 7.3
+- use key/value for File/Callback Header Auth ([see details here](docs/Models/File.md)) and ([see details here](docs/Models/Callback.md))
 
 ## Contents
 
@@ -23,7 +24,7 @@ Please update your applications and environments accordingly.
   - [Repositories][Repositories]
 
 ## Requirements
-- PHP >=5.6
+- PHP >=7.3
 
 ## Contributing
 
