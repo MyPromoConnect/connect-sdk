@@ -28,7 +28,10 @@ $file->setHttpsBasicAuthPassword($password);
 
 ###### https Header Auth
 ```php
-$file->setHttpsHeader('Bearer Test');
+$file->setHttpsHeader([
+	'key' => 'Authorization',
+	'value' => 'Bearer Test',
+]);
 ```
 
 ###### https oauth

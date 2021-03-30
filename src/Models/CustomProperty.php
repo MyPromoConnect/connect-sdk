@@ -1,11 +1,4 @@
 <?php
-/**
- * @file          CustomProperty.php
- * @since         13.12.19, 09:56
- *
- * @copyright (c) 2019.
- * @author        Mohammad Abazid <mab@os-cillation.de>
- */
 
 namespace MyPromo\Connect\SDK\Models;
 
