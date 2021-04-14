@@ -71,6 +71,16 @@ class Order implements Arrayable
     protected $callback;
 
     /**
+     * @var bool|null
+     */
+    protected $fakePreflight = null;
+
+    /**
+     * @var bool|null
+     */
+    protected $fakeShipment = null;
+
+    /**
      * @param int $id
      */
     public function setId($id)
@@ -263,6 +273,38 @@ class Order implements Arrayable
     }
 
     /**
+     * @return bool|null
+     */
+    public function getFakePreflight()
+    {
+        return $this->fakePreflight;
+    }
+
+    /**
+     * @param $fakePreflight
+     */
+    public function setFakePreflight($fakePreflight)
+    {
+        $this->fakePreflight = $fakePreflight;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getFakeShipment()
+    {
+        return $this->fakeShipment;
+    }
+
+    /**
+     * @param $fakeShipment
+     */
+    public function setFakeShipment($fakeShipment)
+    {
+        $this->fakeShipment = $fakeShipment;
+    }
+
+    /**
      * Convert object to array
      *
      * @return array
@@ -305,6 +347,14 @@ class Order implements Arrayable
 
         if (!empty($this->callback)) {
             $orderArray['callback'] = $this->callback->toArray();
+        }
+
+        if (!is_null($this->fakeShipment)) {
+            $orderArray['fake_shipment'] = $this->fakeShipment;
+        }
+
+        if (!is_null($this->fakePreflight)) {
+            $orderArray['fake_preflight'] = $this->fakePreflight;
         }
 
         return $orderArray;
