@@ -10,6 +10,8 @@ $orderOptions->setCreatedFrom(new DateTime('date'));
 $orderOptions->setCreatedTo(new DateTime('date'));
 $orderOptions->setUpdatedFrom(new DateTime('date'));
 $orderOptions->setUpdatedTo(new DateTime('date'));
+$orderOptions->setReference('xyz123');
+$orderOptions->setReference2('abc123');
 ```  
   
 Supported DateTime formats: 

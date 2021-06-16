@@ -51,6 +51,8 @@ $orderOptions = [
     'created_to'   => $date->format('Y-m-d'),
     'updated_from' => $date->format('Y-m-d'),
     'updated_to'   => $date->format('Y-m-d'),
+    'reference'    => 'xyz123',
+    'reference2'   => 'abc123',
 ];
 
 $orderRepository->all($orderOptions);
