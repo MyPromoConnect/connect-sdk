@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK;
 
+use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
@@ -151,31 +152,35 @@ class Client
             throw new MissingCredentialsException('Missing client id or secret.');
         }
 
-        $bearerToken = $this->cache->getItem('bearerToken' . $this->id . '-' . $this->secret);
+        try {
+            $bearerToken = $this->cache->getItem('bearerToken' . $this->id . '-' . $this->secret);
 
-        if (!$bearerToken->isHit() || $this->forceNewToken) {
-            $response = $this->guzzle->post('/oauth/token', [
-                'headers'            => [
-                    'Content-Type' => 'application/json',
-                    'Accept'       => 'application/json',
-                ],
-                RequestOptions::JSON => [
-                    'grant_type'    => 'client_credentials',
-                    'client_id'     => $this->id(),
-                    'client_secret' => $this->secret(),
-                    'scope'         => '*',
-                ],
-            ]);
+            if (!$bearerToken->isHit() || $this->forceNewToken) {
+                $response = $this->guzzle->post('/oauth/token', [
+                    'headers'            => [
+                        'Content-Type' => 'application/json',
+                        'Accept'       => 'application/json',
+                    ],
+                    RequestOptions::JSON => [
+                        'grant_type'    => 'client_credentials',
+                        'client_id'     => $this->id(),
+                        'client_secret' => $this->secret(),
+                        'scope'         => '*',
+                    ],
+                ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new ClientException($response->getBody(), $response->getStatusCode());
+                if ($response->getStatusCode() !== 200) {
+                    throw new ClientException($response->getBody(), $response->getStatusCode());
+                }
+
+                $body = json_decode($response->getBody(), true);
+
+                $bearerToken->set($body['access_token']);
+                $bearerToken->expiresAfter($body['expires_in']);
+                $this->cache->save($bearerToken);
             }
-
-            $body = json_decode($response->getBody(), true);
-
-            $bearerToken->set($body['access_token']);
-            $bearerToken->expiresAfter($body['expires_in']);
-            $this->cache->save($bearerToken);
+        } catch (Exception $ex) {
+            throw new ClientException($ex->getMessage(), $ex->getCode());
         }
 
         return $bearerToken;
@@ -185,21 +190,24 @@ class Client
      * @return array
      *
      * @throws ClientException
-     * @throws MissingCredentialsException
      * @throws InvalidArgumentException
      * @throws GuzzleException
      */
     public function status(): array
     {
-        $response = $this->guzzle->get('/v1/status', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->auth()->get(),
-            ],
-        ]);
+        try {
+            $response = $this->guzzle->get('/v1/status', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new ClientException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new ClientException($response->getBody(), $response->getStatusCode());
+            }
+        } catch (Exception $ex) {
+            throw new ClientException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
