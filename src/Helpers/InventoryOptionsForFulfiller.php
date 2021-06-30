@@ -1,16 +1,16 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: massimo
- * Date: 16.07.20
- * Time: 13:16
+ * User: mypromo_ua
+ * Date: 30.07.21
+ * Time: 14:28
  */
 
 namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class PriceOptions implements Arrayable
+class InventoryOptionsForFulfiller implements Arrayable
 {
     /**
      * @var int
@@ -26,11 +26,6 @@ class PriceOptions implements Arrayable
      * @var string
      */
     protected $sku;
-
-    /**
-     * @var string
-     */
-    protected $shipping_from;
 
     /**
      * @var string
@@ -88,22 +83,6 @@ class PriceOptions implements Arrayable
     /**
      * @return string
      */
-    public function getShippingFrom()
-    {
-        return $this->shipping_from;
-    }
-
-    /**
-     * @param string $shipping_from
-     */
-    public function setShippingFrom($shipping_from)
-    {
-        $this->shipping_from = $shipping_from;
-    }
-
-    /**
-     * @return string
-     */
     public function getSkuFulfiller()
     {
         return $this->sku_fulfiller;
@@ -124,20 +103,11 @@ class PriceOptions implements Arrayable
      */
     public function toArray()
     {
-        $array = [
+        return [
             'from'          => $this->from,
             'per_page'      => $this->per_page,
             'sku'           => $this->sku,
+            'sku_fulfiller' => $this->sku_fulfiller,
         ];
-
-        if (isset($this->sku_fulfiller)) {
-            $array['sku_fulfiller'] = $this->sku_fulfiller;
-        }
-
-        if (isset($this->shipping_from)) {
-            $array['shipping_from'] = $this->shipping_from;
-        }
-
-        return $array;
     }
 }
