@@ -8,6 +8,7 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Products;
 
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
@@ -15,6 +16,7 @@ use MyPromo\Connect\SDK\Exceptions\ProductException;
 use MyPromo\Connect\SDK\Helpers\InventoryOptions;
 use MyPromo\Connect\SDK\Helpers\PriceOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
+use MyPromo\Connect\SDK\Helpers\SeoOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -30,6 +32,7 @@ class ProductRepository extends Repository
      *      sku
      *      lang
      *      currency
+     *      test_product
      *
      * You can use the @param array|ProductOptions $options
      *
@@ -37,7 +40,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function all($options) {
         if ($options instanceof ProductOptions) {
@@ -68,7 +71,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function find($productId) {
         $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
@@ -90,7 +93,8 @@ class ProductRepository extends Repository
      *      from
      *      per_page
      *      sku
-     *      shipping_from
+     *      sku_fulfiller (For Fulfiller)
+     *      shipping_from (For Merchant)
      *
      * You can use the @param array|InventoryOptions $options
      *
@@ -98,7 +102,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function getInventory($options) {
         if ($options instanceof InventoryOptions) {
@@ -127,7 +131,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws ProductException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function putInventory($productInventory) {
         $response = $this->client->guzzle()->patch('/v1/inventory', [
@@ -162,7 +166,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws ProductException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function getPrices($options) {
         if ($options instanceof PriceOptions) {
@@ -191,7 +195,7 @@ class ProductRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function putPrices($productPriceUpdate) {
         $response = $this->client->guzzle()->patch('/v1/prices', [
@@ -201,6 +205,68 @@ class ProductRepository extends Repository
                 'Authorization' => 'Bearer ' . $this->client->auth()->get(),
             ],
             RequestOptions::JSON => $productPriceUpdate->toArray(),
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ProductException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        return $body;
+    }
+
+    /**
+     * Available options:
+     *      from
+     *      per_page
+     *      sku
+     *
+     * You can use the @param array|SeoOptions $options
+     *
+     * @return array
+     * @throws ClientException
+     * @throws MissingCredentialsException
+     * @throws ProductException
+     * @throws InvalidArgumentException|GuzzleException
+     */
+    public function getSeo($options) {
+        if ($options instanceof SeoOptions) {
+            $options = $options->toArray();
+        }
+
+        $response = $this->client->guzzle()->get('/v1/seo', [
+            'headers' => [
+                'Accept'        => 'application/json',
+                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+            ],
+            'query' => $options
+        ]);
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ProductException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
+     * @param $productSeoUpdate
+     *
+     * @return array
+     * @throws ClientException
+     * @throws InvalidArgumentException
+     * @throws MissingCredentialsException
+     * @throws ProductException|GuzzleException
+     */
+    public function putSeo($productSeoUpdate) {
+        $response = $this->client->guzzle()->patch('/v1/seo', [
+            'headers'            => [
+                'Accept'        => 'application/json',
+                'Content-Type'  => 'application/json',
+                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+            ],
+            RequestOptions::JSON => $productSeoUpdate->toArray(),
         ]);
 
         if ($response->getStatusCode() !== 200) {

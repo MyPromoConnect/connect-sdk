@@ -23,7 +23,7 @@ class ProductInventory implements Arrayable
     protected $productAvailabilities = [];
 
     /**
-     * @return callable
+     * @return Callback
      */
     public function getCallback()
     {

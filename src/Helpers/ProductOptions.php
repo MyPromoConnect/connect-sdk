@@ -53,6 +53,11 @@ class ProductOptions implements Arrayable
     protected $currency;
 
     /**
+     * @var bool
+     */
+    protected $test_product;
+
+    /**
      * @return int
      */
     public function getFrom()
@@ -181,6 +186,22 @@ class ProductOptions implements Arrayable
     }
 
     /**
+     * @return bool
+     */
+    public function isTestProduct()
+    {
+        return $this->test_product;
+    }
+
+    /**
+     * @param bool $testProduct
+     */
+    public function setTestProduct($test_product)
+    {
+        $this->test_product = $test_product;
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -195,7 +216,8 @@ class ProductOptions implements Arrayable
             'available'     => $this->available,
             'sku'           => $this->sku,
             'lang'          => $this->lang,
-            'currency'      => $this->currency
+            'currency'      => $this->currency,
+            'test_product'  => $this->test_product,
         ];
     }
 }

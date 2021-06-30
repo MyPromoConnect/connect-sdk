@@ -33,6 +33,11 @@ class InventoryOptions implements Arrayable
     protected $shipping_from;
 
     /**
+     * @var string
+     */
+    protected $sku_fulfiller;
+
+    /**
      * @return int
      */
     public function getFrom()
@@ -97,17 +102,42 @@ class InventoryOptions implements Arrayable
     }
 
     /**
+     * @return string
+     */
+    public function getSkuFulfiller()
+    {
+        return $this->sku_fulfiller;
+    }
+
+    /**
+     * @param string $sku_fulfiller
+     */
+    public function setSkuFulfiller($sku_fulfiller)
+    {
+        $this->sku_fulfiller = $sku_fulfiller;
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array
      */
     public function toArray()
     {
-        return [
+        $array = [
             'from'          => $this->from,
             'per_page'      => $this->per_page,
-            'sku'           => $this->sku,
-            'shipping_from' => $this->shipping_from,
+            'sku'           => $this->sku
         ];
+
+        if (isset($this->sku_fulfiller)) {
+            $array['sku_fulfiller'] = $this->sku_fulfiller;
+        }
+
+        if (isset($this->shipping_from)) {
+            $array['shipping_from'] = $this->shipping_from;
+        }
+
+        return $array;
     }
 }

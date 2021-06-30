@@ -6,6 +6,26 @@ which represent the actual availability of a product.
 ```php
 $productInventory = new \MyPromo\Connect\SDK\Models\ProductInventory();
 
+# Sample of $productAvailability array for client Fulfiller
+$productAvailability = [
+     "sku"=> "TESTPRODUCT123",
+     "sku_fulfiller"=> "TEST Prod-26",
+     "available"=> true,
+     "stock"=> [
+           "managed"=> true,
+           "is_in_stock"=> true,
+           "qty"=> 14500
+         ]
+];
+
+    
+# Sample of $productAvailability array for client Merchant
+$productAvailability = [
+     "sku"=> "TESTPRODUCT123",
+     "available"=> true,
+];
+
+
 $productAvailabilities = [
     $productAvailability,
     ...
