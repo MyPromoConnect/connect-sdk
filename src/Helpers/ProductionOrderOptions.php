@@ -3,15 +3,15 @@
 namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Repositories\Orders\OrderRepository;
 use DateTimeInterface;
+use MyPromo\Connect\SDK\Repositories\Orders\ProductionOrderRepository;
 
 /**
- * Class OrderOption
+ * Class ProductionOrderOptions
  * @package Connect\SDK\Helpers
- * Helper class for @see OrderRepository::all()
+ * Helper class for @see ProductionOrderRepository::all()
  */
-class OrderOptions implements Arrayable
+class ProductionOrderOptions implements Arrayable
 {
     /**
      * @var int

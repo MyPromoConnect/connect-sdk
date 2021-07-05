@@ -53,7 +53,7 @@ $orderOptions = [
     'updated_to'   => $date->format('Y-m-d'),
 ];
 
-$orderRepo->all($orderOptions);
+$orderRepository->all($orderOptions);
 ```
 
 
