@@ -55,7 +55,7 @@ $orderOptions = [
     'reference2'   => 'abc123',
 ];
 
-$orderRepo->all($orderOptions);
+$orderRepository->all($orderOptions);
 ```
 
 
