@@ -20,12 +20,12 @@ class ProductOptions implements Arrayable
     /**
      * @var int
      */
-    protected $per_page;
+    protected $perPage;
 
     /**
      * @var string
      */
-    protected $shipping_from;
+    protected $shippingFrom;
 
     /**
      * @var string
@@ -55,7 +55,7 @@ class ProductOptions implements Arrayable
     /**
      * @var bool
      */
-    protected $test_product;
+    protected $testProduct;
 
     /**
      * @return int
@@ -78,15 +78,15 @@ class ProductOptions implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->per_page;
+        return $this->perPage;
     }
 
     /**
-     * @param int $per_page
+     * @param int $perPage
      */
-    public function setPerPage($per_page)
+    public function setPerPage($perPage)
     {
-        $this->per_page = $per_page;
+        $this->perPage = $perPage;
     }
 
     /**
@@ -94,15 +94,15 @@ class ProductOptions implements Arrayable
      */
     public function getShippingFrom()
     {
-        return $this->shipping_from;
+        return $this->shippingFrom;
     }
 
     /**
-     * @param string $shipping_from
+     * @param string $shippingFrom
      */
-    public function setShippingFrom($shipping_from)
+    public function setShippingFrom($shippingFrom)
     {
-        $this->shipping_from = $shipping_from;
+        $this->shippingFrom = $shippingFrom;
     }
 
     /**
@@ -190,15 +190,15 @@ class ProductOptions implements Arrayable
      */
     public function isTestProduct()
     {
-        return $this->test_product;
+        return $this->testProduct;
     }
 
     /**
      * @param bool $testProduct
      */
-    public function setTestProduct($test_product)
+    public function setTestProduct($testProduct)
     {
-        $this->test_product = $test_product;
+        $this->testProduct = $testProduct;
     }
 
     /**
@@ -210,14 +210,14 @@ class ProductOptions implements Arrayable
     {
         return [
             'from'          => $this->from,
-            'per_page'      => $this->per_page,
-            'shipping_from' => $this->shipping_from,
+            'per_page'      => $this->perPage,
+            'shipping_from' => $this->shippingFrom,
             'search'        => $this->search,
             'available'     => $this->available,
             'sku'           => $this->sku,
             'lang'          => $this->lang,
             'currency'      => $this->currency,
-            'test_product'  => $this->test_product,
+            'test_product'  => $this->testProduct,
         ];
     }
 }

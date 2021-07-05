@@ -14,7 +14,7 @@ class Shipment implements Arrayable
     /**
      * @var string
      */
-    protected $tracking_id;
+    protected $trackingId;
 
     /**
      * @var string
@@ -39,7 +39,7 @@ class Shipment implements Arrayable
     /**
      * @var array
      */
-    protected $production_order_items = [];
+    protected $productionOrderItems = [];
 
     /**
      * @var bool
@@ -67,15 +67,15 @@ class Shipment implements Arrayable
      */
     public function getTrackingId()
     {
-        return $this->tracking_id;
+        return $this->trackingId;
     }
 
     /**
-     * @param string $tracking_id
+     * @param string $trackingId
      */
-    public function setTrackingId($tracking_id)
+    public function setTrackingId($trackingId)
     {
-        $this->tracking_id = $tracking_id;
+        $this->trackingId = $trackingId;
     }
 
     /**
@@ -147,15 +147,15 @@ class Shipment implements Arrayable
      */
     public function getProductionOrderItems()
     {
-        return $this->production_order_items;
+        return $this->productionOrderItems;
     }
 
     /**
-     * @param array $production_order_items
+     * @param array $productionOrderItems
      */
-    public function setProductionOrderItems($production_order_items)
+    public function setProductionOrderItems($productionOrderItems)
     {
-        $this->production_order_items = $production_order_items;
+        $this->productionOrderItems = $productionOrderItems;
     }
 
     /**
@@ -183,12 +183,12 @@ class Shipment implements Arrayable
     {
         return [
             'carrier'                   => $this->carrier,
-            'tracking_id'               => $this->tracking_id,
+            'tracking_id'               => $this->trackingId,
             'height'                    => $this->height,
             'width'                     => $this->width,
             'depth'                     => $this->depth,
             'weight'                    => $this->weight,
-            'production_order_items'    => $this->production_order_items,
+            'production_order_items'    => $this->productionOrderItems,
             'force'                     => $this->force,
         ];
     }
