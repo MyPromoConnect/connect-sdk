@@ -20,7 +20,7 @@ class SeoOptions implements Arrayable
     /**
      * @var int
      */
-    protected $per_page;
+    protected $perPage;
 
     /**
      * @var string
@@ -49,15 +49,15 @@ class SeoOptions implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->per_page;
+        return $this->perPage;
     }
 
     /**
-     * @param int $per_page
+     * @param int $perPage
      */
-    public function setPerPage($per_page)
+    public function setPerPage($perPage)
     {
-        $this->per_page = $per_page;
+        $this->perPage = $perPage;
     }
 
     /**
@@ -85,7 +85,7 @@ class SeoOptions implements Arrayable
     {
         return [
             'from'          => $this->from,
-            'per_page'      => $this->per_page,
+            'per_page'      => $this->perPage,
             'sku'           => $this->sku,
         ];
     }

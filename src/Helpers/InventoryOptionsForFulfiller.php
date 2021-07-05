@@ -20,7 +20,7 @@ class InventoryOptionsForFulfiller implements Arrayable
     /**
      * @var int
      */
-    protected $per_page;
+    protected $perPage;
 
     /**
      * @var string
@@ -30,7 +30,7 @@ class InventoryOptionsForFulfiller implements Arrayable
     /**
      * @var string
      */
-    protected $sku_fulfiller;
+    protected $skuFulfiller;
 
     /**
      * @return int
@@ -53,15 +53,15 @@ class InventoryOptionsForFulfiller implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->per_page;
+        return $this->perPage;
     }
 
     /**
-     * @param int $per_page
+     * @param int $perPage
      */
-    public function setPerPage($per_page)
+    public function setPerPage($perPage)
     {
-        $this->per_page = $per_page;
+        $this->perPage = $perPage;
     }
 
     /**
@@ -85,15 +85,15 @@ class InventoryOptionsForFulfiller implements Arrayable
      */
     public function getSkuFulfiller()
     {
-        return $this->sku_fulfiller;
+        return $this->skuFulfiller;
     }
 
     /**
-     * @param string $sku_fulfiller
+     * @param string $skuFulfiller
      */
-    public function setSkuFulfiller($sku_fulfiller)
+    public function setSkuFulfiller($skuFulfiller)
     {
-        $this->sku_fulfiller = $sku_fulfiller;
+        $this->skuFulfiller = $skuFulfiller;
     }
 
     /**
@@ -105,9 +105,9 @@ class InventoryOptionsForFulfiller implements Arrayable
     {
         return [
             'from'          => $this->from,
-            'per_page'      => $this->per_page,
+            'per_page'      => $this->perPage,
             'sku'           => $this->sku,
-            'sku_fulfiller' => $this->sku_fulfiller,
+            'sku_fulfiller' => $this->skuFulfiller,
         ];
     }
 }
