@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mpua
- * Date: 30.06.21
- * Time: 02:33
- */
 
 namespace MyPromo\Connect\SDK\Models;
 
