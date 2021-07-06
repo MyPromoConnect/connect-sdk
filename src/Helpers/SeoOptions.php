@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mpua
- * Date: 30.06.21
- * Time: 13:16
- */
 
 namespace MyPromo\Connect\SDK\Helpers;
 
