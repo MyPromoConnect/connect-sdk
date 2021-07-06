@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
@@ -28,7 +29,7 @@ class OrderItemRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws InvalidArgumentException
-     * @throws OrderItemException
+     * @throws OrderItemException|GuzzleException
      */
     public function submit($orderItem)
     {

@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
@@ -29,7 +30,7 @@ class OrderRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      * @see OrderOptions as its helper
      *
      */
@@ -64,7 +65,7 @@ class OrderRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function find($orderId)
     {
@@ -91,7 +92,7 @@ class OrderRepository extends Repository
      * @throws ClientException
      * @throws MissingCredentialsException
      * @throws InvalidArgumentException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function create($order)
     {
@@ -123,7 +124,7 @@ class OrderRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function submit($orderId)
     {
@@ -150,7 +151,7 @@ class OrderRepository extends Repository
      * @throws ClientException
      * @throws InvalidArgumentException
      * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function cancel($orderId)
     {

@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Designs;
 
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\DesignException;
@@ -25,7 +26,7 @@ class DesignRepository extends Repository
      * @throws DesignException
      * @throws ClientException
      * @throws MissingCredentialsException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function create($design)
     {
@@ -55,7 +56,7 @@ class DesignRepository extends Repository
      * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws MissingCredentialsException|GuzzleException
      */
     public function getDesign($designId)
     {
@@ -82,7 +83,7 @@ class DesignRepository extends Repository
      * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws MissingCredentialsException|GuzzleException
      */
     public function submit($designId)
     {
@@ -108,7 +109,7 @@ class DesignRepository extends Repository
      * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws MissingCredentialsException|GuzzleException
      */
     public function getPreviewPDF($designId)
     {
@@ -149,7 +150,7 @@ class DesignRepository extends Repository
      * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws MissingCredentialsException|GuzzleException
      */
     public function savePreview($designId, $targetFile)
     {
