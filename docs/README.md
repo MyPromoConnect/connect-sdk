@@ -7,7 +7,7 @@ The recommended way to install Connect SDK is through [Composer][Composer].
 Run the Composer command to install the latest stable version of Connect SDK:
 
 ```
-composer require mypromo/connectsdk
+composer require mypromo/connect-sdk
 ```
 
 After installing, you need to require Composer's autoloader:

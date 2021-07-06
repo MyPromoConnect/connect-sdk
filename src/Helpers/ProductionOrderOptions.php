@@ -3,15 +3,15 @@
 namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Repositories\Orders\OrderRepository;
 use DateTimeInterface;
+use MyPromo\Connect\SDK\Repositories\Orders\ProductionOrderRepository;
 
 /**
- * Class OrderOption
+ * Class ProductionOrderOptions
  * @package Connect\SDK\Helpers
- * Helper class for @see OrderRepository::all()
+ * Helper class for @see ProductionOrderRepository::all()
  */
-class OrderOptions implements Arrayable
+class ProductionOrderOptions implements Arrayable
 {
     /**
      * @var int
@@ -42,16 +42,6 @@ class OrderOptions implements Arrayable
      * @var DateTimeInterface
      */
     protected $updatedTo;
-
-    /**
-     * @var string
-     */
-    protected $reference;
-
-    /**
-     * @var string
-     */
-    protected $reference2;
 
     /**
      * @return int
@@ -158,38 +148,6 @@ class OrderOptions implements Arrayable
     }
 
     /**
-     * @return string
-     */
-    public function getReference()
-    {
-        return $this->reference;
-    }
-
-    /**
-     * @param string $reference
-     */
-    public function setReference($reference)
-    {
-        $this->reference = $reference;
-    }
-
-    /**
-     * @return string
-     */
-    public function getReference2()
-    {
-        return $this->reference2;
-    }
-
-    /**
-     * @param string $reference2
-     */
-    public function setReference2($reference2)
-    {
-        $this->reference2 = $reference2;
-    }
-
-    /**
      * {@inheritDoc}
      */
     public function toArray()
@@ -201,8 +159,6 @@ class OrderOptions implements Arrayable
             'created_to'   => $this->createdTo ? $this->createdTo->format('Y-m-d') : null,
             'updated_from' => $this->updatedFrom ? $this->updatedFrom->format('Y-m-d') : null,
             'updated_to'   => $this->updatedTo ? $this->updatedTo->format('Y-m-d') : null,
-            'reference'    => $this->reference ? $this->reference : null,
-            'reference2'   => $this->reference2 ? $this->reference2 : null,
         ];
     }
 }

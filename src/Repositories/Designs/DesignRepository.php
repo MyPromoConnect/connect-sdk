@@ -2,10 +2,10 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Designs;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\DesignException;
-use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Models\Design;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -22,28 +22,32 @@ class DesignRepository extends Repository
      *
      * @return mixed
      *
+     * @throws InvalidArgumentException|GuzzleException
      * @throws DesignException
-     * @throws ClientException
-     * @throws MissingCredentialsException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function create($design)
     {
-        $response = $this->client->guzzle()->post('/v1/designs', [
-            'headers'            => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            RequestOptions::JSON => $design->toArray(),
-        ]);
+        try {
+            $response = $this->client->guzzle()->post('/v1/designs', [
+                'headers'           => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                RequestOptions::JSON => $design->toArray(),
+            ]);
 
-        if ($response->getStatusCode() !== 201) {
-            throw new DesignException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 201) {
+                throw new DesignException($response->getBody(), $response->getStatusCode());
+            }
+
+            $body = json_decode($response->getBody(), true);
+            $design->setId($body['id']);
+
+        } catch (Exception $ex) {
+            throw new DesignException($ex->getMessage(), $ex->getCode());
         }
-
-        $body = json_decode($response->getBody(), true);
-        $design->setId($body['id']);
 
         return $body;
     }
@@ -52,23 +56,27 @@ class DesignRepository extends Repository
      * @param $designId
      *
      * @return mixed
-     * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws GuzzleException
      */
     public function getDesign($designId)
     {
-        $response = $this->client->guzzle()->get('/v1/designs/' . $designId, [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ]);
+        try {
+            $response = $this->client->guzzle()->get('/v1/designs/' . $designId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new DesignException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new DesignException($response->getBody(), $response->getStatusCode());
+            }
+
+        } catch (Exception $ex) {
+            throw new DesignException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -79,23 +87,26 @@ class DesignRepository extends Repository
      *
      * @return mixed
      *
-     * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws GuzzleException
      */
     public function submit($designId)
     {
-        $response = $this->client->guzzle()->post('/v1/designs/' . $designId . '/submit', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ]);
+        try {
+            $response = $this->client->guzzle()->post('/v1/designs/' . $designId . '/submit', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new DesignException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new DesignException($response->getBody(), $response->getStatusCode());
+            }
+        } catch (Exception $ex) {
+            throw new DesignException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -105,37 +116,41 @@ class DesignRepository extends Repository
      * @param int $designId
      *
      * @return ResponseInterface
-     * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws GuzzleException
      */
     public function getPreviewPDF($designId)
     {
-        $getDesignResponse = $this->getDesign($designId);
+        try {
+            $getDesignResponse = $this->getDesign($designId);
 
-        $previewUrl = isset($getDesignResponse['preview_url']) ? $getDesignResponse['preview_url'] : null;
+            $previewUrl = isset($getDesignResponse['preview_url']) ? $getDesignResponse['preview_url'] : null;
 
-        if ($previewUrl === null){
-            throw new DesignException("No preview url exists.");
-        }
+            if ($previewUrl === null){
+                throw new DesignException("No preview url exists.");
+            }
 
-        $response = $this->client->guzzle()->get($previewUrl, [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-            ],
-        ]);
+            $response = $this->client->guzzle()->get($previewUrl, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new DesignException($response->getBody(), $response->getStatusCode());
-        } elseif (
-            strtolower($response->getHeader('Content-Type')[0]) !== 'pdf'
-            && strtolower($response->getHeader('Content-Type')[0]) !== 'application/pdf'
-        ) {
-            throw new DesignException(
-                "Not supported content-type '{$response->getHeader('Content-Type')[0]}'."
-            );
+            if ($response->getStatusCode() !== 200) {
+                throw new DesignException($response->getBody(), $response->getStatusCode());
+            } elseif (
+                strtolower($response->getHeader('Content-Type')[0]) !== 'pdf'
+                && strtolower($response->getHeader('Content-Type')[0]) !== 'application/pdf'
+            ) {
+                throw new DesignException(
+                    "Not supported content-type '{$response->getHeader('Content-Type')[0]}'."
+                );
+            }
+
+        } catch (Exception $ex) {
+            throw new DesignException($ex->getMessage(), $ex->getCode());
         }
 
         return $response;
@@ -146,53 +161,62 @@ class DesignRepository extends Repository
      * @param string $targetFile
      *
      * @return bool
-     * @throws ClientException
      * @throws DesignException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
+     * @throws GuzzleException
      */
     public function savePreview($designId, $targetFile)
     {
-        $response = $this->getPreviewPDF($designId);
+        try {
+            $response = $this->getPreviewPDF($designId);
 
-        $previewFile = fopen($targetFile, 'w');
-        if ($previewFile === false) {
-            throw new DesignException("File '{$targetFile}' could not be created.");
+            $previewFile = fopen($targetFile, 'w');
+            if ($previewFile === false) {
+                throw new DesignException("File '{$targetFile}' could not be created.");
+            }
+
+            if (fwrite($previewFile, $response->getbody()) === false){
+                throw new DesignException("File '{$targetFile}' is not writable.");
+            }
+
+            $file = fclose($previewFile);
+
+        } catch (Exception $ex) {
+            throw new DesignException($ex->getMessage(), $ex->getCode());
         }
 
-
-        if (fwrite($previewFile, $response->getbody()) === false){
-            throw new DesignException("File '{$targetFile}' is not writable.");
-        }
-
-        return fclose($previewFile);
+        return $file;
     }
+
     /**
      * @param Design $design
      *
      * @return mixed
      *
      * @throws DesignException
-     * @throws ClientException
-     * @throws MissingCredentialsException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function createEditorUserHash($design)
     {
-        $response = $this->client->guzzle()->post('/v1/editor_user', [
-            'headers'            => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ]);
+        try {
+            $response = $this->client->guzzle()->post('/v1/editor_user', [
+                'headers'            => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 201) {
-            throw new DesignException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 201) {
+                throw new DesignException($response->getBody(), $response->getStatusCode());
+            }
+
+            $body = json_decode($response->getBody(), true);
+            $design->setEditorUserHash($body['editor_user_hash']);
+
+        } catch (Exception $ex) {
+            throw new DesignException($ex->getMessage(), $ex->getCode());
         }
-
-        $body = json_decode($response->getBody(), true);
-        $design->setEditorUserHash($body['editor_user_hash']);
 
         return $body;
     }

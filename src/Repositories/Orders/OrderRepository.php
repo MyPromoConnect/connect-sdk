@@ -2,8 +2,8 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
-use MyPromo\Connect\SDK\Exceptions\ClientException;
-use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
 use MyPromo\Connect\SDK\Helpers\OrderOptions;
 use MyPromo\Connect\SDK\Models\Order;
@@ -26,10 +26,8 @@ class OrderRepository extends Repository
      *
      * @return array
      *
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      * @see OrderOptions as its helper
      *
      */
@@ -39,18 +37,22 @@ class OrderRepository extends Repository
             $options = $options->toArray();
         }
 
-        $response = $this->client->guzzle()->get('/v1/orders', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            'query'   => $options,
-        ])
-        ;
+        try {
+            $response = $this->client->guzzle()->get('/v1/orders', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $options,
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new OrderException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new OrderException($response->getBody(), $response->getStatusCode());
+            }
+
+        } catch (Exception $ex) {
+            throw new OrderException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -61,23 +63,25 @@ class OrderRepository extends Repository
      *
      * @return array
      *
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function find($orderId)
     {
-        $response = $this->client->guzzle()->get('/v1/orders/' . $orderId, [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ])
-        ;
+        try {
+            $response = $this->client->guzzle()->get('/v1/orders/' . $orderId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new OrderException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new OrderException($response->getBody(), $response->getStatusCode());
+            }
+
+        } catch (Exception $ex) {
+            throw new OrderException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -88,29 +92,31 @@ class OrderRepository extends Repository
      *
      * @return array
      *
-     * @throws ClientException
-     * @throws MissingCredentialsException
      * @throws InvalidArgumentException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function create($order)
     {
-        $response = $this->client->guzzle()->post('/v1/orders', [
-            'headers'            => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            RequestOptions::JSON => $order->toArray(),
-        ])
-        ;
+        try {
+            $response = $this->client->guzzle()->post('/v1/orders', [
+                'headers'            => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                RequestOptions::JSON => $order->toArray(),
+            ]);
 
-        if ($response->getStatusCode() !== 201) {
-            throw new OrderException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 201) {
+                throw new OrderException($response->getBody(), $response->getStatusCode());
+            }
+
+            $body = json_decode($response->getBody(), true);
+            $order->setId($body['id']);
+
+        } catch (Exception $ex) {
+            throw new OrderException($ex->getMessage(), $ex->getCode());
         }
-
-        $body = json_decode($response->getBody(), true);
-        $order->setId($body['id']);
 
         return $body;
     }
@@ -120,23 +126,24 @@ class OrderRepository extends Repository
      *
      * @return array
      *
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function submit($orderId)
     {
-        $response = $this->client->guzzle()->post('/v1/orders/' . $orderId . '/submit', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ])
-        ;
+        try {
+            $response = $this->client->guzzle()->post('/v1/orders/' . $orderId . '/submit', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new OrderException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new OrderException($response->getBody(), $response->getStatusCode());
+            }
+        } catch (Exception $ex) {
+            throw new OrderException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -147,23 +154,25 @@ class OrderRepository extends Repository
      *
      * @return array
      *
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws OrderException
+     * @throws OrderException|GuzzleException
      */
     public function cancel($orderId)
     {
-        $response = $this->client->guzzle()->put('/v1/orders/' . $orderId . '/cancel', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ])
-        ;
+        try {
+            $response = $this->client->guzzle()->put('/v1/orders/' . $orderId . '/cancel', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new OrderException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new OrderException($response->getBody(), $response->getStatusCode());
+            }
+
+        } catch (Exception $ex) {
+            throw new OrderException($ex->getMessage(), $ex->getCode());
         }
 
         return json_decode($response->getBody(), true);
