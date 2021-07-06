@@ -8,13 +8,14 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Products;
 
+use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ClientException;
-use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Exceptions\ProductException;
 use MyPromo\Connect\SDK\Helpers\InventoryOptions;
 use MyPromo\Connect\SDK\Helpers\PriceOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
+use MyPromo\Connect\SDK\Helpers\SeoOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -30,59 +31,63 @@ class ProductRepository extends Repository
      *      sku
      *      lang
      *      currency
+     *      test_product
      *
      * You can use the @param array|ProductOptions $options
      *
      * @return array
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function all($options) {
-        if ($options instanceof ProductOptions) {
-            $options = $options->toArray();
+        try {
+            if ($options instanceof ProductOptions) {
+                $options = $options->toArray();
+            }
+
+            $response = $this->client->guzzle()->get('/v1/products', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $options,
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
         }
-
-        $response = $this->client->guzzle()->get('/v1/products', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            'query' => $options,
-        ])
-        ;
-
-        if ($response->getStatusCode() !== 200) {
-            throw new ProductException($response->getBody(), $response->getStatusCode());
-        }
-
-        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param $productId
      *
      * @return array
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function find($productId) {
-        $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-        ]);
+        try {
+            $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new ProductException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
         }
-
-        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -90,63 +95,65 @@ class ProductRepository extends Repository
      *      from
      *      per_page
      *      sku
-     *      shipping_from
+     *      sku_fulfiller (For Fulfiller)
+     *      shipping_from (For Merchant)
      *
      * You can use the @param array|InventoryOptions $options
      *
      * @return array
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function getInventory($options) {
-        if ($options instanceof InventoryOptions) {
-            $options = $options->toArray();
+        try {
+            if ($options instanceof InventoryOptions) {
+                $options = $options->toArray();
+            }
+
+            $response = $this->client->guzzle()->get('/v1/inventory', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $options
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
         }
-
-        $response = $this->client->guzzle()->get('/v1/inventory', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            'query' => $options
-        ]);
-
-        if ($response->getStatusCode() !== 200) {
-            throw new ProductException($response->getBody(), $response->getStatusCode());
-        }
-
-        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param $productInventory
      *
      * @return array
-     * @throws ClientException
-     * @throws MissingCredentialsException
      * @throws ProductException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function putInventory($productInventory) {
-        $response = $this->client->guzzle()->patch('/v1/inventory', [
-            'headers'            => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            RequestOptions::JSON => $productInventory->toArray(),
-        ])
-        ;
+        try {
+            $response = $this->client->guzzle()->patch('/v1/inventory', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                RequestOptions::JSON => $productInventory->toArray(),
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new ProductException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
         }
-
-        $body = json_decode($response->getBody(), true);
-
-        return $body;
     }
 
     /**
@@ -159,56 +166,122 @@ class ProductRepository extends Repository
      * You can use the @param array|PriceOptions $options
      *
      * @return array
-     * @throws ClientException
-     * @throws MissingCredentialsException
      * @throws ProductException
-     * @throws InvalidArgumentException
+     * @throws InvalidArgumentException|GuzzleException
      */
     public function getPrices($options) {
-        if ($options instanceof PriceOptions) {
-            $options = $options->toArray();
+        try {
+            if ($options instanceof PriceOptions) {
+                $options = $options->toArray();
+            }
+
+            $response = $this->client->guzzle()->get('/v1/prices', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $options
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
         }
-
-        $response = $this->client->guzzle()->get('/v1/prices', [
-            'headers' => [
-                'Accept'        => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            'query' => $options
-        ]);
-
-        if ($response->getStatusCode() !== 200) {
-            throw new ProductException($response->getBody(), $response->getStatusCode());
-        }
-
-        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param $productPriceUpdate
      *
      * @return array
-     * @throws ClientException
      * @throws InvalidArgumentException
-     * @throws MissingCredentialsException
-     * @throws ProductException
+     * @throws ProductException|GuzzleException
      */
     public function putPrices($productPriceUpdate) {
-        $response = $this->client->guzzle()->patch('/v1/prices', [
-            'headers'            => [
-                'Accept'        => 'application/json',
-                'Content-Type'  => 'application/json',
-                'Authorization' => 'Bearer ' . $this->client->auth()->get(),
-            ],
-            RequestOptions::JSON => $productPriceUpdate->toArray(),
-        ]);
+        try {
+            $response = $this->client->guzzle()->patch('/v1/prices', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                RequestOptions::JSON => $productPriceUpdate->toArray(),
+            ]);
 
-        if ($response->getStatusCode() !== 200) {
-            throw new ProductException($response->getBody(), $response->getStatusCode());
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
         }
+    }
 
-        $body = json_decode($response->getBody(), true);
+    /**
+     * Available options:
+     *      from
+     *      per_page
+     *      sku
+     *
+     * You can use the @param array|SeoOptions $options
+     *
+     * @return array
+     * @throws ProductException
+     * @throws InvalidArgumentException|GuzzleException
+     */
+    public function getSeo($options) {
+        try {
+            if ($options instanceof SeoOptions) {
+                $options = $options->toArray();
+            }
 
-        return $body;
+            $response = $this->client->guzzle()->get('/v1/seo', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $options
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
+        }
+    }
+
+    /**
+     * @param $productSeoUpdate
+     *
+     * @return array
+     * @throws InvalidArgumentException
+     * @throws ProductException|GuzzleException
+     */
+    public function putSeo($productSeoUpdate) {
+        try {
+            $response = $this->client->guzzle()->patch('/v1/seo', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                RequestOptions::JSON => $productSeoUpdate->toArray(),
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
+        }
     }
 }

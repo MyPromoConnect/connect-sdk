@@ -1,16 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: massimo
- * Date: 16.07.20
- * Time: 12:33
- */
 
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Exceptions\OrderException;
 
-class ProductPriceUpdate implements Arrayable
+class ProductSeoUpdate implements Arrayable
 {
     /**
      * @var Callback
@@ -20,7 +15,7 @@ class ProductPriceUpdate implements Arrayable
     /**
      * @var array
      */
-    protected $productPrices = [];
+    protected $productSeo = [];
 
     /**
      * @return Callback
@@ -41,29 +36,30 @@ class ProductPriceUpdate implements Arrayable
     /**
      * @return array
      */
-    public function getProductPrices()
+    public function getProductSeo()
     {
-        return $this->productPrices;
+        return $this->productSeo;
     }
 
     /**
-     * @param array $productPrices
+     * @param array $productSeo
      */
-    public function setProductPrices($productPrices)
+    public function setProductSeo($productSeo)
     {
-        $this->productPrices = $productPrices;
+        $this->productSeo = $productSeo;
     }
 
     /**
      * Get the instance as an array.
      *
      * @return array
+     * @throws OrderException
      */
     public function toArray()
     {
         $dataArray = [];
-        foreach ($this->productPrices as $productPrice) {
-            $dataArray[] = $productPrice->toArray();
+        foreach ($this->productSeo as $seo) {
+            $dataArray[] = $seo->toArray();
         }
 
         $resultArray = [

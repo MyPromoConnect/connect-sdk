@@ -8,6 +8,7 @@ $priceOptions->setFrom(1);
 $priceOptions->setPerPage(5);
 $priceOptions->setSku('TESTSKU');
 $priceOptions->setShippingFrom('DE');
+$priceOptions->setSkuFulfiller('SKU_FULFILLER');
 ```
 
 [ProductRepository]: ../Repositories/ProductRepository.md

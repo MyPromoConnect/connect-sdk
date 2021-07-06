@@ -20,7 +20,7 @@ class PriceOptions implements Arrayable
     /**
      * @var int
      */
-    protected $per_page;
+    protected $perPage;
 
     /**
      * @var string
@@ -30,7 +30,12 @@ class PriceOptions implements Arrayable
     /**
      * @var string
      */
-    protected $shipping_from;
+    protected $shippingFrom;
+
+    /**
+     * @var string
+     */
+    protected $skuFulfiller;
 
     /**
      * @return int
@@ -53,15 +58,15 @@ class PriceOptions implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->per_page;
+        return $this->perPage;
     }
 
     /**
-     * @param int $per_page
+     * @param int $perPage
      */
-    public function setPerPage($per_page)
+    public function setPerPage($perPage)
     {
-        $this->per_page = $per_page;
+        $this->perPage = $perPage;
     }
 
     /**
@@ -85,15 +90,31 @@ class PriceOptions implements Arrayable
      */
     public function getShippingFrom()
     {
-        return $this->shipping_from;
+        return $this->shippingFrom;
     }
 
     /**
-     * @param string $shipping_from
+     * @param string $shippingFrom
      */
-    public function setShippingFrom($shipping_from)
+    public function setShippingFrom($shippingFrom)
     {
-        $this->shipping_from = $shipping_from;
+        $this->shippingFrom = $shippingFrom;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSkuFulfiller()
+    {
+        return $this->skuFulfiller;
+    }
+
+    /**
+     * @param string $skuFulfiller
+     */
+    public function setSkuFulfiller($skuFulfiller)
+    {
+        $this->skuFulfiller = $skuFulfiller;
     }
 
     /**
@@ -103,11 +124,20 @@ class PriceOptions implements Arrayable
      */
     public function toArray()
     {
-        return [
+        $array = [
             'from'          => $this->from,
-            'per_page'      => $this->per_page,
+            'per_page'      => $this->perPage,
             'sku'           => $this->sku,
-            'shipping_from' => $this->shipping_from,
         ];
+
+        if (isset($this->skuFulfiller)) {
+            $array['sku_fulfiller'] = $this->skuFulfiller;
+        }
+
+        if (isset($this->shippingFrom)) {
+            $array['shipping_from'] = $this->shippingFrom;
+        }
+
+        return $array;
     }
 }
