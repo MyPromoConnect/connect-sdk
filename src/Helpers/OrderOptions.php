@@ -21,6 +21,11 @@ class OrderOptions implements Arrayable
     /**
      * @var int
      */
+    protected $page;
+
+    /**
+     * @var int
+     */
     protected $perPage;
 
     /**
@@ -190,12 +195,29 @@ class OrderOptions implements Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
+    }
+
+    /**
      * {@inheritDoc}
      */
     public function toArray()
     {
         return [
             'from'         => $this->from,
+            'page'         => $this->page,
             'per_page'     => $this->perPage,
             'created_from' => $this->createdFrom ? $this->createdFrom->format('Y-m-d') : null,
             'created_to'   => $this->createdTo ? $this->createdTo->format('Y-m-d') : null,

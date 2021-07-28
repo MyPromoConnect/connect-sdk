@@ -14,6 +14,11 @@ class CarrierOptions implements Arrayable
     /**
      * @var int
      */
+    protected $page;
+
+    /**
+     * @var int
+     */
     protected $perPage;
 
     /**
@@ -49,6 +54,22 @@ class CarrierOptions implements Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -57,6 +78,7 @@ class CarrierOptions implements Arrayable
     {
         return [
             'from'          => $this->from,
+            'page'          => $this->page,
             'per_page'      => $this->perPage,
         ];
     }

@@ -14,6 +14,11 @@ class InventoryOptionsForFulfiller implements Arrayable
     /**
      * @var int
      */
+    protected $page;
+
+    /**
+     * @var int
+     */
     protected $perPage;
 
     /**
@@ -91,6 +96,22 @@ class InventoryOptionsForFulfiller implements Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -99,6 +120,7 @@ class InventoryOptionsForFulfiller implements Arrayable
     {
         return [
             'from'          => $this->from,
+            'page'          => $this->page,
             'per_page'      => $this->perPage,
             'sku'           => $this->sku,
             'sku_fulfiller' => $this->skuFulfiller,
