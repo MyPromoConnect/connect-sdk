@@ -20,6 +20,11 @@ class ProductOptions implements Arrayable
     /**
      * @var int
      */
+    protected $page;
+
+    /**
+     * @var int
+     */
     protected $perPage;
 
     /**
@@ -56,6 +61,22 @@ class ProductOptions implements Arrayable
      * @var bool
      */
     protected $testProduct;
+
+    /**
+     * @return int
+     */
+    public function getPage()
+    {
+        return $this->page;
+    }
+
+    /**
+     * @param int $page
+     */
+    public function setPage($page)
+    {
+        $this->page = $page;
+    }
 
     /**
      * @return int
@@ -209,6 +230,7 @@ class ProductOptions implements Arrayable
     public function toArray()
     {
         return [
+            'page'          => $this->page,
             'from'          => $this->from,
             'per_page'      => $this->perPage,
             'shipping_from' => $this->shippingFrom,
