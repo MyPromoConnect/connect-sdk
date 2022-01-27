@@ -43,6 +43,16 @@ class OrderItem implements Arrayable
     protected $files;
 
     /**
+     * @var ...$services
+     */
+    protected $services;
+
+    /**
+     * @var ...$relation
+     */
+    protected $relation;
+
+    /**
      * @var CustomProperty[]
      */
     protected $customProperties = [];
@@ -52,6 +62,10 @@ class OrderItem implements Arrayable
      */
     protected $designs;
 
+    /**
+     * @var string|null
+     */
+    protected $comment = null;
 
     /**
      * @return int|null
@@ -150,6 +164,38 @@ class OrderItem implements Arrayable
     }
 
     /**
+     * @return array ...Services
+     */
+    public function getServices()
+    {
+        return $this->services;
+    }
+
+    /**
+     * @param array ...$services
+     */
+    public function setServices(...$services)
+    {
+        $this->services = $services;
+    }
+
+    /**
+     * @return array ...Relation
+     */
+    public function getRelation()
+    {
+        return $this->relation;
+    }
+
+    /**
+     * @param array ...$relation
+     */
+    public function setRelation(...$relation)
+    {
+        $this->relation = $relation;
+    }
+
+    /**
      * @return mixed
      */
     public function getDesigns()
@@ -182,11 +228,27 @@ class OrderItem implements Arrayable
     }
 
     /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
      * {@inheritDoc}
      *
      * @throws OrderItemException
      */
-    public function toArray()
+    public function toArray(): array
     {
         $files   = [];
         $designs = [];
@@ -198,6 +260,14 @@ class OrderItem implements Arrayable
 
         if (!empty($this->customs)) {
             $orderItemArray['customs'] = $this->customs->toArray();
+        }
+
+        if (!empty($this->services)) {
+            $orderItemArray['services'] = $this->services;
+        }
+
+        if (!empty($this->relation)) {
+            $orderItemArray['relation'] = $this->relation;
         }
 
         if ($this->files) {
@@ -238,6 +308,10 @@ class OrderItem implements Arrayable
             empty($designs)
         ) {
             $orderItemArray['sku'] = $this->sku;
+        }
+
+        if (!is_null($this->comment)) {
+            $orderItemArray['comment'] = $this->comment;
         }
 
         $customPropertyArray = [];

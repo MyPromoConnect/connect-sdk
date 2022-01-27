@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Exceptions\OrderException;
 
 /**
  * Class Order
@@ -79,6 +80,11 @@ class Order implements Arrayable
      * @var bool|null
      */
     protected $fakeShipment = null;
+
+    /**
+     * @var string|null
+     */
+    protected $comment = null;
 
     /**
      * @param int $id
@@ -305,11 +311,28 @@ class Order implements Arrayable
     }
 
     /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
+    }
+
+    /**
+     * @param string $comment
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+    }
+
+    /**
      * Convert object to array
      *
      * @return array
+     * @throws OrderException
      */
-    public function toArray()
+    public function toArray(): array
     {
         $files = [];
         /**
@@ -355,6 +378,10 @@ class Order implements Arrayable
 
         if (!is_null($this->fakePreflight)) {
             $orderArray['fake_preflight'] = $this->fakePreflight;
+        }
+
+        if (!is_null($this->comment)) {
+            $orderArray['comment'] = $this->comment;
         }
 
         return $orderArray;
