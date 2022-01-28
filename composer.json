@@ -4,7 +4,7 @@
     "type": "sdk",
     "require": {
         "php": "^7.3",
-        "guzzlehttp/guzzle": "6.4.1",
+        "guzzlehttp/guzzle": "^6.4.1",
         "symfony/cache": "^5.2",
         "ext-json": "*",
         "symfony/validator": "^5.2"
