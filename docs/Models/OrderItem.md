@@ -7,13 +7,19 @@ $orderItem->setQuantity(35);
 $orderItem->setOrderId($order->getId());
 $orderItem->setSku('product-sku');
 $orderItem->setComment('comment for order item here');
-$orderItem->setServices($services);
-$orderItem->setRelation($relation);
 $orderItem->setFiles($file);
 $orderItem->setCustoms($customs);
+$orderItem->setServices($services);
+
+# To add service item mention order_item_id in relation
+$orderItemRelation = new \MyPromo\Connect\SDK\Models\OrderItemRelation();
+$orderItemRelation->setOrderItemId($relation);
+
+// To set relation pass object of orderItemRelation after setting up order_item_id which is added previously in order
+$orderItem->setRelation($orderItemRelation);
 ```
 
-Required Models: 
+Required Models:
 - [File][File]
 
 Optional:
