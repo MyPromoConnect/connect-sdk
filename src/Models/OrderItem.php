@@ -43,11 +43,6 @@ class OrderItem implements Arrayable
     protected $files;
 
     /**
-     * @var ...$services
-     */
-    protected $services;
-
-    /**
      * @var ...$relation
      */
     protected $relation;
@@ -164,22 +159,6 @@ class OrderItem implements Arrayable
     }
 
     /**
-     * @return array ...Services
-     */
-    public function getServices()
-    {
-        return $this->services;
-    }
-
-    /**
-     * @param array ...$services
-     */
-    public function setServices(...$services)
-    {
-        $this->services = $services;
-    }
-
-    /**
      * @return array ...Relation
      */
     public function getRelation()
@@ -260,10 +239,6 @@ class OrderItem implements Arrayable
 
         if (!empty($this->customs)) {
             $orderItemArray['customs'] = $this->customs->toArray();
-        }
-
-        if (!empty($this->services)) {
-            $orderItemArray['services'] = $this->services;
         }
 
         if (!empty($this->relation)) {
