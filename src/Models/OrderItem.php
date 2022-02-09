@@ -241,8 +241,18 @@ class OrderItem implements Arrayable
             $orderItemArray['customs'] = $this->customs->toArray();
         }
 
-        if (!empty($this->relation)) {
-            $orderItemArray['relation'] = $this->relation;
+        $relations = '';
+        if ($this->relation) {
+            /**
+             * @var OrderItemRelation $relation
+             */
+            foreach ($this->relation as $relation) {
+                $relations = $relation->toArray();
+            }
+        }
+
+        if (!empty($relations)) {
+            $orderItemArray['relation'] = $relations;
         }
 
         if ($this->files) {
