@@ -113,6 +113,35 @@ class ProductExportRepository extends Repository
     }
 
     /**
+     * Delete product export by using product export id
+     *
+     * @param $productExportId
+     *
+     * @return array
+     * @throws InvalidArgumentException
+     * @throws ProductExportException|GuzzleException
+     */
+    public function deleteExport($productExportId): array
+    {
+        try {
+            $response = $this->client->guzzle()->delete('/v1/products_export/' . $productExportId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductExportException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductExportException($ex->getMessage(), $ex->getCode());
+        }
+    }
+
+    /**
      * @param ProductExport $productExport
      *
      * @return mixed

@@ -46,5 +46,11 @@ Cancel product export pass product export ID
 $productExportRepository->cancelExport($productExport->getId());
 ```
 
+###### Delete Product Export
+Delete product export pass product export ID
+```php
+$productExportRepository->deleteExport($productExport->getId());
+```
+
 [ProductExportOptions]: ../Helpers/ProductExportOptions.md
 [ProductExport]: ../Models/ProductExport.md
