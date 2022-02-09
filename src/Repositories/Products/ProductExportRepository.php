@@ -55,6 +55,8 @@ class ProductExportRepository extends Repository
     }
 
     /**
+     * Find product export by using product export id
+     *
      * @param $productExportId
      *
      * @return array
@@ -65,6 +67,35 @@ class ProductExportRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->get('/v1/products_export/' . $productExportId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductExportException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductExportException($ex->getMessage(), $ex->getCode());
+        }
+    }
+
+    /**
+     * Cancel product export by using product export id
+     *
+     * @param $productExportId
+     *
+     * @return array
+     * @throws InvalidArgumentException
+     * @throws ProductExportException|GuzzleException
+     */
+    public function cancelExport($productExportId): array
+    {
+        try {
+            $response = $this->client->guzzle()->patch('/v1/products_export/' . $productExportId . '/cancel', [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),

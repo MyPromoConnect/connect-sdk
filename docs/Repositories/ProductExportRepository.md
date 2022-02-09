@@ -32,11 +32,19 @@ $productExportRepository->find(1);
 ```
 <br />
 
+###### Request Product Export
+Request product export (with [ProductExport][ProductExport])
+```php
+$productExport = new \MyPromo\Connect\SDK\Models\ProductExport();
+...
+$productExportRepository->requestExport($productExport);
+```
 
-[ProductOptions]: ../Helpers/ProductOptions.md
-[InventoryOptions]: ../Helpers/InventoryOptions.md
-[PriceOptions]: ../Helpers/PriceOptions.md
-[SeoOptions]: ../Helpers/SeoOptions.md
-[ProductInventory]: ../Models/ProductInventory.md
-[ProductPriceUpdate]: ../Models/ProductPriceUpdate.md
-[ProductSeoUpdate]: ../Models/ProductSeoUpdate.md
+###### Cancel Product Export
+Cancel product export pass product export ID
+```php
+$productExportRepository->cancelExport($productExport->getId());
+```
+
+[ProductExportOptions]: ../Helpers/ProductExportOptions.md
+[ProductExport]: ../Models/ProductExport.md
