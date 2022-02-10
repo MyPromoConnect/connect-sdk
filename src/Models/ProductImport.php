@@ -4,9 +4,9 @@ namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
-use MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions;
+use MyPromo\Connect\SDK\Helpers\ProductImportInput;
 
-class ProductExport implements Arrayable
+class ProductImport implements Arrayable
 {
     /**
      * @var int
@@ -26,12 +26,12 @@ class ProductExport implements Arrayable
     /**
      * @var string
      */
-    protected $format;
+    protected $dryRun;
 
     /**
-     * @var ProductExportFilterOptions $filters
+     * @var ProductImportInput $input
      */
-    protected $filters;
+    protected $input;
 
     /**
      * @var Callback
@@ -39,19 +39,35 @@ class ProductExport implements Arrayable
     protected $callback;
 
     /**
-     * @return ProductExportFilterOptions
+     * @return Callback
      */
-    public function getFilters(): ProductExportFilterOptions
+    public function getCallback(): Callback
     {
-        return $this->filters;
+        return $this->callback;
     }
 
     /**
-     * @param ProductExportFilterOptions $filters
+     * @param Callback $callback
      */
-    public function setFilters(ProductExportFilterOptions $filters)
+    public function setCallback(Callback $callback)
     {
-        $this->filters = $filters;
+        $this->callback = $callback;
+    }
+
+    /**
+     * @return ProductImportInput
+     */
+    public function getInput(): ProductImportInput
+    {
+        return $this->input;
+    }
+
+    /**
+     * @param ProductImportInput $input
+     */
+    public function setInput(ProductImportInput $input)
+    {
+        $this->input = $input;
     }
 
     /**
@@ -71,35 +87,19 @@ class ProductExport implements Arrayable
     }
 
     /**
-     * @return Callback
-     */
-    public function getCallback(): Callback
-    {
-        return $this->callback;
-    }
-
-    /**
-     * @param Callback $callback
-     */
-    public function setCallback(Callback $callback)
-    {
-        $this->callback = $callback;
-    }
-
-    /**
      * @return string
      */
-    public function getFormat(): string
+    public function getDryRun(): string
     {
-        return $this->format;
+        return $this->dryRun;
     }
 
     /**
-     * @param string $format
+     * @param string $dryRun
      */
-    public function setFormat(string $format)
+    public function setDryRun(string $dryRun)
     {
-        $this->format = $format;
+        $this->dryRun = $dryRun;
     }
 
     /**
@@ -146,9 +146,11 @@ class ProductExport implements Arrayable
             'id'            => $this->id,
             'template_id'   => $this->template_id,
             'template_key'  => $this->template_key,
-            'format'        => $this->format,
-            'filters'       => $this->filters->toArray(),
         ];
+
+        if (!empty($this->input)) {
+            $resultArray['input'] = $this->input->toArray();
+        }
 
         if (!empty($this->callback)) {
             $resultArray['callback'] = $this->callback->toArray();
