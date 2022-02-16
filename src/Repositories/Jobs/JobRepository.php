@@ -9,7 +9,6 @@
 namespace MyPromo\Connect\SDK\Repositories\Jobs;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\ClientException;
 use MyPromo\Connect\SDK\Exceptions\JobException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use MyPromo\Connect\SDK\Repositories\Repository;
