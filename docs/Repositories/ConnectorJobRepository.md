@@ -4,7 +4,7 @@ $connectorRepository = new \MyPromo\Connect\SDK\Repositories\Jobs\ConnectorJobRe
 ```
 
 ###### Create Job
-Request product import (with [ProductImport][ProductImport])
+Create connector job (with [ConnectorJob][ConnectorJob])
 ```php
 $connectorJob = new \MyPromo\Connect\SDK\Models\ConnectorJob();
 ...
