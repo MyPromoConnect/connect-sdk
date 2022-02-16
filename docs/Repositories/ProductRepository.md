@@ -135,7 +135,24 @@ Update the products SEO of your client (with [ProductSeoUpdate])
 $productRepository->putSeo($productSeoUpdate);
 ```
 
+###### Get Product variants
+Get all variants of product
+Products can be filtered/paginated with this helper: [ProductVariantOptions][ProductVariantOptions]
+```php
+$productVariantOptions = new \MyPromo\Connect\SDK\Helpers\ProductVariantOptions();
+$productRepository->variants($productVariantOptions);
+```
+<br />
+
+###### Get Product Variant
+Get a specific product variant by id.
+```php
+$productRepository->variant(1);
+```
+<br />
+
 [ProductOptions]: ../Helpers/ProductOptions.md
+[ProductVariantOptions]: ../Helpers/ProductVariantOptions.md
 [InventoryOptions]: ../Helpers/InventoryOptions.md
 [PriceOptions]: ../Helpers/PriceOptions.md
 [SeoOptions]: ../Helpers/SeoOptions.md
