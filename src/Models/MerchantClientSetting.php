@@ -5,7 +5,7 @@ namespace MyPromo\Connect\SDK\Models;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
 
-class ClientSetting implements Arrayable
+class MerchantClientSetting implements Arrayable
 {
     /**
      * @var int

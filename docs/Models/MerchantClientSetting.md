@@ -1,7 +1,7 @@
 Template-File for [ClientSettingRepository->create()][ClientSettingRepository]
 
 ```php
-$clientSettings = new \MyPromo\Connect\SDK\Models\ClientSetting();
+$clientSettings = new \MyPromo\Connect\SDK\Models\MerchantClientSetting();
 
 $clientSettings->setActivateNewFulfiller('true|false');
 $clientSettings->setActivateNewProducts('true|false');

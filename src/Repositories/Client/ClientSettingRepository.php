@@ -6,7 +6,7 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientGeneralException;
-use MyPromo\Connect\SDK\Models\ClientSetting;
+use MyPromo\Connect\SDK\Models\MerchantClientSetting;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -44,14 +44,14 @@ class ClientSettingRepository extends Repository
     /**
      * Update client settings
      *
-     * @param ClientSetting $clientSettings
+     * @param MerchantClientSetting $clientSettings
      *
      * @return mixed
      *
      * @throws InvalidArgumentException|GuzzleException
      * @throws ClientGeneralException
      */
-    public function update(ClientSetting $clientSettings)
+    public function update(MerchantClientSetting $clientSettings)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/settings', [
