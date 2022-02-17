@@ -59,6 +59,27 @@ class OrderOptions implements Arrayable
     protected $reference2;
 
     /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    /**
      * @return int
      */
     public function getFrom()
@@ -219,6 +240,7 @@ class OrderOptions implements Arrayable
             'from'         => $this->from,
             'page'         => $this->page,
             'per_page'     => $this->perPage,
+            'pagination'   => $this->pagination,
             'created_from' => $this->createdFrom ? $this->createdFrom->format('Y-m-d') : null,
             'created_to'   => $this->createdTo ? $this->createdTo->format('Y-m-d') : null,
             'updated_from' => $this->updatedFrom ? $this->updatedFrom->format('Y-m-d') : null,

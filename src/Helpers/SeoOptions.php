@@ -26,6 +26,26 @@ class SeoOptions implements Arrayable
      */
     protected $sku;
 
+    /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
 
     /**
      * @return int
@@ -103,6 +123,7 @@ class SeoOptions implements Arrayable
             'page'          => $this->page,
             'per_page'      => $this->perPage,
             'sku'           => $this->sku,
+            'pagination'    => $this->pagination,
         ];
     }
 }

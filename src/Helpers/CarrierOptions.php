@@ -17,30 +17,14 @@ class CarrierOptions implements Arrayable
     protected $page;
 
     /**
-     * @var bool
-     */
-    protected $pagination;
-
-    /**
      * @var int
      */
     protected $perPage;
 
     /**
-     * @return int
+     * @var bool
      */
-    public function getFrom(): int
-    {
-        return $this->from;
-    }
-
-    /**
-     * @param int $from
-     */
-    public function setFrom(int $from)
-    {
-        $this->from = $from;
-    }
+    protected $pagination;
 
     /**
      * @return bool
@@ -56,6 +40,22 @@ class CarrierOptions implements Arrayable
     public function setPagination(bool $pagination)
     {
         $this->pagination = $pagination;
+    }
+
+    /**
+     * @return int
+     */
+    public function getFrom(): int
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param int $from
+     */
+    public function setFrom(int $from)
+    {
+        $this->from = $from;
     }
 
     /**

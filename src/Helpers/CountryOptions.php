@@ -22,6 +22,27 @@ class CountryOptions implements Arrayable
     protected $perPage;
 
     /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    /**
      * @return int
      */
     public function getFrom()
@@ -80,6 +101,7 @@ class CountryOptions implements Arrayable
             'from'          => $this->from,
             'page'          => $this->page,
             'per_page'      => $this->perPage,
+            'pagination'    => $this->pagination,
         ];
     }
 }

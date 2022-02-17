@@ -63,6 +63,27 @@ class ProductOptions implements Arrayable
     protected $testProduct;
 
     /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    /**
      * @return int
      */
     public function getPage()
@@ -233,6 +254,7 @@ class ProductOptions implements Arrayable
             'page'          => $this->page,
             'from'          => $this->from,
             'per_page'      => $this->perPage,
+            'pagination'    => $this->pagination,
             'shipping_from' => $this->shippingFrom,
             'search'        => $this->search,
             'available'     => $this->available,

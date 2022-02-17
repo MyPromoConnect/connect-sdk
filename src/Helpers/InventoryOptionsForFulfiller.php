@@ -32,6 +32,27 @@ class InventoryOptionsForFulfiller implements Arrayable
     protected $skuFulfiller;
 
     /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    /**
      * @return int
      */
     public function getFrom()
@@ -122,6 +143,7 @@ class InventoryOptionsForFulfiller implements Arrayable
             'from'          => $this->from,
             'page'          => $this->page,
             'per_page'      => $this->perPage,
+            'pagination'    => $this->pagination,
             'sku'           => $this->sku,
             'sku_fulfiller' => $this->skuFulfiller,
         ];
