@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class CarrierOptions implements Arrayable
+class LocaleOptions implements Arrayable
 {
     /**
      * @var int
