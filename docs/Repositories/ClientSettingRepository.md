@@ -11,7 +11,7 @@ $clientSettingRepository->getSettings();
 ```
 
 ###### Update merchant client settings
-Update merchant client settings (with [MerchantClientSetting][MerchantClientSetting])
+Update merchant client settings (with [ClientSettingMerchant][ClientSettingMerchant])
 ```php
 $clientSettings = new \MyPromo\Connect\SDK\Models\MerchantClientSetting();
 ...
@@ -19,12 +19,12 @@ $clientSettingRepository->update($clientSettings);
 ```
 
 ###### Update fulfiller client settings
-Update fulfiller client settings (with [FulfillerClientSetting][FulfillerClientSetting])
+Update fulfiller client settings (with [ClientSettingFulfiller][ClientSettingFulfiller])
 ```php
 $clientSettings = new \MyPromo\Connect\SDK\Models\FulfillerClientSetting();
 ...
 $clientSettingRepository->update($clientSettings);
 ```
 
-[MerchantClientSetting]: ../Models/MerchantClientSetting.md
-[FulfillerClientSetting]: ../Models/FulfillerClientSetting.md
+[ClientSettingMerchant]: ../Models/ClientSettingMerchant.md
+[ClientSettingFulfiller]: ../Models/ClientSettingFulfiller.md

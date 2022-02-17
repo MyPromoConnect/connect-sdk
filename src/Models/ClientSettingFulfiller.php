@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class FulfillerClientSetting implements Arrayable
+class ClientSettingFulfiller implements Arrayable
 {
     /**
      * @var string
