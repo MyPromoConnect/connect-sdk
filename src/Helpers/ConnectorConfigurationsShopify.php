@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class ShopifyConnectorConfigurations implements Arrayable
+class ConnectorConfigurationsShopify implements Arrayable
 {
     /**
      * @var string

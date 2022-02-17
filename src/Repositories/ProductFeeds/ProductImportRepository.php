@@ -258,7 +258,7 @@ class ProductImportRepository extends Repository
                 RequestOptions::JSON => $confirmProductImportOptions->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
+            if ($response->getStatusCode() !== 200) {
                 throw new ProductImportException($response->getBody(), $response->getStatusCode());
             }
 

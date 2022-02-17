@@ -1,7 +1,7 @@
 Helper class for `\MyPromo\Connect\SDK\Repositories\Client\ClientConnectorRepository::all()`
 
 ```php
-$configurations = new \MyPromo\Connect\SDK\Helpers\MagentoConnectorConfigurations();
+$configurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento();
 $configurations->setInstanceUrl('url');
 $configurations->setApiUsername('username');
 $configurations->setApiPassword('password');

@@ -1,7 +1,7 @@
 Helper class for `\MyPromo\Connect\SDK\Repositories\Client\ClientConnectorRepository::all()`
 
 ```php
-$configurations = new \MyPromo\Connect\SDK\Helpers\ShopifyConnectorConfigurations();
+$configurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify();
 $configurations->setShopName('Shop Name');
 $configurations->setShopUrl('Shop Url');
 $configurations->setToken('Shop Token');

@@ -58,9 +58,9 @@ $productRepository->getInventory($inventoryOptions);
 
 ###### Get current inventory for fulfiller
 Get the current inventory of your client type fulfiller.
-Results can be filtered/paginated with this helper: [InventoryOptions][InventoryOptions]
+Results can be filtered/paginated with this helper: [InventoryOptionsMerchant][InventoryOptionsMerchant]
 ```php
-$inventoryOptions = new \MyPromo\Connect\SDK\Helpers\InventoryOptions();
+$inventoryOptions = new \MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant();
 ...
 or
 
@@ -140,20 +140,20 @@ Get all variants of product
 Products can be filtered/paginated with this helper: [ProductVariantOptions][ProductVariantOptions]
 ```php
 $productVariantOptions = new \MyPromo\Connect\SDK\Helpers\ProductVariantOptions();
-$productRepository->variants($productVariantOptions);
+$productRepository->getVariants($productVariantOptions);
 ```
 <br />
 
 ###### Get Product Variant
 Get a specific product variant by id.
 ```php
-$productRepository->variant(1);
+$productRepository->getVariant(1);
 ```
 <br />
 
 [ProductOptions]: ../Helpers/ProductOptions.md
 [ProductVariantOptions]: ../Helpers/ProductVariantOptions.md
-[InventoryOptions]: ../Helpers/InventoryOptions.md
+[InventoryOptionsMerchant]: ../Helpers/InventoryOptionsMerchant.md
 [PriceOptions]: ../Helpers/PriceOptions.md
 [SeoOptions]: ../Helpers/SeoOptions.md
 [ProductInventory]: ../Models/ProductInventory.md

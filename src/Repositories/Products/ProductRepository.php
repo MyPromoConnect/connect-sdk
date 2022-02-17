@@ -293,7 +293,7 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException|GuzzleException
      */
-    public function variants(ProductVariantOptions $productVariantOptions)
+    public function getVariants(ProductVariantOptions $productVariantOptions)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/variants', [
@@ -322,7 +322,7 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException|GuzzleException
      */
-    public function variant($id)
+    public function getVariant($id)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/variants/' . $id, [

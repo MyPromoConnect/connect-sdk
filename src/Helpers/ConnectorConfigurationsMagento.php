@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class MagentoConnectorConfigurations implements Arrayable
+class ConnectorConfigurationsMagento implements Arrayable
 {
     /**
      * @var string
