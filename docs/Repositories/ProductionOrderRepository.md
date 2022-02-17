@@ -56,5 +56,11 @@ $productionOrderId = 1; // ID of production order which you want to ship.
 $productionOrderRepository->addShipment($productionOrderId, $shipment);
 
 ```
+
+###### Generic Label
+Get generic label of production order by id.
+```php
+$productionOrderRepository->genericLabel(1); // Pass id of production order id
+```
 [ProductionOrderOptions]: ../Helpers/ProductionOrderOptions.md
 

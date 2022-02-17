@@ -118,4 +118,33 @@ class ProductionOrderRepository extends Repository
         }
     }
 
+    /**
+     * @param $orderId
+     * @return array
+     *
+     * @throws GuzzleException
+     * @throws InvalidArgumentException
+     * @throws ProductionOrderException
+     */
+    public function genericLabel($orderId): array
+    {
+        try {
+            $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId . '/generic_label', [
+                'headers'            => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ]
+            ]);
+
+            if ($response->getStatusCode() !== 201) {
+                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+        }
+    }
+
 }
