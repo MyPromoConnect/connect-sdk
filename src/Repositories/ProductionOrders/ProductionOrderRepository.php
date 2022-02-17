@@ -1,6 +1,6 @@
 <?php
 
-namespace MyPromo\Connect\SDK\Repositories\Orders;
+namespace MyPromo\Connect\SDK\Repositories\ProductionOrders;
 
 use Exception;
 use GuzzleHttp\RequestOptions;

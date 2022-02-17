@@ -1,6 +1,6 @@
 <?php
 
-namespace MyPromo\Connect\SDK\Repositories\Products;
+namespace MyPromo\Connect\SDK\Repositories\ProductFeeds;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;

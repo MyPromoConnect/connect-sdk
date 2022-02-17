@@ -1,6 +1,6 @@
 #### Create a new Production Order Repository
 ```php
-$productionOrderRepository = new \MyPromo\Connect\SDK\Repositories\Orders\ProductionOrderRepository($client);
+$productionOrderRepository = new \MyPromo\Connect\SDK\Repositories\ProductionOrders\ProductionOrderRepository($client);
 ```
 
 #### Available Methods

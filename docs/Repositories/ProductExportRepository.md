@@ -1,6 +1,6 @@
 ### Create a new Repository
 ```php
-$productExportRepository = new \MyPromo\Connect\SDK\Repositories\Products\ProductExportRepository($client);
+$productExportRepository = new \MyPromo\Connect\SDK\Repositories\ProductFeeds\ProductExportRepository($client);
 ```
 
 ### Available Methods

@@ -1,6 +1,6 @@
 ### Create a new Repository
 ```php
-$productImportRepository = new \MyPromo\Connect\SDK\Repositories\Products\ProductImportRepository($client);
+$productImportRepository = new \MyPromo\Connect\SDK\Repositories\ProductFeeds\ProductImportRepository($client);
 ```
 
 ### Available Methods

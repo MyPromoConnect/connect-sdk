@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use DateTimeInterface;
-use MyPromo\Connect\SDK\Repositories\Orders\ProductionOrderRepository;
+use MyPromo\Connect\SDK\Repositories\ProductionOrders\ProductionOrderRepository;
 
 /**
  * Class ProductionOrderOptions
