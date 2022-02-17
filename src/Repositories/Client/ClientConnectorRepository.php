@@ -34,7 +34,7 @@ class ClientConnectorRepository extends Repository
                 RequestOptions::JSON => $clientConnector->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
+            if ($response->getStatusCode() !== 200) {
                 throw new ClientConnectorException($response->getBody(), $response->getStatusCode());
             }
 

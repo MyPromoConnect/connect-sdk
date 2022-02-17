@@ -63,7 +63,7 @@ class ClientSettingRepository extends Repository
                 RequestOptions::JSON => $clientSettings->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
+            if ($response->getStatusCode() !== 200) {
                 throw new ClientGeneralException($response->getBody(), $response->getStatusCode());
             }
 
