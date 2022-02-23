@@ -179,7 +179,6 @@ class ClientSettingMerchant implements Arrayable
      * Get the instance as an array.
      *
      * @return array
-     * @throws OrderException
      */
     public function toArray(): array
     {

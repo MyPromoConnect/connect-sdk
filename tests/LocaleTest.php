@@ -2,10 +2,10 @@
 
 namespace MyPromo\Connect\SDK\Tests;
 
-use MyPromo\Connect\SDK\Helpers\StateOptions;
+use MyPromo\Connect\SDK\Helpers\LocaleOptions;
 use PHPUnit\Framework\TestCase;
 
-class StateTest extends TestCase
+class LocaleTest extends TestCase
 {
     /**
      * @var $options
@@ -16,7 +16,7 @@ class StateTest extends TestCase
     {
         parent::setUp();
 
-        $this->options = new StateOptions();
+        $this->options = new LocaleOptions();
         $this->options->setFrom(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);

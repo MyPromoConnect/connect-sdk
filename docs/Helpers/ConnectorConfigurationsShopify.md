@@ -7,7 +7,7 @@ $configurations->setShopUrl('Shop Url');
 $configurations->setToken('Shop Token');
 $configurations->setShopCurrency('EUR');
 $configurations->setProductsLanguage('DE');
-$configurations->getSyncProductSettings('normal');
+$configurations->setSyncProductSettings('normal');
 $configurations->setSalePriceConfig('use_sales_price');
 $configurations->setCreateCollections('true|false');
 $configurations->setUpdateImages('true|false');
