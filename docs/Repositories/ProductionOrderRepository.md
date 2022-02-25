@@ -1,6 +1,6 @@
 #### Create a new Production Order Repository
 ```php
-$productionOrderRepository = new \MyPromo\Connect\SDK\Repositories\Orders\ProductionOrderRepository($client);
+$productionOrderRepository = new \MyPromo\Connect\SDK\Repositories\ProductionOrders\ProductionOrderRepository($client);
 ```
 
 #### Available Methods
@@ -55,6 +55,12 @@ $shipment->setForce(false);
 $productionOrderId = 1; // ID of production order which you want to ship.
 $productionOrderRepository->addShipment($productionOrderId, $shipment);
 
+```
+
+###### Generic Label
+Get generic label of production order by id.
+```php
+$productionOrderRepository->genericLabel(1); // Pass id of production order id
 ```
 [ProductionOrderOptions]: ../Helpers/ProductionOrderOptions.md
 

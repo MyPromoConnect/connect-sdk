@@ -15,6 +15,7 @@ use MyPromo\Connect\SDK\Exceptions\ProductException;
 use MyPromo\Connect\SDK\Helpers\InventoryOptions;
 use MyPromo\Connect\SDK\Helpers\PriceOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
+use MyPromo\Connect\SDK\Helpers\ProductVariantOptions;
 use MyPromo\Connect\SDK\Helpers\SeoOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -273,6 +274,63 @@ class ProductRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $productSeoUpdate->toArray(),
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
+        }
+    }
+
+    /**
+     * @param ProductVariantOptions $productVariantOptions
+     *
+     * @return array
+     * @throws InvalidArgumentException
+     * @throws ProductException|GuzzleException
+     */
+    public function getVariants(ProductVariantOptions $productVariantOptions)
+    {
+        try {
+            $response = $this->client->guzzle()->get('/v1/variants', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $productVariantOptions->toArray(),
+            ]);
+
+            if ($response->getStatusCode() !== 200) {
+                throw new ProductException($response->getBody(), $response->getStatusCode());
+            }
+
+            return json_decode($response->getBody(), true);
+        } catch (Exception $ex) {
+            throw new ProductException($ex->getMessage(), $ex->getCode());
+        }
+    }
+
+    /**
+     * @param $id
+     *
+     * @return array
+     * @throws InvalidArgumentException
+     * @throws ProductException|GuzzleException
+     */
+    public function getVariant($id)
+    {
+        try {
+            $response = $this->client->guzzle()->get('/v1/variants/' . $id, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ]
             ]);
 
             if ($response->getStatusCode() !== 200) {

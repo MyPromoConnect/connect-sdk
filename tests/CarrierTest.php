@@ -17,8 +17,10 @@ class CarrierTest extends TestCase
         parent::setUp();
 
         $this->options = new CarrierOptions();
+        $this->options->setPage(1);
         $this->options->setFrom(1);
         $this->options->setPerPage(5);
+        $this->options->setPagination(false);
     }
 
     public function testOptions()

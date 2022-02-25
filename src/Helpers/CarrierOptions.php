@@ -22,9 +22,30 @@ class CarrierOptions implements Arrayable
     protected $perPage;
 
     /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
+
+    /**
      * @return int
      */
-    public function getFrom()
+    public function getFrom(): int
     {
         return $this->from;
     }
@@ -32,7 +53,7 @@ class CarrierOptions implements Arrayable
     /**
      * @param int $from
      */
-    public function setFrom($from)
+    public function setFrom(int $from)
     {
         $this->from = $from;
     }
@@ -40,7 +61,7 @@ class CarrierOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPerPage()
+    public function getPerPage(): int
     {
         return $this->perPage;
     }
@@ -48,7 +69,7 @@ class CarrierOptions implements Arrayable
     /**
      * @param int $perPage
      */
-    public function setPerPage($perPage)
+    public function setPerPage(int $perPage)
     {
         $this->perPage = $perPage;
     }
@@ -56,7 +77,7 @@ class CarrierOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
@@ -64,7 +85,7 @@ class CarrierOptions implements Arrayable
     /**
      * @param int $page
      */
-    public function setPage($page)
+    public function setPage(int $page)
     {
         $this->page = $page;
     }
@@ -74,12 +95,13 @@ class CarrierOptions implements Arrayable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'from'          => $this->from,
             'page'          => $this->page,
             'per_page'      => $this->perPage,
+            'pagination'    => $this->pagination,
         ];
     }
 }

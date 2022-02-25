@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use DateTimeInterface;
-use MyPromo\Connect\SDK\Repositories\Orders\ProductionOrderRepository;
+use MyPromo\Connect\SDK\Repositories\ProductionOrders\ProductionOrderRepository;
 
 /**
  * Class ProductionOrderOptions
@@ -47,6 +47,27 @@ class ProductionOrderOptions implements Arrayable
      * @var DateTimeInterface
      */
     protected $updatedTo;
+
+    /**
+     * @var bool
+     */
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
 
     /**
      * @return int
@@ -177,6 +198,7 @@ class ProductionOrderOptions implements Arrayable
             'from'         => $this->from,
             'page'         => $this->page,
             'per_page'     => $this->perPage,
+            'pagination'   => $this->pagination,
             'created_from' => $this->createdFrom ? $this->createdFrom->format('Y-m-d') : null,
             'created_to'   => $this->createdTo ? $this->createdTo->format('Y-m-d') : null,
             'updated_from' => $this->updatedFrom ? $this->updatedFrom->format('Y-m-d') : null,

@@ -1,16 +1,10 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: massimo
- * Date: 16.07.20
- * Time: 14:28
- */
 
 namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class InventoryOptions implements Arrayable
+class InventoryOptionsFulfiller implements Arrayable
 {
     /**
      * @var int
@@ -35,12 +29,28 @@ class InventoryOptions implements Arrayable
     /**
      * @var string
      */
-    protected $shippingFrom;
+    protected $skuFulfiller;
 
     /**
-     * @var string
+     * @var bool
      */
-    protected $skuFulfiller;
+    protected $pagination;
+
+    /**
+     * @return bool
+     */
+    public function getPagination(): bool
+    {
+        return $this->pagination;
+    }
+
+    /**
+     * @param bool $pagination
+     */
+    public function setPagination(bool $pagination)
+    {
+        $this->pagination = $pagination;
+    }
 
     /**
      * @return int
@@ -93,22 +103,6 @@ class InventoryOptions implements Arrayable
     /**
      * @return string
      */
-    public function getShippingFrom()
-    {
-        return $this->shippingFrom;
-    }
-
-    /**
-     * @param string $shippingFrom
-     */
-    public function setShippingFrom($shippingFrom)
-    {
-        $this->shippingFrom = $shippingFrom;
-    }
-
-    /**
-     * @return string
-     */
     public function getSkuFulfiller()
     {
         return $this->skuFulfiller;
@@ -145,21 +139,13 @@ class InventoryOptions implements Arrayable
      */
     public function toArray()
     {
-        $array = [
+        return [
             'from'          => $this->from,
             'page'          => $this->page,
             'per_page'      => $this->perPage,
-            'sku'           => $this->sku
+            'pagination'    => $this->pagination,
+            'sku'           => $this->sku,
+            'sku_fulfiller' => $this->skuFulfiller,
         ];
-
-        if (isset($this->skuFulfiller)) {
-            $array['sku_fulfiller'] = $this->skuFulfiller;
-        }
-
-        if (isset($this->shippingFrom)) {
-            $array['shipping_from'] = $this->shippingFrom;
-        }
-
-        return $array;
     }
 }
