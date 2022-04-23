@@ -3,8 +3,8 @@
     "description": "SDK for connect",
     "type": "sdk",
     "require": {
-        "php": "^7.3",
-        "guzzlehttp/guzzle": "^6.4",
+        "php": ">=7.3 <=8.1.4",
+        "guzzlehttp/guzzle": ">=6.4",
         "symfony/cache": "^3.4",
         "ext-json": "*",
         "symfony/validator": "^4.4"

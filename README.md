@@ -24,7 +24,13 @@ Please update your applications and environments accordingly.
   - [Repositories][Repositories]
 
 ## Requirements
-- PHP >=7.3
+- PHP >=7.3 <=8.1.4
+
+## Installation
+
+```
+composer require mypromo/connect-sdk
+```
 
 ## Contributing
 
