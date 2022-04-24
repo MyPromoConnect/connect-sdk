@@ -14,12 +14,12 @@ class ProductExport implements Arrayable
     protected $id;
 
     /**
-     * @var string
+     * @var string | null
      */
     protected $template_id;
 
     /**
-     * @var string
+     * @var string | null
      */
     protected $template_key;
 
@@ -111,9 +111,9 @@ class ProductExport implements Arrayable
     }
 
     /**
-     * @param string $template_id
+     * @param string|null $template_id
      */
-    public function setTempletaId(string $template_id)
+    public function setTempletaId(?string $template_id)
     {
         $this->template_id = $template_id;
     }
@@ -127,9 +127,9 @@ class ProductExport implements Arrayable
     }
 
     /**
-     * @param string $template_key
+     * @param string|null $template_key
      */
-    public function setTempletaKey(string $template_key)
+    public function setTempletaKey(?string $template_key)
     {
         $this->template_key = $template_key;
     }
@@ -143,11 +143,11 @@ class ProductExport implements Arrayable
     public function toArray(): array
     {
         $resultArray = [
-            'id'            => $this->id,
-            'template_id'   => $this->template_id,
-            'template_key'  => $this->template_key,
-            'format'        => $this->format,
-            'filters'       => $this->filters->toArray(),
+            'id' => $this->id,
+            'template_id' => $this->template_id,
+            'template_key' => $this->template_key,
+            'format' => $this->format,
+            'filters' => $this->filters->toArray(),
         ];
 
         if (!empty($this->callback)) {
