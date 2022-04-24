@@ -114,7 +114,7 @@ class OrderOptions implements Arrayable
     /**
      * @return DateTimeInterface
      */
-    public function getcreated_from()
+    public function getCreatedFrom()
     {
         return $this->created_from;
     }
@@ -122,7 +122,7 @@ class OrderOptions implements Arrayable
     /**
      * @param DateTimeInterface $created_from
      */
-    public function setcreated_from($created_from)
+    public function setCreatedFrom($created_from)
     {
         Date::validate($created_from);
 
@@ -132,7 +132,7 @@ class OrderOptions implements Arrayable
     /**
      * @return DateTimeInterface
      */
-    public function getcreated_to()
+    public function getCreatedTo()
     {
         return $this->created_to;
     }
@@ -140,7 +140,7 @@ class OrderOptions implements Arrayable
     /**
      * @param DateTimeInterface $created_to
      */
-    public function setcreated_to($created_to)
+    public function setCreatedTo($created_to)
     {
         Date::validate($created_to);
 
@@ -150,7 +150,7 @@ class OrderOptions implements Arrayable
     /**
      * @return DateTimeInterface
      */
-    public function getupdated_from()
+    public function getUpdatedFrom()
     {
         return $this->updated_from;
     }
@@ -158,7 +158,7 @@ class OrderOptions implements Arrayable
     /**
      * @param DateTimeInterface $updated_from
      */
-    public function setupdated_from($updated_from)
+    public function setUpdatedFrom($updated_from)
     {
         Date::validate($updated_from);
 
@@ -168,7 +168,7 @@ class OrderOptions implements Arrayable
     /**
      * @return DateTimeInterface
      */
-    public function getupdated_to()
+    public function getUpdatedTo()
     {
         return $this->updated_to;
     }
@@ -176,7 +176,7 @@ class OrderOptions implements Arrayable
     /**
      * @param DateTimeInterface $updated_to
      */
-    public function setupdated_to($updated_to)
+    public function setUpdatedTo($updated_to)
     {
         Date::validate($updated_to);
 

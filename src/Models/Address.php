@@ -11,6 +11,16 @@ use MyPromo\Connect\SDK\Contracts\Arrayable;
 class Address implements Arrayable
 {
     /**
+     * @var int|null
+     */
+    protected $address_id;
+
+    /**
+     * @var string|null
+     */
+    protected $address_key;
+
+    /**
      * @var string
      */
     protected $reference;
@@ -28,7 +38,27 @@ class Address implements Arrayable
     /**
      * @var string
      */
+    protected $salutation;
+
+    /**
+     * @var string
+     */
+    protected $gender;
+
+    /**
+     * @var string
+     */
+    protected $date_of_birth;
+
+    /**
+     * @var string
+     */
     protected $firstname;
+
+    /**
+     * @var string
+     */
+    protected $middlename;
 
     /**
      * @var string
@@ -125,6 +155,105 @@ class Address implements Arrayable
      */
     protected $templateId = null;
 
+
+    /**
+     * @return int|null
+     */
+    public function getAddressId()
+    {
+        return $this->address_id;
+    }
+
+    /**
+     * @param int|null $address_id
+     */
+    public function setAddressId(?int $address_id)
+    {
+        $this->address_id = $address_id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAddressKey()
+    {
+        return $this->address_key;
+    }
+
+    /**
+     * @param string|null $address_key
+     */
+    public function setAddressKey(?string $address_key)
+    {
+        $this->address_key = $address_key;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSalutation()
+    {
+        return $this->salutation;
+    }
+
+    /**
+     * @param string|null $salutation
+     */
+    public function setSalutation(?string $salutation)
+    {
+        $this->salutation = $salutation;
+    }
+
+    /**
+     * @return string
+     */
+    public function getGender()
+    {
+        return $this->gender;
+    }
+
+    /**
+     * @param string|null $gender
+     */
+    public function setGender(?string $gender)
+    {
+        $this->gender = $gender;
+    }
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function getDateOfBirth()
+    {
+        return $this->date_of_birth;
+    }
+
+    /**
+     * @param DateTimeInterface $date_of_birth
+     */
+    public function setDateOfBirth($date_of_birth)
+    {
+        Date::validate($date_of_birth);
+
+        $this->date_of_birth = $date_of_birth;
+    }
+
+    /**
+     * @return string
+     */
+    public function getMiddlename()
+    {
+        return $this->middlename;
+    }
+
+    /**
+     * @param string|null $middlename
+     */
+    public function setMiddlename(?string $middlename)
+    {
+        $this->middlename = $middlename;
+    }
+
     /**
      * @return string
      */
@@ -134,9 +263,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $reference
+     * @param string|null $reference
      */
-    public function setReference($reference)
+    public function setReference(?string $reference)
     {
         $this->reference = $reference;
     }
@@ -152,7 +281,7 @@ class Address implements Arrayable
     /**
      * @param string $company
      */
-    public function setCompany($company)
+    public function setCompany(string $company)
     {
         $this->company = $company;
     }
@@ -166,9 +295,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $department
+     * @param string|null $department
      */
-    public function setDepartment($department)
+    public function setDepartment(?string $department)
     {
         $this->department = $department;
     }
@@ -184,7 +313,7 @@ class Address implements Arrayable
     /**
      * @param string $firstname
      */
-    public function setFirstname($firstname)
+    public function setFirstname(string $firstname)
     {
         $this->firstname = $firstname;
     }
@@ -200,7 +329,7 @@ class Address implements Arrayable
     /**
      * @param string $lastname
      */
-    public function setLastname($lastname)
+    public function setLastname(string $lastname)
     {
         $this->lastname = $lastname;
     }
@@ -216,7 +345,7 @@ class Address implements Arrayable
     /**
      * @param string $street
      */
-    public function setStreet($street)
+    public function setStreet(string $street)
     {
         $this->street = $street;
     }
@@ -230,9 +359,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $careOf
+     * @param string|null $careOf
      */
-    public function setCareOf($careOf)
+    public function setCareOf(?string $careOf)
     {
         $this->careOf = $careOf;
     }
@@ -246,9 +375,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $zip
+     * @param string|null $zip
      */
-    public function setZip($zip)
+    public function setZip(string $zip)
     {
         $this->zip = $zip;
     }
@@ -264,7 +393,7 @@ class Address implements Arrayable
     /**
      * @param string $city
      */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
     }
@@ -280,7 +409,7 @@ class Address implements Arrayable
     /**
      * @param string $stateCode
      */
-    public function setStateCode($stateCode)
+    public function setStateCode(string $stateCode)
     {
         $this->stateCode = $stateCode;
     }
@@ -294,9 +423,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $district
+     * @param string|null $district
      */
-    public function setDistrict($district)
+    public function setDistrict(?string $district)
     {
         $this->district = $district;
     }
@@ -312,7 +441,7 @@ class Address implements Arrayable
     /**
      * @param string $countryCode
      */
-    public function setCountryCode($countryCode)
+    public function setCountryCode(string $countryCode)
     {
         $this->countryCode = $countryCode;
     }
@@ -326,9 +455,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $phone
+     * @param string|null $phone
      */
-    public function setPhone($phone)
+    public function setPhone(?string $phone)
     {
         $this->phone = $phone;
     }
@@ -342,9 +471,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $fax
+     * @param string|null $fax
      */
-    public function setFax($fax)
+    public function setFax(?string $fax)
     {
         $this->fax = $fax;
     }
@@ -358,9 +487,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $mobile
+     * @param string|null $mobile
      */
-    public function setMobile($mobile)
+    public function setMobile(?string $mobile)
     {
         $this->mobile = $mobile;
     }
@@ -374,9 +503,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $email
+     * @param string|null $email
      */
-    public function setEmail($email)
+    public function setEmail(?string $email)
     {
         $this->email = $email;
     }
@@ -390,9 +519,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $vatId
+     * @param string|null $vatId
      */
-    public function setVatId($vatId)
+    public function setVatId(?string $vatId)
     {
         $this->vatId = $vatId;
     }
@@ -406,9 +535,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $iban
+     * @param string|null $iban
      */
-    public function setIban($iban)
+    public function setIban(?string $iban)
     {
         $this->iban = $iban;
     }
@@ -422,9 +551,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $bicOrSwift
+     * @param string|null $bicOrSwift
      */
-    public function setBicOrSwift($bicOrSwift)
+    public function setBicOrSwift(?string $bicOrSwift)
     {
         $this->bicOrSwift = $bicOrSwift;
     }
@@ -438,9 +567,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $accountHolder
+     * @param string|null $accountHolder
      */
-    public function setAccountHolder($accountHolder)
+    public function setAccountHolder(?string $accountHolder)
     {
         $this->accountHolder = $accountHolder;
     }
@@ -454,9 +583,9 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $eoriNumber
+     * @param string|null $eoriNumber
      */
-    public function setEoriNumber($eoriNumber)
+    public function setEoriNumber(?string $eoriNumber)
     {
         $this->eoriNumber = $eoriNumber;
     }
@@ -470,15 +599,17 @@ class Address implements Arrayable
     }
 
     /**
-     * @param string $commercialRegisterEntry
+     * @param string|null $commercialRegisterEntry
      */
-    public function setCommercialRegisterEntry($commercialRegisterEntry)
+    public function setCommercialRegisterEntry(?string $commercialRegisterEntry)
     {
         $this->commercialRegisterEntry = $commercialRegisterEntry;
     }
 
     /**
      * @return int|null
+     *
+     * TODO: deprecated ???
      */
     public function getTemplateId()
     {
@@ -487,8 +618,10 @@ class Address implements Arrayable
 
     /**
      * @param int|null $templateId
+     *
+     * TODO: deprecated ???
      */
-    public function setTemplateId($templateId)
+    public function setTemplateId(?int $templateId)
     {
         $this->templateId = $templateId;
     }
@@ -499,34 +632,38 @@ class Address implements Arrayable
     public function toArray()
     {
         $addressArray = [
-            'reference'                 => $this->reference,
-            'company'                   => $this->company,
-            'department'                => $this->department,
-            'firstname'                 => $this->firstname,
-            'lastname'                  => $this->lastname,
-            'street'                    => $this->street,
-            'care_of'                   => $this->careOf,
-            'zip'                       => $this->zip,
-            'city'                      => $this->city,
-            'state_code'                => $this->stateCode,
-            'district'                  => $this->district,
-            'country_code'              => $this->countryCode,
-            'phone'                     => $this->phone,
-            'fax'                       => $this->fax,
-            'mobile'                    => $this->mobile,
-            'email'                     => $this->email,
-            'vat_id'                    => $this->vatId,
-            'eori_number'               => $this->eoriNumber,
-            'account_holder'            => $this->accountHolder,
-            'iban'                      => $this->iban,
-            'bic_or_swift'              => $this->bicOrSwift,
+            'address_id' => $this->address_id,
+            'address_key' => $this->address_key,
+            'reference' => $this->reference,
+            'company' => $this->company,
+            'department' => $this->department,
+            'salutation' => $this->salutation,
+            'gender' => $this->gender,
+            'date_of_birth' => $this->date_of_birth ? $this->date_of_birth->format('Y-m-d') : null,
+            'firstname' => $this->firstname,
+            'middlename' => $this->middlename,
+            'lastname' => $this->lastname,
+            'street' => $this->street,
+            'care_of' => $this->careOf,
+            'zip' => $this->zip,
+            'city' => $this->city,
+            'state_code' => $this->stateCode,
+            'district' => $this->district,
+            'country_code' => $this->countryCode,
+            'phone' => $this->phone,
+            'fax' => $this->fax,
+            'mobile' => $this->mobile,
+            'email' => $this->email,
+            'vat_id' => $this->vatId,
+            'eori_number' => $this->eoriNumber,
+            'account_holder' => $this->accountHolder,
+            'iban' => $this->iban,
+            'bic_or_swift' => $this->bicOrSwift,
+            'commercial_register_entry' => $this->commercialRegisterEntry,
         ];
 
-        if (!empty($this->commercialRegisterEntry)){
-            $addressArray['commercial_register_entry'] = $this->commercialRegisterEntry;
-        }
-
-        if(!empty($this->templateId)) {
+        // TODO: deprecated ???
+        if (!empty($this->templateId)) {
             $addressArray['template_id'] = $this->templateId;
         }
 

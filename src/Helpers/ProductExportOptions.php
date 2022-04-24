@@ -22,12 +22,12 @@ class ProductExportOptions implements Arrayable
     protected $perPage;
 
     /**
-     * @var string
+     * @var DateTimeInterface
      */
     protected $created_from;
 
     /**
-     * @var string
+     * @var DateTimeInterface
      */
     protected $created_to;
 
