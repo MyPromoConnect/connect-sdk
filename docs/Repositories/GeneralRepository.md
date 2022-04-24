@@ -1,6 +1,6 @@
 ### Create a new Repository
 ```php
-$generalRepository = new \MyPromo\Connect\SDK\Repositories\Client\GeneralRepository($client);
+$generalRepository = new \MyPromo\Connect\SDK\Repositories\Miscellaneous\GeneralRepository(client);
 ```
 
 ###### Get Api Status
