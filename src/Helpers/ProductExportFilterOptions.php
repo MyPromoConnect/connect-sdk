@@ -36,9 +36,13 @@ class ProductExportFilterOptions implements Arrayable
     protected $currency;
 
     /**
-     * @var string (normal|test|all)
+     * @var string
      */
     protected $product_types;
+
+    const ProductExportFilterOptionsProductTypeAll = "all";
+    const ProductExportFilterOptionsProductTypeNormal = "normal";
+    const ProductExportFilterOptionsProductTypeTest = "test";
 
     /**
      * @var string|null
@@ -165,13 +169,13 @@ class ProductExportFilterOptions implements Arrayable
     public function toArray(): array
     {
         return [
-            'sku'           => $this->sku,
+            'sku' => $this->sku,
             'shipping_from' => $this->shipping_from,
             'product_types' => $this->product_types,
-            'search'        => $this->search,
-            'category_id'   => $this->category_id,
-            'currency'      => $this->currency,
-            'lang'          => $this->lang,
+            'search' => $this->search,
+            'category_id' => $this->category_id,
+            'currency' => $this->currency,
+            'lang' => $this->lang,
         ];
     }
 }
