@@ -5,6 +5,7 @@ namespace MyPromo\Connect\SDK\Models;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
 use MyPromo\Connect\SDK\Helpers\ProductImportInput;
+use phpDocumentor\Reflection\Types\Boolean;
 
 class ProductImport implements Arrayable
 {
@@ -24,7 +25,7 @@ class ProductImport implements Arrayable
     protected $template_key;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $dryRun;
 
@@ -95,9 +96,9 @@ class ProductImport implements Arrayable
     }
 
     /**
-     * @param string $dryRun
+     * @param bool $dryRun
      */
-    public function setDryRun(string $dryRun)
+    public function setDryRun(bool $dryRun)
     {
         $this->dryRun = $dryRun;
     }
