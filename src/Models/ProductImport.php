@@ -4,6 +4,7 @@ namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Exceptions\ProductImportException;
 use MyPromo\Connect\SDK\Helpers\ProductImportInput;
 use phpDocumentor\Reflection\Types\Boolean;
 
@@ -139,7 +140,7 @@ class ProductImport implements Arrayable
      * Get the instance as an array.
      *
      * @return array
-     * @throws OrderException
+     * @throws ProductImportException
      */
     public function toArray(): array
     {
