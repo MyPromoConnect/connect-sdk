@@ -5,7 +5,7 @@
 
 ## Important Announcement
 
-Mypromo Connect SDK will support `php 7.3` or higher only from 1st of March 2021.
+Starting with version 2.0 mypromo connect SDK will support `php 8.0` or higher only.
 Please update your applications and environments accordingly.
 
 ## Important Changes
@@ -13,8 +13,13 @@ Please update your applications and environments accordingly.
 - added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
 - Support a custom baseUri for Client ([see details here](docs/README.md))
 - Add `reference2`field to Order Model ([see details here](docs/Models/Order.md))
-- Set minimum PHP Version to 7.3
 - use key/value for File/Callback Header Auth ([see details here](docs/Models/File.md)) and ([see details here](docs/Models/Callback.md))
+- Set minimum PHP Version to 8.0
+- Added product routes to manage product data
+- Added product feeds
+- Added configurator routes to build up your own personalization app
+- Added client settings routes
+- Added connector routes for magento 2.x and shopify integration
 
 ## Contents
 
@@ -24,37 +29,33 @@ Please update your applications and environments accordingly.
   - [Repositories][Repositories]
 
 ## Requirements
-- PHP >=7.3 <=8.1.4
+- PHP ^8.0
 
 ## Installation
-
 ```
 composer require mypromo/connect-sdk
 ```
 
 ## Contributing
 
-#### Reporting Issues
+### Reporting Issues
 
 When reporting issues, please fill out the included template as completely as possible.
 
-#### Security
+### Security
 
 If you discover any security related issues, please email `support@mypromo.com` instead of using the issue tracker.
 
-#### Tests
+### Tests
 
-Running tests requires at least PHP Version `7.3` or higher.
+Running tests requires at least PHP Version `8.0` or higher.
 
 ## Version Guidance
 
 | Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
 |---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.3      |
-
-| Version | Status     | Packagist           | Namespace    | Repo                | Docs                | PHP Version |
-|---------|------------|---------------------|--------------|---------------------|---------------------| -------------|
-| 1.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.3      |
+| 1.x     | Deprecated | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 7.3      |
+| 2.x     | Latest     | `mypromo/connectsdk` | `MyPromo\Connect\SDK` | [v1][repo] | [v1][Docs] |  \>= 8.0      |
 
 # License
 
