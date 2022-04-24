@@ -92,6 +92,8 @@ class ProductImportOptions implements Arrayable
      */
     public function setCreatedFrom(string $created_from)
     {
+        Date::validate($created_from);
+
         $this->created_from = $created_from;
     }
 
@@ -108,6 +110,8 @@ class ProductImportOptions implements Arrayable
      */
     public function setCreatedTo(string $created_to)
     {
+        Date::validate($created_to);
+
         $this->created_to = $created_to;
     }
 
