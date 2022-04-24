@@ -7,10 +7,10 @@ $orderOptions = new \MyPromo\Connect\SDK\Helpers\OrderOptions();
 $orderOptions->setFrom(1);
 $orderOptions->setPage(1); // get data from this page number
 $orderOptions->setPerPage(5);
-$orderOptions->setCreatedFrom(new DateTime('date'));
-$orderOptions->setCreatedTo(new DateTime('date'));
-$orderOptions->setUpdatedFrom(new DateTime('date'));
-$orderOptions->setUpdatedTo(new DateTime('date'));
+$orderOptions->setCreatedFrom(new DateTime('Y-m-d H:i:s'));
+$orderOptions->setCreatedTo(new DateTime('Y-m-d H:i:s'));
+$orderOptions->setUpdatedFrom(new DateTime('Y-m-d H:i:s'));
+$orderOptions->setUpdatedTo(new DateTime('Y-m-d H:i:s'));
 $orderOptions->setReference('xyz123');
 $orderOptions->setReference2('abc123');
 ```  

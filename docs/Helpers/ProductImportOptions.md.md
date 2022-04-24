@@ -7,8 +7,8 @@ $productImportOptions = new \MyPromo\Connect\SDK\Helpers\ProductImportOptions();
 $productImportOptions->setPage(1); // get data from this page number
 $productImportOptions->setPerPage(5);
 $productImportOptions->setPagination(true);
-$productImportOptions->setCreatedFrom(new DateTime('date'));
-$productImportOptions->setCreatedTo(new DateTime('date'));
+$productImportOptions->setCreatedFrom(new DateTime('Y-m-d H:i:s'));
+$productImportOptions->setCreatedTo(new DateTime('Y-m-d H:i:s'));
 ```
 
 [ProductImportRepository]: ../Repositories/ProductImportRepository.md
