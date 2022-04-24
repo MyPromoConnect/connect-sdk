@@ -16,12 +16,12 @@ class ProductExportFilterOptions implements Arrayable
     protected $shipping_from;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $sku;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $search;
 
@@ -36,12 +36,12 @@ class ProductExportFilterOptions implements Arrayable
     protected $currency;
 
     /**
-     * @var string
+     * @var string (normal|test|all)
      */
     protected $product_types;
 
     /**
-     * @var string
+     * @var string|null
      */
     protected $category_id;
 
@@ -70,9 +70,9 @@ class ProductExportFilterOptions implements Arrayable
     }
 
     /**
-     * @param string $sku
+     * @param string|null $sku
      */
-    public function setSku(string $sku)
+    public function setSku(?string $sku)
     {
         $this->sku = $sku;
     }
@@ -118,9 +118,9 @@ class ProductExportFilterOptions implements Arrayable
     }
 
     /**
-     * @param string $category_id
+     * @param string|null $category_id
      */
-    public function setCategoryId(string $category_id)
+    public function setCategoryId(?string $category_id)
     {
         $this->category_id = $category_id;
     }
@@ -134,9 +134,9 @@ class ProductExportFilterOptions implements Arrayable
     }
 
     /**
-     * @param string $search
+     * @param string|null $search
      */
-    public function setSearch(string $search)
+    public function setSearch(?string $search)
     {
         $this->search = $search;
     }

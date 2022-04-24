@@ -13,6 +13,17 @@ $productImport->setCallback($callback);
 
 ```
 
+Helpers:
+
+- [ProductImportInput][ProductImportInput]
+
+
+Optional:
+
+- [Callback][callback]
+
+
+
 [Callback]: ../Models/Callback.md
 [ProductImportInput]: ../Helpers/ProductImportInput.md
 [ProductImportRepository]: ../Repositories/ProductImportRepository.md
