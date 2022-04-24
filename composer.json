@@ -3,7 +3,7 @@
     "description": "SDK for the mypromo connect API",
     "type": "sdk",
     "require": {
-        "php": "^8.0",
+        "php": "^7.4|^8.0",
         "guzzlehttp/guzzle": "^7.0.1",
         "symfony/cache": "^5.4",
         "ext-json": "*",
