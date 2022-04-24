@@ -4,7 +4,7 @@ Template-File for [ProductImportRepository->create()][ProductImportRepository]
 $productImport = new \MyPromo\Connect\SDK\Models\ProductImport();
 $productImport->setTempletaId('template_key');
 $productImport->setTempletaKey('template_key');
-$productImport->setDryRun('true|false');
+$productImport->setDryRun(true|false);
 
 $productImportInput = new \MyPromo\Connect\SDK\Helpers\ProductImportInput();
 $productImport->setInput($productImportInput);
