@@ -134,7 +134,7 @@ class ProductImportInput implements Arrayable
     }
 
     /**
-     * @param  array  $httpsHeader
+     * @param array $httpsHeader
      * @throws OrderException
      */
     public function setHttpsHeader(array $httpsHeader)
@@ -202,7 +202,7 @@ class ProductImportInput implements Arrayable
     }
 
     /**
-     * @param array|null  $oauthCredentials
+     * @param array|null $oauthCredentials
      */
     public function setOAuthCredentials(array $oauthCredentials)
     {
@@ -218,7 +218,7 @@ class ProductImportInput implements Arrayable
     }
 
     /**
-     * @param array|null  $oauth2Credentials
+     * @param array|null $oauth2Credentials
      */
     public function setOAuth2Credentials(array $oauth2Credentials)
     {
@@ -233,8 +233,8 @@ class ProductImportInput implements Arrayable
     public function toArray(): array
     {
         $importArray = [
-            'url'           => $this->url,
-            'format'        => $this->format,
+            'format' => $this->format,
+            'url' => $this->url
         ];
 
         // Only use credentials if everything isset
