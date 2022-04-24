@@ -1,13 +1,13 @@
 {
     "name": "mypromo/connect-sdk",
-    "description": "SDK for connect",
+    "description": "SDK for the mypromo connect API",
     "type": "sdk",
     "require": {
-        "php": ">=7.3 <=8.1.4",
-        "guzzlehttp/guzzle": ">=6.4",
-        "symfony/cache": "^3.4",
+        "php": "^7.3|^8.0",
+        "guzzlehttp/guzzle": "^7.0.1",
+        "symfony/cache": "^5.4",
         "ext-json": "*",
-        "symfony/validator": "^4.4"
+        "symfony/validator": "^5.4"
     },
     "license": "MIT",
     "autoload": {
@@ -21,6 +21,6 @@
         }
     },
     "require-dev": {
-        "phpunit/phpunit": "^8.4"
+        "phpunit/phpunit": "^9.5.10"
     }
 }
