@@ -24,8 +24,8 @@ class ExportTest extends TestCase
         $this->options->setPage(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);
-        $this->options->setCreatedTo(date("Y-m-d H:i:s"));
-        $this->options->setCreatedFrom(date("Y-m-d H:i:s"));
+        $this->options->setCreatedTo(new \DateTime(date('Y-m-d H:i:s')));
+        $this->options->setCreatedFrom(new \DateTime(date('Y-m-d H:i:s')));
     }
 
     public function testOptions()

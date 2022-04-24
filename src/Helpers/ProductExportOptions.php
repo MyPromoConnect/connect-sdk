@@ -80,17 +80,17 @@ class ProductExportOptions implements Arrayable
     }
 
     /**
-     * @return string
+     * @return DateTimeInterface
      */
-    public function getCreatedFrom(): string
+    public function getCreatedFrom()
     {
         return $this->created_from;
     }
 
     /**
-     * @param string $created_from
+     * @param DateTimeInterface $created_from
      */
-    public function setCreatedFrom(string $created_from)
+    public function setCreatedFrom($created_from)
     {
         Date::validate($created_from);
 
@@ -98,17 +98,17 @@ class ProductExportOptions implements Arrayable
     }
 
     /**
-     * @return string
+     * @return DateTimeInterface
      */
-    public function getCreatedTo(): string
+    public function getCreatedTo()
     {
         return $this->created_to;
     }
 
     /**
-     * @param string $created_to
+     * @param DateTimeInterface $created_to
      */
-    public function setCreatedTo(string $created_to)
+    public function setCreatedTo($created_to)
     {
         Date::validate($created_to);
 
@@ -123,11 +123,11 @@ class ProductExportOptions implements Arrayable
     public function toArray(): array
     {
         return [
-            'page'          => $this->page,
-            'per_page'      => $this->perPage,
-            'pagination'    => $this->pagination,
-            'created_from'  => $this->created_from,
-            'created_to'    => $this->created_to,
+            'page' => $this->page,
+            'per_page' => $this->perPage,
+            'pagination' => $this->pagination,
+            'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,
+            'created_to' => $this->created_to ? $this->created_to->format('Y-m-d') : null,
         ];
     }
 }

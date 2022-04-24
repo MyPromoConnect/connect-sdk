@@ -31,22 +31,22 @@ class ProductionOrderOptions implements Arrayable
     /**
      * @var DateTimeInterface
      */
-    protected $createdFrom;
+    protected $created_from;
 
     /**
      * @var DateTimeInterface
      */
-    protected $createdTo;
+    protected $created_to;
 
     /**
      * @var DateTimeInterface
      */
-    protected $updatedFrom;
+    protected $updated_from;
 
     /**
      * @var DateTimeInterface
      */
-    protected $updatedTo;
+    protected $updated_to;
 
     /**
      * @var bool
@@ -104,73 +104,73 @@ class ProductionOrderOptions implements Arrayable
     /**
      * @return DateTimeInterface
      */
-    public function getCreatedFrom()
+    public function getcreated_from()
     {
-        return $this->createdFrom;
+        return $this->created_from;
     }
 
     /**
-     * @param DateTimeInterface $createdFrom
+     * @param DateTimeInterface $created_from
      */
-    public function setCreatedFrom($createdFrom)
+    public function setcreated_from($created_from)
     {
-        Date::validate($createdFrom);
+        Date::validate($created_from);
 
-        $this->createdFrom = $createdFrom;
-    }
-
-    /**
-     * @return DateTimeInterface
-     */
-    public function getCreatedTo()
-    {
-        return $this->createdTo;
-    }
-
-    /**
-     * @param DateTimeInterface $createdTo
-     */
-    public function setCreatedTo($createdTo)
-    {
-        Date::validate($createdTo);
-
-        $this->createdTo = $createdTo;
+        $this->created_from = $created_from;
     }
 
     /**
      * @return DateTimeInterface
      */
-    public function getUpdatedFrom()
+    public function getcreated_to()
     {
-        return $this->updatedFrom;
+        return $this->created_to;
     }
 
     /**
-     * @param DateTimeInterface $updatedFrom
+     * @param DateTimeInterface $created_to
      */
-    public function setUpdatedFrom($updatedFrom)
+    public function setcreated_to($created_to)
     {
-        Date::validate($updatedFrom);
+        Date::validate($created_to);
 
-        $this->updatedFrom = $updatedFrom;
+        $this->created_to = $created_to;
     }
 
     /**
      * @return DateTimeInterface
      */
-    public function getUpdatedTo()
+    public function getupdated_from()
     {
-        return $this->updatedTo;
+        return $this->updated_from;
     }
 
     /**
-     * @param DateTimeInterface $updatedTo
+     * @param DateTimeInterface $updated_from
      */
-    public function setUpdatedTo($updatedTo)
+    public function setupdated_from($updated_from)
     {
-        Date::validate($updatedTo);
+        Date::validate($updated_from);
 
-        $this->updatedTo = $updatedTo;
+        $this->updated_from = $updated_from;
+    }
+
+    /**
+     * @return DateTimeInterface
+     */
+    public function getupdated_to()
+    {
+        return $this->updated_to;
+    }
+
+    /**
+     * @param DateTimeInterface $updated_to
+     */
+    public function setupdated_to($updated_to)
+    {
+        Date::validate($updated_to);
+
+        $this->updated_to = $updated_to;
     }
 
     /**
@@ -199,10 +199,10 @@ class ProductionOrderOptions implements Arrayable
             'page'         => $this->page,
             'per_page'     => $this->perPage,
             'pagination'   => $this->pagination,
-            'created_from' => $this->createdFrom ? $this->createdFrom->format('Y-m-d') : null,
-            'created_to'   => $this->createdTo ? $this->createdTo->format('Y-m-d') : null,
-            'updated_from' => $this->updatedFrom ? $this->updatedFrom->format('Y-m-d') : null,
-            'updated_to'   => $this->updatedTo ? $this->updatedTo->format('Y-m-d') : null,
+            'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,
+            'created_to'   => $this->created_to ? $this->created_to->format('Y-m-d') : null,
+            'updated_from' => $this->updated_from ? $this->updated_from->format('Y-m-d') : null,
+            'updated_to'   => $this->updated_to ? $this->updated_to->format('Y-m-d') : null,
         ];
     }
 }

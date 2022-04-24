@@ -7,10 +7,10 @@ $productionOrderOptions = new \MyPromo\Connect\SDK\Helpers\ProductionOrderOption
 $productionOrderOptions->setFrom(1);
 $productionOrderOptions->setPage(1); // get data from this page number
 $productionOrderOptions->setPerPage(5);
-$productionOrderOptions->setCreatedFrom(new DateTime('Y-m-d H:i:s'));
-$productionOrderOptions->setCreatedTo(new DateTime('Y-m-d H:i:s'));
-$productionOrderOptions->setUpdatedFrom(new DateTime('Y-m-d H:i:s'));
-$productionOrderOptions->setUpdatedTo(new DateTime('Y-m-d H:i:s'));
+$productionOrderOptions->setCreatedFrom(new \DateTime(date('Y-m-d H:i:s')));
+$productionOrderOptions->setCreatedTo(new \DateTime(date('Y-m-d H:i:s')));
+$productionOrderOptions->setUpdatedFrom(new \DateTime(date('Y-m-d H:i:s')));
+$productionOrderOptions->setUpdatedTo(new \DateTime(date('Y-m-d H:i:s')));
 ```  
 
 Supported DateTime formats:
