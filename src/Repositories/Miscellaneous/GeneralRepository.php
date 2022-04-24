@@ -48,6 +48,10 @@ class GeneralRepository extends Repository
      */
     public function downloadFile($shortUrlIdentifier): array
     {
+        // TODO: create save method similar to $designRepository->savePreview($design->getId(), 'preview.pdf');
+        // alternativly offer savetodisk option and filename in the method
+        // eg. downloadFile($url, true, '/path/to/file.ext')
+
         try {
             $response = $this->client->guzzle()->get('/v1/' . $shortUrlIdentifier, [
                 'headers' => [
