@@ -5,8 +5,8 @@
 
 ## Important Announcement
 
-Starting with version 2.0 mypromo connect SDK will support `php 8.0` or higher only.
-You should be able to use `php 7.4` on your own risk till end of 2022.
+Starting with version 2.0 mypromo connect SDK will support `php 8.0` or higher only.  
+You should be able to use `php 7.4` on your own risk till end of 2022.  
 Please update your applications and environments accordingly.
 
 ## Important Changes
