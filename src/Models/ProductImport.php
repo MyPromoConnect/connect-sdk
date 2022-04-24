@@ -41,6 +41,11 @@ class ProductImport implements Arrayable
     protected $callback;
 
     /**
+     * @var Date Excecute
+     */
+    protected $date_execute;
+
+    /**
      * @return Callback
      */
     public function getCallback(): Callback
@@ -93,15 +98,15 @@ class ProductImport implements Arrayable
      */
     public function getDryRun(): string
     {
-        return $this->dryRun;
+        return $this->dry_run;
     }
 
     /**
-     * @param bool $dryRun
+     * @param bool $dry_run
      */
-    public function setDryRun(bool $dryRun)
+    public function setDryRun(bool $dry_run)
     {
-        $this->dryRun = $dryRun;
+        $this->dryRun = $dry_run;
     }
 
     /**
@@ -136,6 +141,24 @@ class ProductImport implements Arrayable
         $this->template_key = $template_key;
     }
 
+
+    /**
+     * @return string
+     */
+    public function getDateExecute(): string
+    {
+        return $this->date_execute;
+    }
+
+    /**
+     * @param string|null $date_execute
+     */
+    public function setDateExecute(?string $date_execute)
+    {
+        $this->date_execute = $date_execute;
+    }
+
+
     /**
      * Get the instance as an array.
      *
@@ -149,6 +172,7 @@ class ProductImport implements Arrayable
             'template_id' => $this->template_id,
             'template_key' => $this->template_key,
             'dry_run' => $this->dryRun,
+            'date_execute' => $this->date_execute
         ];
 
         if (!empty($this->input)) {
