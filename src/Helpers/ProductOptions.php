@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: massimo
- * Date: 16.07.20
- * Time: 12:44
- */
 
 namespace MyPromo\Connect\SDK\Helpers;
 
@@ -25,12 +19,12 @@ class ProductOptions implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var string
      */
-    protected $shippingFrom;
+    protected $shipping_from;
 
     /**
      * @var string
@@ -60,7 +54,7 @@ class ProductOptions implements Arrayable
     /**
      * @var bool
      */
-    protected $testProduct;
+    protected $test_product;
 
     /**
      * @var bool
@@ -86,7 +80,7 @@ class ProductOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
@@ -94,7 +88,7 @@ class ProductOptions implements Arrayable
     /**
      * @param int $page
      */
-    public function setPage($page)
+    public function setPage(int $page)
     {
         $this->page = $page;
     }
@@ -102,7 +96,7 @@ class ProductOptions implements Arrayable
     /**
      * @return int
      */
-    public function getFrom()
+    public function getFrom(): int
     {
         return $this->from;
     }
@@ -110,7 +104,7 @@ class ProductOptions implements Arrayable
     /**
      * @param int $from
      */
-    public function setFrom($from)
+    public function setFrom(int $from)
     {
         $this->from = $from;
     }
@@ -118,39 +112,39 @@ class ProductOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPerPage()
+    public function getPerPage(): int
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage($perPage)
+    public function setPerPage(int $per_page)
     {
-        $this->perPage = $perPage;
-    }
-
-    /**
-     * @return string
-     */
-    public function getShippingFrom()
-    {
-        return $this->shippingFrom;
-    }
-
-    /**
-     * @param string $shippingFrom
-     */
-    public function setShippingFrom($shippingFrom)
-    {
-        $this->shippingFrom = $shippingFrom;
+        $this->per_page = $per_page;
     }
 
     /**
      * @return string
      */
-    public function getSearch()
+    public function getShippingFrom(): string
+    {
+        return $this->shipping_from;
+    }
+
+    /**
+     * @param string $shipping_from
+     */
+    public function setShippingFrom(string $shipping_from)
+    {
+        $this->shipping_from = $shipping_from;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSearch(): string
     {
         return $this->search;
     }
@@ -158,7 +152,7 @@ class ProductOptions implements Arrayable
     /**
      * @param string $search
      */
-    public function setSearch($search)
+    public function setSearch(string $search)
     {
         $this->search = $search;
     }
@@ -166,7 +160,7 @@ class ProductOptions implements Arrayable
     /**
      * @return bool
      */
-    public function isAvailable()
+    public function isAvailable(): bool
     {
         return $this->available;
     }
@@ -174,7 +168,7 @@ class ProductOptions implements Arrayable
     /**
      * @param bool $available
      */
-    public function setAvailable($available)
+    public function setAvailable(bool $available)
     {
         $this->available = $available;
     }
@@ -182,7 +176,7 @@ class ProductOptions implements Arrayable
     /**
      * @return string
      */
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
@@ -190,7 +184,7 @@ class ProductOptions implements Arrayable
     /**
      * @param string $sku
      */
-    public function setSku($sku)
+    public function setSku(string $sku)
     {
         $this->sku = $sku;
     }
@@ -198,7 +192,7 @@ class ProductOptions implements Arrayable
     /**
      * @return string
      */
-    public function getLang()
+    public function getLang(): string
     {
         return $this->lang;
     }
@@ -206,7 +200,7 @@ class ProductOptions implements Arrayable
     /**
      * @param string $lang
      */
-    public function setLang($lang)
+    public function setLang(string $lang)
     {
         $this->lang = $lang;
     }
@@ -214,7 +208,7 @@ class ProductOptions implements Arrayable
     /**
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): string
     {
         return $this->currency;
     }
@@ -222,7 +216,7 @@ class ProductOptions implements Arrayable
     /**
      * @param string $currency
      */
-    public function setCurrency($currency)
+    public function setCurrency(string $currency)
     {
         $this->currency = $currency;
     }
@@ -230,17 +224,17 @@ class ProductOptions implements Arrayable
     /**
      * @return bool
      */
-    public function isTestProduct()
+    public function isTestProduct(): bool
     {
-        return $this->testProduct;
+        return $this->test_product;
     }
 
     /**
-     * @param bool $testProduct
+     * @param bool $test_product
      */
-    public function setTestProduct($testProduct)
+    public function setTestProduct(bool $test_product)
     {
-        $this->testProduct = $testProduct;
+        $this->test_product = $test_product;
     }
 
     /**
@@ -248,20 +242,20 @@ class ProductOptions implements Arrayable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'page'          => $this->page,
             'from'          => $this->from,
-            'per_page'      => $this->perPage,
+            'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
-            'shipping_from' => $this->shippingFrom,
+            'shipping_from' => $this->shipping_from,
             'search'        => $this->search,
             'available'     => $this->available,
             'sku'           => $this->sku,
             'lang'          => $this->lang,
             'currency'      => $this->currency,
-            'test_product'  => $this->testProduct,
+            'test_product'  => $this->test_product,
         ];
     }
 }

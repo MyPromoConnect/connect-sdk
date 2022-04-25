@@ -23,7 +23,7 @@ class DesignOptions implements Arrayable
     /**
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -31,7 +31,7 @@ class DesignOptions implements Arrayable
     /**
      * @param int $id
      */
-    public function setId($id)
+    public function setId(int $id)
     {
         $this->id = $id;
     }
@@ -47,7 +47,7 @@ class DesignOptions implements Arrayable
     /**
      * @param string $type
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $this->type = $type;
     }
@@ -57,7 +57,7 @@ class DesignOptions implements Arrayable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'id'   => $this->id,

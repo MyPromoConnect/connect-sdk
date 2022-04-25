@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: massimo
- * Date: 16.07.20
- * Time: 14:28
- */
 
 namespace MyPromo\Connect\SDK\Helpers;
 
@@ -25,7 +19,7 @@ class InventoryOptionsMerchant implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var string
@@ -35,12 +29,12 @@ class InventoryOptionsMerchant implements Arrayable
     /**
      * @var string
      */
-    protected $shippingFrom;
+    protected $shipping_from;
 
     /**
      * @var string
      */
-    protected $skuFulfiller;
+    protected $sku_fulfiller;
 
     /**
      * @var bool
@@ -84,15 +78,15 @@ class InventoryOptionsMerchant implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage($perPage)
+    public function setPerPage($per_page)
     {
-        $this->perPage = $perPage;
+        $this->per_page = $per_page;
     }
 
     /**
@@ -116,15 +110,15 @@ class InventoryOptionsMerchant implements Arrayable
      */
     public function getShippingFrom()
     {
-        return $this->shippingFrom;
+        return $this->shipping_from;
     }
 
     /**
-     * @param string $shippingFrom
+     * @param string $shipping_from
      */
-    public function setShippingFrom($shippingFrom)
+    public function setShippingFrom($shipping_from)
     {
-        $this->shippingFrom = $shippingFrom;
+        $this->shipping_from = $shipping_from;
     }
 
     /**
@@ -132,15 +126,15 @@ class InventoryOptionsMerchant implements Arrayable
      */
     public function getSkuFulfiller()
     {
-        return $this->skuFulfiller;
+        return $this->sku_fulfiller;
     }
 
     /**
-     * @param string $skuFulfiller
+     * @param string $sku_fulfiller
      */
-    public function setSkuFulfiller($skuFulfiller)
+    public function setSkuFulfiller($sku_fulfiller)
     {
-        $this->skuFulfiller = $skuFulfiller;
+        $this->sku_fulfiller = $sku_fulfiller;
     }
 
     /**
@@ -164,22 +158,22 @@ class InventoryOptionsMerchant implements Arrayable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         $array = [
             'from'          => $this->from,
             'page'          => $this->page,
-            'per_page'      => $this->perPage,
+            'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
             'sku'           => $this->sku
         ];
 
-        if (isset($this->skuFulfiller)) {
-            $array['sku_fulfiller'] = $this->skuFulfiller;
+        if (isset($this->sku_fulfiller)) {
+            $array['sku_fulfiller'] = $this->sku_fulfiller;
         }
 
-        if (isset($this->shippingFrom)) {
-            $array['shipping_from'] = $this->shippingFrom;
+        if (isset($this->shipping_from)) {
+            $array['shipping_from'] = $this->shipping_from;
         }
 
         return $array;

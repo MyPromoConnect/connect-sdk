@@ -2,9 +2,9 @@
 
 namespace MyPromo\Connect\SDK\Helpers;
 
+use DateTimeInterface;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Repositories\Orders\OrderRepository;
-use DateTimeInterface;
 
 /**
  * Class OrderOption
@@ -26,7 +26,7 @@ class OrderOptions implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var DateTimeInterface
@@ -100,15 +100,15 @@ class OrderOptions implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage($perPage)
+    public function setPerPage($per_page)
     {
-        $this->perPage = $perPage;
+        $this->per_page = $per_page;
     }
 
     /**
@@ -234,19 +234,19 @@ class OrderOptions implements Arrayable
     /**
      * {@inheritDoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'from' => $this->from,
             'page' => $this->page,
-            'per_page' => $this->perPage,
+            'per_page' => $this->per_page,
             'pagination' => $this->pagination,
             'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,
             'created_to' => $this->created_to ? $this->created_to->format('Y-m-d') : null,
             'updated_from' => $this->updated_from ? $this->updated_from->format('Y-m-d') : null,
             'updated_to' => $this->updated_to ? $this->updated_to->format('Y-m-d') : null,
-            'reference' => $this->reference ? $this->reference : null,
-            'reference2' => $this->reference2 ? $this->reference2 : null,
+            'reference' => $this->reference ?? null,
+            'reference2' => $this->reference2 ?? null,
         ];
     }
 }

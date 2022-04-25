@@ -19,7 +19,7 @@ class StateOptions implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var bool
@@ -63,15 +63,15 @@ class StateOptions implements Arrayable
      */
     public function getPerPage()
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage($perPage)
+    public function setPerPage($per_page)
     {
-        $this->perPage = $perPage;
+        $this->per_page = $per_page;
     }
 
     /**
@@ -100,7 +100,7 @@ class StateOptions implements Arrayable
         return [
             'from'          => $this->from,
             'page'          => $this->page,
-            'per_page'      => $this->perPage,
+            'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
         ];
     }

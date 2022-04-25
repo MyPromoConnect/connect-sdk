@@ -19,7 +19,7 @@ class SeoOptions implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var string
@@ -50,7 +50,7 @@ class SeoOptions implements Arrayable
     /**
      * @return int
      */
-    public function getFrom()
+    public function getFrom(): int
     {
         return $this->from;
     }
@@ -58,7 +58,7 @@ class SeoOptions implements Arrayable
     /**
      * @param int $from
      */
-    public function setFrom($from)
+    public function setFrom(int $from)
     {
         $this->from = $from;
     }
@@ -66,23 +66,23 @@ class SeoOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPerPage()
+    public function getPerPage(): int
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage($perPage)
+    public function setPerPage(int $per_page)
     {
-        $this->perPage = $perPage;
+        $this->per_page = $per_page;
     }
 
     /**
      * @return string
      */
-    public function getSku()
+    public function getSku(): string
     {
         return $this->sku;
     }
@@ -90,7 +90,7 @@ class SeoOptions implements Arrayable
     /**
      * @param string $sku
      */
-    public function setSku($sku)
+    public function setSku(string $sku)
     {
         $this->sku = $sku;
     }
@@ -98,7 +98,7 @@ class SeoOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
@@ -106,7 +106,7 @@ class SeoOptions implements Arrayable
     /**
      * @param int $page
      */
-    public function setPage($page)
+    public function setPage(int $page)
     {
         $this->page = $page;
     }
@@ -116,12 +116,12 @@ class SeoOptions implements Arrayable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'from'          => $this->from,
             'page'          => $this->page,
-            'per_page'      => $this->perPage,
+            'per_page'      => $this->per_page,
             'sku'           => $this->sku,
             'pagination'    => $this->pagination,
         ];

@@ -2,10 +2,13 @@
 
 namespace MyPromo\Connect\SDK\Models;
 
+use DateTimeInterface;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Helpers\Date;
 
 /**
  * Class Address
+ *
  * @package Connect\SDK\Models
  */
 class Address implements Arrayable
@@ -46,7 +49,7 @@ class Address implements Arrayable
     protected $gender;
 
     /**
-     * @var string
+     * @var DateTimeInterface
      */
     protected $date_of_birth;
 
@@ -223,7 +226,7 @@ class Address implements Arrayable
     /**
      * @return DateTimeInterface
      */
-    public function getDateOfBirth()
+    public function getDateOfBirth(): DateTimeInterface
     {
         return $this->date_of_birth;
     }
@@ -231,7 +234,7 @@ class Address implements Arrayable
     /**
      * @param DateTimeInterface $date_of_birth
      */
-    public function setDateOfBirth($date_of_birth)
+    public function setDateOfBirth(DateTimeInterface $date_of_birth)
     {
         Date::validate($date_of_birth);
 
@@ -241,7 +244,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getMiddlename()
+    public function getMiddlename(): string
     {
         return $this->middlename;
     }
@@ -257,7 +260,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getReference()
+    public function getReference(): string
     {
         return $this->reference;
     }
@@ -273,7 +276,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getCompany()
+    public function getCompany(): string
     {
         return $this->company;
     }
@@ -289,7 +292,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getDepartment()
+    public function getDepartment(): string
     {
         return $this->department;
     }
@@ -305,7 +308,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getFirstname()
+    public function getFirstname(): string
     {
         return $this->firstname;
     }
@@ -321,7 +324,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getLastname()
+    public function getLastname(): string
     {
         return $this->lastname;
     }
@@ -337,7 +340,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getStreet()
+    public function getStreet(): string
     {
         return $this->street;
     }
@@ -353,7 +356,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getCareOf()
+    public function getCareOf(): string
     {
         return $this->careOf;
     }
@@ -369,7 +372,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getZip()
+    public function getZip(): string
     {
         return $this->zip;
     }
@@ -385,7 +388,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -401,7 +404,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getStateCode()
+    public function getStateCode(): string
     {
         return $this->stateCode;
     }
@@ -417,7 +420,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getDistrict()
+    public function getDistrict(): string
     {
         return $this->district;
     }
@@ -433,7 +436,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
         return $this->countryCode;
     }
@@ -449,7 +452,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getPhone()
+    public function getPhone(): string
     {
         return $this->phone;
     }
@@ -465,7 +468,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getFax()
+    public function getFax(): string
     {
         return $this->fax;
     }
@@ -481,7 +484,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getMobile()
+    public function getMobile(): string
     {
         return $this->mobile;
     }
@@ -497,7 +500,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
@@ -513,7 +516,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getVatId()
+    public function getVatId(): string
     {
         return $this->vatId;
     }
@@ -529,7 +532,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getIban()
+    public function getIban(): string
     {
         return $this->iban;
     }
@@ -545,7 +548,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getBicOrSwift()
+    public function getBicOrSwift(): string
     {
         return $this->bicOrSwift;
     }
@@ -561,7 +564,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getAccountHolder()
+    public function getAccountHolder(): string
     {
         return $this->accountHolder;
     }
@@ -577,7 +580,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getEoriNumber()
+    public function getEoriNumber(): string
     {
         return $this->eoriNumber;
     }
@@ -593,7 +596,7 @@ class Address implements Arrayable
     /**
      * @return string
      */
-    public function getCommercialRegisterEntry()
+    public function getCommercialRegisterEntry(): string
     {
         return $this->commercialRegisterEntry;
     }
@@ -607,31 +610,11 @@ class Address implements Arrayable
     }
 
     /**
-     * @return int|null
-     *
-     * TODO: deprecated ???
-     */
-    public function getTemplateId()
-    {
-        return $this->templateId;
-    }
-
-    /**
-     * @param int|null $templateId
-     *
-     * TODO: deprecated ???
-     */
-    public function setTemplateId(?int $templateId)
-    {
-        $this->templateId = $templateId;
-    }
-
-    /**
      * {@inheritDoc}
      */
-    public function toArray()
+    public function toArray(): array
     {
-        $addressArray = [
+        return [
             'address_id' => $this->address_id,
             'address_key' => $this->address_key,
             'reference' => $this->reference,
@@ -661,12 +644,5 @@ class Address implements Arrayable
             'bic_or_swift' => $this->bicOrSwift,
             'commercial_register_entry' => $this->commercialRegisterEntry,
         ];
-
-        // TODO: deprecated ???
-        if (!empty($this->templateId)) {
-            $addressArray['template_id'] = $this->templateId;
-        }
-
-        return $addressArray;
     }
 }

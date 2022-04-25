@@ -12,18 +12,19 @@ use Symfony\Component\Validator\Validation;
 
 /**
  * Class Callback
+ *
  * @package MyPromo\Connect\SDK\Models
  */
 class Callback implements Arrayable
 {
-    const AUTH_TYPE_NONE = 'none';
-    const AUTH_TYPE_BASIC = 'basic';
-    const AUTH_TYPE_HEADER = 'header';
-    const AUTH_TYPE_OAUTH1 = 'oauth1';
-    const AUTH_TYPE_OAUTH2 = 'oauth2';
+    const AUTH_TYPE_NONE    = 'none';
+    const AUTH_TYPE_BASIC   = 'basic';
+    const AUTH_TYPE_HEADER  = 'header';
+    const AUTH_TYPE_OAUTH1  = 'oauth1';
+    const AUTH_TYPE_OAUTH2  = 'oauth2';
 
-    const AUTH_GRANT_TYPE_PASSWORD = 'password_grant';
-    const AUTH_GRANT_TYPE_CLIENT_CREDENTIALS = 'client_credentials';
+    const AUTH_GRANT_TYPE_PASSWORD              = 'password_grant';
+    const AUTH_GRANT_TYPE_CLIENT_CREDENTIALS    = 'client_credentials';
 
     const SUPPORTED_AUTH_TYPES = [
         self::AUTH_TYPE_NONE,

@@ -24,37 +24,37 @@ class ProductImportInput implements Arrayable
     /**
      * @var string|null
      */
-    protected $httpsBasicAuthUser;
+    protected $https_basic_auth_user;
 
     /**
      * @var string|null
      */
-    protected $httpsBasicAuthPassword;
+    protected $https_basic_auth_password;
 
     /**
      * @var array|null
      */
-    protected $httpsHeader;
+    protected $https_header;
 
     /**
      * @var array|null
      */
-    protected $oauthCredentials;
+    protected $oauth_credentials;
 
     /**
      * @var array|null
      */
-    protected $oauth2Credentials;
+    protected $oauth2_credentials;
 
     /**
      * @var string|null
      */
-    protected $sftpUser;
+    protected $sftp_user;
 
     /**
      * @var string|null
      */
-    protected $sftpPassword;
+    protected $sftp_password;
 
     /**
      * @var string
@@ -98,15 +98,15 @@ class ProductImportInput implements Arrayable
      */
     public function getHttpsBasicAuthUser(): ?string
     {
-        return $this->httpsBasicAuthUser;
+        return $this->https_basic_auth_user;
     }
 
     /**
-     * @param string|null $httpsBasicAuthUser
+     * @param string|null $https_basic_auth_user
      */
-    public function setHttpsBasicAuthUser(?string $httpsBasicAuthUser)
+    public function setHttpsBasicAuthUser(?string $https_basic_auth_user)
     {
-        $this->httpsBasicAuthUser = $httpsBasicAuthUser;
+        $this->https_basic_auth_user = $https_basic_auth_user;
     }
 
     /**
@@ -114,15 +114,15 @@ class ProductImportInput implements Arrayable
      */
     public function getHttpsBasicAuthPassword(): ?string
     {
-        return $this->httpsBasicAuthPassword;
+        return $this->https_basic_auth_password;
     }
 
     /**
-     * @param string|null $httpsBasicAuthPassword
+     * @param string|null $https_basic_auth_password
      */
-    public function setHttpsBasicAuthPassword(?string $httpsBasicAuthPassword)
+    public function setHttpsBasicAuthPassword(?string $https_basic_auth_password)
     {
-        $this->httpsBasicAuthPassword = $httpsBasicAuthPassword;
+        $this->https_basic_auth_password = $https_basic_auth_password;
     }
 
     /**
@@ -130,16 +130,17 @@ class ProductImportInput implements Arrayable
      */
     public function getHttpsHeader(): ?array
     {
-        return $this->httpsHeader;
+        return $this->https_header;
     }
 
     /**
-     * @param array $httpsHeader
+     * @param array $https_header
      * @throws OrderException
      */
-    public function setHttpsHeader(array $httpsHeader)
+    public function setHttpsHeader(array $https_header)
     {
         $validator = Validation::createValidator();
+
         $constraints = new Collection([
             'key' => [
                 new Type('string'),
@@ -153,12 +154,12 @@ class ProductImportInput implements Arrayable
             ],
         ]);
 
-        $violations = $validator->validate($httpsHeader, $constraints);
+        $violations = $validator->validate($https_header, $constraints);
         if ($violations->count() > 0) {
             throw new OrderException($violations);
         }
 
-        $this->httpsHeader = $httpsHeader;
+        $this->https_header = $https_header;
     }
 
     /**
@@ -166,15 +167,15 @@ class ProductImportInput implements Arrayable
      */
     public function getSftpUser(): ?string
     {
-        return $this->sftpUser;
+        return $this->sftp_user;
     }
 
     /**
-     * @param string|null $sftpUser
+     * @param string|null $sftp_user
      */
-    public function setSftpUser(?string $sftpUser)
+    public function setSftpUser(?string $sftp_user)
     {
-        $this->sftpUser = $sftpUser;
+        $this->sftp_user = $sftp_user;
     }
 
     /**
@@ -182,15 +183,15 @@ class ProductImportInput implements Arrayable
      */
     public function getSftpPassword(): ?string
     {
-        return $this->sftpPassword;
+        return $this->sftp_password;
     }
 
     /**
-     * @param string|null $sftpPassword
+     * @param string|null $sftp_password
      */
-    public function setSftpPassword(?string $sftpPassword)
+    public function setSftpPassword(?string $sftp_password)
     {
-        $this->sftpPassword = $sftpPassword;
+        $this->sftp_password = $sftp_password;
     }
 
     /**
@@ -198,15 +199,15 @@ class ProductImportInput implements Arrayable
      */
     public function getOAuthCredenetials(): ?array
     {
-        return $this->oauthCredentials;
+        return $this->oauth_credentials;
     }
 
     /**
-     * @param array|null $oauthCredentials
+     * @param array|null $oauth_credentials
      */
-    public function setOAuthCredentials(array $oauthCredentials)
+    public function setOAuthCredentials(array $oauth_credentials)
     {
-        $this->oauthCredentials = $oauthCredentials;
+        $this->oauth_credentials = $oauth_credentials;
     }
 
     /**
@@ -214,15 +215,15 @@ class ProductImportInput implements Arrayable
      */
     public function getOAuth2Credentials(): ?array
     {
-        return $this->oauth2Credentials;
+        return $this->oauth2_credentials;
     }
 
     /**
-     * @param array|null $oauth2Credentials
+     * @param array|null $oauth2_credentials
      */
-    public function setOAuth2Credentials(array $oauth2Credentials)
+    public function setOAuth2Credentials(array $oauth2_credentials)
     {
-        $this->oauth2Credentials = $oauth2Credentials;
+        $this->oauth2_credentials = $oauth2_credentials;
     }
 
     /**
@@ -242,22 +243,22 @@ class ProductImportInput implements Arrayable
         // 1. Https basic auth user and password
         // 2. Https basic auth header
         // 3. Sftp user and password
-        if (isset($this->httpsBasicAuthUser) && isset($this->httpsBasicAuthPassword)) {
+        if (isset($this->https_basic_auth_user) && isset($this->https_basic_auth_password)) {
             $importArray['auth']['basic'] = [
-                'username' => $this->httpsBasicAuthUser,
-                'password' => $this->httpsBasicAuthPassword,
+                'username' => $this->https_basic_auth_user,
+                'password' => $this->https_basic_auth_password,
             ];
-        } elseif (isset($this->httpsHeader)) {
-            $importArray['auth']['header'] = $this->httpsHeader;
-        } elseif (isset($this->sftpUser) && isset($this->sftpPassword)) {
+        } elseif (isset($this->https_header)) {
+            $importArray['auth']['header'] = $this->https_header;
+        } elseif (isset($this->sftp_user) && isset($this->sftp_password)) {
             $importArray['auth']['basic'] = [
-                'username' => $this->sftpUser,
-                'password' => $this->sftpPassword,
+                'username' => $this->sftp_user,
+                'password' => $this->sftp_password,
             ];
-        } else if (isset($this->oauthCredentials)) {
-            $importArray['auth']['oauth1'] = $this->oauthCredentials;
-        } else if (isset($this->oauth2Credentials)) {
-            $importArray['auth']['oauth2'] = $this->oauth2Credentials;
+        } else if (isset($this->oauth_credentials)) {
+            $importArray['auth']['oauth1'] = $this->oauth_credentials;
+        } else if (isset($this->oauth2_credentials)) {
+            $importArray['auth']['oauth2'] = $this->oauth2_credentials;
         }
 
         return $importArray;

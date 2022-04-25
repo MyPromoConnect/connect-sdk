@@ -2,6 +2,7 @@
 
 namespace MyPromo\Connect\SDK\Helpers;
 
+use DateTimeInterface;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
 class ProductExportOptions implements Arrayable
@@ -19,7 +20,7 @@ class ProductExportOptions implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var DateTimeInterface
@@ -36,15 +37,15 @@ class ProductExportOptions implements Arrayable
      */
     public function getPerPage(): int
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage(int $perPage)
+    public function setPerPage(int $per_page)
     {
-        $this->perPage = $perPage;
+        $this->per_page = $per_page;
     }
 
     /**
@@ -124,7 +125,7 @@ class ProductExportOptions implements Arrayable
     {
         return [
             'page' => $this->page,
-            'per_page' => $this->perPage,
+            'per_page' => $this->per_page,
             'pagination' => $this->pagination,
             'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,
             'created_to' => $this->created_to ? $this->created_to->format('Y-m-d') : null,

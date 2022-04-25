@@ -19,7 +19,7 @@ class CountryOptions implements Arrayable
     /**
      * @var int
      */
-    protected $perPage;
+    protected $per_page;
 
     /**
      * @var bool
@@ -45,7 +45,7 @@ class CountryOptions implements Arrayable
     /**
      * @return int
      */
-    public function getFrom()
+    public function getFrom(): int
     {
         return $this->from;
     }
@@ -53,7 +53,7 @@ class CountryOptions implements Arrayable
     /**
      * @param int $from
      */
-    public function setFrom($from)
+    public function setFrom(int $from)
     {
         $this->from = $from;
     }
@@ -61,23 +61,23 @@ class CountryOptions implements Arrayable
     /**
      * @return int
      */
-    public function getPerPage()
+    public function getPerPage(): int
     {
-        return $this->perPage;
+        return $this->per_page;
     }
 
     /**
-     * @param int $perPage
+     * @param int $per_page
      */
-    public function setPerPage($perPage)
+    public function setPerPage(int $per_page)
     {
-        $this->perPage = $perPage;
+        $this->per_page = $per_page;
     }
 
     /**
      * @return int
      */
-    public function getPage()
+    public function getPage(): int
     {
         return $this->page;
     }
@@ -85,7 +85,7 @@ class CountryOptions implements Arrayable
     /**
      * @param int $page
      */
-    public function setPage($page)
+    public function setPage(int $page)
     {
         $this->page = $page;
     }
@@ -95,12 +95,12 @@ class CountryOptions implements Arrayable
      *
      * @return array
      */
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'from'          => $this->from,
             'page'          => $this->page,
-            'per_page'      => $this->perPage,
+            'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
         ];
     }
