@@ -6,7 +6,8 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientGeneralException;
-use MyPromo\Connect\SDK\Models\MerchantClientSetting;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
+use MyPromo\Connect\SDK\Models\ClientSettingMerchant;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -16,7 +17,7 @@ class ClientSettingRepository extends Repository
      * Get a list of client settings
      *
      * @throws InvalidArgumentException
-     * @throws ClientGeneralException|GuzzleException
+     * @throws ClientGeneralException
      *
      */
     public function getSettings()
@@ -34,6 +35,8 @@ class ClientSettingRepository extends Repository
                 throw new ClientGeneralException($response->getBody(), $response->getStatusCode());
             }
 
+        } catch (GuzzleException $ex) {
+            throw new ClientGeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientGeneralException($ex->getMessage(), $ex->getCode());
         }
@@ -44,14 +47,14 @@ class ClientSettingRepository extends Repository
     /**
      * Update client settings
      *
-     * @param MerchantClientSetting $clientSettings
+     * @param ClientSettingMerchant $clientSettings
      *
      * @return mixed
      *
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InvalidArgumentException
      * @throws ClientGeneralException
      */
-    public function update(MerchantClientSetting $clientSettings)
+    public function update(ClientSettingMerchant $clientSettings)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/settings', [
@@ -69,6 +72,8 @@ class ClientSettingRepository extends Repository
 
             $body = json_decode($response->getBody(), true);
 
+        } catch (GuzzleException $ex) {
+            throw new ClientGeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientGeneralException($ex->getMessage(), $ex->getCode());
         }

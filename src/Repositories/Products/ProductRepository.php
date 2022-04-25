@@ -12,7 +12,10 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ProductException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Helpers\InventoryOptions;
+use MyPromo\Connect\SDK\Helpers\InventoryOptionsFulfiller;
+use MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant;
 use MyPromo\Connect\SDK\Helpers\PriceOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
 use MyPromo\Connect\SDK\Helpers\ProductVariantOptions;
@@ -38,7 +41,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function all($options) {
         try {
@@ -60,6 +63,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -70,7 +75,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function find($productId) {
         try {
@@ -86,6 +91,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -99,16 +106,22 @@ class ProductRepository extends Repository
      *      sku_fulfiller (For Fulfiller)
      *      shipping_from (For Merchant)
      *
-     * You can use the @param array|InventoryOptions $options
+     * You can use the @param array|InventoryOptionsMerchant $options
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function getInventory($options) {
         try {
-            if ($options instanceof InventoryOptions) {
-                $options = $options->toArray();
+            if (empty($options->getSkuFulfiller())) {
+                if ($options instanceof InventoryOptionsMerchant) {
+                    $options = $options->toArray();
+                }
+            } else {
+                if ($options instanceof InventoryOptionsFulfiller) {
+                    $options = $options->toArray();
+                }
             }
 
             $response = $this->client->guzzle()->get('/v1/inventory', [
@@ -124,6 +137,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -134,7 +149,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws ProductException
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InvalidArgumentException
      */
     public function putInventory($productInventory) {
         try {
@@ -152,6 +167,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -168,7 +185,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws ProductException
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InvalidArgumentException
      */
     public function getPrices($options) {
         try {
@@ -189,6 +206,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -199,7 +218,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function putPrices($productPriceUpdate) {
         try {
@@ -217,6 +236,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -232,7 +253,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws ProductException
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InvalidArgumentException
      */
     public function getSeo($options) {
         try {
@@ -253,6 +274,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -263,7 +286,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function putSeo($productSeoUpdate) {
         try {
@@ -281,6 +304,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -291,7 +316,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function getVariants(ProductVariantOptions $productVariantOptions)
     {
@@ -310,6 +335,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -320,7 +347,7 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException|GuzzleException
+     * @throws ProductException
      */
     public function getVariant($id)
     {
@@ -338,6 +365,8 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }

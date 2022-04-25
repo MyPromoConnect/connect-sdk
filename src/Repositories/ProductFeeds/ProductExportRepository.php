@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ProductExportException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
 use MyPromo\Connect\SDK\Models\ProductExport;
@@ -26,7 +27,7 @@ class ProductExportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductExportException|GuzzleException
+     * @throws ProductExportException
      */
     public function all($options): array
     {
@@ -49,6 +50,8 @@ class ProductExportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductExportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductExportException($ex->getMessage(), $ex->getCode());
         }
@@ -61,7 +64,7 @@ class ProductExportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductExportException|GuzzleException
+     * @throws ProductExportException
      */
     public function find($productExportId): array
     {
@@ -78,6 +81,8 @@ class ProductExportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductExportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductExportException($ex->getMessage(), $ex->getCode());
         }
@@ -90,7 +95,7 @@ class ProductExportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductExportException|GuzzleException
+     * @throws ProductExportException
      */
     public function cancelExport($productExportId): array
     {
@@ -107,6 +112,8 @@ class ProductExportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductExportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductExportException($ex->getMessage(), $ex->getCode());
         }
@@ -119,7 +126,7 @@ class ProductExportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductExportException|GuzzleException
+     * @throws ProductExportException
      */
     public function deleteExport($productExportId): array
     {
@@ -136,6 +143,8 @@ class ProductExportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductExportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductExportException($ex->getMessage(), $ex->getCode());
         }
@@ -146,7 +155,7 @@ class ProductExportRepository extends Repository
      *
      * @return mixed
      *
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InvalidArgumentException
      * @throws ProductExportException
      */
     public function requestExport(ProductExport $productExport)
@@ -168,6 +177,8 @@ class ProductExportRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $productExport->setId($body['id']);
 
+        } catch (GuzzleException $ex) {
+            throw new ProductExportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductExportException($ex->getMessage(), $ex->getCode());
         }

@@ -5,6 +5,7 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\LocaleException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Helpers\LocaleOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -21,7 +22,7 @@ class LocaleRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws LocaleException|GuzzleException
+     * @throws LocaleException
      */
     public function all($options): array
     {
@@ -44,6 +45,8 @@ class LocaleRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new LocaleException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new LocaleException($ex->getMessage(), $ex->getCode());
         }

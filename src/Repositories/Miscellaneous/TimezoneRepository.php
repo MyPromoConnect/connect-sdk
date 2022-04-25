@@ -5,6 +5,7 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\TimezoneException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Helpers\TimezoneOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -21,7 +22,7 @@ class TimezoneRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws TimezoneException|GuzzleException
+     * @throws TimezoneException
      */
     public function all($options): array
     {
@@ -44,6 +45,8 @@ class TimezoneRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new TimezoneException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new TimezoneException($ex->getMessage(), $ex->getCode());
         }

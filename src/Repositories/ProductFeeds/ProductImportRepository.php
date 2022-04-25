@@ -8,6 +8,7 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ProductExportException;
 use MyPromo\Connect\SDK\Exceptions\ProductImportException;
 use MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
@@ -30,7 +31,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws GuzzleException|ProductImportException
+     * @throws ProductImportException
      */
     public function all($options): array
     {
@@ -53,6 +54,8 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -65,7 +68,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ProductImportException
      */
     public function find($productImportId): array
     {
@@ -82,6 +85,8 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -94,7 +99,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ProductImportException
      */
     public function cancelImport($productImportId): array
     {
@@ -111,6 +116,8 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -123,7 +130,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ProductImportException
      */
     public function deleteImport($productImportId): array
     {
@@ -140,6 +147,8 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -150,7 +159,7 @@ class ProductImportRepository extends Repository
      *
      * @return mixed
      *
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InvalidArgumentException
      * @throws ProductImportException
      */
     public function requestImport(ProductImport $productImport)
@@ -172,6 +181,8 @@ class ProductImportRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $productImport->setId($body['id']);
 
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -186,7 +197,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ProductImportException
      */
     public function errors($productImportId): array
     {
@@ -203,6 +214,8 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -215,7 +228,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ProductImportException
      */
     public function validate($productImportId): array
     {
@@ -232,6 +245,8 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -242,7 +257,6 @@ class ProductImportRepository extends Repository
      * @param $productImportId
      * @return mixed
      *
-     * @throws GuzzleException
      * @throws InvalidArgumentException
      * @throws ProductImportException
      */
@@ -264,6 +278,8 @@ class ProductImportRepository extends Repository
 
             $body = json_decode($response->getBody(), true);
 
+        } catch (GuzzleException $ex) {
+            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }

@@ -5,6 +5,7 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\GeneralException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -15,7 +16,7 @@ class GeneralRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws GeneralException|GuzzleException
+     * @throws GeneralException
      */
     public function apiStatus(): array
     {
@@ -32,6 +33,8 @@ class GeneralRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new GeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new GeneralException($ex->getMessage(), $ex->getCode());
         }
@@ -43,7 +46,6 @@ class GeneralRepository extends Repository
      * @param $shortUrlIdentifier
      * @return array
      * @throws GeneralException
-     * @throws GuzzleException
      * @throws InvalidArgumentException
      */
     public function downloadFile($shortUrlIdentifier): array
@@ -65,6 +67,8 @@ class GeneralRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new GeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new GeneralException($ex->getMessage(), $ex->getCode());
         }

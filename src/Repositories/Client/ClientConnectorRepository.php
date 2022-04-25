@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientConnectorException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\ClientConnector;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -19,7 +20,6 @@ class ClientConnectorRepository extends Repository
      * @return mixed
      *
      * @throws ClientConnectorException
-     * @throws GuzzleException
      * @throws InvalidArgumentException
      */
     public function update(ClientConnector $clientConnector)
@@ -40,6 +40,8 @@ class ClientConnectorRepository extends Repository
 
             $body = json_decode($response->getBody(), true);
 
+        } catch (GuzzleException $ex) {
+            throw new ClientConnectorException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientConnectorException($ex->getMessage(), $ex->getCode());
         }

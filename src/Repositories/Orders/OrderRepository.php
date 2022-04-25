@@ -4,7 +4,9 @@ namespace MyPromo\Connect\SDK\Repositories\Orders;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
+use MyPromo\Connect\SDK\Exceptions\GeneralException;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Helpers\OrderOptions;
 use MyPromo\Connect\SDK\Models\Order;
 use MyPromo\Connect\SDK\Repositories\Repository;
@@ -27,7 +29,7 @@ class OrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @throws OrderException
      * @see OrderOptions as its helper
      *
      */
@@ -51,6 +53,8 @@ class OrderRepository extends Repository
                 throw new OrderException($response->getBody(), $response->getStatusCode());
             }
 
+        } catch (GuzzleException $ex) {
+            throw new OrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new OrderException($ex->getMessage(), $ex->getCode());
         }
@@ -64,7 +68,7 @@ class OrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @throws OrderException
      */
     public function find($orderId)
     {
@@ -80,6 +84,8 @@ class OrderRepository extends Repository
                 throw new OrderException($response->getBody(), $response->getStatusCode());
             }
 
+        } catch (GuzzleException $ex) {
+            throw new OrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new OrderException($ex->getMessage(), $ex->getCode());
         }
@@ -93,7 +99,7 @@ class OrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @throws OrderException
      */
     public function create($order)
     {
@@ -114,6 +120,8 @@ class OrderRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $order->setId($body['id']);
 
+        } catch (GuzzleException $ex) {
+            throw new OrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new OrderException($ex->getMessage(), $ex->getCode());
         }
@@ -127,7 +135,7 @@ class OrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @throws OrderException
      */
     public function submit($orderId)
     {
@@ -142,6 +150,8 @@ class OrderRepository extends Repository
             if ($response->getStatusCode() !== 200) {
                 throw new OrderException($response->getBody(), $response->getStatusCode());
             }
+        } catch (GuzzleException $ex) {
+            throw new OrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new OrderException($ex->getMessage(), $ex->getCode());
         }
@@ -155,7 +165,7 @@ class OrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @throws OrderException
      */
     public function cancel($orderId)
     {
@@ -171,6 +181,8 @@ class OrderRepository extends Repository
                 throw new OrderException($response->getBody(), $response->getStatusCode());
             }
 
+        } catch (GuzzleException $ex) {
+            throw new OrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new OrderException($ex->getMessage(), $ex->getCode());
         }

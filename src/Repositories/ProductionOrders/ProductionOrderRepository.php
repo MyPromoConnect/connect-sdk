@@ -4,6 +4,7 @@ namespace MyPromo\Connect\SDK\Repositories\ProductionOrders;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
+use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\Shipment;
 use Psr\Cache\InvalidArgumentException;
 use GuzzleHttp\Exception\GuzzleException;
@@ -27,7 +28,6 @@ class ProductionOrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws GuzzleException
      * @throws ProductionOrderException
      * @see    ProductionOrderOptions as its helper
      *
@@ -53,6 +53,8 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
@@ -65,7 +67,7 @@ class ProductionOrderRepository extends Repository
      * @return array
      *
      * @throws InvalidArgumentException
-     * @throws ProductionOrderException|GuzzleException
+     * @throws ProductionOrderException
      */
     public function find($orderId): array
     {
@@ -82,6 +84,8 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
@@ -92,7 +96,6 @@ class ProductionOrderRepository extends Repository
      * @param Shipment $shipment
      * @return array
      *
-     * @throws GuzzleException
      * @throws InvalidArgumentException
      * @throws ProductionOrderException
      */
@@ -113,6 +116,8 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
@@ -122,7 +127,6 @@ class ProductionOrderRepository extends Repository
      * @param $orderId
      * @return array
      *
-     * @throws GuzzleException
      * @throws InvalidArgumentException
      * @throws ProductionOrderException
      */
@@ -142,6 +146,8 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
+        } catch (GuzzleException $ex) {
+            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
