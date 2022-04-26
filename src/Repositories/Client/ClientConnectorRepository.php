@@ -4,6 +4,8 @@ namespace MyPromo\Connect\SDK\Repositories\Client;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\ClientConnectorException;
 use MyPromo\Connect\SDK\Models\ClientConnector;
 use MyPromo\Connect\SDK\Repositories\Repository;
@@ -16,9 +18,6 @@ class ClientConnectorRepository extends Repository
      *
      * @param ClientConnector $clientConnector
      * @return mixed
-     *
-     * @throws ClientConnectorException
-     * @throws InvalidArgumentException
      */
     public function update(ClientConnector $clientConnector)
     {
@@ -31,17 +30,14 @@ class ClientConnectorRepository extends Repository
                 ],
                 RequestOptions::JSON => $clientConnector->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ClientConnectorException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new ClientConnectorException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
 
-        return $body;
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

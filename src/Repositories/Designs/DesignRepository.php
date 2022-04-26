@@ -4,10 +4,11 @@ namespace MyPromo\Connect\SDK\Repositories\Designs;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\DesignException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Models\Design;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 use Psr\Http\Message\ResponseInterface;
 
 /**
@@ -20,9 +21,6 @@ class DesignRepository extends Repository
      * @param Design $design
      *
      * @return mixed
-     *
-     * @throws InvalidArgumentException
-     * @throws DesignException
      */
     public function create($design)
     {
@@ -35,16 +33,20 @@ class DesignRepository extends Repository
                 ],
                 RequestOptions::JSON => $design->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new DesignException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $design->setId($body['id']);
-
         } catch (Exception $ex) {
-            throw new DesignException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['id'])) {
+            $design->setId($body['id']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
@@ -54,8 +56,6 @@ class DesignRepository extends Repository
      * @param $designId
      *
      * @return mixed
-     * @throws DesignException
-     * @throws InvalidArgumentException
      */
     public function getDesign($designId)
     {
@@ -68,12 +68,12 @@ class DesignRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new DesignException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new DesignException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -83,9 +83,6 @@ class DesignRepository extends Repository
      * @param int $designId
      *
      * @return mixed
-     *
-     * @throws DesignException
-     * @throws InvalidArgumentException
      */
     public function submit($designId)
     {
@@ -97,12 +94,12 @@ class DesignRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new DesignException($response->getBody(), $response->getStatusCode());
-            }
         } catch (Exception $ex) {
-            throw new DesignException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -112,20 +109,18 @@ class DesignRepository extends Repository
      * @param int $designId
      *
      * @return ResponseInterface
-     * @throws DesignException
-     * @throws InvalidArgumentException
      */
     public function getPreviewPDF($designId)
     {
+        $getDesignResponse = $this->getDesign($designId);
+
+        $previewUrl = $getDesignResponse['preview_url'] ?? null;
+
+        if ($previewUrl === null){
+            throw new ApiResponseException("No preview url exists.", 422);
+        }
+
         try {
-            $getDesignResponse = $this->getDesign($designId);
-
-            $previewUrl = $getDesignResponse['preview_url'] ?? null;
-
-            if ($previewUrl === null){
-                throw new DesignException("No preview url exists.");
-            }
-
             $response = $this->client->guzzle()->get($previewUrl, [
                 'headers' => [
                     'Accept'        => 'application/json',
@@ -133,19 +128,19 @@ class DesignRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new DesignException($response->getBody(), $response->getStatusCode());
-            } elseif (
-                strtolower($response->getHeader('Content-Type')[0]) !== 'pdf'
-                && strtolower($response->getHeader('Content-Type')[0]) !== 'application/pdf'
-            ) {
-                throw new DesignException(
-                    "Not supported content-type '{$response->getHeader('Content-Type')[0]}'."
-                );
-            }
-
         } catch (Exception $ex) {
-            throw new DesignException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        } elseif (
+            strtolower($response->getHeader('Content-Type')[0]) !== 'pdf'
+            && strtolower($response->getHeader('Content-Type')[0]) !== 'application/pdf'
+        ) {
+            throw new ApiResponseException(
+                "Not supported content-type '{$response->getHeader('Content-Type')[0]}'."
+            );
         }
 
         return $response;
@@ -156,8 +151,6 @@ class DesignRepository extends Repository
      * @param string $targetFile
      *
      * @return bool
-     * @throws DesignException
-     * @throws InvalidArgumentException
      */
     public function savePreview($designId, $targetFile)
     {
@@ -165,19 +158,20 @@ class DesignRepository extends Repository
             $response = $this->getPreviewPDF($designId);
 
             $previewFile = fopen($targetFile, 'w');
-            if ($previewFile === false) {
-                throw new DesignException("File '{$targetFile}' could not be created.");
-            }
-
-            if (fwrite($previewFile, $response->getbody()) === false){
-                throw new DesignException("File '{$targetFile}' is not writable.");
-            }
-
-            $file = fclose($previewFile);
 
         } catch (Exception $ex) {
-            throw new DesignException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($previewFile === false) {
+            throw new ApiResponseException("File '{$targetFile}' could not be created.");
+        }
+
+        if (fwrite($previewFile, $response->getbody()) === false){
+            throw new ApiResponseException("File '{$targetFile}' is not writable.");
+        }
+
+        $file = fclose($previewFile);
 
         return $file;
     }
@@ -186,9 +180,6 @@ class DesignRepository extends Repository
      * @param Design $design
      *
      * @return mixed
-     *
-     * @throws DesignException
-     * @throws InvalidArgumentException
      */
     public function createEditorUserHash($design)
     {
@@ -201,15 +192,20 @@ class DesignRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 201) {
-                throw new DesignException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $design->setEditorUserHash($body['editor_user_hash']);
-
         } catch (Exception $ex) {
-            throw new DesignException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['editor_user_hash'])) {
+            $design->setEditorUserHash($body['editor_user_hash']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
