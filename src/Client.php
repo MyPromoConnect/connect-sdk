@@ -100,6 +100,7 @@ class Client
         $this->cache      = new FilesystemAdapter();
         $this->guzzle     = new \GuzzleHttp\Client([
             'base_uri' => $baseUri,
+            'http_errors' => false
         ]);
         $this->id               = $id;
         $this->secret           = $secret;
