@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Exceptions;
 
 use Exception;
+use Throwable;
 
 /**
  * Class InvalidResponseException
