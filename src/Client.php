@@ -69,14 +69,18 @@ class Client
     /**
      * Client constructor.
      *
-     * @param int           $productionCode
-     * @param int           $id
-     * @param string        $secret
-     * @param string|null   $baseUri
-     * @param bool          $forceNewToken
+     * @param int $productionCode
+     * @param int $id
+     * @param string $secret
+     * @param string|null $baseUri
+     * @param bool $forceNewToken
      */
     public function __construct($productionCode, $id, $secret, $baseUri = null, $forceNewToken = false)
     {
+        if (!isset($id) || !isset($secret)) {
+            throw new InputValidationException('Missing client id or secret.');
+        }
+
         if (!$baseUri) {
             // Switch through production codes
             // default case should always be the live system
@@ -95,15 +99,15 @@ class Client
             }
         }
 
-        $this->cache      = new FilesystemAdapter();
-        $this->guzzle     = new \GuzzleHttp\Client([
-            'base_uri' => $baseUri,
+        $this->cache = new FilesystemAdapter();
+        $this->guzzle = new \GuzzleHttp\Client([
+            'base_uri'    => $baseUri,
             'http_errors' => false
         ]);
-        $this->id               = $id;
-        $this->secret           = $secret;
-        $this->productionCode   = $productionCode;
-        $this->forceNewToken    = $forceNewToken;
+        $this->id = $id;
+        $this->secret = $secret;
+        $this->productionCode = $productionCode;
+        $this->forceNewToken = $forceNewToken;
     }
 
     /**
