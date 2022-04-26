@@ -4,6 +4,9 @@ namespace MyPromo\Connect\SDK\Repositories\ProductFeeds;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Exceptions\ProductImportException;
 use MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
@@ -24,8 +27,6 @@ class ProductImportRepository extends Repository
      * You can use the @param array|ProductImportOptions $options
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function all($options): array
     {
@@ -42,15 +43,15 @@ class ProductImportRepository extends Repository
                 ],
                 'query' => $options,
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -71,15 +72,15 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -88,8 +89,6 @@ class ProductImportRepository extends Repository
      * @param $productImportId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function cancelImport($productImportId): array
     {
@@ -100,15 +99,15 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -117,8 +116,6 @@ class ProductImportRepository extends Repository
      * @param $productImportId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function deleteImport($productImportId): array
     {
@@ -129,15 +126,15 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -145,8 +142,6 @@ class ProductImportRepository extends Repository
      *
      * @return mixed
      *
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function requestImport(ProductImport $productImport)
     {
@@ -159,16 +154,20 @@ class ProductImportRepository extends Repository
                 ],
                 RequestOptions::JSON => $productImport->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $productImport->setId($body['id']);
-
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['id'])) {
+            $productImport->setId($body['id']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
@@ -180,8 +179,6 @@ class ProductImportRepository extends Repository
      * @param $productImportId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function errors($productImportId): array
     {
@@ -192,15 +189,15 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -209,8 +206,6 @@ class ProductImportRepository extends Repository
      * @param $productImportId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function validate($productImportId): array
     {
@@ -221,24 +216,21 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param ConfirmProductImportOptions $confirmProductImportOptions
      * @param $productImportId
      * @return mixed
-     *
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function confirm(ConfirmProductImportOptions $confirmProductImportOptions, $productImportId)
     {
@@ -251,16 +243,15 @@ class ProductImportRepository extends Repository
                 ],
                 RequestOptions::JSON => $confirmProductImportOptions->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
 
         return $body;
     }
