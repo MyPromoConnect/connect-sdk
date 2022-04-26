@@ -18,35 +18,60 @@ class ApiResponseException extends Exception
     protected $responseBody;
 
     /**
+     * @var bool
+     */
+    protected $isSuccess;
+
+    /**
+     * @var string
+     */
+    protected $message;
+
+    /**
      * @var int
      */
     protected $code;
+
+    /**
+     * @var mixed
+     */
+    protected $errors;
 
     /**
      * @param string $message
      * @param int $code
      * @param Throwable|null $previous
      */
-    public function __construct($message = "", int $code = 0, Throwable $previous = null)
+    public function __construct(string $responseBody = "", int $code = 0, Throwable $previous = null)
     {
-        $this->responseBody = json_decode($message);
+        if (empty($responseBody)) {
+            $this->isSuccess = false;
+            $this->message = "General communication error with the API. Got no response body.";
+            $this->errors = null;
+        } else {
+            $responseBodyDecoded = json_decode($responseBody);
 
-        parent::__construct($this->responseBody->message, $code, $previous);
+            $this->isSuccess = $responseBodyDecoded->success;
+            $this->message = $responseBodyDecoded->message;
+            $this->errors = $responseBodyDecoded->errors;
+        }
+
+        parent::__construct($this->message, $code, $previous);
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function isSuccess(): string
+    public function isSuccess(): bool
     {
-        return $this->responseBody->success;
+        return $this->isSuccess;
     }
 
     /**
-     * @return array
+     * @return mixed
      */
-    public function getErrors(): ?array
+    public function getErrors(): mixed
     {
-        return $this->responseBody->errors;
+        return $this->errors;
     }
 }
