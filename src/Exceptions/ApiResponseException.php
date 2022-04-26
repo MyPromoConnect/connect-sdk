@@ -33,7 +33,7 @@ class ApiResponseException extends Exception
     protected $code;
 
     /**
-     * @var mixed
+     * @var array
      */
     protected $errors;
 
@@ -49,11 +49,11 @@ class ApiResponseException extends Exception
             $this->message = "General communication error with the API. Got no response body.";
             $this->errors = null;
         } else {
-            $responseBodyDecoded = json_decode($responseBody);
+            $responseBodyDecoded = $this->convertObjectToArray(json_decode($responseBody));
 
-            $this->isSuccess = $responseBodyDecoded->success;
-            $this->message = $responseBodyDecoded->message;
-            $this->errors = $responseBodyDecoded->errors;
+            $this->isSuccess = $responseBodyDecoded['success'] ?? false;
+            $this->message = $responseBodyDecoded['message'] ?? '';
+            $this->errors = $responseBodyDecoded['errors'] ?? null;
         }
 
         parent::__construct($this->message, $code, $previous);
@@ -68,10 +68,40 @@ class ApiResponseException extends Exception
     }
 
     /**
-     * @return mixed
+     * @return array
      */
-    public function getErrors(): mixed
+    public function getErrors(): ?array
     {
         return $this->errors;
+    }
+
+    /**
+     * Convert object to array
+     *
+     * @return array
+     */
+    protected function convertObjectToArray($objectOrArray)
+    {
+        if (is_object($objectOrArray)) {
+            $objectOrArray = (array)$objectOrArray;
+        }
+
+        // if not array -> just return it (probably string or number) :
+        if (!is_array($objectOrArray)) {
+            return $objectOrArray;
+        }
+
+        // if empty array -> return [] :
+        if (count($objectOrArray) == 0) {
+            return [];
+        }
+
+        // repeat tasks for each item :
+        $output = [];
+        foreach ($objectOrArray as $key => $o_a) {
+            $output[$key] = self::convertObjectToArray($o_a);
+        }
+
+        return $output;
     }
 }
