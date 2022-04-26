@@ -7,5 +7,5 @@ namespace MyPromo\Connect\SDK\Helpers;
  */
 class GeneralHelper
 {
-    public const GUZZLE_EXCEPTION_MESSAGE = 'API is not available.';
+    public const GUZZLE_EXCEPTION_MESSAGE = '500 Internal Server Error';
 }
