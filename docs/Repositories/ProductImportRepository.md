@@ -68,7 +68,7 @@ $productImportRepository->validate($productImport->getId());
 Confirm product import pass product import ID and confirm options
 ```php
 $confirmProductImportOptions = new \MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions();
-$confirmProductImportOptions->setExecuteDate('DATE');
+$confirmProductImportOptions->setExecuteDate(new \DateTime(date('Y-m-d H:i:s')));
 
 $productImportRepository->confirm($confirmProductImportOptions, $productImport->getId());
 ```
