@@ -5,10 +5,10 @@ $order = new \MyPromo\Connect\SDK\Models\Order();
 $order->setReference('your-order-reference');
 $order->setReference2('your-order-reference2');
 $order->setComment('your comment for order here');
-$order->setShipper($shipper);
-$order->setRecipient($recipient);
-$order->setExport($export);
-$order->setInvoice($invoice);
+$order->setShipper($shipperAddress);
+$order->setRecipient($recipientAddress);
+$order->setExport($exportAddress);
+$order->setInvoice($invoiceAddress);
 
 # Optional parameters 
 $order->setFakePreflight(true|false);
