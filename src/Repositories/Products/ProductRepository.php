@@ -10,6 +10,8 @@ namespace MyPromo\Connect\SDK\Repositories\Products;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\ProductException;
 use MyPromo\Connect\SDK\Helpers\InventoryOptionsFulfiller;
 use MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant;
@@ -40,7 +42,8 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException
      */
-    public function all($options) {
+    public function all($options)
+    {
         try {
             if ($options instanceof ProductOptions) {
                 $options = $options->toArray();
@@ -52,17 +55,17 @@ class ProductRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -72,7 +75,8 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException
      */
-    public function find($productId) {
+    public function find($productId)
+    {
         try {
             $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
                 'headers' => [
@@ -81,14 +85,15 @@ class ProductRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -105,7 +110,8 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException
      */
-    public function getInventory($options) {
+    public function getInventory($options)
+    {
         try {
             if (empty($options->getSkuFulfiller())) {
                 if ($options instanceof InventoryOptionsMerchant) {
@@ -122,17 +128,18 @@ class ProductRepository extends Repository
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options
+                'query'   => $options
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -142,25 +149,27 @@ class ProductRepository extends Repository
      * @throws ProductException
      * @throws InvalidArgumentException
      */
-    public function putInventory($productInventory) {
+    public function putInventory($productInventory)
+    {
         try {
             $response = $this->client->guzzle()->patch('/v1/inventory', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $productInventory->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -176,7 +185,8 @@ class ProductRepository extends Repository
      * @throws ProductException
      * @throws InvalidArgumentException
      */
-    public function getPrices($options) {
+    public function getPrices($options)
+    {
         try {
             if ($options instanceof PriceOptions) {
                 $options = $options->toArray();
@@ -187,17 +197,18 @@ class ProductRepository extends Repository
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options
+                'query'   => $options
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -207,25 +218,27 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException
      */
-    public function putPrices($productPriceUpdate) {
+    public function putPrices($productPriceUpdate)
+    {
         try {
             $response = $this->client->guzzle()->patch('/v1/prices', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $productPriceUpdate->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -240,7 +253,8 @@ class ProductRepository extends Repository
      * @throws ProductException
      * @throws InvalidArgumentException
      */
-    public function getSeo($options) {
+    public function getSeo($options)
+    {
         try {
             if ($options instanceof SeoOptions) {
                 $options = $options->toArray();
@@ -251,17 +265,18 @@ class ProductRepository extends Repository
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options
+                'query'   => $options
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -271,25 +286,27 @@ class ProductRepository extends Repository
      * @throws InvalidArgumentException
      * @throws ProductException
      */
-    public function putSeo($productSeoUpdate) {
+    public function putSeo($productSeoUpdate)
+    {
         try {
             $response = $this->client->guzzle()->patch('/v1/seo', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $productSeoUpdate->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -308,17 +325,18 @@ class ProductRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $productVariantOptions->toArray(),
+                'query'   => $productVariantOptions->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -337,14 +355,15 @@ class ProductRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ]
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 }

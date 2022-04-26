@@ -4,6 +4,8 @@ namespace MyPromo\Connect\SDK\Repositories\ProductionOrders;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Models\Shipment;
 use Psr\Cache\InvalidArgumentException;
 use MyPromo\Connect\SDK\Repositories\Repository;
@@ -45,16 +47,15 @@ class ProductionOrderRepository extends Repository
                 ],
                 'query'   => $options,
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
 
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -74,15 +75,16 @@ class ProductionOrderRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -104,15 +106,16 @@ class ProductionOrderRepository extends Repository
                 ],
                 RequestOptions::JSON => $shipment->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
     /**
@@ -126,21 +129,22 @@ class ProductionOrderRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId . '/generic_label', [
-                'headers'            => [
+                'headers' => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ]
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+
     }
 
 }
