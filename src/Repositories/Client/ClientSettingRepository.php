@@ -3,10 +3,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Client;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ClientGeneralException;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\ClientSettingMerchant;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -35,8 +33,6 @@ class ClientSettingRepository extends Repository
                 throw new ClientGeneralException($response->getBody(), $response->getStatusCode());
             }
 
-        } catch (GuzzleException $ex) {
-            throw new ClientGeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientGeneralException($ex->getMessage(), $ex->getCode());
         }
@@ -72,8 +68,6 @@ class ClientSettingRepository extends Repository
 
             $body = json_decode($response->getBody(), true);
 
-        } catch (GuzzleException $ex) {
-            throw new ClientGeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientGeneralException($ex->getMessage(), $ex->getCode());
         }

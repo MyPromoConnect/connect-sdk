@@ -3,10 +3,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\CarrierException;
 use MyPromo\Connect\SDK\Helpers\CarrierOptions;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -43,8 +41,6 @@ class CarrierRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new CarrierException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new CarrierException($ex->getMessage(), $ex->getCode());
         }
@@ -71,8 +67,6 @@ class CarrierRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new CarrierException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new CarrierException($ex->getMessage(), $ex->getCode());
         }

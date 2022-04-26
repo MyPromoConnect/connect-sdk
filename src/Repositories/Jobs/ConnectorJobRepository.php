@@ -3,10 +3,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Jobs;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ConnectorJobException;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\ConnectorJob;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -40,8 +38,6 @@ class ConnectorJobRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $connectorJob->setId($body['id']);
 
-        } catch (GuzzleException $ex) {
-            throw new ConnectorJobException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ConnectorJobException($ex->getMessage(), $ex->getCode());
         }

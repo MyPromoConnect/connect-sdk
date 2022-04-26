@@ -3,12 +3,9 @@
 namespace MyPromo\Connect\SDK;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ClientException;
-use MyPromo\Connect\SDK\Exceptions\GeneralException;
 use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\CacheItem;
@@ -181,8 +178,6 @@ class Client
                 $bearerToken->expiresAfter($body['expires_in']);
                 $this->cache->save($bearerToken);
             }
-        } catch (GuzzleException $ex) {
-            throw new ClientException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientException($ex->getMessage(), $ex->getCode());
         }
@@ -208,8 +203,6 @@ class Client
             if ($response->getStatusCode() !== 200) {
                 throw new ClientException($response->getBody(), $response->getStatusCode());
             }
-        } catch (GuzzleException $ex) {
-            throw new ClientException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ClientException($ex->getMessage(), $ex->getCode());
         }

@@ -3,10 +3,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Designs;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\DesignException;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\Design;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -45,8 +43,6 @@ class DesignRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $design->setId($body['id']);
 
-        } catch (GuzzleException $ex) {
-            throw new DesignException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new DesignException($ex->getMessage(), $ex->getCode());
         }
@@ -76,8 +72,6 @@ class DesignRepository extends Repository
                 throw new DesignException($response->getBody(), $response->getStatusCode());
             }
 
-        } catch (GuzzleException $ex) {
-            throw new DesignException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new DesignException($ex->getMessage(), $ex->getCode());
         }
@@ -107,8 +101,6 @@ class DesignRepository extends Repository
             if ($response->getStatusCode() !== 200) {
                 throw new DesignException($response->getBody(), $response->getStatusCode());
             }
-        } catch (GuzzleException $ex) {
-            throw new DesignException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new DesignException($ex->getMessage(), $ex->getCode());
         }
@@ -152,8 +144,6 @@ class DesignRepository extends Repository
                 );
             }
 
-        } catch (GuzzleException $ex) {
-            throw new DesignException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new DesignException($ex->getMessage(), $ex->getCode());
         }
@@ -185,8 +175,6 @@ class DesignRepository extends Repository
 
             $file = fclose($previewFile);
 
-        } catch (GuzzleException $ex) {
-            throw new DesignException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new DesignException($ex->getMessage(), $ex->getCode());
         }
@@ -220,8 +208,6 @@ class DesignRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $design->setEditorUserHash($body['editor_user_hash']);
 
-        } catch (GuzzleException $ex) {
-            throw new DesignException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new DesignException($ex->getMessage(), $ex->getCode());
         }

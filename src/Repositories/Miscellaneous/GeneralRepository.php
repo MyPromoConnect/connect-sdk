@@ -3,9 +3,7 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\GeneralException;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -33,8 +31,6 @@ class GeneralRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new GeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new GeneralException($ex->getMessage(), $ex->getCode());
         }
@@ -67,8 +63,6 @@ class GeneralRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new GeneralException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new GeneralException($ex->getMessage(), $ex->getCode());
         }

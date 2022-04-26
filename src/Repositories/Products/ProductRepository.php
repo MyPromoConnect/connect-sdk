@@ -9,11 +9,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Products;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ProductException;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
-use MyPromo\Connect\SDK\Helpers\InventoryOptions;
 use MyPromo\Connect\SDK\Helpers\InventoryOptionsFulfiller;
 use MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant;
 use MyPromo\Connect\SDK\Helpers\PriceOptions;
@@ -63,8 +60,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -91,8 +86,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -137,8 +130,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -167,8 +158,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -206,8 +195,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -236,8 +223,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -274,8 +259,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -304,8 +287,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -335,8 +316,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }
@@ -347,7 +326,6 @@ class ProductRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws ProductException
      */
     public function getVariant($id)
     {
@@ -365,8 +343,6 @@ class ProductRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductException($ex->getMessage(), $ex->getCode());
         }

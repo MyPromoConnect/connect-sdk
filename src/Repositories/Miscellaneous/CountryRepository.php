@@ -3,10 +3,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\CountryException;
 use MyPromo\Connect\SDK\Helpers\CountryOptions;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
@@ -21,7 +19,7 @@ class CountryRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws CountryException|GuzzleException
+     * @throws CountryException
      */
     public function all($options) {
         try {
@@ -43,8 +41,6 @@ class CountryRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new CountryException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new CountryException($ex->getMessage(), $ex->getCode());
         }
@@ -55,7 +51,7 @@ class CountryRepository extends Repository
      *
      * @return array
      * @throws InvalidArgumentException
-     * @throws CountryException|GuzzleException
+     * @throws CountryException
      */
     public function find($countryId) {
         try {
@@ -71,8 +67,6 @@ class CountryRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new CountryException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new CountryException($ex->getMessage(), $ex->getCode());
         }

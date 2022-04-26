@@ -3,16 +3,10 @@
 namespace MyPromo\Connect\SDK\Repositories\ProductFeeds;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ProductExportException;
 use MyPromo\Connect\SDK\Exceptions\ProductImportException;
 use MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
-use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
-use MyPromo\Connect\SDK\Helpers\ProductOptions;
-use MyPromo\Connect\SDK\Models\ProductExport;
 use MyPromo\Connect\SDK\Models\ProductImport;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
@@ -54,8 +48,6 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -85,8 +77,6 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -116,8 +106,6 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -147,8 +135,6 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -181,8 +167,6 @@ class ProductImportRepository extends Repository
             $body = json_decode($response->getBody(), true);
             $productImport->setId($body['id']);
 
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -214,8 +198,6 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -245,8 +227,6 @@ class ProductImportRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }
@@ -278,8 +258,6 @@ class ProductImportRepository extends Repository
 
             $body = json_decode($response->getBody(), true);
 
-        } catch (GuzzleException $ex) {
-            throw new ProductImportException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductImportException($ex->getMessage(), $ex->getCode());
         }

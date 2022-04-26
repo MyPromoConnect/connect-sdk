@@ -2,11 +2,9 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
-use GuzzleHttp\Exception\GuzzleException;
 use Exception;
 use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\OrderItem;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
@@ -51,8 +49,6 @@ class OrderItemRepository extends Repository
 
             $body = json_decode($response->getBody(), true);
 
-        } catch (GuzzleException $ex) {
-            throw new OrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new OrderException($ex->getMessage(), $ex->getCode());
         }

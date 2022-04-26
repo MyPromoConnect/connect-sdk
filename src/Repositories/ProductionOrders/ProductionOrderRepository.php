@@ -4,10 +4,8 @@ namespace MyPromo\Connect\SDK\Repositories\ProductionOrders;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Helpers\GeneralHelper;
 use MyPromo\Connect\SDK\Models\Shipment;
 use Psr\Cache\InvalidArgumentException;
-use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use MyPromo\Connect\SDK\Helpers\ProductionOrderOptions;
 use MyPromo\Connect\SDK\Exceptions\ProductionOrderException;
@@ -53,8 +51,6 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
@@ -84,8 +80,6 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
@@ -116,8 +110,6 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
@@ -146,8 +138,6 @@ class ProductionOrderRepository extends Repository
             }
 
             return json_decode($response->getBody(), true);
-        } catch (GuzzleException $ex) {
-            throw new ProductionOrderException(GeneralHelper::GUZZLE_EXCEPTION_MESSAGE, $ex->getCode());
         } catch (Exception $ex) {
             throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
         }
