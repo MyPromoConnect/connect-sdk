@@ -3,7 +3,7 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -142,7 +142,7 @@ class Callback implements Arrayable
 
     /**
      * @param  array  $authHeader
-     * @throws OrderException
+     * @throws InputValidationException
      */
     public function setAuthHeader(array $authHeader)
     {
@@ -162,7 +162,7 @@ class Callback implements Arrayable
 
         $violations = $validator->validate($authHeader, $constraints);
         if ($violations->count() > 0) {
-            throw new OrderException($violations);
+            throw new InputValidationException($violations);
         }
 
         $this->authHeader = $authHeader;
@@ -250,7 +250,7 @@ class Callback implements Arrayable
 
     /**
      * @inheritDoc
-     * @throws OrderException
+     * @throws InputValidationException
      */
     public function toArray()
     {
@@ -260,7 +260,7 @@ class Callback implements Arrayable
          */
 
         if (empty($this->url)) {
-            throw new OrderException('Callback url is missing.');
+            throw new InputValidationException('Callback url is missing.');
         }
 
         //decide authType
@@ -275,7 +275,7 @@ class Callback implements Arrayable
         }
 
         if (!in_array($this->authType, self::SUPPORTED_AUTH_TYPES)) {
-            throw new OrderException(
+            throw new InputValidationException(
                 "Callback authentication type '{$this->authType}' is not supported."
                 . "Only the following authentication types are allowed ("
                 . implode(', ', self::SUPPORTED_AUTH_TYPES) . ")"
@@ -287,11 +287,11 @@ class Callback implements Arrayable
         switch ($this->authType) {
             case self::AUTH_TYPE_BASIC:
                 if (empty($this->authUsername)) {
-                    throw new OrderException("Callback authentication username is missing.");
+                    throw new InputValidationException("Callback authentication username is missing.");
                 }
 
                 if (empty($this->authPassword)) {
-                    throw new OrderException("Callback authentication password is missing.");
+                    throw new InputValidationException("Callback authentication password is missing.");
                 }
 
                 $callbackArray['auth']['basic']['username'] = $this->authUsername;
@@ -300,7 +300,7 @@ class Callback implements Arrayable
                 return $callbackArray;
             case self::AUTH_TYPE_HEADER:
                 if (empty($this->authHeader)) {
-                    throw new OrderException("Callback authentication header key/value pair is missing.");
+                    throw new InputValidationException("Callback authentication header key/value pair is missing.");
                 }
 
                 $callbackArray['auth']['header'] = $this->authHeader;
@@ -308,15 +308,15 @@ class Callback implements Arrayable
                 return $callbackArray;
             case self::AUTH_TYPE_OAUTH1:
                 if (empty($this->authUrl)) {
-                    throw new OrderException("Callback authentication url is missing.");
+                    throw new InputValidationException("Callback authentication url is missing.");
                 }
 
                 if (empty($this->authUsername)) {
-                    throw new OrderException("Callback authentication username is missing.");
+                    throw new InputValidationException("Callback authentication username is missing.");
                 }
 
                 if (empty($this->authPassword)) {
-                    throw new OrderException("Callback authentication password is missing.");
+                    throw new InputValidationException("Callback authentication password is missing.");
                 }
 
                 $callbackArray['auth']['oauth1']['auth_url'] = $this->authUrl;
@@ -326,21 +326,21 @@ class Callback implements Arrayable
                 return $callbackArray;
             case self::AUTH_TYPE_OAUTH2:
                 if (empty($this->authUrl)) {
-                    throw new OrderException("Callback authentication url is missing.");
+                    throw new InputValidationException("Callback authentication url is missing.");
                 }
 
                 if (empty($this->authGrantType)) {
-                    throw new OrderException("Callback authentication grant type is missing.");
+                    throw new InputValidationException("Callback authentication grant type is missing.");
                 }
 
                 switch ($this->authGrantType) {
                     case self::AUTH_GRANT_TYPE_PASSWORD:
                         if (empty($this->authUsername)) {
-                            throw new OrderException("Callback authentication username is missing.");
+                            throw new InputValidationException("Callback authentication username is missing.");
                         }
 
                         if (empty($this->authPassword)) {
-                            throw new OrderException("Callback authentication password is missing.");
+                            throw new InputValidationException("Callback authentication password is missing.");
                         }
 
                         $callbackArray['auth']['oauth2']['auth_url']   = $this->authUrl;
@@ -352,11 +352,11 @@ class Callback implements Arrayable
                         return $callbackArray;
                     case self::AUTH_GRANT_TYPE_CLIENT_CREDENTIALS:
                         if (empty($this->authClientId)) {
-                            throw new OrderException("Callback authentication client ID is missing.");
+                            throw new InputValidationException("Callback authentication client ID is missing.");
                         }
 
                         if (empty($this->authSecret)) {
-                            throw new OrderException("Callback authentication secret is missing.");
+                            throw new InputValidationException("Callback authentication secret is missing.");
                         }
 
                         $callbackArray['auth']['oauth2']['auth_url']   = $this->authUrl;
@@ -366,7 +366,7 @@ class Callback implements Arrayable
 
                         return $callbackArray;
                     default:
-                        throw new OrderException(
+                        throw new InputValidationException(
                             "Unknown callback authentication grant type '{$this->authGrantType}'."
                             . "Only the following grant types are allowed: ("
                             . implode(', ', self::SUPPORTED_AUTH_GRANT_TYPES) . ")"
@@ -377,7 +377,7 @@ class Callback implements Arrayable
                 return $callbackArray;
 
             default:
-                throw new OrderException("Unknown callback authentication type '{$this->authType}'.");
+                throw new InputValidationException("Unknown callback authentication type '{$this->authType}'.");
 
         }
     }

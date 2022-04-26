@@ -3,10 +3,10 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\TimezoneException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\TimezoneOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class TimezoneRepository extends Repository
 {
@@ -19,8 +19,6 @@ class TimezoneRepository extends Repository
      * You can use the @param array|TimezoneOptions $options
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws TimezoneException
      */
     public function all($options): array
     {
@@ -38,13 +36,14 @@ class TimezoneRepository extends Repository
                 'query' => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new TimezoneException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new TimezoneException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

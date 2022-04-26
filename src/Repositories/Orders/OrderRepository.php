@@ -3,12 +3,13 @@
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Helpers\OrderOptions;
 use MyPromo\Connect\SDK\Models\Order;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
-use Psr\Cache\InvalidArgumentException;
 
 class OrderRepository extends Repository
 {
@@ -24,9 +25,6 @@ class OrderRepository extends Repository
      * You can use the @param array|OrderOptions $options
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException
      * @see OrderOptions as its helper
      *
      */
@@ -46,12 +44,12 @@ class OrderRepository extends Repository
                 'query' => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -61,9 +59,6 @@ class OrderRepository extends Repository
      * @param int $orderId
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException
      */
     public function find($orderId)
     {
@@ -74,13 +69,12 @@ class OrderRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -90,9 +84,6 @@ class OrderRepository extends Repository
      * @param Order $order
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException
      */
     public function create($order)
     {
@@ -105,16 +96,20 @@ class OrderRepository extends Repository
                 ],
                 RequestOptions::JSON => $order->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $order->setId($body['id']);
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['id'])) {
+            $order->setId($body['id']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
@@ -124,9 +119,6 @@ class OrderRepository extends Repository
      * @param int $orderId
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException
      */
     public function submit($orderId)
     {
@@ -137,12 +129,12 @@ class OrderRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -152,9 +144,6 @@ class OrderRepository extends Repository
      * @param int $orderId
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException
      */
     public function cancel($orderId)
     {
@@ -166,12 +155,12 @@ class OrderRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);

@@ -7,7 +7,6 @@ use PHPUnit\Framework\TestCase;
 use MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Models\ProductExport;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 
 class ExportTest extends TestCase
 {
@@ -40,7 +39,6 @@ class ExportTest extends TestCase
     }
 
     /**
-     * @throws OrderException
      */
     public function testPayload()
     {

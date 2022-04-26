@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Models\Design;
 use MyPromo\Connect\SDK\Repositories\Repository;
@@ -117,7 +118,7 @@ class DesignRepository extends Repository
         $previewUrl = $getDesignResponse['preview_url'] ?? null;
 
         if ($previewUrl === null){
-            throw new ApiResponseException("No preview url exists.", 422);
+            throw new InputValidationException("No preview url exists.", 422);
         }
 
         try {

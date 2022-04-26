@@ -3,7 +3,7 @@
 namespace MyPromo\Connect\SDK\Helpers;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use Symfony\Component\Validator\Constraints\Collection;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotNull;
@@ -135,7 +135,6 @@ class ProductImportInput implements Arrayable
 
     /**
      * @param array $https_header
-     * @throws OrderException
      */
     public function setHttpsHeader(array $https_header)
     {
@@ -156,7 +155,7 @@ class ProductImportInput implements Arrayable
 
         $violations = $validator->validate($https_header, $constraints);
         if ($violations->count() > 0) {
-            throw new OrderException($violations);
+            throw new InputValidationException($violations);
         }
 
         $this->https_header = $https_header;

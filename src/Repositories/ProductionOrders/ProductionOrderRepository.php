@@ -24,6 +24,7 @@ class ProductionOrderRepository extends Repository
      * You can use the @param array|ProductionOrderOptions $options
      *
      * @return array
+     *
      * @see    ProductionOrderOptions as its helper
      *
      */
@@ -42,6 +43,7 @@ class ProductionOrderRepository extends Repository
                 ],
                 'query'   => $options,
             ]);
+
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
@@ -67,6 +69,7 @@ class ProductionOrderRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
+
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
@@ -76,7 +79,6 @@ class ProductionOrderRepository extends Repository
         }
 
         return json_decode($response->getBody(), true);
-
     }
 
     /**
@@ -95,6 +97,7 @@ class ProductionOrderRepository extends Repository
                 ],
                 RequestOptions::JSON => $shipment->toArray(),
             ]);
+
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
@@ -104,7 +107,6 @@ class ProductionOrderRepository extends Repository
         }
 
         return json_decode($response->getBody(), true);
-
     }
 
     /**
@@ -115,12 +117,13 @@ class ProductionOrderRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId . '/generic_label', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ]
             ]);
+
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
@@ -130,7 +133,6 @@ class ProductionOrderRepository extends Repository
         }
 
         return json_decode($response->getBody(), true);
-
     }
 
 }

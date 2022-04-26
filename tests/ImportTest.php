@@ -4,7 +4,6 @@ namespace MyPromo\Connect\SDK\Tests;
 
 use PHPUnit\Framework\TestCase;
 use MyPromo\Connect\SDK\Models\ProductImport;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 use MyPromo\Connect\SDK\Helpers\ProductImportInput;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
 
@@ -44,7 +43,6 @@ class ImportTest extends TestCase
     }
 
     /**
-     * @throws OrderException
      */
     public function testPayload()
     {

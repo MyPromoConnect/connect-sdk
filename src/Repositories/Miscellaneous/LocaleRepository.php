@@ -3,10 +3,10 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\LocaleException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\LocaleOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class LocaleRepository extends Repository
 {
@@ -19,8 +19,6 @@ class LocaleRepository extends Repository
      * You can use the @param array|LocaleOptions $options
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws LocaleException
      */
     public function all($options): array
     {
@@ -38,13 +36,14 @@ class LocaleRepository extends Repository
                 'query' => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new LocaleException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new LocaleException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

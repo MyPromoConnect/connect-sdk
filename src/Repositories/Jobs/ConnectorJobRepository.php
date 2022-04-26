@@ -4,10 +4,11 @@ namespace MyPromo\Connect\SDK\Repositories\Jobs;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ConnectorJobException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Models\ConnectorJob;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class ConnectorJobRepository extends Repository
 {
@@ -15,9 +16,6 @@ class ConnectorJobRepository extends Repository
      * @param ConnectorJob $connectorJob
      *
      * @return mixed
-     *
-     * @throws InvalidArgumentException
-     * @throws ConnectorJobException
      */
     public function createJob(ConnectorJob $connectorJob)
     {
@@ -31,15 +29,20 @@ class ConnectorJobRepository extends Repository
                 RequestOptions::JSON => $connectorJob->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
-                throw new ConnectorJobException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $connectorJob->setId($body['id']);
-
         } catch (Exception $ex) {
-            throw new ConnectorJobException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['id'])) {
+            $connectorJob->setId($body['id']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;

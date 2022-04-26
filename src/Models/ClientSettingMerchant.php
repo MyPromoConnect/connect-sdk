@@ -3,7 +3,6 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 
 class ClientSettingMerchant implements Arrayable
 {

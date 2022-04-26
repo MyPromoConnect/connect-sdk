@@ -3,8 +3,6 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
-use MyPromo\Connect\SDK\Exceptions\ProductExportException;
 use MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions;
 
 class ProductExport implements Arrayable

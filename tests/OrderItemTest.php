@@ -3,7 +3,7 @@
 namespace MyPromo\Connect\SDK\Tests;
 
 use MyPromo\Connect\SDK\Client;
-use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use MyPromo\Connect\SDK\Models\Customs;
 use MyPromo\Connect\SDK\Models\File;
 use MyPromo\Connect\SDK\Models\OrderItem;
@@ -89,7 +89,7 @@ class OrderItemTest extends TestCase
 
     public function testCannotBeSubmittedWithoutOrderId()
     {
-        $this->expectException(MissingOrderException::class);
+        $this->expectException(InputValidationException::class);
 
         $orderItem = new OrderItem();
 

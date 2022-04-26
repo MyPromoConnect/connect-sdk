@@ -3,7 +3,6 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 
 /**
  * Class Order
@@ -351,7 +350,6 @@ class Order implements Arrayable
      * Convert object to array
      *
      * @return array
-     * @throws OrderException
      */
     public function toArray(): array
     {

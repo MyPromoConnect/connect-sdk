@@ -3,7 +3,6 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 use MyPromo\Connect\SDK\Helpers\ConnectorJobFilters;
 
 class ConnectorJob implements Arrayable
@@ -96,7 +95,6 @@ class ConnectorJob implements Arrayable
      * Get the instance as an array.
      *
      * @return array
-     * @throws OrderException
      */
     public function toArray(): array
     {

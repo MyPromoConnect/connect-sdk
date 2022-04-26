@@ -3,10 +3,10 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\CarrierException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\CarrierOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class CarrierRepository extends Repository
 {
@@ -18,8 +18,6 @@ class CarrierRepository extends Repository
      * You can use the @param array|CarrierOptions $options
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws CarrierException
      */
     public function all($options) {
         try {
@@ -36,22 +34,21 @@ class CarrierRepository extends Repository
                 'query' => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new CarrierException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new CarrierException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param $carrierId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws CarrierException
      */
     public function find($carrierId) {
         try {
@@ -62,13 +59,14 @@ class CarrierRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new CarrierException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new CarrierException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

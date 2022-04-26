@@ -3,9 +3,9 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\GeneralException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class GeneralRepository extends Repository
 {
@@ -13,8 +13,6 @@ class GeneralRepository extends Repository
      * Check api status
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws GeneralException
      */
     public function apiStatus(): array
     {
@@ -26,14 +24,15 @@ class GeneralRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new GeneralException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new GeneralException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -41,8 +40,6 @@ class GeneralRepository extends Repository
      *
      * @param $shortUrlIdentifier
      * @return array
-     * @throws GeneralException
-     * @throws InvalidArgumentException
      */
     public function downloadFile($shortUrlIdentifier): array
     {
@@ -58,13 +55,14 @@ class GeneralRepository extends Repository
                 ]
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new GeneralException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new GeneralException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

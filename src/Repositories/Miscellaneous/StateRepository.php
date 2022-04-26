@@ -3,10 +3,10 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\StateException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\StateOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class StateRepository extends Repository
 {
@@ -18,8 +18,6 @@ class StateRepository extends Repository
      * You can use the @param array|StateOptions $options
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws StateException
      */
     public function all($options) {
         try {
@@ -36,22 +34,21 @@ class StateRepository extends Repository
                 'query' => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new StateException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new StateException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param $stateId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws StateException
      */
     public function find($stateId) {
         try {
@@ -62,13 +59,14 @@ class StateRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new StateException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new StateException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

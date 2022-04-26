@@ -7,12 +7,10 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Exceptions\ProductExportException;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
 use MyPromo\Connect\SDK\Models\ProductExport;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use PharIo\Manifest\ElementCollectionException;
 use Psr\Cache\InvalidArgumentException;
 
 class ProductExportRepository extends Repository

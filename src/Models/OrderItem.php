@@ -3,7 +3,7 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Exceptions\OrderItemException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use MyPromo\Connect\SDK\Helpers\DesignOptions;
 
 /**
@@ -224,8 +224,6 @@ class OrderItem implements Arrayable
 
     /**
      * {@inheritDoc}
-     *
-     * @throws OrderItemException
      */
     public function toArray(): array
     {
@@ -286,7 +284,7 @@ class OrderItem implements Arrayable
          * But we cannot allow to send designs and files to the API at the same time
          */
         if (!empty($designs) && !empty($files)) {
-            throw new OrderItemException('You cannot use designs and files together.');
+            throw new InputValidationException('You cannot use designs and files together.');
         }
 
         if (

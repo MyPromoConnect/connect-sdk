@@ -6,10 +6,8 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Exceptions\ClientConnectorException;
 use MyPromo\Connect\SDK\Models\ClientConnector;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class ClientConnectorRepository extends Repository
 {

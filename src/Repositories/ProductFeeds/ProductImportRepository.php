@@ -7,12 +7,10 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Exceptions\ProductImportException;
 use MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
 use MyPromo\Connect\SDK\Models\ProductImport;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class ProductImportRepository extends Repository
 {
@@ -60,8 +58,6 @@ class ProductImportRepository extends Repository
      * @param $productImportId
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
      */
     public function find($productImportId): array
     {
