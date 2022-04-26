@@ -57,6 +57,11 @@ class Order implements Arrayable
     protected $export;
 
     /**
+     * @var Address|null
+     */
+    protected $invoice;
+
+    /**
      * @var ...$files
      */
     protected $files;
@@ -231,6 +236,22 @@ class Order implements Arrayable
     }
 
     /**
+     * @return Address|null
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * @param Address|null $invoice
+     */
+    public function setInvoice($invoice)
+    {
+        $this->invoice = $invoice;
+    }
+
+    /**
      * @return array ...File
      */
     public function getFiles()
@@ -335,6 +356,7 @@ class Order implements Arrayable
     public function toArray(): array
     {
         $files = [];
+
         /**
          * @var File $file
          */
@@ -345,14 +367,15 @@ class Order implements Arrayable
         }
 
         $orderArray = [
-            'reference'          => $this->reference,
-            'reference2'         => $this->reference2,
-            'complaint'          => $this->complaint,
+            'reference' => $this->reference,
+            'reference2' => $this->reference2,
+            'complaint' => $this->complaint,
             'express_production' => $this->expressProduction,
-            'express_shipping'   => $this->expressShipping,
-            'shipper'            => $this->shipper->toArray(),
-            'recipient'          => $this->recipient->toArray(),
-            'export'             => $this->export !== null ? $this->export->toArray() : null,
+            'express_shipping' => $this->expressShipping,
+            'shipper' => $this->shipper !== null ? $this->shipper->toArray() : null,
+            'recipient' => $this->recipient->toArray(),
+            'export' => $this->export !== null ? $this->export->toArray() : null,
+            'invoice' => $this->invoice !== null ? $this->invoice->toArray() : null,
         ];
 
         if ($files) {
