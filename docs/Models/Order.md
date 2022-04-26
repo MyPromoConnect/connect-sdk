@@ -15,6 +15,11 @@ $order->setFakePreflight(true|false);
 $order->setFakeShipment(true|false);
 ```
 
+Required:
+
+- [Address][address]
+
+
 Optional:
 
 - [CustomProperty][CustomProperty]
@@ -24,3 +29,4 @@ Optional:
 [OrderRepository]: ../Repositories/OrderRepository.md
 [CustomProperty]: CustomProperty.md
 [callback]: Callback.md
+[address]: Address.md
