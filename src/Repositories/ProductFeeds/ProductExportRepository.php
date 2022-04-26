@@ -168,8 +168,8 @@ class ProductExportRepository extends Repository
 
         $body = json_decode($response->getBody(), true);
 
-        if (!empty($body) && isset($body['asdfgid'])) {
-            $productExport->setId($body['asdfgid']);
+        if (!empty($body) && isset($body['id'])) {
+            $productExport->setId($body['id']);
         } else {
             throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
