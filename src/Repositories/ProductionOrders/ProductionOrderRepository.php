@@ -7,10 +7,8 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Models\Shipment;
-use Psr\Cache\InvalidArgumentException;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use MyPromo\Connect\SDK\Helpers\ProductionOrderOptions;
-use MyPromo\Connect\SDK\Exceptions\ProductionOrderException;
 
 class ProductionOrderRepository extends Repository
 {
@@ -26,9 +24,6 @@ class ProductionOrderRepository extends Repository
      * You can use the @param array|ProductionOrderOptions $options
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException
      * @see    ProductionOrderOptions as its helper
      *
      */
@@ -62,9 +57,6 @@ class ProductionOrderRepository extends Repository
      * @param int $orderId
      *
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException
      */
     public function find($orderId): array
     {
@@ -91,9 +83,6 @@ class ProductionOrderRepository extends Repository
      * @param $orderId
      * @param Shipment $shipment
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException
      */
     public function addShipment($orderId, Shipment $shipment): array
     {
@@ -121,9 +110,6 @@ class ProductionOrderRepository extends Repository
     /**
      * @param $orderId
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException
      */
     public function genericLabel($orderId): array
     {
