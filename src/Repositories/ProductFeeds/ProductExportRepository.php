@@ -6,11 +6,13 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Exceptions\ProductExportException;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
 use MyPromo\Connect\SDK\Models\ProductExport;
 use MyPromo\Connect\SDK\Repositories\Repository;
+use PharIo\Manifest\ElementCollectionException;
 use Psr\Cache\InvalidArgumentException;
 
 class ProductExportRepository extends Repository
@@ -156,15 +158,20 @@ class ProductExportRepository extends Repository
                 RequestOptions::JSON => $productExport->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
-                throw new ApiResponseException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $productExport->setId($body['id']);
-
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['asdfgid'])) {
+            $productExport->setId($body['asdfgid']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
