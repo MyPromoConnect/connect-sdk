@@ -10,17 +10,18 @@ You should be able to use `php 7.4` on your own risk till end of 2022.
 Please update your applications and environments accordingly.
 
 ## Important Changes
-- added Trailing Slashes to all API Endpoints
-- added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
-- Support a custom baseUri for Client ([see details here](docs/README.md))
-- Add `reference2`field to Order Model ([see details here](docs/Models/Order.md))
-- use key/value for File/Callback Header Auth ([see details here](docs/Models/File.md)) and ([see details here](docs/Models/Callback.md))
 - Set minimum PHP Version to 8.0
+- From version 2.0 the SDK it not throwing guzzle exceptions anymore - use the exception handlers from the sdk instead
 - Added product routes to manage product data
 - Added product feeds
 - Added configurator routes to build up your own personalization app
 - Added client settings routes
 - Added connector routes for magento 2.x and shopify integration
+- Added Trailing Slashes to all API Endpoints
+- Added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
+- Support a custom baseUri for Client ([see details here](docs/README.md))
+- Added `reference2` field to Order Model ([see details here](docs/Models/Order.md))
+- Use key/value for File/Callback Header Auth ([see details here](docs/Models/File.md)) and ([see details here](docs/Models/Callback.md))
 
 ## Contents
 
