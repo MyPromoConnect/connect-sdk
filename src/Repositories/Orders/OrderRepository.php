@@ -123,7 +123,7 @@ class OrderRepository extends Repository
     public function submit($orderId)
     {
         try {
-            $response = $this->client->guzzle()->post('/v1/orders/' . $orderId . '/submit', [
+            $response = $this->client->guzzle()->patch('/v1/orders/' . $orderId . '/submit', [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
