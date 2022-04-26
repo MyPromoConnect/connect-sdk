@@ -3,6 +3,8 @@
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
 use Exception;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
 use MyPromo\Connect\SDK\Exceptions\OrderException;
 use MyPromo\Connect\SDK\Models\OrderItem;
@@ -42,16 +44,16 @@ class OrderItemRepository extends Repository
                 ],
                 RequestOptions::JSON => $orderItem->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
 
         return $body;
     }
