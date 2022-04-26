@@ -74,10 +74,11 @@ class Client
      * @param string $secret
      * @param string|null $baseUri
      * @param bool $forceNewToken
+     * @throws InputValidationException
      */
     public function __construct($productionCode, $id, $secret, $baseUri = null, $forceNewToken = false)
     {
-        if (!isset($id) || !isset($secret)) {
+        if (empty($id) || empty($secret)) {
             throw new InputValidationException('Missing client id or secret.');
         }
 
@@ -146,6 +147,9 @@ class Client
      * Get token from cache or request bearer token from connect
      *
      * @return CacheItem
+     * @throws InputValidationException
+     * @throws ApiRequestException
+     * @throws InvalidResponseException
      */
     public function auth(): CacheItem
     {
@@ -193,6 +197,8 @@ class Client
 
     /**
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function status(): array
     {
