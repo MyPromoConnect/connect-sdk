@@ -24,7 +24,7 @@ class ProductExportException extends Exception
      */
     public function __construct($message = "", $code = 0, Throwable $previous = null)
     {
-        $this->responseBody = json_decode($previous->getMessage());
+        $this->responseBody = json_decode($message);
 
         parent::__construct($message, $code, $previous);
     }
