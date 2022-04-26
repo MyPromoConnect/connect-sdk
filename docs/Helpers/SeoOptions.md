@@ -3,11 +3,11 @@ Helper class for [ProductRepository->getSeo()][ProductRepository]
 You can use this helper class to filter and paginate the inventory results.
 
 ```php
-$inventoryOptions = new \MyPromo\Connect\SDK\Helpers\SeoOptions();
-$inventoryOptions->setFrom(1);
-$inventoryOptions->setPage(1); // get data from this page number
-$inventoryOptions->setPerPage(5);
-$inventoryOptions->setSku('TESTSKU');
+$seoOptions = new \MyPromo\Connect\SDK\Helpers\SeoOptions();
+$seoOptions->setFrom(1);
+$seoOptions->setPage(1); // get data from this page number
+$seoOptions->setPerPage(5);
+$seoOptions->setSku('TESTSKU');
 ```
 
 [SeoOptions]: ../Helpers/SeoOptions.md
