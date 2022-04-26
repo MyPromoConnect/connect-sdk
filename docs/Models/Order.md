@@ -8,6 +8,7 @@ $order->setComment('your comment for order here');
 $order->setShipper($shipper);
 $order->setRecipient($recipient);
 $order->setExport($export);
+$order->setInvoice($invoice);
 
 # Optional parameters 
 $order->setFakePreflight(true|false);

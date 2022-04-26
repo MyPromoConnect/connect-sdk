@@ -4,7 +4,7 @@ There are multiple addresses needed to create an [Order][Order].
 - Export (optional, if not set we use address assigned to your client)
 - Invoice (optional, if not set we use address assigned to your client)
 
-Example Address-Object:
+Address object sample:
 
 ```php
 $address = new \MyPromo\Connect\SDK\Models\Address();
