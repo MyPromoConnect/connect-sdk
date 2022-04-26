@@ -28,8 +28,6 @@ class ProductExportRepository extends Repository
      * You can use the @param  array|ProductOptions  $options
      *
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ApiRequestException
      */
     public function all($options): array
     {
@@ -46,15 +44,15 @@ class ProductExportRepository extends Repository
                 ],
                 'query' => $options,
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ApiResponseException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -63,7 +61,6 @@ class ProductExportRepository extends Repository
      * @param $productExportId
      *
      * @return array
-     * @throws InvalidArgumentException
      */
     public function find($productExportId): array
     {
@@ -74,15 +71,15 @@ class ProductExportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ApiResponseException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -91,7 +88,6 @@ class ProductExportRepository extends Repository
      * @param $productExportId
      *
      * @return array
-     * @throws InvalidArgumentException
      */
     public function cancelExport($productExportId): array
     {
@@ -102,15 +98,15 @@ class ProductExportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ApiResponseException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
@@ -130,19 +126,19 @@ class ProductExportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ApiResponseException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param ProductExport $productExport
+     * @param  ProductExport  $productExport
      *
      * @return mixed
      */
