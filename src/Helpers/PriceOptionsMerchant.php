@@ -140,16 +140,13 @@ class PriceOptionsMerchant implements Arrayable
     public function toArray()
     {
         $array = [
-            'from'       => $this->from,
-            'page'       => $this->page,
-            'per_page'   => $this->per_page,
-            'pagination' => $this->pagination,
-            'sku'        => $this->sku,
+            'page'          => $this->page ? $this->page : 1,
+            'from'          => $this->from ? $this->from : 1,
+            'per_page'      => $this->per_page,
+            'pagination'    => $this->pagination,
+            'sku'           => $this->sku,
+            'shipping_from' => $this->shipping_from,
         ];
-
-        if (isset($this->shipping_from)) {
-            $array['shipping_from'] = $this->shipping_from;
-        }
 
         return $array;
     }

@@ -10,6 +10,11 @@ class ProductImportOptions implements Arrayable
     /**
      * @var int
      */
+    protected $from;
+
+    /**
+     * @var int
+     */
     protected $pagination;
 
     /**
@@ -81,6 +86,22 @@ class ProductImportOptions implements Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param int $from
+     */
+    public function setFrom($from)
+    {
+        $this->from = $from;
+    }
+
+    /**
      * @return DateTimeInterface
      */
     public function getCreatedFrom()
@@ -124,11 +145,12 @@ class ProductImportOptions implements Arrayable
     public function toArray(): array
     {
         return [
-            'page'          => $this->page,
-            'per_page'      => $this->per_page,
-            'pagination'    => $this->pagination,
+            'page'         => $this->page ? $this->page : 1,
+            'from'         => $this->from ? $this->from : 1,
+            'per_page'     => $this->per_page,
+            'pagination'   => $this->pagination,
             'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,
-            'created_to' => $this->created_to ? $this->created_to->format('Y-m-d') : null,
+            'created_to'   => $this->created_to ? $this->created_to->format('Y-m-d') : null,
         ];
     }
 }

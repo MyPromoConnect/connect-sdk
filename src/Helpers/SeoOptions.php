@@ -119,11 +119,11 @@ class SeoOptions implements Arrayable
     public function toArray(): array
     {
         return [
-            'from'          => $this->from,
-            'page'          => $this->page,
-            'per_page'      => $this->per_page,
-            'sku'           => $this->sku,
-            'pagination'    => $this->pagination,
+            'page'       => $this->page ? $this->page : 1,
+            'from'       => $this->from ? $this->from : 1,
+            'per_page'   => $this->per_page,
+            'sku'        => $this->sku,
+            'pagination' => $this->pagination,
         ];
     }
 }

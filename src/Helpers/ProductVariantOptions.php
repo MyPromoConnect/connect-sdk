@@ -9,6 +9,11 @@ class ProductVariantOptions implements Arrayable
     /**
      * @var int
      */
+    protected $from;
+
+    /**
+     * @var int
+     */
     protected $page;
 
     /**
@@ -153,6 +158,22 @@ class ProductVariantOptions implements Arrayable
         $this->pagination = $pagination;
     }
 
+    /**
+     * @return int
+     */
+    public function getFrom()
+    {
+        return $this->from;
+    }
+
+    /**
+     * @param int $from
+     */
+    public function setFrom($from)
+    {
+        $this->from = $from;
+    }
+
 
     /**
      * Get the instance as an array.
@@ -162,10 +183,11 @@ class ProductVariantOptions implements Arrayable
     public function toArray(): array
     {
         $data = [
-            'lang' => $this->lang,
-            'page' => $this->page,
-            'per_page' => $this->per_page,
+            'page'       => $this->page ? $this->page : 1,
+            'from'       => $this->from ? $this->from : 1,
+            'per_page'   => $this->per_page,
             'pagination' => $this->pagination,
+            'lang'       => $this->lang ? $this->lang : null,
         ];
 
         if (isset($this->id)) {

@@ -237,16 +237,16 @@ class OrderOptions implements Arrayable
     public function toArray(): array
     {
         return [
-            'from' => $this->from,
-            'page' => $this->page,
-            'per_page' => $this->per_page,
-            'pagination' => $this->pagination,
+            'page'         => $this->page ? $this->page : 1,
+            'from'         => $this->from ? $this->from : 1,
+            'per_page'     => $this->per_page,
+            'pagination'   => $this->pagination,
             'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,
-            'created_to' => $this->created_to ? $this->created_to->format('Y-m-d') : null,
+            'created_to'   => $this->created_to ? $this->created_to->format('Y-m-d') : null,
             'updated_from' => $this->updated_from ? $this->updated_from->format('Y-m-d') : null,
-            'updated_to' => $this->updated_to ? $this->updated_to->format('Y-m-d') : null,
-            'reference' => $this->reference ?? null,
-            'reference2' => $this->reference2 ?? null,
+            'updated_to'   => $this->updated_to ? $this->updated_to->format('Y-m-d') : null,
+            'reference'    => $this->reference ?? null,
+            'reference2'   => $this->reference2 ?? null,
         ];
     }
 }
