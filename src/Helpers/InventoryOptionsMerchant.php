@@ -165,7 +165,7 @@ class InventoryOptionsMerchant implements Arrayable
             'page'          => $this->page,
             'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
-            'sku'           => $this->sku
+            'sku'           => $this->sku ? $this->sku : null,
         ];
 
         if (isset($this->sku_fulfiller)) {
