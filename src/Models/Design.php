@@ -36,6 +36,12 @@ class Design implements Arrayable
     protected $sku;
 
     /**
+     * @var int
+     */
+    protected $qty;
+
+
+    /**
      * @var array|null
      */
     protected $options;
@@ -126,6 +132,23 @@ class Design implements Arrayable
     }
 
     /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->qty;
+    }
+
+    /**
+     * @param int $qty
+     */
+    public function setQuantity($qty)
+    {
+        $this->qty = $qty;
+    }
+
+
+    /**
      * @return array|null
      */
     public function getOptions()
@@ -166,16 +189,18 @@ class Design implements Arrayable
     public function toArray()
     {
         $designArray = [
-            'sku'               => $this->sku,
-            'intent'     => $this->intent,
-            'return_url'        => $this->returnUrl,
-            'cancel_url'        => $this->cancelUrl,
-            'editor_user_hash'  => $this->editorUserHash,
+            'editor_user_hash' => $this->editorUserHash,
+            'sku'              => $this->sku,
+            'qty'              => $this->qty ? $this->qty : 1,
+            'intent'           => $this->intent,
+            'return_url'       => $this->returnUrl,
+            'cancel_url'       => $this->cancelUrl,
         ];
 
         if ($this->options) {
             $designArray['options'] = $this->options;
         }
+
 
         return $designArray;
     }

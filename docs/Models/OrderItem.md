@@ -1,4 +1,4 @@
-Template-File for [OrderItemRepository][OrderItemRepository].
+Template-File for [OrderItemRepository->submit()][OrderItemRepository].
 
 ```php
 $orderItem = new \MyPromo\Connect\SDK\Models\OrderItem();
@@ -18,13 +18,21 @@ $orderItemRelation->setOrderItemId($relation);
 $orderItem->setRelation($orderItemRelation);
 ```
 
+Notes:
+
+* Item commect is optional and just available on request
+* Service items with  [OrderItemRelation][OrderItemRelation] are just acvailable on request 
+
+
 Required Models:
 - [File][File]
+
 
 Optional:
 - [Custom][Customs]
 - [CustomProperty][CustomProperty]
 - [OrderItemRelation][OrderItemRelation]
+
 
 [File]: File.md
 [Customs]: Customs.md

@@ -1,4 +1,5 @@
-There are multiple addresses needed to create an [Order][Order].
+There are multiple addresses needed to create an [Order][Order].  
+
 - Shipper (optional, if not set we use address assigned to your client)
 - Recipient (mandatory)
 - Export (optional, if not set we use address assigned to your client)

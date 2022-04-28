@@ -6,12 +6,17 @@ $design->setEditorUserHash('Hash String');
 $design->setReturnUrl('https...');
 $design->setCancelUrl('https...');
 $design->setSku('EXAMPLE-SKU');
+$design->setQty(1);
 $design->setIntent('EXAMPLE-INTENT (upload/customize)');
 $design->setOptions([
     'example-key' => 'example-value'
 ]);
 ```
 
-Options are optionals.
+Notes:  
+
+* Options are optionals.
+* Qty is optional
+
 
 [DesignRepository]: ../Repositories/DesignRepository.md

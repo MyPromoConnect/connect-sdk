@@ -15,6 +15,11 @@ $order->setFakePreflight(true|false);
 $order->setFakeShipment(true|false);
 ```
 
+Notes:
+
+* Order commect is optional and just available on request
+
+
 Required:
 
 - [Address][address]
