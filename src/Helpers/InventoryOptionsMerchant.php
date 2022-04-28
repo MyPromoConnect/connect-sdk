@@ -32,11 +32,6 @@ class InventoryOptionsMerchant implements Arrayable
     protected $shipping_from;
 
     /**
-     * @var string
-     */
-    protected $sku_fulfiller;
-
-    /**
      * @var bool
      */
     protected $pagination;
@@ -122,22 +117,6 @@ class InventoryOptionsMerchant implements Arrayable
     }
 
     /**
-     * @return string
-     */
-    public function getSkuFulfiller()
-    {
-        return $this->sku_fulfiller;
-    }
-
-    /**
-     * @param string $sku_fulfiller
-     */
-    public function setSkuFulfiller($sku_fulfiller)
-    {
-        $this->sku_fulfiller = $sku_fulfiller;
-    }
-
-    /**
      * @return int
      */
     public function getPage()
@@ -165,16 +144,9 @@ class InventoryOptionsMerchant implements Arrayable
             'page'          => $this->page,
             'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
+            'shipping_from' => $this->shipping_from,
             'sku'           => $this->sku ? $this->sku : null,
         ];
-
-        if (isset($this->sku_fulfiller)) {
-            $array['sku_fulfiller'] = $this->sku_fulfiller;
-        }
-
-        if (isset($this->shipping_from)) {
-            $array['shipping_from'] = $this->shipping_from;
-        }
 
         return $array;
     }

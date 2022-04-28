@@ -144,8 +144,8 @@ class InventoryOptionsFulfiller implements Arrayable
             'page'          => $this->page,
             'per_page'      => $this->per_page,
             'pagination'    => $this->pagination,
-            'sku'           => $this->sku,
-            'sku_fulfiller' => $this->sku_fulfiller,
+            'sku'           => $this->sku ? $this->sku : null,
+            'sku_fulfiller' => $this->sku_fulfiller ? $this->sku_fulfiller : null,
         ];
     }
 }
