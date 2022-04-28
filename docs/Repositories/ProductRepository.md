@@ -85,8 +85,10 @@ $productRepository->putInventory($productInventory);
 ###### Get all prices
 Get all prices for products which are available for your client.
 Results can be filtered/paginated with this helper: [PriceOptions][PriceOptions]
+
 ```php
-$priceOptions = new \MyPromo\Connect\SDK\Helpers\PriceOptions();
+// merchants
+$priceOptionsMerchant = new \MyPromo\Connect\SDK\Helpers\PriceOptionsMerchant();
 ...
 or
 
@@ -97,8 +99,25 @@ $priceOptions = [
     'shipping_from' => 'DE',
 ];
 
-$productRepository->getPrices($priceOptions);
+$productRepository->getPrices($priceOptionsMerchant);
 ```
+```php
+// fulfiller
+$priceOptionsFulfiller = new \MyPromo\Connect\SDK\Helpers\PriceOptionsFulfiller();
+...
+or
+
+$priceOptions = [
+    'from'          => 1,
+    'per_page'      => 5,
+    'sku'           => 'TESTSKU',
+    'sku_fulfiller' => '1234567890',
+];
+
+$productRepository->getPrices($priceOptionsFulfiller);
+```
+
+
 <br />
 
 ###### Update prices
@@ -154,7 +173,8 @@ $productRepository->getVariant(1);
 [ProductOptions]: ../Helpers/ProductOptions.md
 [ProductVariantOptions]: ../Helpers/ProductVariantOptions.md
 [InventoryOptionsMerchant]: ../Helpers/InventoryOptionsMerchant.md
-[PriceOptions]: ../Helpers/PriceOptions.md
+[PriceOptionsMerchant]: ../Helpers/PriceOptionsMerchant.md
+[PriceOptionsFulfiller]: ../Helpers/PriceOptionsFulfiller.md
 [SeoOptions]: ../Helpers/SeoOptions.md
 [ProductInventory]: ../Models/ProductInventory.md
 [ProductPriceUpdate]: ../Models/ProductPriceUpdate.md

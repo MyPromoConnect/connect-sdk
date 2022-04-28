@@ -8,7 +8,8 @@ use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\InventoryOptionsFulfiller;
 use MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant;
-use MyPromo\Connect\SDK\Helpers\PriceOptions;
+use MyPromo\Connect\SDK\Helpers\PriceOptionsFulfiller;
+use MyPromo\Connect\SDK\Helpers\PriceOptionsMerchant;
 use MyPromo\Connect\SDK\Helpers\ProductOptions;
 use MyPromo\Connect\SDK\Helpers\ProductVariantOptions;
 use MyPromo\Connect\SDK\Helpers\SeoOptions;
@@ -160,13 +161,13 @@ class ProductRepository extends Repository
      *      sku
      *      shipping_from
      *
-     * You can use the @param array|PriceOptions $options
+     * You can use the @param array|PriceOptionsMerchant|PriceOptionsFulfiller $options
      *
      * @return array
      */
     public function getPrices($options) {
         try {
-            if ($options instanceof PriceOptions) {
+            if ($options instanceof PriceOptionsMerchant || $options instanceof PriceOptionsFulfiller) {
                 $options = $options->toArray();
             }
 
