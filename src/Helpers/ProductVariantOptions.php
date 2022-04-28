@@ -95,33 +95,33 @@ class ProductVariantOptions implements Arrayable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSku(): string
+    public function getSku(): ?string
     {
         return $this->sku;
     }
 
     /**
-     * @param string $sku
+     * @param string|null $sku
      */
-    public function setSku(string $sku)
+    public function setSku(?string $sku)
     {
         $this->sku = $sku;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
     }
 
     /**
-     * @param string $reference
+     * @param string|null $reference
      */
-    public function setReference(string $reference)
+    public function setReference(?string $reference)
     {
         $this->reference = $reference;
     }

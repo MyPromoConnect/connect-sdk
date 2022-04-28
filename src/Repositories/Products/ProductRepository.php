@@ -66,14 +66,19 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function find($productId)
+    public function find($productId, $options)
     {
         try {
+            if ($options instanceof ProductOptions) {
+                $options = $options->toArray();
+            }
+
             $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
+                'query'   => $options,
             ]);
 
         } catch (Exception $ex) {
