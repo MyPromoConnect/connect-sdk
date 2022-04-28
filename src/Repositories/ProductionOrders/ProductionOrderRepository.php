@@ -60,10 +60,10 @@ class ProductionOrderRepository extends Repository
      *
      * @return array
      */
-    public function find($orderId): array
+    public function find($productionOrderId): array
     {
         try {
-            $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId, [
+            $response = $this->client->guzzle()->get('/v1/production_orders/' . $productionOrderId, [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
@@ -82,14 +82,14 @@ class ProductionOrderRepository extends Repository
     }
 
     /**
-     * @param $orderId
+     * @param $productionOrderId
      * @param Shipment $shipment
      * @return array
      */
-    public function addShipment($orderId, Shipment $shipment): array
+    public function addShipment($productionOrderId, Shipment $shipment): array
     {
         try {
-            $response = $this->client->guzzle()->post('/v1/production_orders/' . $orderId . '/add_shipment', [
+            $response = $this->client->guzzle()->post('/v1/production_orders/' . $productionOrderId . '/add_shipment', [
                 'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
@@ -110,14 +110,14 @@ class ProductionOrderRepository extends Repository
     }
 
     /**
-     * @param $orderId
+     * @param $productionOrderId
      * @return array
      */
-    public function genericLabel($orderId): array
+    public function genericLabel($productionOrderId): array
     {
         try {
-            $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId . '/generic_label', [
-                'headers'            => [
+            $response = $this->client->guzzle()->get('/v1/production_orders/' . $productionOrderId . '/generic_label', [
+                'headers' => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
