@@ -28,12 +28,14 @@ class ProductRepository extends Repository
      *      lang
      *      currency
      *      test_product
+     *      include_variants
      *
      * You can use the @param array|ProductOptions $options
      *
      * @return array
      */
-    public function all($options) {
+    public function all($options)
+    {
         try {
             if ($options instanceof ProductOptions) {
                 $options = $options->toArray();
@@ -45,7 +47,7 @@ class ProductRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
         } catch (Exception $ex) {
@@ -64,7 +66,8 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function find($productId) {
+    public function find($productId)
+    {
         try {
             $response = $this->client->guzzle()->get('/v1/products/' . $productId, [
                 'headers' => [
@@ -96,16 +99,16 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function getInventory($options) {
+    public function getInventory($options)
+    {
         try {
-            if (empty($options->getSkuFulfiller())) {
-                if ($options instanceof InventoryOptionsMerchant) {
-                    $options = $options->toArray();
-                }
-            } else {
-                if ($options instanceof InventoryOptionsFulfiller) {
-                    $options = $options->toArray();
-                }
+
+            if ($options instanceof InventoryOptionsMerchant) {
+                $options = $options->toArray();
+            }
+
+            if ($options instanceof InventoryOptionsFulfiller) {
+                $options = $options->toArray();
             }
 
             $response = $this->client->guzzle()->get('/v1/inventory', [
@@ -113,7 +116,7 @@ class ProductRepository extends Repository
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options
+                'query'   => $options
             ]);
 
         } catch (Exception $ex) {
@@ -132,10 +135,11 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function putInventory($productInventory) {
+    public function putInventory($productInventory)
+    {
         try {
             $response = $this->client->guzzle()->patch('/v1/inventory', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
@@ -165,9 +169,15 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function getPrices($options) {
+    public function getPrices($options)
+    {
         try {
-            if ($options instanceof PriceOptionsMerchant || $options instanceof PriceOptionsFulfiller) {
+
+            if ($options instanceof PriceOptionsMerchant) {
+                $options = $options->toArray();
+            }
+
+            if ($options instanceof PriceOptionsFulfiller) {
                 $options = $options->toArray();
             }
 
@@ -176,7 +186,7 @@ class ProductRepository extends Repository
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options
+                'query'   => $options
             ]);
 
         } catch (Exception $ex) {
@@ -195,10 +205,11 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function putPrices($productPriceUpdate) {
+    public function putPrices($productPriceUpdate)
+    {
         try {
             $response = $this->client->guzzle()->patch('/v1/prices', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
@@ -227,7 +238,8 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function getSeo($options) {
+    public function getSeo($options)
+    {
         try {
             if ($options instanceof SeoOptions) {
                 $options = $options->toArray();
@@ -238,7 +250,7 @@ class ProductRepository extends Repository
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options
+                'query'   => $options
             ]);
 
         } catch (Exception $ex) {
@@ -257,10 +269,11 @@ class ProductRepository extends Repository
      *
      * @return array
      */
-    public function putSeo($productSeoUpdate) {
+    public function putSeo($productSeoUpdate)
+    {
         try {
             $response = $this->client->guzzle()->patch('/v1/seo', [
-                'headers' => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
@@ -293,7 +306,7 @@ class ProductRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $productVariantOptions->toArray(),
+                'query'   => $productVariantOptions->toArray(),
             ]);
 
         } catch (Exception $ex) {

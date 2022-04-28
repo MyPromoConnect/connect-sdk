@@ -59,6 +59,11 @@ class ProductOptions implements Arrayable
     /**
      * @var bool
      */
+    protected $include_variants;
+
+    /**
+     * @var bool
+     */
     protected $pagination;
 
     /**
@@ -142,17 +147,17 @@ class ProductOptions implements Arrayable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSearch(): string
+    public function getSearch(): ?string
     {
         return $this->search;
     }
 
     /**
-     * @param string $search
+     * @param string|null $search
      */
-    public function setSearch(string $search)
+    public function setSearch(?string $search)
     {
         $this->search = $search;
     }
@@ -174,17 +179,17 @@ class ProductOptions implements Arrayable
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getSku(): string
+    public function getSku(): ?string
     {
         return $this->sku;
     }
 
     /**
-     * @param string $sku
+     * @param string|null $sku
      */
-    public function setSku(string $sku)
+    public function setSku(?string $sku)
     {
         $this->sku = $sku;
     }
@@ -238,6 +243,22 @@ class ProductOptions implements Arrayable
     }
 
     /**
+     * @return bool
+     */
+    public function getIncludeVariants(): bool
+    {
+        return $this->include_variants;
+    }
+
+    /**
+     * @param bool $include_variants
+     */
+    public function setIncludeVariants(bool $include_variants)
+    {
+        $this->include_variants = $include_variants;
+    }
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -245,17 +266,18 @@ class ProductOptions implements Arrayable
     public function toArray(): array
     {
         return [
-            'page'          => $this->page,
-            'from'          => $this->from,
-            'per_page'      => $this->per_page,
-            'pagination'    => $this->pagination,
-            'shipping_from' => $this->shipping_from,
-            'search'        => $this->search,
-            'available'     => $this->available,
-            'sku'           => $this->sku,
-            'lang'          => $this->lang,
-            'currency'      => $this->currency,
-            'test_product'  => $this->test_product,
+            'page'             => $this->page,
+            'from'             => $this->from,
+            'per_page'         => $this->per_page,
+            'pagination'       => $this->pagination,
+            'shipping_from'    => $this->shipping_from,
+            'search'           => $this->search,
+            'available'        => $this->available,
+            'sku'              => $this->sku,
+            'lang'             => $this->lang,
+            'currency'         => $this->currency,
+            'test_product'     => $this->test_product,
+            'include_variants' => $this->include_variants,
         ];
     }
 }
