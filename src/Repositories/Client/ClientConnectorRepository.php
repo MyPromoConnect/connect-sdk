@@ -6,11 +6,56 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Helpers\OrderOptions;
 use MyPromo\Connect\SDK\Models\ClientConnector;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class ClientConnectorRepository extends Repository
 {
+
+    /**
+     * Available options:
+     *      from
+     *      per_page
+     *      created_from
+     *      created_to
+     *      updated_from
+     *      updated_to
+     *
+     * You can use the @param array|OrderOptions $options
+     *
+     * @return array
+     * @see OrderOptions as its helper
+     *
+     */
+    public function all($options)
+    {
+        if ($options instanceof OrderOptions) {
+            $options = $options->toArray();
+        }
+
+        try {
+            $response = $this->client->guzzle()->get('/v1/client/connectors', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query' => $options,
+            ]);
+
+        } catch (Exception $ex) {
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+    }
+
+
     /**
      * Update client connectors
      *
@@ -21,7 +66,7 @@ class ClientConnectorRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/connectors', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
