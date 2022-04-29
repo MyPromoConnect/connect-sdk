@@ -9,12 +9,12 @@ $configurations->setShopCurrency('EUR');
 $configurations->setProductsLanguage('DE');
 $configurations->setSyncProductSettings('normal');
 $configurations->setSalePriceConfig('use_sales_price');
-$configurations->setCreateCollections('true|false');
-$configurations->setUpdateImages('true|false');
-$configurations->setUpdateProducts('true|false');
-$configurations->setUpdateSeo('true|false');
-$configurations->setRecreateDeletedCollection('true|false');
-$configurations->setRecreateDeletedProducts('true|false');
+$configurations->setCreateCollections(true|false);
+$configurations->setUpdateImages(true|false);
+$configurations->setUpdateProducts(true|false);
+$configurations->setUpdateSeo(true|false);
+$configurations->setRecreateDeletedCollection(true|false);
+$configurations->setRecreateDeletedProducts(true|false);
 ```
 
 [ClientConnectorRepository]: ../Repositories/ClientConnectorRepository.md

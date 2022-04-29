@@ -3,11 +3,11 @@ Template-File for [ClientSettingRepository->create()][ClientSettingRepository]
 ```php
 $clientSettingsMerchant = new \MyPromo\Connect\SDK\Models\ClientSettingMerchant();
 
-$clientSettingsMerchant->setActivateNewFulfiller('true|false');
-$clientSettingsMerchant->setActivateNewProducts('true|false');
+$clientSettingsMerchant->setActivateNewFulfiller(true|false);
+$clientSettingsMerchant->setActivateNewProducts(true|false);
 
-$clientSettingsMerchant->setHasToSupplyCarrier('true|false');
-$clientSettingsMerchant->setHasToSupplyTrackingCode('true|false');
+$clientSettingsMerchant->setHasToSupplyCarrier(true|false);
+$clientSettingsMerchant->setHasToSupplyTrackingCode(true|false);
 
 $clientSettingsMerchant->setPriceResetLogic(1); // allowed value 1-4
 $clientSettingsMerchant->setAdjustMaxUpPercentage(0); // 0 = off
