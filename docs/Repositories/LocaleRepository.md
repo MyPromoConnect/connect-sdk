@@ -15,7 +15,6 @@ $options = new \MyPromo\Connect\SDK\Helpers\LocaleOptions();
 or
 
 $options = [
-    'from'         => 1,
     'page'         => 1,
     'per_page'     => 5,
     'pagination'   => 5,

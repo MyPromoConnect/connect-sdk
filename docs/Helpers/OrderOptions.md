@@ -4,9 +4,9 @@ You can use this helper class to filter/paginate orders.
 
 ```php
 $orderOptions = new \MyPromo\Connect\SDK\Helpers\OrderOptions();
-$orderOptions->setFrom(1);
 $orderOptions->setPage(1); // get data from this page number
 $orderOptions->setPerPage(5);
+$orderOptions->setPagination(true|false);
 $orderOptions->setCreatedFrom(new \DateTime(date('Y-m-d H:i:s')));
 $orderOptions->setCreatedTo(new \DateTime(date('Y-m-d H:i:s')));
 $orderOptions->setUpdatedFrom(new \DateTime(date('Y-m-d H:i:s')));

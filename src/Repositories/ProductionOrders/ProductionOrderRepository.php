@@ -14,7 +14,7 @@ class ProductionOrderRepository extends Repository
 {
     /**
      * Available options:
-     *      from
+     *      page
      *      per_page
      *      created_from
      *      created_to

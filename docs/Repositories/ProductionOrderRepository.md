@@ -22,7 +22,7 @@ $productionOrderOptions = new \MyPromo\Connect\SDK\Helpers\ProductionOrderOption
 or
 
 $productionOrderOptions = [
-    'from'         => 1,
+    'page'         => 1,
     'per_page'     => 5,
     'created_from' => $date->format('Y-m-d'),
     'created_to'   => $date->format('Y-m-d'),

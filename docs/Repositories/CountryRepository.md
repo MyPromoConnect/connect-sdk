@@ -21,7 +21,7 @@ $countryOptions = new \MyPromo\Connect\SDK\Helpers\CountryOptions();
 or
 
 $countryOptions = [
-    'from'         => 1,
+    'page'         => 1,
     'per_page'     => 5,
 ];
 

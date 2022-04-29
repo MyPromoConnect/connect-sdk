@@ -12,7 +12,7 @@ class StateRepository extends Repository
 {
     /**
      * Available options:
-     *      from
+     *      page
      *      per_page
      *
      * You can use the @param array|StateOptions $options

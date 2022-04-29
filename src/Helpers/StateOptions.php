@@ -9,11 +9,6 @@ class StateOptions implements Arrayable
     /**
      * @var int
      */
-    protected $from;
-
-    /**
-     * @var int
-     */
     protected $page;
 
     /**
@@ -40,22 +35,6 @@ class StateOptions implements Arrayable
     public function setPagination(bool $pagination)
     {
         $this->pagination = $pagination;
-    }
-
-    /**
-     * @return int
-     */
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    /**
-     * @param int $from
-     */
-    public function setFrom($from)
-    {
-        $this->from = $from;
     }
 
     /**
@@ -99,7 +78,6 @@ class StateOptions implements Arrayable
     {
         return [
             'page'       => $this->page ? $this->page : 1,
-            'from'       => $this->from ? $this->from : 1,
             'per_page'   => $this->per_page,
             'pagination' => $this->pagination,
         ];

@@ -10,11 +10,6 @@ class ProductExportOptions implements Arrayable
     /**
      * @var int
      */
-    protected $from;
-
-    /**
-     * @var int
-     */
     protected $pagination;
 
     /**
@@ -86,22 +81,6 @@ class ProductExportOptions implements Arrayable
     }
 
     /**
-     * @return int
-     */
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    /**
-     * @param int $from
-     */
-    public function setFrom($from)
-    {
-        $this->from = $from;
-    }
-
-    /**
      * @return DateTimeInterface
      */
     public function getCreatedFrom()
@@ -146,7 +125,6 @@ class ProductExportOptions implements Arrayable
     {
         return [
             'page'         => $this->page ? $this->page : 1,
-            'from'         => $this->from ? $this->from : 1,
             'per_page'     => $this->per_page,
             'pagination'   => $this->pagination,
             'created_from' => $this->created_from ? $this->created_from->format('Y-m-d') : null,

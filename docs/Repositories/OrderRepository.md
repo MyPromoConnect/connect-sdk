@@ -45,7 +45,7 @@ $orderOptions = new \MyPromo\Connect\SDK\Helpers\OrderOptions();
 or
 
 $orderOptions = [
-    'from'         => 1,
+    'page'         => 1,
     'per_page'     => 5,
     'created_from' => $date->format('Y-m-d'),
     'created_to'   => $date->format('Y-m-d'),

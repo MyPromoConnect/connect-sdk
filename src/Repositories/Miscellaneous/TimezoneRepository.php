@@ -12,7 +12,7 @@ class TimezoneRepository extends Repository
 {
     /**
      * Available options:
-     *      from
+     *      page
      *      per_page
      *      pagination
      *

@@ -21,7 +21,7 @@ $carrierOptions = new \MyPromo\Connect\SDK\Helpers\CarrierOptions();
 or
 
 $carrierOptions = [
-    'from'         => 1,
+    'page'         => 1,
     'per_page'     => 5,
 ];
 

@@ -21,7 +21,7 @@ $stateOptions = new \MyPromo\Connect\SDK\Helpers\StateOptions();
 or
 
 $stateOptions = [
-    'from'         => 1,
+    'page'         => 1,
     'per_page'     => 5,
 ];
 

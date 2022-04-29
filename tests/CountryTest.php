@@ -18,7 +18,6 @@ class CountryTest extends TestCase
 
         $this->options = new CountryOptions();
         $this->options->setPage(1);
-        $this->options->setFrom(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);
     }

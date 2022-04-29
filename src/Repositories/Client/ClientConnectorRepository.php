@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Helpers\ClientConnectorOptions;
 use MyPromo\Connect\SDK\Helpers\OrderOptions;
 use MyPromo\Connect\SDK\Models\ClientConnector;
 use MyPromo\Connect\SDK\Repositories\Repository;
@@ -14,15 +15,7 @@ class ClientConnectorRepository extends Repository
 {
 
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      created_from
-     *      created_to
-     *      updated_from
-     *      updated_to
-     *
-     * You can use the @param array|OrderOptions $options
+     * Get all Connectors assigned to a client
      *
      * @return array
      * @see OrderOptions as its helper
@@ -30,7 +23,7 @@ class ClientConnectorRepository extends Repository
      */
     public function all($options)
     {
-        if ($options instanceof OrderOptions) {
+        if ($options instanceof ClientConnectorOptions) {
             $options = $options->toArray();
         }
 
@@ -41,7 +34,7 @@ class ClientConnectorRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
         } catch (Exception $ex) {

@@ -9,11 +9,6 @@ class ProductVariantOptions implements Arrayable
     /**
      * @var int
      */
-    protected $from;
-
-    /**
-     * @var int
-     */
     protected $page;
 
     /**
@@ -159,23 +154,6 @@ class ProductVariantOptions implements Arrayable
     }
 
     /**
-     * @return int
-     */
-    public function getFrom()
-    {
-        return $this->from;
-    }
-
-    /**
-     * @param int $from
-     */
-    public function setFrom($from)
-    {
-        $this->from = $from;
-    }
-
-
-    /**
      * Get the instance as an array.
      *
      * @return array
@@ -184,7 +162,6 @@ class ProductVariantOptions implements Arrayable
     {
         $data = [
             'page'       => $this->page ? $this->page : 1,
-            'from'       => $this->from ? $this->from : 1,
             'per_page'   => $this->per_page,
             'pagination' => $this->pagination,
             'lang'       => $this->lang ? $this->lang : null,

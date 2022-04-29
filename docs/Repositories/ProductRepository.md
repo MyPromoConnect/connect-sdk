@@ -14,7 +14,7 @@ $productOptions = new \MyPromo\Connect\SDK\Helpers\ProductOptions();
 or
 
 $productOptions = [
-    'from'          => 1,
+    'page'          => 1,
     'per_page'      => 5,
     'shipping_from' => 'DE',
     'search'        => 'Test',
@@ -46,7 +46,7 @@ $inventoryOptions = new \MyPromo\Connect\SDK\Helpers\InventoryOptions();
 or
 
 $inventoryOptions = [
-    'from'          => 1,
+    'page'          => 1,
     'per_page'      => 5,
     'sku'           => 'TESTSKU',
     'shipping_from' => 'DE',
@@ -65,7 +65,7 @@ $inventoryOptions = new \MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant();
 or
 
 $inventoryOptions = [
-    'from'          => 1,
+    'page'          => 1,
     'per_page'      => 5,
     'sku'           => 'TESTSKU',
     'sku_fulfiller' => 'SKU-FULFILLER',
@@ -93,7 +93,7 @@ $priceOptionsMerchant = new \MyPromo\Connect\SDK\Helpers\PriceOptionsMerchant();
 or
 
 $priceOptions = [
-    'from'          => 1,
+    'page'          => 1,
     'per_page'      => 5,
     'sku'           => 'TESTSKU',
     'shipping_from' => 'DE',
@@ -108,7 +108,7 @@ $priceOptionsFulfiller = new \MyPromo\Connect\SDK\Helpers\PriceOptionsFulfiller(
 or
 
 $priceOptions = [
-    'from'          => 1,
+    'page'          => 1,
     'per_page'      => 5,
     'sku'           => 'TESTSKU',
     'sku_fulfiller' => '1234567890',
@@ -138,7 +138,7 @@ $seoOptions = new \MyPromo\Connect\SDK\Helpers\SeoOptions();
 or
 
 $seoOptions = [
-    'from'          => 1,
+    'page'          => 1,
     'per_page'      => 5,
     'sku'           => 'TESTSKU',
 ];
