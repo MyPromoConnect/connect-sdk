@@ -1,4 +1,4 @@
-Template-File for [ClientConnectorRepository->create()][ClientConnectorRepository]
+Template-File for [ClientConnectorRepository->update()][ClientConnectorRepository]
 
 ```php
 $clientConnector = new \MyPromo\Connect\SDK\Models\ClientConnector();
@@ -15,5 +15,14 @@ $clientConnector->setConfiguration($magentoConfigurations);
 $shopifyConfigurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify();
 $clientConnector->setConfiguration($shopifyConfigurations);
 ```
+
+Configurations:
+
+* [ConnectorConfigurationsMagento][ConnectorConfigurationsMagento]
+* [ConnectorConfigurationsShopify][ConnectorConfigurationsShopify]
+
+[ConnectorConfigurationsMagento]: ../Helpers/ConnectorConfigurationsMagento.md
+
+[ConnectorConfigurationsShopify]: ../Helpers/ConnectorConfigurationsShopify.md
 
 [ClientConnectorRepository]: ../Repositories/ClientConnectorRepository.md

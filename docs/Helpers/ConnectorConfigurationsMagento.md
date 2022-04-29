@@ -1,18 +1,18 @@
-Helper class for `\MyPromo\Connect\SDK\Repositories\Client\ClientConnectorRepository::all()`
+Helper class for `\MyPromo\Connect\SDK\Repositories\Client\ClientConnectorRepository::update()`
 
 ```php
-$configurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento();
-$configurations->setInstanceUrl('url');
-$configurations->setApiUsername('username');
-$configurations->setApiPassword('password');
-$configurations->setWebsiteCode('XXXX');
-$configurations->setWebsiteCodeId(1);
-$configurations->setWebsiteCodeName('Website name');
-$configurations->setStoreCode('XXXXX');
-$configurations->setStoreCodeId(1);
-$configurations->setStoreCodeName('Store code');
-$configurations->setSyncProductsSettings('normal');
-$configurations->setSalesPriceConfig('use_sales_price');
+$magentoConfigurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento();
+$magentoConfigurations->setInstanceUrl('url');
+$magentoConfigurations->setApiUsername('username');
+$magentoConfigurations->setApiPassword('password');
+$magentoConfigurations->setWebsiteCode('XXXX');
+$magentoConfigurations->setWebsiteCodeId(1);
+$magentoConfigurations->setWebsiteCodeName('Website name');
+$magentoConfigurations->setStoreCode('XXXXX');
+$magentoConfigurations->setStoreCodeId(1);
+$magentoConfigurations->setStoreCodeName('Store code');
+$magentoConfigurations->setSyncProductsSettings('normal');
+$magentoConfigurations->setSalesPriceConfig('use_sales_price');
 ```
 
 [ClientConnectorRepository]: ../Repositories/ClientConnectorRepository.md
