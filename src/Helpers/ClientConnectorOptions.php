@@ -119,17 +119,17 @@ class ClientConnectorOptions implements Arrayable
     /**
      * @return string
      */
-    public function getConnectorTarget(): ?string
+    public function getTarget(): ?string
     {
-        return $this->connector_target;
+        return $this->target;
     }
 
     /**
-     * @param string $connector_target
+     * @param string $target
      */
-    public function setConnectorTarget(?string $connector_target)
+    public function setTarget(?string $target)
     {
-        $this->connector_target = $connector_target;
+        $this->target = $target;
     }
 
     /**

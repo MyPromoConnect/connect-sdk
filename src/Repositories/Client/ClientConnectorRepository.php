@@ -27,6 +27,8 @@ class ClientConnectorRepository extends Repository
             $options = $options->toArray();
         }
 
+        dd($options);
+
         try {
             $response = $this->client->guzzle()->get('/v1/client/connectors', [
                 'headers' => [

@@ -9,5 +9,5 @@ $clientConnectorOptions->setPerPage(5);
 $clientConnectorOptions->setPagination(true|false);
 $clientConnectorOptions->setConnectorId(12);
 $clientConnectorOptions->setConnectorKey('shopify');
-$clientConnectorOptions->setConnectorTarget('sales_channel');
+$clientConnectorOptions->setTarget('sales_channel');
 ```  
