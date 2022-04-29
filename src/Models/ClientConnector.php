@@ -3,6 +3,9 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento;
+use MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify;
+use MyPromo\Connect\SDK\Helpers\ProductOptions;
 
 class ClientConnector implements Arrayable
 {
@@ -22,7 +25,7 @@ class ClientConnector implements Arrayable
     protected $target;
 
     /**
-     * @var array
+     * @var object
      */
     protected $configuration;
 
@@ -75,17 +78,22 @@ class ClientConnector implements Arrayable
     }
 
     /**
-     * @return array
+     * @return object
      */
-    public function getConfiguration(): array
+    public function getConfiguration(): object
     {
         return $this->configuration;
     }
 
     /**
-     * @param array $configuration
+     * @param object $configuration
+     *
+     * e.g.
+     * \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento
+     * \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify
+     * ...
      */
-    public function setConfiguration(array $configuration)
+    public function setConfiguration(object $configuration)
     {
         $this->configuration = $configuration;
     }
@@ -97,11 +105,21 @@ class ClientConnector implements Arrayable
      */
     public function toArray(): array
     {
-        return [
+        $clientConnectorArray = [
             'connector_id'  => $this->connector_id,
             'connector_key' => $this->connector_key,
             'target'        => $this->target,
-            'configuration' => $this->configuration,
         ];
+
+        if ($this->configuration instanceof ConnectorConfigurationsShopify) {
+            $clientConnectorArray['configuration'] = $this->configuration->toArray();
+        }
+
+        if ($this->configuration instanceof ConnectorConfigurationsMagento) {
+            $clientConnectorArray['configuration'] = $this->configuration->toArray();
+        }
+
+        return $clientConnectorArray;
+
     }
 }

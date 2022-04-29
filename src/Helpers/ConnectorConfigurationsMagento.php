@@ -248,14 +248,14 @@ class ConnectorConfigurationsMagento implements Arrayable
             'magento_connector_instance_url' => $this->magento_connector_instance_url,
             'magento_connector_api_username' => $this->magento_connector_api_username,
             'magento_connector_api_password' => $this->magento_connector_api_password,
-            'magento_website_code' => $this->magento_website_code,
-            'magento_store_code' => $this->magento_store_code,
-            'magento_store_code_id' => $this->magento_store_code_id,
-            'magento_website_code_id' => $this->magento_website_code_id,
-            'magento_store_code_name' => $this->magento_store_code_name,
-            'magento_website_code_name' => $this->magento_website_code_name,
-            'sync_products_settings' => $this->sync_products_settings,
-            'sales_price_config' => $this->sales_price_config
+            'magento_website_code'           => $this->magento_website_code,
+            'magento_store_code'             => $this->magento_store_code,
+            'magento_store_code_id'          => $this->magento_store_code_id,
+            'magento_website_code_id'        => $this->magento_website_code_id,
+            'magento_store_code_name'        => $this->magento_store_code_name,
+            'magento_website_code_name'      => $this->magento_website_code_name,
+            'sync_products_settings'         => $this->sync_products_settings,
+            'sales_price_config'             => $this->sales_price_config
         ];
     }
 }

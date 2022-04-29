@@ -72,6 +72,17 @@ class ConnectorConfigurationsShopify implements Arrayable
     protected $spy_recreate_deleted_collections;
 
     /**
+     * @var bool
+     */
+    protected $spy_add_new_products_automatically;
+
+    /**
+     * @var bool
+     */
+    protected $spy_use_mega_menu;
+
+
+    /**
      * @return string
      */
     public function getShopName(): string
@@ -280,6 +291,39 @@ class ConnectorConfigurationsShopify implements Arrayable
     }
 
     /**
+     * @return bool
+     */
+    public function getAddNewProductsAutomatically(): bool
+    {
+        return $this->spy_add_new_products_automatically;
+    }
+
+    /**
+     * @param bool $spy_add_new_products_automatically
+     */
+    public function setAddNewProductsAutomatically(bool $spy_add_new_products_automatically)
+    {
+        $this->spy_add_new_products_automatically = $spy_add_new_products_automatically;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getUseMegaMenu(): bool
+    {
+        return $this->spy_use_mega_menu;
+    }
+
+    /**
+     * @param bool $spy_use_mega_menu
+     */
+    public function setUseMegaMenu(bool $spy_use_mega_menu)
+    {
+        $this->spy_use_mega_menu = $spy_use_mega_menu;
+    }
+
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -287,19 +331,21 @@ class ConnectorConfigurationsShopify implements Arrayable
     public function toArray(): array
     {
         return [
-            'spy_shop_name' => $this->spy_shop_name,
-            'spy_token' => $this->spy_token,
-            'spy_shop_url' => $this->spy_shop_url,
-            'spy_sales_price_config' => $this->spy_sales_price_config,
-            'spy_recreate_deleted_products' => $this->spy_recreate_deleted_products,
-            'spy_sync_products_settings' => $this->spy_sync_products_settings,
-            'spy_shop_currency' => $this->spy_shop_currency,
-            'spy_products_language' => $this->spy_products_language,
-            'spy_update_images' => $this->spy_update_images,
-            'spy_update_products' => $this->spy_update_products,
-            'spy_update_seo' => $this->spy_update_seo,
-            'spy_create_collections' => $this->spy_create_collections,
-            'spy_recreate_deleted_collections' => $this->spy_recreate_deleted_collections,
+            'spy_shop_name'                      => $this->spy_shop_name,
+            'spy_token'                          => $this->spy_token,
+            'spy_shop_url'                       => $this->spy_shop_url,
+            'spy_sales_price_config'             => $this->spy_sales_price_config,
+            'spy_recreate_deleted_products'      => $this->spy_recreate_deleted_products,
+            'spy_sync_products_settings'         => $this->spy_sync_products_settings,
+            'spy_shop_currency'                  => $this->spy_shop_currency,
+            'spy_products_language'              => $this->spy_products_language,
+            'spy_update_images'                  => $this->spy_update_images,
+            'spy_update_products'                => $this->spy_update_products,
+            'spy_update_seo'                     => $this->spy_update_seo,
+            'spy_create_collections'             => $this->spy_create_collections,
+            'spy_recreate_deleted_collections'   => $this->spy_recreate_deleted_collections,
+            'spy_add_new_products_automatically' => $this->spy_add_new_products_automatically,
+            'spy_use_mega_menu'                  => $this->spy_use_mega_menu,
         ];
     }
 }
