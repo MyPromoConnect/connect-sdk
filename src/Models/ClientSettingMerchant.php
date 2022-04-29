@@ -12,12 +12,12 @@ class ClientSettingMerchant implements Arrayable
     protected $sent_to_production_delay;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $has_to_supply_carrier;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $has_to_supply_tracking_code;
 
@@ -37,12 +37,12 @@ class ClientSettingMerchant implements Arrayable
     protected $adjust_max_down_percentage;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $activate_new_fulfillers;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $activate_new_products;
 
@@ -63,33 +63,33 @@ class ClientSettingMerchant implements Arrayable
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getHasToSupplyCarrier(): string
+    public function getHasToSupplyCarrier(): bool
     {
         return $this->has_to_supply_carrier;
     }
 
     /**
-     * @param string $has_to_supply_carrier
+     * @param bool $has_to_supply_carrier
      */
-    public function setHasToSupplyCarrier(string $has_to_supply_carrier)
+    public function setHasToSupplyCarrier(bool $has_to_supply_carrier)
     {
         $this->has_to_supply_carrier = $has_to_supply_carrier;
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getHasToSupplyTrackingCode(): string
+    public function getHasToSupplyTrackingCode(): bool
     {
         return $this->has_to_supply_tracking_code;
     }
 
     /**
-     * @param string $has_to_supply_tracking_code
+     * @param bool $has_to_supply_tracking_code
      */
-    public function setHasToSupplyTrackingCode(string $has_to_supply_tracking_code)
+    public function setHasToSupplyTrackingCode(bool $has_to_supply_tracking_code)
     {
         $this->has_to_supply_tracking_code = $has_to_supply_tracking_code;
     }
@@ -143,33 +143,33 @@ class ClientSettingMerchant implements Arrayable
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getActivateNewFulfiller(): string
+    public function getActivateNewFulfiller(): bool
     {
         return $this->activate_new_fulfillers;
     }
 
     /**
-     * @param string $activate_new_fulfillers
+     * @param bool $activate_new_fulfillers
      */
-    public function setActivateNewFulfiller(string $activate_new_fulfillers)
+    public function setActivateNewFulfiller(bool $activate_new_fulfillers)
     {
         $this->activate_new_fulfillers = $activate_new_fulfillers;
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getActivateNewProducts(): string
+    public function getActivateNewProducts(): bool
     {
         return $this->activate_new_products;
     }
 
     /**
-     * @param string $activate_new_products
+     * @param bool $activate_new_products
      */
-    public function setActivateNewProducts(string $activate_new_products)
+    public function setActivateNewProducts(bool $activate_new_products)
     {
         $this->activate_new_products = $activate_new_products;
     }
@@ -188,19 +188,19 @@ class ClientSettingMerchant implements Arrayable
         ];
 
         $resultArray['shipping'] = [
-            'has_to_supply_carrier' => $this->has_to_supply_carrier,
+            'has_to_supply_carrier'       => $this->has_to_supply_carrier,
             'has_to_supply_tracking_code' => $this->has_to_supply_tracking_code,
         ];
 
         $resultArray['price_rules'] = [
-            'price_reset_logic' => $this->price_reset_logic,
-            'adjust_max_up_percentage' => $this->adjust_max_up_percentage,
+            'price_reset_logic'          => $this->price_reset_logic,
+            'adjust_max_up_percentage'   => $this->adjust_max_up_percentage,
             'adjust_max_down_percentage' => $this->adjust_max_down_percentage
         ];
 
         $resultArray['automatisms'] = [
             'activate_new_fulfillers' => $this->activate_new_fulfillers,
-            'activate_new_products' => $this->activate_new_products
+            'activate_new_products'   => $this->activate_new_products
         ];
 
         return $resultArray;

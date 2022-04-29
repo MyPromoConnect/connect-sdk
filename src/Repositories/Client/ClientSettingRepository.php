@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Models\ClientSettingFulfiller;
 use MyPromo\Connect\SDK\Models\ClientSettingMerchant;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
@@ -46,7 +47,7 @@ class ClientSettingRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/settings', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
