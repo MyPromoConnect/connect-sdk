@@ -1,8 +1,6 @@
 Helper class for [ConnectorJobRepository->all()][ConnectorJobRepository]
 
-You can use this helper class to filter and paginate the products.
-
-NOTE: all these filters are optional
+You can use this helper class to filter and paginate the connector jobs.
 
 ```php
 $filters = new \MyPromo\Connect\SDK\Helpers\ConnectorJobFilters();
@@ -17,7 +15,11 @@ $filters->setReference('reference to product');
 $filters->setStatus('new');
 $filters->setSkipDuplicates(true|false);
 
-# There are no filfers available for job = inventory , so you can pass empty $filters object
 ```
+
+Notes:
+
+* all filters are optional
+* if no filters available, pass an emtpy `$filters` object
 
 [ConnectorJobRepository]: ../Repositories/ConnectorJobRepository.md
