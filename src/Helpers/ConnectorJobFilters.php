@@ -21,7 +21,7 @@ class ConnectorJobFilters implements Arrayable
     protected $fulfiller;
 
     /**
-     * @var string
+     * @var bool
      */
     protected $test_product;
 
@@ -46,65 +46,65 @@ class ConnectorJobFilters implements Arrayable
     protected $skip_duplicates;
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getProducts(): string
+    public function getProducts(): ?string
     {
         return $this->products;
     }
 
     /**
-     * @param string $products
+     * @param string|null $products
      */
-    public function setProducts(string $products)
+    public function setProducts(?string $products)
     {
         $this->products = $products;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getFulfiller(): string
+    public function getFulfiller(): ?string
     {
         return $this->fulfiller;
     }
 
     /**
-     * @param string $fulfiller
+     * @param string|null $fulfiller
      */
-    public function setFulfiller(string $fulfiller)
+    public function setFulfiller(?string $fulfiller)
     {
         $this->fulfiller = $fulfiller;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getStatus(): string
+    public function getStatus(): ?string
     {
         return $this->status;
     }
 
     /**
-     * @param string $status
+     * @param string|null $status
      */
-    public function setStatus(string $status)
+    public function setStatus(?string $status)
     {
         $this->status = $status;
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getReference(): string
+    public function getReference(): ?string
     {
         return $this->reference;
     }
 
     /**
-     * @param string $reference
+     * @param string|null $reference
      */
-    public function setReference(string $reference)
+    public function setReference(?string $reference)
     {
         $this->reference = $reference;
     }
@@ -142,17 +142,17 @@ class ConnectorJobFilters implements Arrayable
     }
 
     /**
-     * @return string
+     * @return bool
      */
-    public function getTestProduct(): string
+    public function getTestProduct(): bool
     {
         return $this->test_product;
     }
 
     /**
-     * @param string $test_product
+     * @param bool $test_product
      */
-    public function setTestProduct(string $test_product)
+    public function setTestProduct(bool $test_product)
     {
         $this->test_product = $test_product;
     }
@@ -164,7 +164,7 @@ class ConnectorJobFilters implements Arrayable
      */
     public function toArray(): array
     {
-       $data = [];
+        $data = [];
 
         if (!empty($this->job)) {
             $data['job'] = $this->job;
@@ -194,6 +194,6 @@ class ConnectorJobFilters implements Arrayable
             $data['product'] = $this->products;
         }
 
-       return $data;
+        return $data;
     }
 }

@@ -98,9 +98,10 @@ class ConnectorJob implements Arrayable
      */
     public function toArray(): array
     {
-        $resultArray['id'] = $this->id;
+        //$resultArray['id'] = $this->id;
+        $resultArray['target'] = $this->target;
 
-        if (!empty($this->input)) {
+        if (!empty($this->filters)) {
             $resultArray['filters'] = $this->filters->toArray();
         }
 
