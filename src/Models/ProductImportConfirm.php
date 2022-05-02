@@ -1,10 +1,10 @@
 <?php
 
-namespace MyPromo\Connect\SDK\Helpers;
+namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class ConfirmProductImportOptions implements Arrayable
+class ProductImportConfirm implements Arrayable
 {
     /**
      * @var string

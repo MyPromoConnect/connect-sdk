@@ -4,7 +4,7 @@ Template-File for [ConnectorJobRepository->create()][ConnectorJobRepository]
 $connectorJob = new \MyPromo\Connect\SDK\Models\ConnectorJob();
 $connectorJob->setTarget('sales_channel|orders|inventory|...');
 
-$filters = new \MyPromo\Connect\SDK\Helpers\ConnectorJobFilters();
+$filters = new \MyPromo\Connect\SDK\Models\ConnectorJobFilters();
 $connectorJob->setFilters($filters);
 
 $connectorJob->setCallback($callback);
@@ -21,5 +21,5 @@ Optional:
 
 
 [Callback]: ../Models/Callback.md
-[ConnectorJobFilters]: ../Helpers/ConnectorJobFilters.md
+[ConnectorJobFilters]: ConnectorJobFilters.md
 [ConnectorJobRepository]: ../Repositories/ConnectorJobRepository.md

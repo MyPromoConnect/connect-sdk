@@ -1,9 +1,8 @@
-Helper class for [ConnectorJobRepository->create()][ConnectorJobRepository]
-
-You can use this helper class to filter and paginate the connector jobs.
+Filter options for [ConnectorJobRepository->create()][ConnectorJobRepository]
 
 ```php
-$filters = new \MyPromo\Connect\SDK\Helpers\ConnectorJobFilters();
+$filters = new \MyPromo\Connect\SDK\Models\ConnectorJobFilters();
+
 # These filters can be used for job = sales_channel
 $filters->setJob('prices|inventory');
 $filters->setFulfiller('Id of fullfiller');

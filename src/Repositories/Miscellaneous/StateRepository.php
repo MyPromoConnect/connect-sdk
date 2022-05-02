@@ -19,7 +19,8 @@ class StateRepository extends Repository
      *
      * @return array
      */
-    public function all($options) {
+    public function all($options)
+    {
         try {
             if ($options instanceof StateOptions) {
                 $options = $options->toArray();
@@ -31,7 +32,7 @@ class StateRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
         } catch (Exception $ex) {
@@ -50,7 +51,8 @@ class StateRepository extends Repository
      *
      * @return array
      */
-    public function find($stateId) {
+    public function find($stateId)
+    {
         try {
             $response = $this->client->guzzle()->get('/v1/states/' . $stateId, [
                 'headers' => [

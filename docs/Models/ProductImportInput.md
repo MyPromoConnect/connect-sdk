@@ -1,4 +1,4 @@
-Helper class for [ProductImportRepository->all()][ProductImportRepository]
+Helper class for [ProductImportRepository->create()][ProductImportRepository]
 
 You can use this helper class to filter and paginate the products.
 
@@ -60,7 +60,6 @@ $file->setOAuth2Credentials([
 ```php
 $file->setSftpUser($user);
 $file->setSftpPassword($password);
-```
 ```
 
 [ProductImportRepository]: ../Repositories/ProductImportRepository.md

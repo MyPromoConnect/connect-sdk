@@ -3,7 +3,8 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Helpers\ProductImportInput;
+use MyPromo\Connect\SDK\Models\ProductImportInput;
+use MyPromo\Connect\SDK\Models\Callback;
 
 class ProductImport implements Arrayable
 {
@@ -164,18 +165,18 @@ class ProductImport implements Arrayable
     public function toArray(): array
     {
         $resultArray = [
-            'id' => $this->id,
-            'template_id' => $this->template_id,
+            'id'           => $this->id,
+            'template_id'  => $this->template_id,
             'template_key' => $this->template_key,
-            'dry_run' => $this->dryRun,
+            'dry_run'      => $this->dryRun,
             'date_execute' => $this->date_execute
         ];
 
-        if (!empty($this->input)) {
+        if ($this->input instanceof \MyPromo\Connect\SDK\Models\ProductImportInput) {
             $resultArray['input'] = $this->input->toArray();
         }
 
-        if (!empty($this->callback)) {
+        if ($this->callback instanceof \MyPromo\Connect\SDK\Models\Callback) {
             $resultArray['callback'] = $this->callback->toArray();
         }
 

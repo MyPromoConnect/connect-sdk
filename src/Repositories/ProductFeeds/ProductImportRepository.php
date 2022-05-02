@@ -7,7 +7,7 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions;
+use MyPromo\Connect\SDK\Helpers\ProductImportConfirm;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
 use MyPromo\Connect\SDK\Models\ProductImport;
 use MyPromo\Connect\SDK\Repositories\Repository;
@@ -39,7 +39,7 @@ class ProductImportRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
@@ -86,7 +86,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      */
-    public function cancelImport($productImportId): array
+    public function cancel($productImportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/cancel', [
@@ -113,7 +113,7 @@ class ProductImportRepository extends Repository
      *
      * @return array
      */
-    public function deleteImport($productImportId): array
+    public function delete($productImportId): array
     {
         try {
             $response = $this->client->guzzle()->delete('/v1/products_import/' . $productImportId, [
@@ -139,11 +139,11 @@ class ProductImportRepository extends Repository
      * @return mixed
      *
      */
-    public function requestImport(ProductImport $productImport)
+    public function create(ProductImport $productImport)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/products_import', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
@@ -224,20 +224,20 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param ConfirmProductImportOptions $confirmProductImportOptions
+     * @param ProductImportConfirm $productImportConfirm
      * @param $productImportId
      * @return mixed
      */
-    public function confirm(ConfirmProductImportOptions $confirmProductImportOptions, $productImportId)
+    public function confirm(ProductImportConfirm $productImportConfirm, $productImportId)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/confirm', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                RequestOptions::JSON => $confirmProductImportOptions->toArray(),
+                RequestOptions::JSON => $productImportConfirm->toArray(),
             ]);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());

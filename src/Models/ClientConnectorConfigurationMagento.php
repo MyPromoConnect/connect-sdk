@@ -1,10 +1,10 @@
 <?php
 
-namespace MyPromo\Connect\SDK\Helpers;
+namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class ConnectorConfigurationsMagento implements Arrayable
+class ClientConnectorConfigurationMagento implements Arrayable
 {
     /**
      * @var string

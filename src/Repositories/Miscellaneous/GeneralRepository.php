@@ -19,7 +19,7 @@ class GeneralRepository extends Repository
         try {
             $response = $this->client->guzzle()->get('/v1/status', [
                 'headers' => [
-                    'Accept' => 'application/json',
+                    'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
@@ -50,7 +50,7 @@ class GeneralRepository extends Repository
         try {
             $response = $this->client->guzzle()->get('/v1/' . $shortUrlIdentifier, [
                 'headers' => [
-                    'Accept' => 'application/json',
+                    'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ]
             ]);

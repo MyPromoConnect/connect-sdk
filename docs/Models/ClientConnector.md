@@ -8,21 +8,21 @@ $clientConnector->setConnectorKey('shopify');
 $clientConnector->setTarget('sales_channel');
 
 # for magento connector
-$magentoConfigurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento();
-$clientConnector->setConfiguration($magentoConfigurations);
+$clientConnectorConfigurationMagento = new \MyPromo\Connect\SDK\Models\ClientConnectorConfigurationMagento();
+$clientConnector->setConfiguration($clientConnectorConfigurationMagento);
 
 # for shopify connector
-$shopifyConfigurations = new \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify();
+$shopifyConfigurations = new \MyPromo\Connect\SDK\Models\ClientConnectorConfigurationShopify();
 $clientConnector->setConfiguration($shopifyConfigurations);
 ```
 
 Configurations:
 
-* [ConnectorConfigurationsMagento][ConnectorConfigurationsMagento]
-* [ConnectorConfigurationsShopify][ConnectorConfigurationsShopify]
+* [ClientConnectorConfigurationMagento][ClientConnectorConfigurationMagento]
+* [ClientConnectorConfigurationShopify][ClientConnectorConfigurationShopify]
 
-[ConnectorConfigurationsMagento]: ../Helpers/ConnectorConfigurationsMagento.md
+[ClientConnectorConfigurationMagento]: ../Models/ClientConnectorConfigurationMagento.md
 
-[ConnectorConfigurationsShopify]: ../Helpers/ConnectorConfigurationsShopify.md
+[ClientConnectorConfigurationShopify]: ../Models/ClientConnectorConfigurationShopify.md
 
 [ClientConnectorRepository]: ../Repositories/ClientConnectorRepository.md

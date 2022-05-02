@@ -25,5 +25,5 @@ Optional:
 
 
 [Callback]: ../Models/Callback.md
-[ProductImportInput]: ../Helpers/ProductImportInput.md
+[ProductImportInput]: ProductImportInput.md
 [ProductImportRepository]: ../Repositories/ProductImportRepository.md

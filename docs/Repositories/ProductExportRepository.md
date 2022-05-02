@@ -37,19 +37,19 @@ Request product export (with [ProductExport][ProductExport])
 ```php
 $productExport = new \MyPromo\Connect\SDK\Models\ProductExport();
 ...
-$productExportRepository->requestExport($productExport);
+$productExportRepository->create($productExport);
 ```
 
 ###### Cancel Product Export
 Cancel product export pass product export ID
 ```php
-$productExportRepository->cancelExport($productExport->getId());
+$productExportRepository->cancel($productExport->getId());
 ```
 
 ###### Delete Product Export
 Delete product export pass product export ID
 ```php
-$productExportRepository->deleteExport($productExport->getId());
+$productExportRepository->delete($productExport->getId());
 ```
 
 [ProductExportOptions]: ../Helpers/ProductExportOptions.md

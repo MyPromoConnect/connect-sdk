@@ -1,6 +1,6 @@
 <?php
 
-namespace MyPromo\Connect\SDK\Helpers;
+namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\InputValidationException;
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Validation;
 
 /**
  * Class ProductImportInput
- * @package MyPromo\Connect\SDK\Helpers
+ * @package MyPromo\Connect\SDK\Models
  */
 class ProductImportInput implements Arrayable
 {
@@ -141,7 +141,7 @@ class ProductImportInput implements Arrayable
         $validator = Validation::createValidator();
 
         $constraints = new Collection([
-            'key' => [
+            'key'   => [
                 new Type('string'),
                 new Length(['min' => 2]),
                 new NotNull(),
@@ -234,7 +234,7 @@ class ProductImportInput implements Arrayable
     {
         $importArray = [
             'format' => $this->format,
-            'url' => $this->url
+            'url'    => $this->url
         ];
 
         // Only use credentials if everything isset

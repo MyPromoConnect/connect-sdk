@@ -3,9 +3,8 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento;
-use MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify;
-use MyPromo\Connect\SDK\Helpers\ProductOptions;
+use MyPromo\Connect\SDK\Helpers\ClientConnectorConfigurationMagento;
+use MyPromo\Connect\SDK\Helpers\ClientConnectorConfigurationShopify;
 
 class ClientConnector implements Arrayable
 {
@@ -89,8 +88,8 @@ class ClientConnector implements Arrayable
      * @param object $configuration
      *
      * e.g.
-     * \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsMagento
-     * \MyPromo\Connect\SDK\Helpers\ConnectorConfigurationsShopify
+     * \MyPromo\Connect\SDK\Helpers\ClientConnectorConfigurationMagento
+     * \MyPromo\Connect\SDK\Helpers\ClientConnectorConfigurationShopify
      * ...
      */
     public function setConfiguration(object $configuration)
@@ -111,11 +110,11 @@ class ClientConnector implements Arrayable
             'target'        => $this->target,
         ];
 
-        if ($this->configuration instanceof ConnectorConfigurationsShopify) {
+        if ($this->configuration instanceof \MyPromo\Connect\SDK\Models\ClientConnectorConfigurationShopify) {
             $clientConnectorArray['configuration'] = $this->configuration->toArray();
         }
 
-        if ($this->configuration instanceof ConnectorConfigurationsMagento) {
+        if ($this->configuration instanceof \MyPromo\Connect\SDK\Models\ClientConnectorConfigurationMagento) {
             $clientConnectorArray['configuration'] = $this->configuration->toArray();
         }
 

@@ -27,7 +27,7 @@ class DesignRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->post('/v1/designs', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
@@ -58,7 +58,7 @@ class DesignRepository extends Repository
      *
      * @return mixed
      */
-    public function getDesign($designId)
+    public function find($designId)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/designs/' . $designId, [
@@ -113,19 +113,19 @@ class DesignRepository extends Repository
      */
     public function getPreviewPDF($designId)
     {
-        $getDesignResponse = $this->getDesign($designId);
+        $getDesignResponse = $this->find($designId);
 
         $previewUrl = $getDesignResponse['preview_url'] ?? null;
 
-        if ($previewUrl === null){
+        if ($previewUrl === null) {
             throw new InputValidationException("No preview url exists.", 422);
         }
 
         try {
             $response = $this->client->guzzle()->get($previewUrl, [
                 'headers' => [
-                    'Accept'        => 'application/json',
-                    'Content-Type'  => 'application/json',
+                    'Accept'       => 'application/json',
+                    'Content-Type' => 'application/json',
                 ],
             ]);
 
@@ -148,7 +148,7 @@ class DesignRepository extends Repository
     }
 
     /**
-     * @param int    $designId
+     * @param int $designId
      * @param string $targetFile
      *
      * @return bool
@@ -168,7 +168,7 @@ class DesignRepository extends Repository
             throw new ApiResponseException("File '{$targetFile}' could not be created.");
         }
 
-        if (fwrite($previewFile, $response->getbody()) === false){
+        if (fwrite($previewFile, $response->getbody()) === false) {
             throw new ApiResponseException("File '{$targetFile}' is not writable.");
         }
 
@@ -186,7 +186,7 @@ class DesignRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->post('/v1/editor_user', [
-                'headers'            => [
+                'headers' => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),

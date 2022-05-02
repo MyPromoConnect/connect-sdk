@@ -23,7 +23,7 @@ class ProductExportRepository extends Repository
      *      created_from
      *      created_to
      *
-     * You can use the @param  array|ProductOptions  $options
+     * You can use the @param array|ProductOptions $options
      *
      * @return array
      */
@@ -40,7 +40,7 @@ class ProductExportRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
@@ -87,7 +87,7 @@ class ProductExportRepository extends Repository
      *
      * @return array
      */
-    public function cancelExport($productExportId): array
+    public function cancel($productExportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_export/' . $productExportId . '/cancel', [
@@ -115,7 +115,7 @@ class ProductExportRepository extends Repository
      * @return array
      * @throws InvalidArgumentException
      */
-    public function deleteExport($productExportId): array
+    public function delete($productExportId): array
     {
         try {
             $response = $this->client->guzzle()->delete('/v1/products_export/' . $productExportId, [
@@ -136,15 +136,15 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * @param  ProductExport  $productExport
+     * @param ProductExport $productExport
      *
      * @return mixed
      */
-    public function requestExport(ProductExport $productExport)
+    public function create(ProductExport $productExport)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/products_export', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),

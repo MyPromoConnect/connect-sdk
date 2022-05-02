@@ -1,12 +1,12 @@
 <?php
 
-namespace MyPromo\Connect\SDK\Helpers;
+namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
 /**
  * Class ConnectorJobFilters
- * @package MyPromo\Connect\SDK\Helpers
+ * @package MyPromo\Connect\SDK\Models
  */
 class ConnectorJobFilters implements Arrayable
 {

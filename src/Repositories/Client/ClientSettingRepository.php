@@ -43,7 +43,7 @@ class ClientSettingRepository extends Repository
      *
      * @return mixed
      */
-    public function update(ClientSettingMerchant $clientSettings)
+    public function setSettings(ClientSettingMerchant $clientSettings)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/settings', [

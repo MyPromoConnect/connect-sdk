@@ -3,7 +3,8 @@
 namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Helpers\ConnectorJobFilters;
+use MyPromo\Connect\SDK\Models\ConnectorJobFilters;
+use MyPromo\Connect\SDK\Models\Callback;
 
 class ConnectorJob implements Arrayable
 {
@@ -98,14 +99,13 @@ class ConnectorJob implements Arrayable
      */
     public function toArray(): array
     {
-        //$resultArray['id'] = $this->id;
         $resultArray['target'] = $this->target;
 
-        if (!empty($this->filters)) {
+        if ($this->filters instanceof \MyPromo\Connect\SDK\Models\ConnectorJobFilters) {
             $resultArray['filters'] = $this->filters->toArray();
         }
 
-        if (!empty($this->callback)) {
+        if ($this->callback instanceof \MyPromo\Connect\SDK\Models\Callback) {
             $resultArray['callback'] = $this->callback->toArray();
         }
 

@@ -227,7 +227,7 @@ class OrderItem implements Arrayable
      */
     public function toArray(): array
     {
-        $files   = [];
+        $files = [];
         $designs = [];
 
         $orderItemArray = [

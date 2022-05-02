@@ -21,7 +21,7 @@ class ConnectorJobRepository extends Repository
     {
         try {
             $response = $this->client->guzzle()->post('/v1/client/connectors/job', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),

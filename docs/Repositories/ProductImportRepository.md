@@ -37,19 +37,19 @@ Request product import (with [ProductImport][ProductImport])
 ```php
 $productImport = new \MyPromo\Connect\SDK\Models\ProductImport();
 ...
-$productImportRepository->requestImport($productImport);
+$productImportRepository->create($productImport);
 ```
 
 ###### Cancel Product Import
 Cancel product import pass product import ID
 ```php
-$productImportRepository->cancelImport($productImport->getId());
+$productImportRepository->cancel($productImport->getId());
 ```
 
 ###### Delete Product Import
 Delete product import pass product import ID
 ```php
-$productImportRepository->deleteImport($productImport->getId());
+$productImportRepository->delete($productImport->getId());
 ```
 
 ###### Errors of Product Import
@@ -66,11 +66,12 @@ $productImportRepository->validate($productImport->getId());
 
 ###### Confirm Product Import
 Confirm product import pass product import ID and confirm options
-```php
-$confirmProductImportOptions = new \MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions();
-$confirmProductImportOptions->setExecuteDate(new \DateTime(date('Y-m-d H:i:s')));
 
-$productImportRepository->confirm($confirmProductImportOptions, $productImport->getId());
+```php
+$productImportConfirm = new \MyPromo\Connect\SDK\Helpers\ProductImportConfirm();
+$productImportConfirm->setExecuteDate(new \DateTime(date('Y-m-d H:i:s')));
+
+$productImportRepository->confirm($productImportConfirm, $productImport->getId());
 ```
 
 [ProductExportOptions]: ../Helpers/ProductExportOptions.md
