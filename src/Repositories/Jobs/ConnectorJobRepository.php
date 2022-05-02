@@ -17,7 +17,7 @@ class ConnectorJobRepository extends Repository
      *
      * @return mixed
      */
-    public function createJob(ConnectorJob $connectorJob)
+    public function create(ConnectorJob $connectorJob)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/client/connectors/job', [

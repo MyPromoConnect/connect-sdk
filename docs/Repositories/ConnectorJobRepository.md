@@ -8,7 +8,7 @@ Create connector job (with [ConnectorJob][ConnectorJob])
 ```php
 $connectorJob = new \MyPromo\Connect\SDK\Models\ConnectorJob();
 ...
-$connectorRepository->createJob($connectorJob);
+$connectorRepository->create($connectorJob);
 ```
 
 [ConnectorJob]: ../Models/ConnectorJob.md
