@@ -6,6 +6,7 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\SdkException;
 use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use MyPromo\Connect\SDK\Models\Design;
@@ -157,22 +158,22 @@ class DesignRepository extends Repository
     {
         try {
             $response = $this->getPreviewPDF($designId);
-
-            $previewFile = fopen($targetFile, 'w');
-
         } catch (Exception $ex) {
             throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
 
+        $previewFile = fopen($targetFile, 'w');
+
         if ($previewFile === false) {
-            throw new ApiResponseException("File '{$targetFile}' could not be created.");
+            throw new SdkException("Preview '{$targetFile}' could not be created.");
         }
 
         if (fwrite($previewFile, $response->getbody()) === false) {
-            throw new ApiResponseException("File '{$targetFile}' is not writable.");
+            throw new SdkException("Preview '{$targetFile}' is not writable.");
         }
 
         $file = fclose($previewFile);
+
 
         return $file;
     }
