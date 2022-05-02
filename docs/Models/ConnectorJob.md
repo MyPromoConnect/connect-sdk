@@ -11,6 +11,15 @@ $connectorJob->setCallback($callback);
 
 ```
 
+Filters:
+
+* [ConnectorJobFilters][ConnectorJobFilters]
+
+Optional:
+
+* [Callback][Callback]
+
+
 [Callback]: ../Models/Callback.md
 [ConnectorJobFilters]: ../Helpers/ConnectorJobFilters.md
 [ConnectorJobRepository]: ../Repositories/ConnectorJobRepository.md

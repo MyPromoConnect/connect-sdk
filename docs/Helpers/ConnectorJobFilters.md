@@ -1,4 +1,4 @@
-Helper class for [ConnectorJobRepository->all()][ConnectorJobRepository]
+Helper class for [ConnectorJobRepository->create()][ConnectorJobRepository]
 
 You can use this helper class to filter and paginate the connector jobs.
 
