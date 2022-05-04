@@ -46,6 +46,16 @@ class ConnectorJobFilters implements Arrayable
     protected $skip_duplicates;
 
     /**
+     * @var string
+     */
+    protected $filter;
+
+    /**
+     * @var string
+     */
+    protected $filter_value;
+
+    /**
      * @return string|null
      */
     public function getProducts(): ?string
@@ -158,6 +168,39 @@ class ConnectorJobFilters implements Arrayable
     }
 
     /**
+     * @return string
+     */
+    public function getFilter(): string
+    {
+        return $this->filter;
+    }
+
+    /**
+     * @param string $filter
+     */
+    public function setFilter(bool $filter)
+    {
+        $this->filter = $filter;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilterValue(): string
+    {
+        return $this->filter_value;
+    }
+
+    /**
+     * @param string $filter_value
+     */
+    public function setFilterValue(bool $filter_value)
+    {
+        $this->filter_value = $filter_value;
+    }
+
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -179,7 +222,7 @@ class ConnectorJobFilters implements Arrayable
         }
 
         if (!empty($this->skip_duplicates)) {
-            $data['skip-duplicates'] = $this->skip_duplicates;
+            $data['skip_duplicates'] = $this->skip_duplicates;
         }
 
         if (!empty($this->test_product)) {
@@ -192,6 +235,14 @@ class ConnectorJobFilters implements Arrayable
 
         if (!empty($this->products)) {
             $data['product'] = $this->products;
+        }
+
+        if (!empty($this->filter)) {
+            $data['filter'] = $this->filter;
+        }
+
+        if (!empty($this->filter_value)) {
+            $data['filter_value'] = $this->filter_value;
         }
 
         return $data;
