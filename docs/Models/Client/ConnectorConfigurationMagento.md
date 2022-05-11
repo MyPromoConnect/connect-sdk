@@ -1,7 +1,7 @@
 Options for magento to set client connector [ClientConnectorRepository->update()][ClientConnectorRepository]
 
 ```php
-$clientConnectorConfigurationMagento = new \MyPromo\Connect\SDK\Models\ClientConnectorConfigurationMagento();
+$clientConnectorConfigurationMagento = new \MyPromo\Connect\SDK\Models\Client\ConnectorConfigurationMagento();
 $clientConnectorConfigurationMagento->setInstanceUrl('url');
 $clientConnectorConfigurationMagento->setApiUsername('username');
 $clientConnectorConfigurationMagento->setApiPassword('password');
@@ -15,4 +15,4 @@ $clientConnectorConfigurationMagento->setSyncProductsSettings('normal');
 $clientConnectorConfigurationMagento->setSalesPriceConfig('use_sales_price');
 ```
 
-[ClientConnectorRepository]: ../Repositories/ClientConnectorRepository.md
+[ClientConnectorRepository]: ../../Repositories/Client/ClientConnectorRepository.md

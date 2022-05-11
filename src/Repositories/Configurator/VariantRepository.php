@@ -9,7 +9,7 @@ use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use MyPromo\Connect\SDK\Helpers\Configurator\VariantsOptions;
 
-class VariantsRepository extends Repository
+class VariantRepository extends Repository
 {
 
     /**

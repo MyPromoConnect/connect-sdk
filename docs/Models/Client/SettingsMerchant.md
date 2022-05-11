@@ -1,7 +1,7 @@
 Template-File for [ClientSettingRepository->create()][ClientSettingRepository]
 
 ```php
-$clientSettingsMerchant = new \MyPromo\Connect\SDK\Models\ClientSettingMerchant();
+$clientSettingsMerchant = new \MyPromo\Connect\SDK\Models\Client\SettingsMerchant();
 
 $clientSettingsMerchant->setActivateNewFulfiller(true|false);
 $clientSettingsMerchant->setActivateNewProducts(true|false);
@@ -30,4 +30,4 @@ Notes:
     * 4 = Never adjust my prices automatically (keep my set sales_prices, regardless if buying price or recommended
       retail price have been changed from fulfiller)
 
-[ClientSettingRepository]: ../Repositories/ClientSettingRepository.md
+[ClientSettingRepository]: ../../Repositories/Client/ClientSettingRepository.md

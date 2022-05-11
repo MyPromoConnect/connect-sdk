@@ -33,6 +33,6 @@ $clientSettings = new \MyPromo\Connect\SDK\Models\FulfillerClientSetting();
 $clientSettingRepository->setSettings($clientSettings);
 ```
 
-[ClientSettingMerchant]: ../Models/ClientSettingMerchant.md
+[ClientSettingMerchant]: ../../Models/ClientSettingMerchant.md
 
-[ClientSettingFulfiller]: ../Models/ClientSettingFulfiller.md
+[ClientSettingFulfiller]: ../../Models/ClientSettingFulfiller.md

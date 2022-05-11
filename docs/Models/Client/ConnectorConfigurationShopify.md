@@ -1,7 +1,7 @@
 Options for shopify to set client connector [ClientConnectorRepository->update()][ClientConnectorRepository]
 
 ```php
-$clientConnectorConfigurationShopify = new \MyPromo\Connect\SDK\Helpers\ClientConnectorConfigurationShopify();
+$clientConnectorConfigurationShopify = new \MyPromo\Connect\SDK\Models\Client\ConnectorConfigurationShopify();
 $clientConnectorConfigurationShopify->setShopName('Shop Name');
 $clientConnectorConfigurationShopify->setShopUrl('Shop Url');
 $clientConnectorConfigurationShopify->setToken('Shop Token');
@@ -17,4 +17,4 @@ $clientConnectorConfigurationShopify->setRecreateDeletedCollection(true|false);
 $clientConnectorConfigurationShopify->setRecreateDeletedProducts(true|false);
 ```
 
-[ClientConnectorRepository]: ../Repositories/ClientConnectorRepository.md
+[ClientConnectorRepository]: ../../Repositories/Client/ClientConnectorRepository.md
