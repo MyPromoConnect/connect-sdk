@@ -7,25 +7,19 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
-use MyPromo\Connect\SDK\Helpers\ProductOptions;
-use MyPromo\Connect\SDK\Models\ProductExport;
+use MyPromo\Connect\SDK\Helpers\ProductFeeds\ExportOptions;
+use MyPromo\Connect\SDK\Models\ProductFeeds\Export;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use Psr\Cache\InvalidArgumentException;
 
 class ProductExportRepository extends Repository
 {
     /**
-     * Available options:
-     *      page
-     *      perPage
-     *      pagination
-     *      created_from
-     *      created_to
-     *
-     * You can use the @param array|ProductOptions $options
-     *
+     * @param $options
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function all($options): array
     {
@@ -54,11 +48,11 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * Find product export by using product export id
-     *
      * @param $productExportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function find($productExportId): array
     {
@@ -81,11 +75,11 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * Cancel product export by using product export id
-     *
      * @param $productExportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function cancel($productExportId): array
     {
@@ -108,12 +102,11 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * Delete product export by using product export id
-     *
      * @param $productExportId
-     *
      * @return array
-     * @throws InvalidArgumentException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function delete($productExportId): array
     {
@@ -136,11 +129,14 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * @param ProductExport $productExport
-     *
+     * @param Export $productExport
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function create(ProductExport $productExport)
+    public function create(Export $productExport)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/products_export', [

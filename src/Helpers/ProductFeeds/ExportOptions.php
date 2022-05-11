@@ -4,6 +4,7 @@ namespace MyPromo\Connect\SDK\Helpers\ProductFeeds;
 
 use DateTimeInterface;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
+use MyPromo\Connect\SDK\Helpers\Date;
 
 class ExportOptions implements Arrayable
 {
