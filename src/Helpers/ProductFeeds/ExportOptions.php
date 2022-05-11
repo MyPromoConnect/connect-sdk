@@ -5,7 +5,7 @@ namespace MyPromo\Connect\SDK\Helpers\ProductFeeds;
 use DateTimeInterface;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
-class ProductExportOptions implements Arrayable
+class ExportOptions implements Arrayable
 {
     /**
      * @var int
