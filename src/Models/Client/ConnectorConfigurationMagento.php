@@ -62,6 +62,11 @@ class ConnectorConfigurationMagento implements Arrayable
     protected $sales_price_config;
 
     /**
+     * @var bool
+     */
+    protected $magento_is_service_products_allowed;
+
+    /**
      * @return string
      */
     public function getInstanceUrl(): string
@@ -238,6 +243,23 @@ class ConnectorConfigurationMagento implements Arrayable
     }
 
     /**
+     * @return bool
+     */
+    public function getIsServiceProductsAllowed(): bool
+    {
+        return $this->magento_is_service_products_allowed;
+    }
+
+    /**
+     * @param string $magento_is_service_products_allowed
+     */
+    public function setIsServiceProductsAllowed(bool $magento_is_service_products_allowed)
+    {
+        $this->magento_is_service_products_allowed = $magento_is_service_products_allowed;
+    }
+
+
+    /**
      * Get the instance as an array.
      *
      * @return array
@@ -245,17 +267,18 @@ class ConnectorConfigurationMagento implements Arrayable
     public function toArray(): array
     {
         return [
-            'magento_connector_instance_url' => $this->magento_connector_instance_url,
-            'magento_connector_api_username' => $this->magento_connector_api_username,
-            'magento_connector_api_password' => $this->magento_connector_api_password,
-            'magento_website_code'           => $this->magento_website_code,
-            'magento_store_code'             => $this->magento_store_code,
-            'magento_store_code_id'          => $this->magento_store_code_id,
-            'magento_website_code_id'        => $this->magento_website_code_id,
-            'magento_store_code_name'        => $this->magento_store_code_name,
-            'magento_website_code_name'      => $this->magento_website_code_name,
-            'sync_products_settings'         => $this->sync_products_settings,
-            'sales_price_config'             => $this->sales_price_config
+            'magento_connector_instance_url'      => $this->magento_connector_instance_url,
+            'magento_connector_api_username'      => $this->magento_connector_api_username,
+            'magento_connector_api_password'      => $this->magento_connector_api_password,
+            'magento_website_code'                => $this->magento_website_code,
+            'magento_store_code'                  => $this->magento_store_code,
+            'magento_store_code_id'               => $this->magento_store_code_id,
+            'magento_website_code_id'             => $this->magento_website_code_id,
+            'magento_store_code_name'             => $this->magento_store_code_name,
+            'magento_website_code_name'           => $this->magento_website_code_name,
+            'sync_products_settings'              => $this->sync_products_settings,
+            'sales_price_config'                  => $this->sales_price_config,
+            'magento_is_service_products_allowed' => $this->magento_is_service_products_allowed
         ];
     }
 }
