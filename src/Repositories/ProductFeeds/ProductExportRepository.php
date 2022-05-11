@@ -24,7 +24,7 @@ class ProductExportRepository extends Repository
     public function all($options): array
     {
         try {
-            if ($options instanceof ProductExportOptions) {
+            if ($options instanceof ExportOptions) {
                 $options = $options->toArray();
             }
 

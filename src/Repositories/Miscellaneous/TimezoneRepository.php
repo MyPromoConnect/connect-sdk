@@ -5,7 +5,7 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 use Exception;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Helpers\TimezoneOptions;
+use MyPromo\Connect\SDK\Helpers\Miscellaneous\TimezoneOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class TimezoneRepository extends Repository

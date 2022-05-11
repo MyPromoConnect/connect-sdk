@@ -5,7 +5,7 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 use Exception;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Helpers\StateOptions;
+use MyPromo\Connect\SDK\Helpers\Miscellaneous\StateOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class StateRepository extends Repository

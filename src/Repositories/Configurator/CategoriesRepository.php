@@ -7,7 +7,7 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use MyPromo\Connect\SDK\Helpers\ConfiguratorCategoriesOptions;
+use MyPromo\Connect\SDK\Helpers\Configurator\CategoriesOptions;
 
 class CategoriesRepository extends Repository
 {
@@ -20,7 +20,7 @@ class CategoriesRepository extends Repository
      */
     public function all($options)
     {
-        if ($options instanceof ConfiguratorCategoriesOptions) {
+        if ($options instanceof CategoriesOptions) {
             $options = $options->toArray();
         }
 

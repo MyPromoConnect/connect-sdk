@@ -6,8 +6,8 @@ use Exception;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Helpers\OrderOptions;
-use MyPromo\Connect\SDK\Models\Order;
+use MyPromo\Connect\SDK\Helpers\Orders\OrderOptions;
+use MyPromo\Connect\SDK\Models\Orders\Order;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
 

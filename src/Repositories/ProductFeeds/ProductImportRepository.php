@@ -24,7 +24,7 @@ class ProductImportRepository extends Repository
     public function all($options): array
     {
         try {
-            if ($options instanceof ProductImportOptions) {
+            if ($options instanceof ImportOptions) {
                 $options = $options->toArray();
             }
 
@@ -221,14 +221,14 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param ProductImportConfirm $productImportConfirm
+     * @param ImportConfirm $productImportConfirm
      * @param $productImportId
      * @return mixed
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function confirm(ProductImportConfirm $productImportConfirm, $productImportId)
+    public function confirm(ImportConfirm $productImportConfirm, $productImportId)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/confirm', [

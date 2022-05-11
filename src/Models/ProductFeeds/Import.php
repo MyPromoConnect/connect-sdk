@@ -172,7 +172,7 @@ class Import implements Arrayable
             'date_execute' => $this->date_execute
         ];
 
-        if ($this->input instanceof \MyPromo\Connect\SDK\Models\ImportInput) {
+        if ($this->input instanceof \MyPromo\Connect\SDK\Models\ProductFeeds\ImportInput) {
             $resultArray['input'] = $this->input->toArray();
         }
 

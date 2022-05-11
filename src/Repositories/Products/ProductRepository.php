@@ -6,13 +6,13 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Helpers\InventoryOptionsFulfiller;
-use MyPromo\Connect\SDK\Helpers\InventoryOptionsMerchant;
-use MyPromo\Connect\SDK\Helpers\PriceOptionsFulfiller;
-use MyPromo\Connect\SDK\Helpers\PriceOptionsMerchant;
-use MyPromo\Connect\SDK\Helpers\ProductOptions;
-use MyPromo\Connect\SDK\Helpers\ProductVariantOptions;
-use MyPromo\Connect\SDK\Helpers\SeoOptions;
+use MyPromo\Connect\SDK\Helpers\Products\InventoryOptionsFulfiller;
+use MyPromo\Connect\SDK\Helpers\Products\InventoryOptionsMerchant;
+use MyPromo\Connect\SDK\Helpers\Products\PriceOptionsFulfiller;
+use MyPromo\Connect\SDK\Helpers\Products\PriceOptionsMerchant;
+use MyPromo\Connect\SDK\Helpers\Products\ProductOptions;
+use MyPromo\Connect\SDK\Helpers\Products\ProductVariantOptions;
+use MyPromo\Connect\SDK\Helpers\Products\SeoOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class ProductRepository extends Repository

@@ -6,9 +6,9 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Models\Shipment;
+use MyPromo\Connect\SDK\Models\ProductionOrders\Shipment;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use MyPromo\Connect\SDK\Helpers\ProductionOrderOptions;
+use MyPromo\Connect\SDK\Helpers\ProductionOrders\ProductionOrderOptions;
 
 class ProductionOrderRepository extends Repository
 {

@@ -5,7 +5,7 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 use Exception;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Helpers\CountryOptions;
+use MyPromo\Connect\SDK\Helpers\Miscellaneous\CountryOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class CountryRepository extends Repository
