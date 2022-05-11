@@ -3,7 +3,7 @@
 namespace MyPromo\Connect\SDK\Models\ProductFeeds;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Models\ProductImportInput;
+use MyPromo\Connect\SDK\Models\ProductFeeds\ImportInput;
 use MyPromo\Connect\SDK\Models\Callback;
 
 class Import implements Arrayable
@@ -62,7 +62,7 @@ class Import implements Arrayable
     /**
      * @return ImportInput
      */
-    public function getInput(): ProductImportInput
+    public function getInput(): ImportInput
     {
         return $this->input;
     }
@@ -70,7 +70,7 @@ class Import implements Arrayable
     /**
      * @param ImportInput $input
      */
-    public function setInput(ProductImportInput $input)
+    public function setInput(ImportInput $input)
     {
         $this->input = $input;
     }
@@ -172,7 +172,7 @@ class Import implements Arrayable
             'date_execute' => $this->date_execute
         ];
 
-        if ($this->input instanceof \MyPromo\Connect\SDK\Models\ProductImportInput) {
+        if ($this->input instanceof \MyPromo\Connect\SDK\Models\ImportInput) {
             $resultArray['input'] = $this->input->toArray();
         }
 

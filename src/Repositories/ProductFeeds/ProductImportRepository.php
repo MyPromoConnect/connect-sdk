@@ -7,24 +7,19 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Helpers\ProductImportConfirm;
-use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
-use MyPromo\Connect\SDK\Models\ProductImport;
+use MyPromo\Connect\SDK\Models\ProductFeeds\ImportConfirm;
+use MyPromo\Connect\SDK\Helpers\ProductFeeds\ImportOptions;
+use MyPromo\Connect\SDK\Models\ProductFeeds\Import;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class ProductImportRepository extends Repository
 {
     /**
-     * Available options:
-     *      page
-     *      perPage
-     *      pagination
-     *      created_from
-     *      created_to
-     *
-     * You can use the @param array|ProductImportOptions $options
-     *
+     * @param $options
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function all($options): array
     {
@@ -53,11 +48,11 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * Find product import by using product import id
-     *
      * @param $productImportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function find($productImportId): array
     {
@@ -80,11 +75,11 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * Cancel product import by using product import id
-     *
      * @param $productImportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function cancel($productImportId): array
     {
@@ -107,11 +102,11 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * Delete product import by using product import id
-     *
      * @param $productImportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function delete($productImportId): array
     {
@@ -135,9 +130,11 @@ class ProductImportRepository extends Repository
 
     /**
      * @param ProductImport $productImport
-     *
      * @return mixed
-     *
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function create(ProductImport $productImport)
     {
@@ -170,11 +167,11 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * Import errors product import id
-     *
      * @param $productImportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function errors($productImportId): array
     {
@@ -197,11 +194,11 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * Validate  product import by id
-     *
      * @param $productImportId
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function validate($productImportId): array
     {
@@ -227,6 +224,9 @@ class ProductImportRepository extends Repository
      * @param ProductImportConfirm $productImportConfirm
      * @param $productImportId
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function confirm(ProductImportConfirm $productImportConfirm, $productImportId)
     {
