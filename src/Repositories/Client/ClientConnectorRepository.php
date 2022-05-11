@@ -6,8 +6,8 @@ use Exception;
 use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
-use MyPromo\Connect\SDK\Helpers\ClientConnectorOptions;
-use MyPromo\Connect\SDK\Models\ClientConnector;
+use MyPromo\Connect\SDK\Helpers\Client\ConnectorOptions;
+use MyPromo\Connect\SDK\Models\Client\Connector;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class ClientConnectorRepository extends Repository
