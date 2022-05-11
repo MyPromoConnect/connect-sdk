@@ -40,4 +40,4 @@ $recipientAddress->setCommercialRegisterEntry('your-commercial-register-entry');
 
 ```
 
-[Order]: Order.md
+[Order]: Orders/Order.md

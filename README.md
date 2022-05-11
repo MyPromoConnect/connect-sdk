@@ -20,7 +20,7 @@ Please update your applications and environments accordingly.
 - Added Trailing Slashes to all API Endpoints
 - Added OAuth 1.0 and OAuth 2.0 for files ([see details here](docs/Models/File.md))
 - Support a custom baseUri for Client ([see details here](docs/README.md))
-- Added `reference2` field to Order Model ([see details here](docs/Models/Order.md))
+- Added `reference2` field to Order Model ([see details here](docs/Models/Orders/Order.md))
 - Use key/value for File/Callback Header Auth ([see details here](docs/Models/File.md)) and ([see details here](docs/Models/Callback.md))
 
 ## Contents
