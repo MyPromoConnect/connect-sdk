@@ -21,7 +21,7 @@ class ClientConnectorRepository extends Repository
      */
     public function all($options)
     {
-        if ($options instanceof ClientConnectorOptions) {
+        if ($options instanceof ConnectorOptions) {
             $options = $options->toArray();
         }
 

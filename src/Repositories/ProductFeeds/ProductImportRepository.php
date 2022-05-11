@@ -129,14 +129,14 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param ProductImport $productImport
+     * @param Import $productImport
      * @return mixed
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws InvalidResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function create(ProductImport $productImport)
+    public function create(Import $productImport)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/products_import', [
