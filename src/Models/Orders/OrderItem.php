@@ -6,10 +6,6 @@ use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use MyPromo\Connect\SDK\Helpers\DesignOptions;
 
-/**
- * Class OrderItem
- * @package Connect\SDK\Models
- */
 class OrderItem implements Arrayable
 {
     /**
