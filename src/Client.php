@@ -195,28 +195,4 @@ class Client
         return $bearerToken;
     }
 
-    /**
-     * @return array
-     * @throws ApiRequestException
-     * @throws ApiResponseException
-     */
-    public function status(): array
-    {
-        try {
-            $response = $this->guzzle->get('/v1/status', [
-                'headers' => [
-                    'Accept'        => 'application/json',
-                    'Authorization' => 'Bearer ' . $this->auth()->get(),
-                ],
-            ]);
-        } catch (Exception $ex) {
-            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
-        }
-
-        if ($response->getStatusCode() !== 200) {
-            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
-        }
-
-        return json_decode($response->getBody(), true);
-    }
 }

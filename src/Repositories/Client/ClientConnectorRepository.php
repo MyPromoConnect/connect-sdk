@@ -7,7 +7,6 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\ClientConnectorOptions;
-use MyPromo\Connect\SDK\Helpers\OrderOptions;
 use MyPromo\Connect\SDK\Models\ClientConnector;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
@@ -18,7 +17,6 @@ class ClientConnectorRepository extends Repository
      * Get all Connectors assigned to a client
      *
      * @return array
-     * @see OrderOptions as its helper
      *
      */
     public function all($options)
