@@ -7,7 +7,7 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Models\ConnectorJob;
+use MyPromo\Connect\SDK\Models\Jobs\ConnectorJob;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
 class ConnectorJobRepository extends Repository

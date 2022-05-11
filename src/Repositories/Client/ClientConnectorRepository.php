@@ -50,10 +50,10 @@ class ClientConnectorRepository extends Repository
     /**
      * Update client connectors
      *
-     * @param ClientConnector $clientConnector
+     * @param Connector $clientConnector
      * @return mixed
      */
-    public function update(ClientConnector $clientConnector)
+    public function update(Connector $clientConnector)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/connectors', [

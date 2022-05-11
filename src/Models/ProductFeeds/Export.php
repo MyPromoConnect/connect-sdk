@@ -4,6 +4,7 @@ namespace MyPromo\Connect\SDK\Models\ProductFeeds;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Models\ProductFeeds\ExportFilters;
+use MyPromo\Connect\SDK\Models\Callback;
 
 class Export implements Arrayable
 {
