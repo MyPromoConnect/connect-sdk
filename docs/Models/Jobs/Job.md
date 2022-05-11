@@ -1,10 +1,10 @@
 Template-File for [ConnectorJobRepository->create()][ConnectorJobRepository]
 
 ```php
-$connectorJob = new \MyPromo\Connect\SDK\Models\ConnectorJob();
+$connectorJob = new \MyPromo\Connect\SDK\Models\Jobs\Job();
 $connectorJob->setTarget('sales_channel|orders|inventory|...');
 
-$filters = new \MyPromo\Connect\SDK\Models\ConnectorJobFilters();
+$filters = new \MyPromo\Connect\SDK\Models\Jobs\JobFilters();
 $connectorJob->setFilters($filters);
 
 $connectorJob->setCallback($callback);
@@ -19,7 +19,8 @@ Optional:
 
 * [Callback][Callback]
 
+[Callback]: ../Callback.md
 
-[Callback]: ../Models/Callback.md
-[ConnectorJobFilters]: ConnectorJobFilters.md
-[ConnectorJobRepository]: ../Repositories/ConnectorJobRepository.md
+[ConnectorJobFilters]: JobFilters.md
+
+[ConnectorJobRepository]: ../../Repositories/Jobs/JobRepository.md

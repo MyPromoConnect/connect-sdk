@@ -58,7 +58,7 @@ Optional:
 
 
 [File]: File.md
-[Design]: Design.md
+[Design]: Designs/Design.md
 [Customs]: Customs.md
 [CustomProperty]: CustomProperty.md
 [OrderItemRelation]: OrderItemRelation.md

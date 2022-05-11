@@ -5,10 +5,10 @@ namespace MyPromo\Connect\SDK\Models\Jobs;
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 
 /**
- * Class ConnectorJobFilters
+ * Class JobFilters
  * @package MyPromo\Connect\SDK\Models
  */
-class ConnectorJobFilters implements Arrayable
+class JobFilters implements Arrayable
 {
     /**
      * @var string

@@ -3,10 +3,10 @@
 namespace MyPromo\Connect\SDK\Models\Jobs;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
-use MyPromo\Connect\SDK\Models\Jobs\ConnectorJobFilters;
+use MyPromo\Connect\SDK\Models\Jobs\JobFilters;
 use MyPromo\Connect\SDK\Models\Callback;
 
-class ConnectorJob implements Arrayable
+class Job implements Arrayable
 {
     /**
      * @var int
@@ -19,7 +19,7 @@ class ConnectorJob implements Arrayable
     protected $target;
 
     /**
-     * @var ConnectorJobFilters $filters
+     * @var JobFilters $filters
      */
     protected $filters;
 
@@ -45,17 +45,17 @@ class ConnectorJob implements Arrayable
     }
 
     /**
-     * @return ConnectorJobFilters
+     * @return JobFilters
      */
-    public function getFilters(): ConnectorJobFilters
+    public function getFilters(): JobFilters
     {
         return $this->filters;
     }
 
     /**
-     * @param ConnectorJobFilters $filters
+     * @param JobFilters $filters
      */
-    public function setFilters(ConnectorJobFilters $filters)
+    public function setFilters(JobFilters $filters)
     {
         $this->filters = $filters;
     }
@@ -101,7 +101,7 @@ class ConnectorJob implements Arrayable
     {
         $resultArray['target'] = $this->target;
 
-        if ($this->filters instanceof \MyPromo\Connect\SDK\Models\Jobs\ConnectorJobFilters) {
+        if ($this->filters instanceof \MyPromo\Connect\SDK\Models\Jobs\JobFilters) {
             $resultArray['filters'] = $this->filters->toArray();
         }
 

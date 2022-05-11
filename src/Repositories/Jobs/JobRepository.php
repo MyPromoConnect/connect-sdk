@@ -7,17 +7,19 @@ use GuzzleHttp\RequestOptions;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
-use MyPromo\Connect\SDK\Models\Jobs\ConnectorJob;
+use MyPromo\Connect\SDK\Models\Jobs\Job;
 use MyPromo\Connect\SDK\Repositories\Repository;
 
-class ConnectorJobRepository extends Repository
+class JobRepository extends Repository
 {
     /**
-     * @param ConnectorJob $connectorJob
-     *
+     * @param Job $connectorJob
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
      */
-    public function create(ConnectorJob $connectorJob)
+    public function create(Job $connectorJob)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/client/connectors/job', [

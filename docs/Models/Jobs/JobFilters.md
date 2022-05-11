@@ -1,7 +1,7 @@
 Filter options for [ConnectorJobRepository->create()][ConnectorJobRepository]
 
 ```php
-$filters = new \MyPromo\Connect\SDK\Models\ConnectorJobFilters();
+$filters = new \MyPromo\Connect\SDK\Models\Jobs\JobFilters();
 
 # Sales Channel
 $filters->setJob('products|images|collections|tax_rates|shipping_rates|prices|inventory'); // mandatory
@@ -38,4 +38,4 @@ Notes:
 * most of the filters are optionally
 * if no filters available, pass an emtpy `$filters` object
 
-[ConnectorJobRepository]: ../Repositories/ConnectorJobRepository.md
+[ConnectorJobRepository]: ../../Repositories/Jobs/JobRepository.md

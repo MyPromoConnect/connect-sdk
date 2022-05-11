@@ -1,6 +1,7 @@
 ### Create a new Repository
+
 ```php
-$connectorRepository = new \MyPromo\Connect\SDK\Repositories\Jobs\ConnectorJobRepository($client);
+$connectorRepository = new \MyPromo\Connect\SDK\Repositories\Jobs\JobRepository($client);
 ```
 
 ###### Create Job
@@ -11,4 +12,4 @@ $connectorJob = new \MyPromo\Connect\SDK\Models\ConnectorJob();
 $connectorRepository->create($connectorJob);
 ```
 
-[ConnectorJob]: ../Models/ConnectorJob.md
+[ConnectorJob]: ../Models/Jobs/Job.md

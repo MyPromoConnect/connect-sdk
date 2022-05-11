@@ -1,7 +1,7 @@
 Template-File for [DesignRepository->create()][DesignRepository]
 
 ```php
-$design = new \MyPromo\Connect\SDK\Models\Design();
+$design = new \MyPromo\Connect\SDK\Models\Designs\Design();
 $design->setEditorUserHash('Hash String');
 $design->setReturnUrl('https...');
 $design->setCancelUrl('https...');
@@ -13,10 +13,9 @@ $design->setOptions([
 ]);
 ```
 
-Notes:  
+Notes:
 
-* Options are optionals.
+* Options are optional.
 * Qty is optional
 
-
-[DesignRepository]: ../Repositories/DesignRepository.md
+[DesignRepository]: ../../Repositories/Designs/DesignRepository.md
