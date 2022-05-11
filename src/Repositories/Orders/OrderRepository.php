@@ -85,7 +85,7 @@ class OrderRepository extends Repository
      *
      * @return array
      */
-    public function create($order)
+    public function create(Order $order)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/orders', [

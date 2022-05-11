@@ -380,8 +380,10 @@ class Order implements Arrayable
         }
 
         $customPropertyArray = [];
-        foreach ($this->customProperties as $customProperty) {
-            $customPropertyArray[] = $customProperty->toArray();
+        if ($this->customProperties) {
+            foreach ($this->customProperties as $customProperty) {
+                $customPropertyArray[] = $customProperty->toArray();
+            }
         }
 
         if (!empty($customPropertyArray)) {
