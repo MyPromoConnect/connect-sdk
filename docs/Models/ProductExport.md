@@ -7,7 +7,7 @@ $productExport->setTempletaId('template_id');
 $productExport->setTempletaKey('template_key');
 $productExport->setFormat('xslx');
 
-$productExportFilterOptions = new \MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions();
+$productExportFilterOptions = new \MyPromo\Connect\SDK\Helpers\ProductExportFilters();
 $productExport->setFilters($productExportFilterOptions);
 
 $productExport->setCallback($callback);

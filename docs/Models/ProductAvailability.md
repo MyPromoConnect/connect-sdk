@@ -7,4 +7,4 @@ $productAvailability->setSku('TESTSKU');
 $productAvailability->setAvailable(true);
 ```
 
-[ProductInventory]: ProductInventory.md
+[ProductInventory]: ProductInventoryUpdate.md

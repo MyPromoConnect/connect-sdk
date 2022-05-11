@@ -3,7 +3,7 @@ Helper class for [ProductExportRepository->all()][ProductExportRepository]
 You can use this helper class to filter and paginate the products.
 
 ```php
-$productExportFilterOptions = new \MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions();
+$productExportFilterOptions = new \MyPromo\Connect\SDK\Helpers\ProductExportFilters();
 $productExportFilterOptions->setCategoryId(1);
 $productExportFilterOptions->setCurrency('EUR');
 $productExportFilterOptions->setLang('DE');

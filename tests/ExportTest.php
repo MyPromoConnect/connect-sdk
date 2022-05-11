@@ -4,7 +4,7 @@ namespace MyPromo\Connect\SDK\Tests;
 
 use MyPromo\Connect\SDK\Models\Callback;
 use PHPUnit\Framework\TestCase;
-use MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions;
+use MyPromo\Connect\SDK\Helpers\ProductExportFilters;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Models\ProductExport;
 
@@ -42,7 +42,7 @@ class ExportTest extends TestCase
      */
     public function testPayload()
     {
-        $productExportFilterOptions = new ProductExportFilterOptions();
+        $productExportFilterOptions = new ProductExportFilters();
         $productExportFilterOptions->setCategoryId(1);
         $productExportFilterOptions->setCurrency('EUR');
         $productExportFilterOptions->setLang('DE');

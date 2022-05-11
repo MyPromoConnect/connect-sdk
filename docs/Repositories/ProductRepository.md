@@ -176,6 +176,6 @@ $productRepository->getVariant(1);
 [PriceOptionsMerchant]: ../Helpers/PriceOptionsMerchant.md
 [PriceOptionsFulfiller]: ../Helpers/PriceOptionsFulfiller.md
 [SeoOptions]: ../Helpers/SeoOptions.md
-[ProductInventory]: ../Models/ProductInventory.md
+[ProductInventory]: ../Models/ProductInventoryUpdate.md
 [ProductPriceUpdate]: ../Models/ProductPriceUpdate.md
 [ProductSeoUpdate]: ../Models/ProductSeoUpdate.md
