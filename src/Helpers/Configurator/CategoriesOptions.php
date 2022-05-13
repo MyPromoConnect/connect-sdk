@@ -17,17 +17,6 @@ class CategoriesOptions implements Arrayable
     protected $client_id;
 
     /**
-     * @var bool
-     */
-    protected $empty;
-
-    /**
-     * @var bool
-     */
-    protected $hidden;
-
-
-    /**
      * @param string $lang
      */
     public function setLang(string $lang)
@@ -59,37 +48,6 @@ class CategoriesOptions implements Arrayable
         return $this->client_id;
     }
 
-    /**
-     * @param bool $empty
-     */
-    public function setEmpty(?bool $empty)
-    {
-        $this->empty = $empty;
-    }
-
-    /**
-     * @return bool
-     */
-    public function getEmpty(): ?bool
-    {
-        return $this->empty;
-    }
-
-    /**
-     * @param bool $hidden
-     */
-    public function setHidden(?bool $hidden)
-    {
-        $this->hidden = $hidden;
-    }
-
-    /**
-     * @return int
-     */
-    public function getHidden(): ?bool
-    {
-        return $this->empty;
-    }
 
     /**
      * {@inheritDoc}
@@ -99,8 +57,6 @@ class CategoriesOptions implements Arrayable
         return [
             'lang'      => $this->lang,
             'client_id' => $this->client_id,
-            'empty'     => $this->empty ?? null,
-            'hidden'    => $this->hidden ?? null,
         ];
     }
 }
