@@ -11,15 +11,12 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class StateRepository extends Repository
 {
     /**
-     * Available options:
-     *      page
-     *      per_page
-     *
-     * You can use the @param array|StateOptions $options
-     *
-     * @return array
+     * @param StateOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options)
+    public function all(StateOptions $options)
     {
         try {
             if ($options instanceof StateOptions) {
@@ -48,8 +45,9 @@ class StateRepository extends Repository
 
     /**
      * @param $stateId
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function find($stateId)
     {

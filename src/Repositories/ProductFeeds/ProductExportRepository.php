@@ -15,13 +15,13 @@ use Psr\Cache\InvalidArgumentException;
 class ProductExportRepository extends Repository
 {
     /**
-     * @param $options
+     * @param ExportOptions $options
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function all($options): array
+    public function all(ExportOptions $options): array
     {
         try {
             if ($options instanceof ExportOptions) {
@@ -48,13 +48,13 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * @param $productExportId
+     * @param int $productExportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function find($productExportId): array
+    public function find(int $productExportId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/products_export/' . $productExportId, [
@@ -75,13 +75,13 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * @param $productExportId
+     * @param int $productExportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function cancel($productExportId): array
+    public function cancel(int $productExportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_export/' . $productExportId . '/cancel', [
@@ -102,13 +102,13 @@ class ProductExportRepository extends Repository
     }
 
     /**
-     * @param $productExportId
+     * @param int $productExportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function delete($productExportId): array
+    public function delete(int $productExportId): array
     {
         try {
             $response = $this->client->guzzle()->delete('/v1/products_export/' . $productExportId, [

@@ -15,13 +15,13 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class ProductImportRepository extends Repository
 {
     /**
-     * @param $options
+     * @param ImportOptions $options
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function all($options): array
+    public function all(ImportOptions $options): array
     {
         try {
             if ($options instanceof ImportOptions) {
@@ -48,13 +48,13 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param $productImportId
+     * @param int $productImportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function find($productImportId): array
+    public function find(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/products_import/' . $productImportId, [
@@ -75,13 +75,13 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param $productImportId
+     * @param int $productImportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function cancel($productImportId): array
+    public function cancel(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/cancel', [
@@ -102,13 +102,13 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param $productImportId
+     * @param int $productImportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function delete($productImportId): array
+    public function delete(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->delete('/v1/products_import/' . $productImportId, [
@@ -167,13 +167,13 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param $productImportId
+     * @param int $productImportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function errors($productImportId): array
+    public function errors(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/products_import/' . $productImportId . '/errors', [
@@ -194,13 +194,13 @@ class ProductImportRepository extends Repository
     }
 
     /**
-     * @param $productImportId
+     * @param int $productImportId
      * @return array
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function validate($productImportId): array
+    public function validate(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/validate', [
@@ -222,13 +222,13 @@ class ProductImportRepository extends Repository
 
     /**
      * @param ImportConfirm $productImportConfirm
-     * @param $productImportId
+     * @param int $productImportId
      * @return mixed
      * @throws ApiRequestException
      * @throws ApiResponseException
      * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function confirm(ImportConfirm $productImportConfirm, $productImportId)
+    public function confirm(ImportConfirm $productImportConfirm, int $productImportId)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/confirm', [

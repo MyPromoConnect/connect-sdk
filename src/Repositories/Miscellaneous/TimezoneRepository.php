@@ -11,14 +11,10 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class TimezoneRepository extends Repository
 {
     /**
-     * Available options:
-     *      page
-     *      per_page
-     *      pagination
-     *
-     * You can use the @param array|TimezoneOptions $options
-     *
+     * @param $options
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function all($options): array
     {
@@ -34,6 +30,33 @@ class TimezoneRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 'query'   => $options,
+            ]);
+
+        } catch (Exception $ex) {
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
+     * @param int $timezoneId
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     */
+    public function find(int $timezoneId)
+    {
+        try {
+            $response = $this->client->guzzle()->get('/v1/timezones/' . $timezoneId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
             ]);
 
         } catch (Exception $ex) {

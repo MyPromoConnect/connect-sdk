@@ -14,6 +14,10 @@ class ClientSettingRepository extends Repository
 {
     /**
      * Get a list of client settings
+     *
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function getSettings()
     {
@@ -40,8 +44,9 @@ class ClientSettingRepository extends Repository
      * Update client settings
      *
      * @param ClientSettingMerchant $clientSettings
-     *
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function setSettings(ClientSettingMerchant $clientSettings)
     {

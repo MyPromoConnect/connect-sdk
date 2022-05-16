@@ -18,23 +18,12 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class ProductRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      shipping_from
-     *      search
-     *      available
-     *      sku
-     *      lang
-     *      currency
-     *      test_product
-     *      include_variants
-     *
-     * You can use the @param array|ProductOptions $options
-     *
-     * @return array
+     * @param ProductOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options)
+    public function all(ProductOptions $options)
     {
         try {
             if ($options instanceof ProductOptions) {
@@ -62,11 +51,13 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param $productId
-     *
-     * @return array
+     * @param int $productId
+     * @param ProductOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($productId, $options)
+    public function find(int $productId, ProductOptions $options)
     {
         try {
             if ($options instanceof ProductOptions) {
@@ -93,16 +84,10 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      sku
-     *      sku_fulfiller (For Fulfiller)
-     *      shipping_from (For Merchant)
-     *
-     * You can use the @param array|InventoryOptionsMerchant $options
-     *
-     * @return array
+     * @param InventoryOptionsMerchant | InventoryOptionsFulfiller $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function getInventory($options)
     {
@@ -137,8 +122,9 @@ class ProductRepository extends Repository
 
     /**
      * @param $productInventory
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function putInventory($productInventory)
     {
@@ -164,15 +150,10 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      sku
-     *      shipping_from
-     *
-     * You can use the @param array|PriceOptionsMerchant|PriceOptionsFulfiller $options
-     *
-     * @return array
+     * @param $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function getPrices($options)
     {
@@ -207,8 +188,9 @@ class ProductRepository extends Repository
 
     /**
      * @param $productPriceUpdate
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function putPrices($productPriceUpdate)
     {
@@ -234,16 +216,12 @@ class ProductRepository extends Repository
     }
 
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      sku
-     *
-     * You can use the @param array|SeoOptions $options
-     *
-     * @return array
+     * @param SeoOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function getSeo($options)
+    public function getSeo(SeoOptions $options)
     {
         try {
             if ($options instanceof SeoOptions) {
@@ -271,8 +249,9 @@ class ProductRepository extends Repository
 
     /**
      * @param $productSeoUpdate
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function putSeo($productSeoUpdate)
     {
@@ -299,8 +278,9 @@ class ProductRepository extends Repository
 
     /**
      * @param ProductVariantOptions $productVariantOptions
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function getVariants(ProductVariantOptions $productVariantOptions)
     {
@@ -326,11 +306,12 @@ class ProductRepository extends Repository
     }
 
     /**
-     * @param $id
-     *
-     * @return array
+     * @param int $id
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function getVariant($id)
+    public function getVariant(int $id)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/variants/' . $id, [

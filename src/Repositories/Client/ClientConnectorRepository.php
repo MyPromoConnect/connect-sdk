@@ -16,8 +16,10 @@ class ClientConnectorRepository extends Repository
     /**
      * Get all Connectors assigned to a client
      *
+     * @param $options
      * @return array
-     *
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function all($options)
     {
@@ -52,6 +54,8 @@ class ClientConnectorRepository extends Repository
      *
      * @param Connector $clientConnector
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function update(Connector $clientConnector)
     {

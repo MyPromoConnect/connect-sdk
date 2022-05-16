@@ -13,22 +13,12 @@ use MyPromo\Connect\SDK\Helpers\ProductionOrders\ProductionOrderOptions;
 class ProductionOrderRepository extends Repository
 {
     /**
-     * Available options:
-     *      page
-     *      per_page
-     *      created_from
-     *      created_to
-     *      updated_from
-     *      updated_to
-     *
-     * You can use the @param array|ProductionOrderOptions $options
-     *
+     * @param ProductionOrderOptions $options
      * @return array
-     *
-     * @see    ProductionOrderOptions as its helper
-     *
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options): array
+    public function all(ProductionOrderOptions $options): array
     {
         if ($options instanceof ProductionOrderOptions) {
             $options = $options->toArray();
@@ -56,11 +46,12 @@ class ProductionOrderRepository extends Repository
     }
 
     /**
-     * @param int $orderId
-     *
+     * @param int $productionOrderId
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($productionOrderId): array
+    public function find(int $productionOrderId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/production_orders/' . $productionOrderId, [
@@ -82,11 +73,13 @@ class ProductionOrderRepository extends Repository
     }
 
     /**
-     * @param $productionOrderId
+     * @param int $productionOrderId
      * @param Shipment $shipment
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function addShipment($productionOrderId, Shipment $shipment): array
+    public function addShipment(int $productionOrderId, Shipment $shipment): array
     {
         try {
             $response = $this->client->guzzle()->post('/v1/production_orders/' . $productionOrderId . '/add_shipment', [
@@ -110,10 +103,12 @@ class ProductionOrderRepository extends Repository
     }
 
     /**
-     * @param $productionOrderId
+     * @param int $productionOrderId
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function genericLabel($productionOrderId): array
+    public function genericLabel(int $productionOrderId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/production_orders/' . $productionOrderId . '/generic_label', [

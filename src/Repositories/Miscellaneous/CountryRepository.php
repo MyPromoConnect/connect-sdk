@@ -11,15 +11,12 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class CountryRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *
-     * You can use the @param array|CountryOptions $options
-     *
-     * @return array
+     * @param CountryOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options)
+    public function all(CountryOptions $options)
     {
         try {
             if ($options instanceof CountryOptions) {
@@ -47,11 +44,12 @@ class CountryRepository extends Repository
     }
 
     /**
-     * @param $countryId
-     *
-     * @return array
+     * @param int $countryId
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($countryId)
+    public function find(int $countryId)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/countries/' . $countryId, [

@@ -14,21 +14,12 @@ use GuzzleHttp\RequestOptions;
 class OrderRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      created_from
-     *      created_to
-     *      updated_from
-     *      updated_to
-     *
-     * You can use the @param array|OrderOptions $options
-     *
-     * @return array
-     * @see OrderOptions as its helper
-     *
+     * @param OrderOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options)
+    public function all(OrderOptions $options)
     {
         if ($options instanceof OrderOptions) {
             $options = $options->toArray();
@@ -57,10 +48,11 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($orderId)
+    public function find(int $orderId)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/orders/' . $orderId, [
@@ -82,8 +74,10 @@ class OrderRepository extends Repository
 
     /**
      * @param Order $order
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
      */
     public function create(Order $order)
     {
@@ -117,10 +111,11 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function submit($orderId)
+    public function submit(int $orderId)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/orders/' . $orderId . '/submit', [
@@ -142,10 +137,11 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function cancel($orderId)
+    public function cancel(int $orderId)
     {
         try {
             $response = $this->client->guzzle()->put('/v1/orders/' . $orderId . '/cancel', [

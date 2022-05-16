@@ -18,10 +18,12 @@ class OrderItemRepository extends Repository
 {
     /**
      * @param OrderItem $orderItem
-     *
-     * @return array
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InputValidationException
      */
-    public function submit($orderItem)
+    public function submit(OrderItem $orderItem)
     {
         $orderId = $orderItem->getOrderId();
 

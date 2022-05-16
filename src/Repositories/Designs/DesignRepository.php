@@ -21,10 +21,12 @@ class DesignRepository extends Repository
 {
     /**
      * @param Design $design
-     *
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
      */
-    public function create($design)
+    public function create(Design $design)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/designs', [
@@ -55,11 +57,12 @@ class DesignRepository extends Repository
     }
 
     /**
-     * @param $designId
-     *
+     * @param int $designId
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($designId)
+    public function find(int $designId)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/designs/' . $designId, [
@@ -83,10 +86,11 @@ class DesignRepository extends Repository
 
     /**
      * @param int $designId
-     *
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function submit($designId)
+    public function submit(int $designId)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/designs/' . $designId . '/submit', [
@@ -109,10 +113,12 @@ class DesignRepository extends Repository
 
     /**
      * @param int $designId
-     *
-     * @return ResponseInterface
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InputValidationException
      */
-    public function getPreviewPDF($designId)
+    public function getPreviewPDF(int $designId)
     {
         $getDesignResponse = $this->find($designId);
 
@@ -151,10 +157,11 @@ class DesignRepository extends Repository
     /**
      * @param int $designId
      * @param string $targetFile
-     *
      * @return bool
+     * @throws ApiRequestException
+     * @throws SdkException
      */
-    public function savePreview($designId, $targetFile)
+    public function savePreview(int $designId, string $targetFile)
     {
         try {
             $response = $this->getPreviewPDF($designId);
@@ -180,10 +187,12 @@ class DesignRepository extends Repository
 
     /**
      * @param Design $design
-     *
      * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
      */
-    public function createEditorUserHash($design)
+    public function createEditorUserHash(Design $design)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/editor_user', [

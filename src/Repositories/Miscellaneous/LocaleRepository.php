@@ -11,16 +11,12 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class LocaleRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      pagination
-     *
-     * You can use the @param array|LocaleOptions $options
-     *
+     * @param LocaleOptions $options
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options): array
+    public function all(LocaleOptions $options): array
     {
         try {
             if ($options instanceof LocaleOptions) {
@@ -34,6 +30,33 @@ class LocaleRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 'query'   => $options,
+            ]);
+
+        } catch (Exception $ex) {
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+    }
+
+    /**
+     * @param int $localeId
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     */
+    public function find(int $localeId)
+    {
+        try {
+            $response = $this->client->guzzle()->get('/v1/locales/' . $localeId, [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
             ]);
 
         } catch (Exception $ex) {

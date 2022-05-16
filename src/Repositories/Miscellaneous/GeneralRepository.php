@@ -12,9 +12,9 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class GeneralRepository extends Repository
 {
     /**
-     * Check api status
-     *
      * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function apiStatus(): array
     {
@@ -38,14 +38,15 @@ class GeneralRepository extends Repository
     }
 
     /**
-     * Download a file from connect api
-     *
-     * @param $url
-     * @param $targetFile
-     *
+     * @param string $url
+     * @param string $targetFile
      * @return bool
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InputValidationException
+     * @throws SdkException
      */
-    public function downloadFile($url, $targetFile): bool
+    public function downloadFile(string $url, string $targetFile): bool
     {
         $shortUrlIdentifier = basename($url);
 

@@ -11,15 +11,12 @@ use MyPromo\Connect\SDK\Repositories\Repository;
 class CarrierRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *
-     * You can use the @param array|CarrierOptions $options
-     *
-     * @return array
+     * @param CarrierOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options)
+    public function all(CarrierOptions $options)
     {
         try {
             if ($options instanceof CarrierOptions) {
@@ -47,11 +44,12 @@ class CarrierRepository extends Repository
     }
 
     /**
-     * @param $carrierId
-     *
-     * @return array
+     * @param int $carrierId
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($carrierId)
+    public function find(int $carrierId)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/carriers/' . $carrierId, [
