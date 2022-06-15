@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\Miscellaneous\CountryOptions;
@@ -14,7 +15,7 @@ class CountryRepository extends Repository
      * @param CountryOptions $options
      * @return mixed
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function all(CountryOptions $options)
     {
@@ -47,7 +48,7 @@ class CountryRepository extends Repository
      * @param int $countryId
      * @return mixed
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function find(int $countryId)
     {

@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\Miscellaneous\CarrierOptions;
@@ -47,7 +48,7 @@ class CarrierRepository extends Repository
      * @param int $carrierId
      * @return mixed
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function find(int $carrierId)
     {

@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Exceptions\InputValidationException;
@@ -14,7 +15,7 @@ class GeneralRepository extends Repository
     /**
      * @return array
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function apiStatus(): array
     {
@@ -80,10 +81,6 @@ class GeneralRepository extends Repository
             throw new SdkException("File '{$targetFile}' is not writable.");
         }
 
-        $file = fclose($localFile);
-
-
-        return $file;
-
+        return fclose($localFile);
     }
 }

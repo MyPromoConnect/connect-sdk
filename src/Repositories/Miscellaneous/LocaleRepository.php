@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\Miscellaneous\LocaleOptions;
@@ -14,7 +15,7 @@ class LocaleRepository extends Repository
      * @param LocaleOptions $options
      * @return array
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function all(LocaleOptions $options): array
     {
@@ -47,7 +48,7 @@ class LocaleRepository extends Repository
      * @param int $localeId
      * @return mixed
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function find(int $localeId)
     {

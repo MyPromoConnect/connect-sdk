@@ -3,6 +3,7 @@
 namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
+use GuzzleHttp\Exception\GuzzleException;
 use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
 use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
 use MyPromo\Connect\SDK\Helpers\Miscellaneous\TimezoneOptions;
@@ -14,7 +15,7 @@ class TimezoneRepository extends Repository
      * @param $options
      * @return array
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function all($options): array
     {
@@ -47,7 +48,7 @@ class TimezoneRepository extends Repository
      * @param int $timezoneId
      * @return mixed
      * @throws ApiRequestException
-     * @throws ApiResponseException
+     * @throws ApiResponseException|GuzzleException
      */
     public function find(int $timezoneId)
     {
