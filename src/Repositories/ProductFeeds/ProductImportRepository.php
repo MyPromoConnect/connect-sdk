@@ -3,39 +3,28 @@
 namespace MyPromo\Connect\SDK\Repositories\ProductFeeds;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ProductExportException;
-use MyPromo\Connect\SDK\Exceptions\ProductImportException;
-use MyPromo\Connect\SDK\Helpers\ConfirmProductImportOptions;
-use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
-use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
-use MyPromo\Connect\SDK\Helpers\ProductOptions;
-use MyPromo\Connect\SDK\Models\ProductExport;
-use MyPromo\Connect\SDK\Models\ProductImport;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
+use MyPromo\Connect\SDK\Models\ProductFeeds\ImportConfirm;
+use MyPromo\Connect\SDK\Helpers\ProductFeeds\ImportOptions;
+use MyPromo\Connect\SDK\Models\ProductFeeds\Import;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class ProductImportRepository extends Repository
 {
     /**
-     * Available options:
-     *      page
-     *      perPage
-     *      pagination
-     *      created_from
-     *      created_to
-     *
-     * You can use the @param array|ProductImportOptions $options
-     *
+     * @param ImportOptions $options
      * @return array
-     * @throws InvalidArgumentException
-     * @throws GuzzleException|ProductImportException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function all($options): array
+    public function all(ImportOptions $options): array
     {
         try {
-            if ($options instanceof ProductImportOptions) {
+            if ($options instanceof ImportOptions) {
                 $options = $options->toArray();
             }
 
@@ -45,29 +34,27 @@ class ProductImportRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * Find product import by using product import id
-     *
-     * @param $productImportId
-     *
+     * @param int $productImportId
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function find($productImportId): array
+    public function find(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/products_import/' . $productImportId, [
@@ -76,27 +63,25 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * Cancel product import by using product import id
-     *
-     * @param $productImportId
-     *
+     * @param int $productImportId
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function cancelImport($productImportId): array
+    public function cancel(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/cancel', [
@@ -105,27 +90,25 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * Delete product import by using product import id
-     *
-     * @param $productImportId
-     *
+     * @param int $productImportId
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function deleteImport($productImportId): array
+    public function delete(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->delete('/v1/products_import/' . $productImportId, [
@@ -134,61 +117,63 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param ProductImport $productImport
-     *
+     * @param Import $productImport
      * @return mixed
-     *
-     * @throws InvalidArgumentException|GuzzleException
-     * @throws ProductImportException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function requestImport(ProductImport $productImport)
+    public function create(Import $productImport)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/products_import', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $productImport->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $productImport->setId($body['id']);
-
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['id'])) {
+            $productImport->setId($body['id']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
     }
 
     /**
-     * Import errors product import id
-     *
-     * @param $productImportId
-     *
+     * @param int $productImportId
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function errors($productImportId): array
+    public function errors(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->get('/v1/products_import/' . $productImportId . '/errors', [
@@ -197,27 +182,25 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * Validate  product import by id
-     *
-     * @param $productImportId
-     *
+     * @param int $productImportId
      * @return array
-     * @throws InvalidArgumentException
-     * @throws ProductImportException|GuzzleException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function validate($productImportId): array
+    public function validate(int $productImportId): array
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/validate', [
@@ -226,47 +209,45 @@ class ProductImportRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param ConfirmProductImportOptions $confirmProductImportOptions
-     * @param $productImportId
+     * @param ImportConfirm $productImportConfirm
+     * @param int $productImportId
      * @return mixed
-     *
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ProductImportException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
-    public function confirm(ConfirmProductImportOptions $confirmProductImportOptions, $productImportId)
+    public function confirm(ImportConfirm $productImportConfirm, int $productImportId)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/products_import/' . $productImportId . '/confirm', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                RequestOptions::JSON => $confirmProductImportOptions->toArray(),
+                RequestOptions::JSON => $productImportConfirm->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductImportException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new ProductImportException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
 
         return $body;
     }

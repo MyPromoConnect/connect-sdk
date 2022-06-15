@@ -2,14 +2,13 @@
 
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
-use GuzzleHttp\Exception\GuzzleException;
 use Exception;
-use MyPromo\Connect\SDK\Exceptions\MissingOrderException;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
 use MyPromo\Connect\SDK\Models\OrderItem;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
-use Psr\Cache\InvalidArgumentException;
 
 /**
  * Class OrderItemRepository
@@ -19,20 +18,17 @@ class OrderItemRepository extends Repository
 {
     /**
      * @param OrderItem $orderItem
-     *
-     * @return array
-     *
-     * @throws MissingOrderException
-     * @throws OrderException
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InputValidationException
      */
-    public function submit($orderItem)
+    public function submit(OrderItem $orderItem)
     {
         $orderId = $orderItem->getOrderId();
 
         if (!isset($orderId)) {
-            throw new MissingOrderException('Missing Order-ID.');
+            throw new InputValidationException('Missing Order-ID.', 422);
         }
 
         try {
@@ -45,15 +41,15 @@ class OrderItemRepository extends Repository
                 RequestOptions::JSON => $orderItem->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
 
         return $body;
     }

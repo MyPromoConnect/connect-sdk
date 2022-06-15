@@ -6,5 +6,5 @@ $custom->setKey('customField');
 $custom->setValue('custom value');
 ```
 
-[OrderItem]: OrderItem.md
-[Order]: Order.md
+[OrderItem]: Orders/OrderItem.md
+[Order]: Orders/Order.md

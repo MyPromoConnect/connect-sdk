@@ -4,25 +4,21 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
-use MyPromo\Connect\SDK\Exceptions\CountryException;
-use MyPromo\Connect\SDK\Helpers\CountryOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Helpers\Miscellaneous\CountryOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class CountryRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *
-     * You can use the @param array|CountryOptions $options
-     *
-     * @return array
-     * @throws InvalidArgumentException
-     * @throws CountryException|GuzzleException
+     * @param CountryOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException|GuzzleException
      */
-    public function all($options) {
+    public function all(CountryOptions $options)
+    {
         try {
             if ($options instanceof CountryOptions) {
                 $options = $options->toArray();
@@ -34,27 +30,28 @@ class CountryRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new CountryException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new CountryException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param $countryId
-     *
-     * @return array
-     * @throws InvalidArgumentException
-     * @throws CountryException|GuzzleException
+     * @param int $countryId
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException|GuzzleException
      */
-    public function find($countryId) {
+    public function find(int $countryId)
+    {
         try {
             $response = $this->client->guzzle()->get('/v1/countries/' . $countryId, [
                 'headers' => [
@@ -63,13 +60,14 @@ class CountryRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new CountryException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new CountryException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

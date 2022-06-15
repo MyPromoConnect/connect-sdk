@@ -23,7 +23,7 @@ class ProductionOrderTest extends TestCase
         parent::setUp();
 
         $this->options = new ProductionOrderOptions();
-        $this->options->setFrom(1);
+        $this->options->setPage(1);
         $this->options->setPerPage(5);
 
         $this->shipment = new Shipment();

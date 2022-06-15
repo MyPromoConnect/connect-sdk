@@ -4,10 +4,9 @@ namespace MyPromo\Connect\SDK\Tests;
 
 use MyPromo\Connect\SDK\Models\Callback;
 use PHPUnit\Framework\TestCase;
-use MyPromo\Connect\SDK\Helpers\ProductExportFilterOptions;
+use MyPromo\Connect\SDK\Helpers\ProductExportFilters;
 use MyPromo\Connect\SDK\Helpers\ProductExportOptions;
 use MyPromo\Connect\SDK\Models\ProductExport;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 
 class ExportTest extends TestCase
 {
@@ -24,8 +23,8 @@ class ExportTest extends TestCase
         $this->options->setPage(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);
-        $this->options->setCreatedTo(date("Y-m-d H:i:s"));
-        $this->options->setCreatedFrom(date("Y-m-d H:i:s"));
+        $this->options->setCreatedTo(new \DateTime(date('Y-m-d H:i:s')));
+        $this->options->setCreatedFrom(new \DateTime(date('Y-m-d H:i:s')));
     }
 
     public function testOptions()
@@ -40,11 +39,10 @@ class ExportTest extends TestCase
     }
 
     /**
-     * @throws OrderException
      */
     public function testPayload()
     {
-        $productExportFilterOptions = new ProductExportFilterOptions();
+        $productExportFilterOptions = new ProductExportFilters();
         $productExportFilterOptions->setCategoryId(1);
         $productExportFilterOptions->setCurrency('EUR');
         $productExportFilterOptions->setLang('DE');

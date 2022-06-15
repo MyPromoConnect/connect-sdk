@@ -17,10 +17,9 @@ class LocaleTest extends TestCase
         parent::setUp();
 
         $this->options = new LocaleOptions();
-        $this->options->setFrom(1);
+        $this->options->setPage(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);
-        $this->options->setPage(1);
     }
 
     public function testOptions()

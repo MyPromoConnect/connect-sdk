@@ -3,35 +3,23 @@
 namespace MyPromo\Connect\SDK\Repositories\Orders;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
-use MyPromo\Connect\SDK\Helpers\OrderOptions;
-use MyPromo\Connect\SDK\Models\Order;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
+use MyPromo\Connect\SDK\Helpers\Orders\OrderOptions;
+use MyPromo\Connect\SDK\Models\Orders\Order;
 use MyPromo\Connect\SDK\Repositories\Repository;
 use GuzzleHttp\RequestOptions;
-use Psr\Cache\InvalidArgumentException;
 
 class OrderRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      created_from
-     *      created_to
-     *      updated_from
-     *      updated_to
-     *
-     * You can use the @param array|OrderOptions $options
-     *
-     * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
-     * @see OrderOptions as its helper
-     *
+     * @param OrderOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options)
+    public function all(OrderOptions $options)
     {
         if ($options instanceof OrderOptions) {
             $options = $options->toArray();
@@ -44,15 +32,15 @@ class OrderRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -60,13 +48,11 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
-     *
-     * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($orderId)
+    public function find(int $orderId)
     {
         try {
             $response = $this->client->guzzle()->get('/v1/orders/' . $orderId, [
@@ -75,13 +61,12 @@ class OrderRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -89,13 +74,12 @@ class OrderRepository extends Repository
 
     /**
      * @param Order $order
-     *
-     * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     * @throws InvalidResponseException
      */
-    public function create($order)
+    public function create(Order $order)
     {
         try {
             $response = $this->client->guzzle()->post('/v1/orders', [
@@ -106,16 +90,20 @@ class OrderRepository extends Repository
                 ],
                 RequestOptions::JSON => $order->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 201) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-            $order->setId($body['id']);
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['id'])) {
+            $order->setId($body['id']);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $body;
@@ -123,27 +111,25 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
-     *
-     * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function submit($orderId)
+    public function submit(int $orderId)
     {
         try {
-            $response = $this->client->guzzle()->post('/v1/orders/' . $orderId . '/submit', [
+            $response = $this->client->guzzle()->patch('/v1/orders/' . $orderId . '/submit', [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -151,13 +137,11 @@ class OrderRepository extends Repository
 
     /**
      * @param int $orderId
-     *
-     * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws OrderException|GuzzleException
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function cancel($orderId)
+    public function cancel(int $orderId)
     {
         try {
             $response = $this->client->guzzle()->put('/v1/orders/' . $orderId . '/cancel', [
@@ -167,12 +151,12 @@ class OrderRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new OrderException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new OrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);

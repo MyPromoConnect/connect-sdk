@@ -12,7 +12,7 @@ use InvalidArgumentException;
 class Date
 {
     /**
-     * @param DateTimeInterface $date
+     * @param $date
      */
     public static function validate($date)
     {

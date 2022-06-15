@@ -3,11 +3,11 @@
 namespace MyPromo\Connect\SDK;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
-use MyPromo\Connect\SDK\Exceptions\ClientException;
-use MyPromo\Connect\SDK\Exceptions\MissingCredentialsException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Exceptions\InputValidationException;
+use MyPromo\Connect\SDK\Exceptions\InvalidResponseException;
 use GuzzleHttp\RequestOptions;
-use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\Cache\CacheItem;
 
@@ -69,14 +69,19 @@ class Client
     /**
      * Client constructor.
      *
-     * @param int           $productionCode
-     * @param int           $id
-     * @param string        $secret
-     * @param string|null   $baseUri
-     * @param bool          $forceNewToken
+     * @param int $productionCode
+     * @param int $id
+     * @param string $secret
+     * @param string|null $baseUri
+     * @param bool $forceNewToken
+     * @throws InputValidationException
      */
     public function __construct($productionCode, $id, $secret, $baseUri = null, $forceNewToken = false)
     {
+        if (empty($id) || empty($secret)) {
+            throw new InputValidationException('Missing client id or secret.');
+        }
+
         if (!$baseUri) {
             // Switch through production codes
             // default case should always be the live system
@@ -95,14 +100,15 @@ class Client
             }
         }
 
-        $this->cache      = new FilesystemAdapter();
-        $this->guzzle     = new \GuzzleHttp\Client([
-            'base_uri' => $baseUri,
+        $this->cache = new FilesystemAdapter();
+        $this->guzzle = new \GuzzleHttp\Client([
+            'base_uri'    => $baseUri,
+            'http_errors' => false
         ]);
-        $this->id               = $id;
-        $this->secret           = $secret;
-        $this->productionCode   = $productionCode;
-        $this->forceNewToken    = $forceNewToken;
+        $this->id = $id;
+        $this->secret = $secret;
+        $this->productionCode = $productionCode;
+        $this->forceNewToken = $forceNewToken;
     }
 
     /**
@@ -141,15 +147,14 @@ class Client
      * Get token from cache or request bearer token from connect
      *
      * @return CacheItem
-     *
-     * @throws MissingCredentialsException
-     * @throws ClientException
-     * @throws InvalidArgumentException|GuzzleException
+     * @throws InputValidationException
+     * @throws ApiRequestException
+     * @throws InvalidResponseException
      */
     public function auth(): CacheItem
     {
         if (!isset($this->id) || !isset($this->secret)) {
-            throw new MissingCredentialsException('Missing client id or secret.');
+            throw new InputValidationException('Missing client id or secret.');
         }
 
         try {
@@ -168,48 +173,26 @@ class Client
                         'scope'         => '*',
                     ],
                 ]);
-
-                if ($response->getStatusCode() !== 200) {
-                    throw new ClientException($response->getBody(), $response->getStatusCode());
-                }
-
-                $body = json_decode($response->getBody(), true);
-
-                $bearerToken->set($body['access_token']);
-                $bearerToken->expiresAfter($body['expires_in']);
-                $this->cache->save($bearerToken);
             }
         } catch (Exception $ex) {
-            throw new ClientException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        $body = json_decode($response->getBody(), true);
+
+        if (!empty($body) && isset($body['access_token']) && isset($body['expires_in'])) {
+            $bearerToken->set($body['access_token']);
+            $bearerToken->expiresAfter($body['expires_in']);
+            $this->cache->save($bearerToken);
+        } else {
+            throw new InvalidResponseException('Unable retrive required data from response.', 422);
         }
 
         return $bearerToken;
     }
 
-    /**
-     * @return array
-     *
-     * @throws ClientException
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
-     */
-    public function status(): array
-    {
-        try {
-            $response = $this->guzzle->get('/v1/status', [
-                'headers' => [
-                    'Accept'        => 'application/json',
-                    'Authorization' => 'Bearer ' . $this->auth()->get(),
-                ],
-            ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ClientException($response->getBody(), $response->getStatusCode());
-            }
-        } catch (Exception $ex) {
-            throw new ClientException($ex->getMessage(), $ex->getCode());
-        }
-
-        return json_decode($response->getBody(), true);
-    }
 }

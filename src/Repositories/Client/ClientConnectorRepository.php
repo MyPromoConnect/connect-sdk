@@ -3,47 +3,79 @@
 namespace MyPromo\Connect\SDK\Repositories\Client;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ClientConnectorException;
-use MyPromo\Connect\SDK\Models\ClientConnector;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Helpers\Client\ConnectorOptions;
+use MyPromo\Connect\SDK\Models\Client\Connector;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class ClientConnectorRepository extends Repository
 {
+
+    /**
+     * Get all Connectors assigned to a client
+     *
+     * @param $options
+     * @return array
+     * @throws ApiRequestException
+     * @throws ApiResponseException
+     */
+    public function all($options)
+    {
+        if ($options instanceof ConnectorOptions) {
+            $options = $options->toArray();
+        }
+
+        try {
+            $response = $this->client->guzzle()->get('/v1/client/connectors', [
+                'headers' => [
+                    'Accept'        => 'application/json',
+                    'Content-Type'  => 'application/json',
+                    'Authorization' => 'Bearer ' . $this->client->auth()->get(),
+                ],
+                'query'   => $options,
+            ]);
+
+        } catch (Exception $ex) {
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
+    }
+
+
     /**
      * Update client connectors
      *
-     * @param ClientConnector $clientConnector
+     * @param Connector $clientConnector
      * @return mixed
-     *
-     * @throws ClientConnectorException
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function update(ClientConnector $clientConnector)
+    public function update(Connector $clientConnector)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/connectors', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $clientConnector->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ClientConnectorException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new ClientConnectorException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
 
-        return $body;
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

@@ -4,7 +4,6 @@ namespace MyPromo\Connect\SDK\Tests;
 
 use PHPUnit\Framework\TestCase;
 use MyPromo\Connect\SDK\Models\ProductImport;
-use MyPromo\Connect\SDK\Exceptions\OrderException;
 use MyPromo\Connect\SDK\Helpers\ProductImportInput;
 use MyPromo\Connect\SDK\Helpers\ProductImportOptions;
 
@@ -28,8 +27,8 @@ class ImportTest extends TestCase
         $this->options->setPage(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);
-        $this->options->setCreatedTo(date("Y-m-d H:i:s"));
-        $this->options->setCreatedFrom(date("Y-m-d H:i:s"));
+        $this->options->setCreatedTo(new \DateTime(date('Y-m-d H:i:s')));
+        $this->options->setCreatedFrom(new \DateTime(date('Y-m-d H:i:s')));
     }
 
     public function testOptions()
@@ -44,7 +43,6 @@ class ImportTest extends TestCase
     }
 
     /**
-     * @throws OrderException
      */
     public function testPayload()
     {

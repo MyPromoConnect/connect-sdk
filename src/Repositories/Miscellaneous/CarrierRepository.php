@@ -4,25 +4,21 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
-use MyPromo\Connect\SDK\Exceptions\CarrierException;
-use MyPromo\Connect\SDK\Helpers\CarrierOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Helpers\Miscellaneous\CarrierOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class CarrierRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *
-     * You can use the @param array|CarrierOptions $options
-     *
-     * @return array
-     * @throws InvalidArgumentException
-     * @throws CarrierException|GuzzleException
+     * @param CarrierOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options) {
+    public function all(CarrierOptions $options)
+    {
         try {
             if ($options instanceof CarrierOptions) {
                 $options = $options->toArray();
@@ -34,27 +30,28 @@ class CarrierRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new CarrierException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new CarrierException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param $carrierId
-     *
-     * @return array
-     * @throws InvalidArgumentException
-     * @throws CarrierException|GuzzleException
+     * @param int $carrierId
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException|GuzzleException
      */
-    public function find($carrierId) {
+    public function find(int $carrierId)
+    {
         try {
             $response = $this->client->guzzle()->get('/v1/carriers/' . $carrierId, [
                 'headers' => [
@@ -63,13 +60,14 @@ class CarrierRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new CarrierException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new CarrierException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

@@ -4,35 +4,21 @@ namespace MyPromo\Connect\SDK\Repositories\ProductionOrders;
 
 use Exception;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Models\Shipment;
-use Psr\Cache\InvalidArgumentException;
-use GuzzleHttp\Exception\GuzzleException;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Models\ProductionOrders\Shipment;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use MyPromo\Connect\SDK\Helpers\ProductionOrderOptions;
-use MyPromo\Connect\SDK\Exceptions\ProductionOrderException;
+use MyPromo\Connect\SDK\Helpers\ProductionOrders\ProductionOrderOptions;
 
 class ProductionOrderRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *      created_from
-     *      created_to
-     *      updated_from
-     *      updated_to
-     *
-     * You can use the @param array|ProductionOrderOptions $options
-     *
+     * @param ProductionOrderOptions $options
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws GuzzleException
-     * @throws ProductionOrderException
-     * @see    ProductionOrderOptions as its helper
-     *
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function all($options): array
+    public function all(ProductionOrderOptions $options): array
     {
         if ($options instanceof ProductionOrderOptions) {
             $options = $options->toArray();
@@ -48,58 +34,55 @@ class ProductionOrderRepository extends Repository
                 'query'   => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
 
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param int $orderId
-     *
+     * @param int $productionOrderId
      * @return array
-     *
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException|GuzzleException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function find($orderId): array
+    public function find(int $productionOrderId): array
     {
         try {
-            $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId, [
+            $response = $this->client->guzzle()->get('/v1/production_orders/' . $productionOrderId, [
                 'headers' => [
                     'Accept'        => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param $orderId
+     * @param int $productionOrderId
      * @param Shipment $shipment
      * @return array
-     *
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function addShipment($orderId, Shipment $shipment): array
+    public function addShipment(int $productionOrderId, Shipment $shipment): array
     {
         try {
-            $response = $this->client->guzzle()->post('/v1/production_orders/' . $orderId . '/add_shipment', [
+            $response = $this->client->guzzle()->post('/v1/production_orders/' . $productionOrderId . '/add_shipment', [
                 'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
@@ -108,43 +91,43 @@ class ProductionOrderRepository extends Repository
                 RequestOptions::JSON => $shipment->toArray(),
             ]);
 
-            if ($response->getStatusCode() !== 201) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
-     * @param $orderId
+     * @param int $productionOrderId
      * @return array
-     *
-     * @throws GuzzleException
-     * @throws InvalidArgumentException
-     * @throws ProductionOrderException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function genericLabel($orderId): array
+    public function genericLabel(int $productionOrderId): array
     {
         try {
-            $response = $this->client->guzzle()->get('/v1/production_orders/' . $orderId . '/generic_label', [
-                'headers'            => [
+            $response = $this->client->guzzle()->get('/v1/production_orders/' . $productionOrderId . '/generic_label', [
+                'headers' => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ]
             ]);
 
-            if ($response->getStatusCode() !== 201) {
-                throw new ProductionOrderException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new ProductionOrderException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 201) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
 }

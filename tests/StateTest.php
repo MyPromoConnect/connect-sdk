@@ -17,7 +17,6 @@ class StateTest extends TestCase
         parent::setUp();
 
         $this->options = new StateOptions();
-        $this->options->setFrom(1);
         $this->options->setPerPage(5);
         $this->options->setPagination(false);
         $this->options->setPage(1);

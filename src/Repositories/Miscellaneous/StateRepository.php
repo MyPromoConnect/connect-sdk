@@ -4,25 +4,21 @@ namespace MyPromo\Connect\SDK\Repositories\Miscellaneous;
 
 use Exception;
 use GuzzleHttp\Exception\GuzzleException;
-use MyPromo\Connect\SDK\Exceptions\StateException;
-use MyPromo\Connect\SDK\Helpers\StateOptions;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Helpers\Miscellaneous\StateOptions;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class StateRepository extends Repository
 {
     /**
-     * Available options:
-     *      from
-     *      per_page
-     *
-     * You can use the @param array|StateOptions $options
-     *
-     * @return array
-     * @throws InvalidArgumentException
-     * @throws StateException|GuzzleException
+     * @param StateOptions $options
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException|GuzzleException
      */
-    public function all($options) {
+    public function all(StateOptions $options)
+    {
         try {
             if ($options instanceof StateOptions) {
                 $options = $options->toArray();
@@ -34,27 +30,28 @@ class StateRepository extends Repository
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
-                'query' => $options,
+                'query'   => $options,
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new StateException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new StateException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 
     /**
      * @param $stateId
-     *
-     * @return array
-     * @throws InvalidArgumentException
-     * @throws StateException|GuzzleException
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException|GuzzleException
      */
-    public function find($stateId) {
+    public function find($stateId)
+    {
         try {
             $response = $this->client->guzzle()->get('/v1/states/' . $stateId, [
                 'headers' => [
@@ -63,13 +60,14 @@ class StateRepository extends Repository
                 ],
             ]);
 
-            if ($response->getStatusCode() !== 200) {
-                throw new StateException($response->getBody(), $response->getStatusCode());
-            }
-
-            return json_decode($response->getBody(), true);
         } catch (Exception $ex) {
-            throw new StateException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

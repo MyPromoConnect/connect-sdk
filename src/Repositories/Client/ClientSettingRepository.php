@@ -3,21 +3,21 @@
 namespace MyPromo\Connect\SDK\Repositories\Client;
 
 use Exception;
-use GuzzleHttp\Exception\GuzzleException;
 use GuzzleHttp\RequestOptions;
-use MyPromo\Connect\SDK\Exceptions\ClientGeneralException;
-use MyPromo\Connect\SDK\Models\MerchantClientSetting;
+use MyPromo\Connect\SDK\Exceptions\ApiRequestException;
+use MyPromo\Connect\SDK\Exceptions\ApiResponseException;
+use MyPromo\Connect\SDK\Models\ClientSettingFulfiller;
+use MyPromo\Connect\SDK\Models\ClientSettingMerchant;
 use MyPromo\Connect\SDK\Repositories\Repository;
-use Psr\Cache\InvalidArgumentException;
 
 class ClientSettingRepository extends Repository
 {
     /**
      * Get a list of client settings
      *
-     * @throws InvalidArgumentException
-     * @throws ClientGeneralException|GuzzleException
-     *
+     * @return mixed
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
     public function getSettings()
     {
@@ -29,13 +29,12 @@ class ClientSettingRepository extends Repository
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ]
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ClientGeneralException($response->getBody(), $response->getStatusCode());
-            }
-
         } catch (Exception $ex) {
-            throw new ClientGeneralException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
+        }
+
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
         }
 
         return json_decode($response->getBody(), true);
@@ -44,35 +43,30 @@ class ClientSettingRepository extends Repository
     /**
      * Update client settings
      *
-     * @param MerchantClientSetting $clientSettings
-     *
+     * @param ClientSettingMerchant $clientSettings
      * @return mixed
-     *
-     * @throws InvalidArgumentException|GuzzleException
-     * @throws ClientGeneralException
+     * @throws ApiRequestException
+     * @throws ApiResponseException
      */
-    public function update(MerchantClientSetting $clientSettings)
+    public function setSettings(ClientSettingMerchant $clientSettings)
     {
         try {
             $response = $this->client->guzzle()->patch('/v1/client/settings', [
-                'headers'           => [
+                'headers'            => [
                     'Accept'        => 'application/json',
                     'Content-Type'  => 'application/json',
                     'Authorization' => 'Bearer ' . $this->client->auth()->get(),
                 ],
                 RequestOptions::JSON => $clientSettings->toArray(),
             ]);
-
-            if ($response->getStatusCode() !== 200) {
-                throw new ClientGeneralException($response->getBody(), $response->getStatusCode());
-            }
-
-            $body = json_decode($response->getBody(), true);
-
         } catch (Exception $ex) {
-            throw new ClientGeneralException($ex->getMessage(), $ex->getCode());
+            throw new ApiRequestException($ex->getMessage(), $ex->getCode());
         }
 
-        return $body;
+        if ($response->getStatusCode() !== 200) {
+            throw new ApiResponseException($response->getBody(), $response->getStatusCode());
+        }
+
+        return json_decode($response->getBody(), true);
     }
 }

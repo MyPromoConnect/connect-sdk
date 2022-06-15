@@ -19,7 +19,7 @@ require 'vendor/autoload.php';
 #### Usage
 
 Everything is build around the `\MyPromo\Connect\SDK\Client`.  
-Every [Repository][Repository] will return the response as an array on success.  
+Every [Repository][Repositories] will return the response as an array on success.  
 On failure it will throw an exception.
 
 ###### Create a new client
@@ -45,13 +45,8 @@ bool    $forceNewToken  // Force SDK to create new token for your client (Option
 
 From here on you are able to use the repositories which require a functioning `\MyPromo\Connect\SDK\Client`.
 
-- [OrderRepository][orderRepository]
-- [OrderItemRepository][orderItemRepository]
+[Show all repositories][Repositories]
 
 [Composer]: https://getcomposer.org/
 
-[orderRepository]: Repositories/OrderRepository.md
-
-[orderItemRepository]: Repositories/OrderItemRepository.md
-
-[Repository]: Repositories
+[Repositories]: Repositories
