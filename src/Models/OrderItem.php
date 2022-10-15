@@ -4,7 +4,6 @@ namespace MyPromo\Connect\SDK\Models;
 
 use MyPromo\Connect\SDK\Contracts\Arrayable;
 use MyPromo\Connect\SDK\Exceptions\OrderItemException;
-use MyPromo\Connect\SDK\Helpers\DesignOptions;
 
 /**
  * Class OrderItem
@@ -183,7 +182,7 @@ class OrderItem implements Arrayable
     }
 
     /**
-     * @param DesignOptions ...$designs
+     * @param Design ...$designs
      */
     public function setDesigns(...$designs)
     {
@@ -270,7 +269,7 @@ class OrderItem implements Arrayable
 
         if ($this->designs) {
             /**
-             * @var DesignOptions $design
+             * @var Design $design
              */
             foreach ($this->designs as $design) {
                 $designs[] = $design->toArray();
