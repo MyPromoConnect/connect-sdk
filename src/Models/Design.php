@@ -54,7 +54,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param int|null $id
+     * @param  int|null  $id
      */
     public function setId($id)
     {
@@ -70,7 +70,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param string $editorUserHash
+     * @param  string  $editorUserHash
      */
     public function setEditorUserHash($editorUserHash)
     {
@@ -86,7 +86,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param string $returnUrl
+     * @param  string  $returnUrl
      */
     public function setReturnUrl($returnUrl)
     {
@@ -102,7 +102,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param string $cancelUrl
+     * @param  string  $cancelUrl
      */
     public function setCancelUrl($cancelUrl)
     {
@@ -118,7 +118,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param string $sku
+     * @param  string  $sku
      */
     public function setSku($sku)
     {
@@ -134,7 +134,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param array $options
+     * @param  array  $options
      */
     public function setOptions($options)
     {
@@ -150,7 +150,7 @@ class Design implements Arrayable
     }
 
     /**
-     * @param string $intent
+     * @param  string  $intent
      */
     public function setIntent($intent)
     {
@@ -166,11 +166,12 @@ class Design implements Arrayable
     public function toArray()
     {
         $designArray = [
-            'sku'               => $this->sku,
-            'intent'     => $this->intent,
-            'return_url'        => $this->returnUrl,
-            'cancel_url'        => $this->cancelUrl,
-            'editor_user_hash'  => $this->editorUserHash,
+            'id'               => $this->id,
+            'sku'              => $this->sku,
+            'intent'           => $this->intent,
+            'return_url'       => $this->returnUrl,
+            'cancel_url'       => $this->cancelUrl,
+            'editor_user_hash' => $this->editorUserHash,
         ];
 
         if ($this->options) {
