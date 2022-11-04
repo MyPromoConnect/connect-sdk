@@ -350,7 +350,7 @@ class Order implements Arrayable
             'complaint'          => $this->complaint,
             'express_production' => $this->expressProduction,
             'express_shipping'   => $this->expressShipping,
-            'shipper'            => $this->shipper->toArray(),
+            'shipper'            => $this->shipper !== null ? $this->shipper->toArray() : null,
             'recipient'          => $this->recipient->toArray(),
             'export'             => $this->export !== null ? $this->export->toArray() : null,
         ];
